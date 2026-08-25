@@ -1,0 +1,51 @@
+<?php
+/**
+ * Static demo blog card when no WP posts exist yet.
+ *
+ * @package Advay_Theme
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+$card     = isset( $args['card'] ) ? $args['card'] : array();
+$featured = ! empty( $args['featured'] );
+?>
+<article class="<?php echo esc_attr( $featured ? 'blog-item is-featured' : 'blog-item' ); ?>">
+	<a class="blog-item-link" href="<?php echo esc_url( $card['url'] ); ?>">
+		<figure class="blog-item-thumb">
+			<img
+				src="<?php echo esc_url( $card['image'] ); ?>"
+				alt=""
+				loading="<?php echo $featured ? 'eager' : 'lazy'; ?>"
+				decoding="async"
+			>
+			<span class="blog-item-badge">
+				<?php echo esc_html( $card['category'] ); ?>
+				<span aria-hidden="true">&middot;</span>
+				<?php echo esc_html( $card['read_time'] ); ?>
+			</span>
+			<?php if ( $featured ) : ?>
+				<span class="blog-item-overlay">
+					<strong><?php echo esc_html( $card['title'] ); ?></strong>
+				</span>
+			<?php endif; ?>
+		</figure>
+		<div class="blog-item-body">
+			<?php if ( ! $featured ) : ?>
+				<h2><?php echo esc_html( $card['title'] ); ?></h2>
+			<?php endif; ?>
+			<div class="blog-item-reveal">
+				<p><?php echo esc_html( $card['excerpt'] ); ?></p>
+				<span class="blog-item-foot">
+					<time><?php echo esc_html( $card['date'] ); ?></time>
+					<span class="blog-item-more">
+						<?php esc_html_e( 'Read More', 'advay-theme' ); ?>
+						<span aria-hidden="true">&rarr;</span>
+					</span>
+				</span>
+			</div>
+		</div>
+	</a>
+</article>

@@ -516,4 +516,27 @@
 			});
 		}
 	}
+
+	document.querySelectorAll('[data-ob-toggle]').forEach(function (btn) {
+		btn.addEventListener('click', function () {
+			var card = btn.closest('.ob-card');
+			var panel = card ? card.querySelector('[data-ob-panel]') : null;
+			if (!card || !panel) {
+				return;
+			}
+			var open = card.classList.contains('is-open');
+			card.classList.toggle('is-open', !open);
+			btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+			panel.hidden = open;
+		});
+	});
+
+	var blogCategory = document.querySelector('[data-blog-category]');
+	if (blogCategory) {
+		blogCategory.addEventListener('change', function () {
+			if (blogCategory.value) {
+				window.location.href = blogCategory.value;
+			}
+		});
+	}
 })();

@@ -47,6 +47,7 @@
 				<h2 class="footer-heading"><?php esc_html_e( 'Company', 'advay-theme' ); ?></h2>
 				<ul class="footer-menu">
 					<li><a href="<?php echo esc_url( advay_pricing_url() ); ?>"><?php esc_html_e( 'Pricing', 'advay-theme' ); ?></a></li>
+					<li><a href="<?php echo esc_url( advay_onboarding_url() ); ?>"><?php esc_html_e( 'Onboarding', 'advay-theme' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/#how-it-works' ) ); ?>"><?php esc_html_e( 'How it works', 'advay-theme' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/#testimonials' ) ); ?>"><?php esc_html_e( 'Testimonials', 'advay-theme' ); ?></a></li>
 					<li><a href="<?php echo esc_url( advay_contact_url() ); ?>"><?php esc_html_e( 'Contact', 'advay-theme' ); ?></a></li>

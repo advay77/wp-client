@@ -31,7 +31,7 @@ $steps = array(
 		<header class="section-heading">
 			<p class="eyebrow"><?php esc_html_e( 'Process', 'advay-theme' ); ?></p>
 			<h2 id="process-heading"><?php esc_html_e( 'Four steps. No mystery.', 'advay-theme' ); ?></h2>
-			<a class="button button-primary process-onboard" href="<?php echo esc_url( advay_contact_url() ); ?>">
+			<a class="button button-primary process-onboard" href="<?php echo esc_url( advay_onboarding_url() ); ?>">
 				<?php esc_html_e( 'One-Click Onboarding', 'advay-theme' ); ?>
 				<span class="btn-arrow" aria-hidden="true"></span>
 			</a>

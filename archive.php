@@ -1,6 +1,6 @@
 <?php
 /**
- * Blog posts index (Posts page).
+ * Archive template — categories, tags, dates.
  *
  * @package Advay_Theme
  */

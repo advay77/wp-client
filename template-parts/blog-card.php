@@ -1,0 +1,63 @@
+<?php
+/**
+ * Blog card — Pattern-style with hover reveal (mega menu feel).
+ *
+ * @package Advay_Theme
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+$featured = ! empty( $args['featured'] );
+$cats     = get_the_category();
+$cat_name = ( $cats && ! is_wp_error( $cats ) ) ? $cats[0]->name : __( 'Insights', 'advay-theme' );
+$fallback = advay_blog_fallback_image( get_the_ID() );
+?>
+<article id="post-<?php the_ID(); ?>" <?php post_class( $featured ? 'blog-item is-featured' : 'blog-item' ); ?>>
+	<a class="blog-item-link" href="<?php the_permalink(); ?>">
+		<figure class="blog-item-thumb">
+			<?php if ( has_post_thumbnail() ) : ?>
+				<?php
+				the_post_thumbnail(
+					$featured ? 'large' : 'medium_large',
+					array(
+						'alt' => the_title_attribute( array( 'echo' => false ) ),
+					)
+				);
+				?>
+			<?php else : ?>
+				<img src="<?php echo esc_url( $fallback ); ?>" alt="" loading="lazy" decoding="async">
+			<?php endif; ?>
+			<span class="blog-item-badge">
+				<?php echo esc_html( $cat_name ); ?>
+				<span aria-hidden="true">&middot;</span>
+				<?php echo esc_html( advay_reading_time() ); ?>
+			</span>
+			<?php if ( $featured ) : ?>
+				<span class="blog-item-overlay">
+					<strong><?php the_title(); ?></strong>
+				</span>
+			<?php endif; ?>
+		</figure>
+
+		<div class="blog-item-body">
+			<?php if ( ! $featured ) : ?>
+				<h2><?php the_title(); ?></h2>
+			<?php endif; ?>
+
+			<div class="blog-item-reveal">
+				<p><?php echo esc_html( wp_trim_words( get_the_excerpt(), 28 ) ); ?></p>
+				<span class="blog-item-foot">
+					<time datetime="<?php echo esc_attr( get_the_date( DATE_W3C ) ); ?>">
+						<?php echo esc_html( get_the_date() ); ?>
+					</time>
+					<span class="blog-item-more">
+						<?php esc_html_e( 'Read More', 'advay-theme' ); ?>
+						<span aria-hidden="true">&rarr;</span>
+					</span>
+				</span>
+			</div>
+		</div>
+	</a>
+</article>

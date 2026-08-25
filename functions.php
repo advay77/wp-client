@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ADVAY_THEME_VERSION', '2.0.2' );
+define( 'ADVAY_THEME_VERSION', '2.2.1' );
 
 function advay_theme_setup() {
 	add_theme_support( 'title-tag' );
@@ -44,20 +44,7 @@ function advay_enqueue_assets() {
 		ADVAY_THEME_VERSION
 	);
 
-	if ( is_front_page() ) {
-		wp_enqueue_style(
-			'leaflet',
-			'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
-			array(),
-			'1.9.4'
-		);
-		wp_enqueue_script(
-			'leaflet',
-			'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',
-			array(),
-			'1.9.4',
-			true
-		);
+	if ( is_front_page() || advay_is_onboarding_page() ) {
 		wp_enqueue_script(
 			'gsap',
 			'https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js',
@@ -74,6 +61,22 @@ function advay_enqueue_assets() {
 		);
 	}
 
+	if ( is_front_page() ) {
+		wp_enqueue_style(
+			'leaflet',
+			'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
+			array(),
+			'1.9.4'
+		);
+		wp_enqueue_script(
+			'leaflet',
+			'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',
+			array(),
+			'1.9.4',
+			true
+		);
+	}
+
 	$theme_deps = is_front_page() ? array( 'leaflet' ) : array();
 	wp_enqueue_script(
 		'advay-theme',
@@ -83,11 +86,11 @@ function advay_enqueue_assets() {
 		true
 	);
 
-	if ( is_front_page() ) {
+	if ( advay_is_onboarding_page() ) {
 		wp_enqueue_script(
-			'advay-fit-story',
-			get_template_directory_uri() . '/assets/js/fit-story.js',
-			array(),
+			'advay-onboarding',
+			get_template_directory_uri() . '/assets/js/onboarding.js',
+			array( 'gsap-scrolltrigger', 'advay-theme' ),
 			ADVAY_THEME_VERSION,
 			true
 		);
@@ -270,6 +273,7 @@ function advay_footer_menu_fallback() {
 		array( 'label' => __( 'What we do', 'advay-theme' ), 'url' => $home . '#services' ),
 		array( 'label' => __( 'Success stories', 'advay-theme' ), 'url' => $home . '#testimonials' ),
 		array( 'label' => __( 'Learn', 'advay-theme' ), 'url' => $home . '#how-it-works' ),
+		array( 'label' => __( 'Onboarding', 'advay-theme' ), 'url' => advay_onboarding_url() ),
 		array( 'label' => __( 'Company', 'advay-theme' ), 'url' => $home . '#company' ),
 	);
 
@@ -286,6 +290,86 @@ function advay_footer_menu_fallback() {
 
 function advay_contact_url() {
 	return trailingslashit( home_url( '/' ) ) . '#contact';
+}
+
+/**
+ * One-click onboarding page URL — existing page slug wins, else /onboarding/ rewrite.
+ */
+function advay_onboarding_url() {
+	$page = get_page_by_path( 'onboarding' );
+	if ( $page ) {
+		return get_permalink( $page );
+	}
+
+	return home_url( '/onboarding/' );
+}
+
+function advay_onboarding_icon( $name ) {
+	$icons = array(
+		'phone'  => '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>',
+		'gear'   => '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
+		'screen' => '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>',
+		'box'    => '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>',
+	);
+
+	echo isset( $icons[ $name ] ) ? $icons[ $name ] : $icons['box']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+}
+
+function advay_register_onboarding_route() {
+	add_rewrite_rule( '^onboarding/?$', 'index.php?advay_onboarding=1', 'top' );
+	add_rewrite_rule( '^blog/?$', 'index.php?advay_blog=1', 'top' );
+	add_rewrite_rule( '^blog/page/([0-9]{1,})/?$', 'index.php?advay_blog=1&paged=$matches[1]', 'top' );
+}
+add_action( 'init', 'advay_register_onboarding_route' );
+
+function advay_onboarding_query_var( $vars ) {
+	$vars[] = 'advay_onboarding';
+	$vars[] = 'advay_blog';
+	return $vars;
+}
+add_filter( 'query_vars', 'advay_onboarding_query_var' );
+
+function advay_custom_page_template( $template ) {
+	if ( (int) get_query_var( 'advay_onboarding' ) === 1 ) {
+		$onboarding = get_template_directory() . '/page-onboarding.php';
+		if ( file_exists( $onboarding ) ) {
+			return $onboarding;
+		}
+	}
+
+	if ( (int) get_query_var( 'advay_blog' ) === 1 ) {
+		$blog = get_template_directory() . '/page-blog.php';
+		if ( file_exists( $blog ) ) {
+			return $blog;
+		}
+	}
+
+	return $template;
+}
+add_filter( 'template_include', 'advay_custom_page_template' );
+
+function advay_flush_onboarding_rewrite() {
+	advay_register_onboarding_route();
+	flush_rewrite_rules();
+}
+add_action( 'after_switch_theme', 'advay_flush_onboarding_rewrite' );
+
+function advay_maybe_flush_onboarding_rewrite() {
+	if ( get_option( 'advay_routes_flushed' ) !== ADVAY_THEME_VERSION ) {
+		advay_flush_onboarding_rewrite();
+		update_option( 'advay_routes_flushed', ADVAY_THEME_VERSION );
+		// Clean up legacy option key.
+		delete_option( 'advay_onboarding_rewrite_flushed' );
+	}
+}
+add_action( 'init', 'advay_maybe_flush_onboarding_rewrite', 99 );
+
+function advay_is_onboarding_page() {
+	return (int) get_query_var( 'advay_onboarding' ) === 1;
+}
+
+function advay_is_blog_page() {
+	return (int) get_query_var( 'advay_blog' ) === 1;
 }
 
 function advay_pricing_url() {
@@ -340,6 +424,10 @@ function advay_pricing_rows() {
 }
 
 function advay_blog_url() {
+	if ( advay_is_blog_page() ) {
+		return home_url( '/blog/' );
+	}
+
 	$posts_page = (int) get_option( 'page_for_posts' );
 	if ( $posts_page ) {
 		return get_permalink( $posts_page );
@@ -350,12 +438,143 @@ function advay_blog_url() {
 		return get_permalink( $page );
 	}
 
-	$link = get_post_type_archive_link( 'post' );
-	if ( $link && untrailingslashit( $link ) !== untrailingslashit( home_url( '/' ) ) ) {
-		return $link;
+	return home_url( '/blog/' );
+}
+
+/**
+ * Evergreen demo posts for /blog/ when no WP posts exist yet.
+ *
+ * @return array<int, array<string, string>>
+ */
+function advay_demo_blog_posts() {
+	$contact = advay_contact_url();
+
+	return array(
+		array(
+			'title'     => __( 'FBA & Walmart WFS prep playbooks for growing brands', 'advay-theme' ),
+			'excerpt'   => __( 'How lean sellers keep inbound moving when Amazon and Walmart rules change — labels, polybags, expiration dates, and what to fix before your next shipment.', 'advay-theme' ),
+			'category'  => __( 'Guides', 'advay-theme' ),
+			'read_time' => __( '6 min read', 'advay-theme' ),
+			'image'     => advay_asset_uri( 'images/svc-warehouse.jpg' ),
+			'date'      => __( 'July 12, 2024', 'advay-theme' ),
+			'url'       => $contact,
+		),
+		array(
+			'title'     => __( 'Marketplace policy changes sellers should watch in 2024', 'advay-theme' ),
+			'excerpt'   => __( 'Inbound rule updates, chargeback triggers, and prep specs that catch brands off guard — and how to stay ahead without rebuilding your whole operation.', 'advay-theme' ),
+			'category'  => __( 'Updates', 'advay-theme' ),
+			'read_time' => __( '5 min read', 'advay-theme' ),
+			'image'     => advay_asset_uri( 'images/brand-littlebay.jpg' ),
+			'date'      => __( 'June 28, 2024', 'advay-theme' ),
+			'url'       => $contact,
+		),
+		array(
+			'title'     => __( 'How lean brands scale fulfillment without running a warehouse', 'advay-theme' ),
+			'excerpt'   => __( 'When DIY prep stops working and a generic 3PL starts costing you in chargebacks — what to look for in a partner that actually knows FBA and WFS.', 'advay-theme' ),
+			'category'  => __( 'Stories', 'advay-theme' ),
+			'read_time' => __( '7 min read', 'advay-theme' ),
+			'image'     => advay_asset_uri( 'images/brand-gainz.jpg' ),
+			'date'      => __( 'June 14, 2024', 'advay-theme' ),
+			'url'       => $contact,
+		),
+		array(
+			'title'     => __( 'Lot tracking and expiration accuracy: why it matters for supplements', 'advay-theme' ),
+			'excerpt'   => __( 'Real lot tracking is not a spreadsheet — it is how you avoid audit pain, chargebacks, and a 3PL that treats compliance as an afterthought.', 'advay-theme' ),
+			'category'  => __( 'Compliance', 'advay-theme' ),
+			'read_time' => __( '4 min read', 'advay-theme' ),
+			'image'     => advay_asset_uri( 'images/brand-anola.jpg' ),
+			'date'      => __( 'May 30, 2024', 'advay-theme' ),
+			'url'       => $contact,
+		),
+		array(
+			'title'     => __( 'TikTok Shop prep: what brands miss before their first inbound', 'advay-theme' ),
+			'excerpt'   => __( 'Labeling, pack-out, and receiving windows for TikTok Shop — the gaps that stall launches when you treat it like standard FBA prep.', 'advay-theme' ),
+			'category'  => __( 'Guides', 'advay-theme' ),
+			'read_time' => __( '5 min read', 'advay-theme' ),
+			'image'     => advay_asset_uri( 'images/client-success.jpg' ),
+			'date'      => __( 'May 18, 2024', 'advay-theme' ),
+			'url'       => $contact,
+		),
+	);
+}
+
+/**
+ * Demo category labels for blog filter when no WP categories exist.
+ *
+ * @return array<int, string>
+ */
+function advay_demo_blog_categories() {
+	return array(
+		__( 'Guides', 'advay-theme' ),
+		__( 'Updates', 'advay-theme' ),
+		__( 'Stories', 'advay-theme' ),
+		__( 'Compliance', 'advay-theme' ),
+	);
+}
+
+/**
+ * Estimated reading time for a post.
+ */
+function advay_reading_time( $post_id = null ) {
+	$post_id = $post_id ? (int) $post_id : get_the_ID();
+	$content = get_post_field( 'post_content', $post_id );
+	$words   = str_word_count( wp_strip_all_tags( (string) $content ) );
+	$mins    = max( 1, (int) ceil( $words / 200 ) );
+
+	/* translators: %d: minutes */
+	return sprintf( _n( '%d min read', '%d min read', $mins, 'advay-theme' ), $mins );
+}
+
+/**
+ * Fallback blog card image when no featured image is set.
+ */
+function advay_blog_fallback_image( $post_id = null ) {
+	$images = array(
+		'images/brand-gainz.jpg',
+		'images/brand-littlebay.jpg',
+		'images/brand-anola.jpg',
+		'images/svc-warehouse.jpg',
+		'images/client-success.jpg',
+	);
+
+	$post_id = $post_id ? (int) $post_id : get_the_ID();
+	$index   = $post_id % count( $images );
+
+	return advay_asset_uri( $images[ $index ] );
+}
+
+/**
+ * Client brand logos used across homepage slider and onboarding.
+ *
+ * @return array<int, array{name: string, src: string}>
+ */
+function advay_brand_logos() {
+	static $cache = null;
+	if ( null !== $cache ) {
+		return $cache;
 	}
 
-	return home_url( '/blog/' );
+	$logos = array(
+		array( 'name' => 'Little Bay Caribbean Kitchen', 'file' => 'images/brand-littlebay.jpg' ),
+		array( 'name' => 'Gainz & Airplanes', 'file' => 'images/brand-gainz.jpg' ),
+		array( 'name' => "Anola's Creations", 'file' => 'images/brand-anola.jpg' ),
+		array( 'name' => 'Boluwaji Popcorn', 'file' => 'images/brand-ajayi.jpg' ),
+		array( 'name' => 'Daka', 'file' => 'images/brand-daka.png' ),
+		array( 'name' => 'No Knife', 'file' => 'images/brand-noknife.png' ),
+	);
+
+	$cache = array();
+	foreach ( $logos as $logo ) {
+		$path = get_template_directory() . '/assets/' . $logo['file'];
+		if ( file_exists( $path ) ) {
+			$cache[] = array(
+				'name' => $logo['name'],
+				'src'  => advay_asset_uri( $logo['file'] ),
+			);
+		}
+	}
+
+	return $cache;
 }
 
 function advay_asset_uri( $relative ) {

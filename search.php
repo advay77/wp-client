@@ -1,6 +1,6 @@
 <?php
 /**
- * Blog posts index (Posts page).
+ * Search results.
  *
  * @package Advay_Theme
  */
