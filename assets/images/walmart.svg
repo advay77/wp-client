@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 36" role="img">
+  <title>Walmart</title>
+  <g fill="#FFC220">
+    <circle cx="18" cy="18" r="3.2"/>
+    <rect x="16.4" y="4" width="3.2" height="7" rx="1.6"/>
+    <rect x="16.4" y="25" width="3.2" height="7" rx="1.6"/>
+    <rect x="4" y="16.4" width="7" height="3.2" rx="1.6"/>
+    <rect x="25" y="16.4" width="7" height="3.2" rx="1.6"/>
+  </g>
+  <text x="40" y="24" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#0071CE">Walmart</text>
+</svg>
