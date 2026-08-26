@@ -778,4 +778,29 @@
 			});
 		});
 	})();
+
+	/* Fit section: Niche / Specification tabs */
+	(function () {
+		var tabs = document.querySelectorAll('[data-fit-tab]');
+		var panels = document.querySelectorAll('[data-fit-panel]');
+		if (!tabs.length || !panels.length) {
+			return;
+		}
+
+		tabs.forEach(function (tab) {
+			tab.addEventListener('click', function () {
+				var id = tab.getAttribute('data-fit-tab');
+				tabs.forEach(function (item) {
+					var on = item === tab;
+					item.classList.toggle('is-active', on);
+					item.setAttribute('aria-selected', on ? 'true' : 'false');
+				});
+				panels.forEach(function (panel) {
+					var on = panel.getAttribute('data-fit-panel') === id;
+					panel.classList.toggle('is-active', on);
+					panel.hidden = !on;
+				});
+			});
+		});
+	})();
 })();

@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ADVAY_THEME_VERSION', '2.6.2' );
+define( 'ADVAY_THEME_VERSION', '2.6.7' );
 
 function advay_theme_setup() {
 	add_theme_support( 'title-tag' );

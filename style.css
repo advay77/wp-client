@@ -528,7 +528,7 @@ a:hover {
 .mega-blogs {
 	grid-template-columns: 1fr;
 	gap: 0.85rem;
-	width: min(980px, calc(100vw - 2rem));
+	width: min(760px, calc(100vw - 2rem));
 	max-height: min(78vh, 640px);
 	overflow: auto;
 	padding: 1.15rem 1.25rem;
@@ -579,7 +579,7 @@ a:hover {
 
 .blogs-cards {
 	display: grid;
-	grid-template-columns: repeat(4, minmax(0, 1fr));
+	grid-template-columns: repeat(3, minmax(0, 1fr));
 	gap: 0.85rem;
 	align-items: stretch;
 }
@@ -2380,10 +2380,47 @@ a:hover {
 }
 
 .fit-lead {
-	margin: 0;
+	margin: 0 0 1.25rem;
     color: var(--muted);
 	font-size: 1rem;
 	line-height: 1.5;
+}
+
+.fit-tabs {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: 0.45rem;
+	padding: 0.3rem;
+	border-radius: 999px;
+	background: rgba(0, 87, 255, 0.08);
+}
+
+.fit-tab {
+	appearance: none;
+	border: 0;
+	border-radius: 999px;
+	padding: 0.55rem 1.15rem;
+	background: transparent;
+	color: var(--ink);
+	font: inherit;
+	font-size: 0.9rem;
+	font-weight: 700;
+	cursor: pointer;
+	transition: background 0.18s ease, color 0.18s ease;
+}
+
+.fit-tab:hover {
+	background: rgba(255, 255, 255, 0.7);
+}
+
+.fit-tab.is-active,
+.fit-tab[aria-selected="true"] {
+	background: var(--blue);
+	color: #fff;
+}
+
+.fit-panel[hidden] {
+	display: none;
 }
 
 .fit-cards {
@@ -2393,6 +2430,11 @@ a:hover {
 	margin-bottom: 2rem;
 }
 
+.fit-cards--spec {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	max-width: 48rem;
+}
+
 .fit-card {
 	overflow: hidden;
 	border-radius: 18px;
@@ -2400,21 +2442,51 @@ a:hover {
 	box-shadow: 0 14px 36px rgba(0, 55, 160, 0.08);
 }
 
+.fit-card--niche {
+	background: #f7f3ea;
+	box-shadow: none;
+}
+
 .fit-card-visual {
+	position: relative;
 	aspect-ratio: 3 / 2;
 	background: #0b0f1a;
+}
+
+.fit-card--niche .fit-card-visual {
+	aspect-ratio: 4 / 3;
+	border-radius: 16px;
+	overflow: hidden;
+	margin: 0.75rem 0.75rem 0;
 }
 
 .fit-card-visual img {
 	display: block;
 	width: 100%;
 	height: 100%;
-	object-fit: contain;
+	object-fit: cover;
 	object-position: center;
+}
+
+.fit-card-tag {
+	position: absolute;
+	right: 0.75rem;
+	bottom: 0.75rem;
+	padding: 0.4rem 0.85rem;
+	border-radius: 999px;
+	background: rgba(20, 24, 32, 0.88);
+	color: #fff;
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: -0.01em;
 }
 
 .fit-card-body {
 	padding: 1.1rem 1.15rem 1.25rem;
+}
+
+.fit-card--niche .fit-card-body {
+	padding: 0.95rem 1rem 1.15rem;
 }
 
 .fit-card-num {
@@ -3315,13 +3387,21 @@ a:hover {
 		grid-template-columns: 1fr;
 	}
 
-	.fit-cards {
+	.fit-cards,
+	.fit-cards--niche {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.fit-cards--spec {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		max-width: none;
 	}
 }
 
 @media (max-width: 899px) {
-	.fit-cards {
+	.fit-cards,
+	.fit-cards--niche,
+	.fit-cards--spec {
 		grid-template-columns: 1fr;
 	}
 
@@ -3655,11 +3735,12 @@ a:hover {
 
 .epc-popup-lanes span {
 	padding: 0.35rem 0.7rem;
-	border-radius: 999px;
-	background: rgba(255, 255, 255, 0.12);
-	border: 1px solid rgba(255, 255, 255, 0.18);
+	border-radius: 8px;
+	background: rgba(255, 214, 214, 0.92);
+	border: 0;
+	color: #8b1e2d;
 	font-size: 0.78rem;
-	font-weight: 600;
+	font-weight: 700;
 }
 
 .epc-popup-scan {
