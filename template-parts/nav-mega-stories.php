@@ -11,16 +11,20 @@ $home   = trailingslashit( home_url( '/' ) );
 
 $stories = array(
 	array(
-		'alt' => __( 'Case study', 'advay-theme' ),
+		'alt' => __( 'Brand fulfillment success story', 'advay-theme' ),
 		'src' => 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80',
 	),
 	array(
-		'alt' => __( 'Case study', 'advay-theme' ),
+		'alt' => __( 'Small business scaling with prep partner', 'advay-theme' ),
 		'src' => 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80',
 	),
 	array(
-		'alt' => __( 'Case study', 'advay-theme' ),
+		'alt' => __( 'Marketplace seller growth story', 'advay-theme' ),
 		'src' => 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=800&q=80',
+	),
+	array(
+		'alt' => __( 'Warehouse prep and shipping success', 'advay-theme' ),
+		'src' => 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80',
 	),
 );
 ?>

@@ -34,7 +34,7 @@ if ( ! $categories && $demo_mode ) {
 	<header class="blog-hero">
 		<h1><?php esc_html_e( 'Blog', 'advay-theme' ); ?></h1>
 		<p class="blog-hero-lead">
-			<?php esc_html_e( 'No matter where you are in your commerce journey, you\'ll find something here. Prep playbooks, marketplace updates, and seller wins from ElitePrep Center.', 'advay-theme' ); ?>
+			<?php esc_html_e( 'Prep playbooks, marketplace updates, and seller wins from ElitePrep.', 'advay-theme' ); ?>
 		</p>
 
 		<div class="blog-toolbar">

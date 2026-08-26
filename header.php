@@ -38,6 +38,14 @@ if ( function_exists( 'wp_body_open' ) ) {
 				)
 			);
 			?>
+			<div class="nav-mobile-actions" id="nav-mobile-actions">
+				<a class="button button-header header-cta-mobile is-secondary" href="<?php echo esc_url( advay_contact_url() ); ?>">
+					<?php esc_html_e( 'Book a call', 'advay-theme' ); ?>
+				</a>
+				<a class="button button-header header-cta-mobile" href="<?php echo esc_url( advay_contact_url() ); ?>">
+					<?php esc_html_e( 'Grow with ElitePrep', 'advay-theme' ); ?>
+				</a>
+			</div>
 		</nav>
 
 		<div class="header-actions">

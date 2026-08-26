@@ -30,8 +30,8 @@ $quotes = array(
 <section class="stories-section" id="testimonials" aria-labelledby="stories-heading">
 	<div class="container">
 		<header class="section-heading stories-heading">
-			<p class="eyebrow"><?php esc_html_e( 'Clients', 'advay-theme' ); ?></p>
-			<h2 id="stories-heading"><?php esc_html_e( 'Testimonials', 'advay-theme' ); ?></h2>
+			<p class="eyebrow"><?php esc_html_e( 'Success stories', 'advay-theme' ); ?></p>
+			<h2 id="stories-heading"><?php esc_html_e( 'Brands that grow with ElitePrep Center.', 'advay-theme' ); ?></h2>
 		</header>
 
 		<div class="stories-grid">
@@ -40,13 +40,12 @@ $quotes = array(
 					<source src="<?php echo esc_url( advay_story_video( 'tall' ) ); ?>" type="video/mp4">
 				</video>
 				<div class="story-media-ui">
-					<span class="story-chip"><?php esc_html_e( 'Colorado Threads', 'advay-theme' ); ?></span>
-					<span class="story-mute" aria-hidden="true"></span>
+					<span class="story-chip"><?php esc_html_e( 'No Knife Body', 'advay-theme' ); ?></span>
+					<button type="button" class="story-mute" aria-label="<?php esc_attr_e( 'Toggle sound', 'advay-theme' ); ?>"></button>
 				</div>
 				<div class="story-media-copy">
-					<p><?php esc_html_e( '“We finally have a warehouse rhythm that keeps Amazon and Walmart in stock.”', 'advay-theme' ); ?></p>
-					<strong>Haley Lucero</strong>
-					<span><?php esc_html_e( 'CEO of Colorado Threads', 'advay-theme' ); ?></span>
+					<p><?php esc_html_e( '“Best decision we ever made — choosing ElitePrep.”', 'advay-theme' ); ?></p>
+					<strong><?php esc_html_e( 'No Knife Body', 'advay-theme' ); ?></strong>
 				</div>
 			</article>
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Blog card — Pattern-style with hover reveal (mega menu feel).
+ * Blog card — compact Pattern-style with hover reveal.
  *
  * @package Advay_Theme
  */
@@ -20,7 +20,7 @@ $fallback = advay_blog_fallback_image( get_the_ID() );
 			<?php if ( has_post_thumbnail() ) : ?>
 				<?php
 				the_post_thumbnail(
-					$featured ? 'large' : 'medium_large',
+					$featured ? 'medium_large' : 'medium',
 					array(
 						'alt' => the_title_attribute( array( 'echo' => false ) ),
 					)
@@ -34,20 +34,12 @@ $fallback = advay_blog_fallback_image( get_the_ID() );
 				<span aria-hidden="true">&middot;</span>
 				<?php echo esc_html( advay_reading_time() ); ?>
 			</span>
-			<?php if ( $featured ) : ?>
-				<span class="blog-item-overlay">
-					<strong><?php the_title(); ?></strong>
-				</span>
-			<?php endif; ?>
 		</figure>
 
 		<div class="blog-item-body">
-			<?php if ( ! $featured ) : ?>
-				<h2><?php the_title(); ?></h2>
-			<?php endif; ?>
-
+			<h2><?php the_title(); ?></h2>
 			<div class="blog-item-reveal">
-				<p><?php echo esc_html( wp_trim_words( get_the_excerpt(), 28 ) ); ?></p>
+				<p><?php echo esc_html( wp_trim_words( get_the_excerpt(), $featured ? 22 : 14 ) ); ?></p>
 				<span class="blog-item-foot">
 					<time datetime="<?php echo esc_attr( get_the_date( DATE_W3C ) ); ?>">
 						<?php echo esc_html( get_the_date() ); ?>

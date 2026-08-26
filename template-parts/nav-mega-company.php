@@ -1,9 +1,6 @@
 <?php
 /**
- * Company mega panel — four image cards.
- *
- * Card links point only to real destinations (on-page anchors and the blog
- * archive); no invented /careers/ or /newsroom/ URLs are generated.
+ * Company mega panel — image cards with thematic placeholders.
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -16,13 +13,18 @@ $cards = array(
 		'title' => __( 'Our Story', 'advay-theme' ),
 		'desc'  => __( 'Learn how ElitePrep Center has grown over the years.', 'advay-theme' ),
 		'url'   => $home . '#company',
-		'img'   => advay_asset_uri( 'images/company-cards.png' ),
+		'img'   => 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=900&q=80',
+		'alt'   => __( 'Warehouse trucks and inbound dock operations', 'advay-theme' ),
 	),
 	array(
 		'title' => __( 'Our Team', 'advay-theme' ),
 		'desc'  => __( 'Meet the team running the warehouse floor.', 'advay-theme' ),
 		'url'   => $home . '#leadership',
-		'img'   => advay_asset_uri( 'images/client-success.jpg' ),
+		'img'   => advay_theme_image(
+			'images/client-success.jpg',
+			'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80'
+		),
+		'alt'   => __( 'Operations team collaborating in the warehouse', 'advay-theme' ),
 	),
 );
 ?>
@@ -34,7 +36,9 @@ $cards = array(
 				<span class="co-arrow" aria-hidden="true"></span>
 			</span>
 			<em class="co-desc"><?php echo esc_html( $card['desc'] ); ?></em>
-			<span class="co-thumb" style="background-image:url('<?php echo esc_url( $card['img'] ); ?>')"></span>
+			<span class="co-thumb">
+				<img src="<?php echo esc_url( $card['img'] ); ?>" alt="<?php echo esc_attr( $card['alt'] ); ?>" loading="lazy" decoding="async">
+			</span>
 		</a>
 	<?php endforeach; ?>
 </div>

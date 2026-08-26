@@ -11,7 +11,7 @@ $pills = array(
 		'icon'  => 'slash',
 	),
 	array(
-		'label' => __( 'Testimonials', 'advay-theme' ),
+		'label' => __( 'Success stories', 'advay-theme' ),
 		'url'   => $home . '#testimonials',
 		'icon'  => 'ribbon',
 	),

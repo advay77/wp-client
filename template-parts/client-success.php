@@ -3,8 +3,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$photo = get_template_directory() . '/assets/images/client-success.jpg';
-$src   = file_exists( $photo ) ? advay_asset_uri( 'images/client-success.jpg' ) : advay_asset_uri( 'images/client-success.png' );
+$founders = advay_founder_portraits();
+if ( empty( $founders ) ) {
+	$photo = get_template_directory() . '/assets/images/client-success.jpg';
+	$founders = array(
+		file_exists( $photo ) ? advay_asset_uri( 'images/client-success.jpg' ) : advay_asset_uri( 'images/client-success.png' ),
+	);
+}
 ?>
 <section class="success-section" id="client-success" aria-labelledby="success-heading">
 	<div class="container success-grid">
@@ -17,8 +22,19 @@ $src   = file_exists( $photo ) ? advay_asset_uri( 'images/client-success.jpg' ) 
 			<p><?php esc_html_e( 'At most 3PLs, you are just a number. Handed off between reps who do not know you, re-explaining your business every time.', 'advay-theme' ); ?></p>
 			<p><?php esc_html_e( 'Not here. You get a real, U.S.-based person who knows your account, with a direct line to the warehouse floor. Something is off? They get the right people on it, fast.', 'advay-theme' ); ?></p>
 		</div>
-		<figure class="success-frame">
-			<img src="<?php echo esc_url( $src ); ?>" alt="<?php esc_attr_e( 'Director of Client Success on the warehouse floor', 'advay-theme' ); ?>">
+		<figure class="success-frame" data-founder-rotate>
+			<div class="success-photo-stack">
+				<?php foreach ( $founders as $index => $src ) : ?>
+					<img
+						class="success-founder-photo<?php echo 0 === $index ? ' is-active' : ''; ?>"
+						src="<?php echo esc_url( $src ); ?>"
+						alt="<?php esc_attr_e( 'ElitePrep Center leadership', 'advay-theme' ); ?>"
+						loading="<?php echo 0 === $index ? 'eager' : 'lazy'; ?>"
+						decoding="async"
+						data-founder-photo
+					>
+				<?php endforeach; ?>
+			</div>
 			<figcaption><?php esc_html_e( 'Director of Client Success, Cole Sweetser', 'advay-theme' ); ?></figcaption>
 		</figure>
 	</div>

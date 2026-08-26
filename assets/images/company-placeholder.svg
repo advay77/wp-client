@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400" role="img" aria-label="Placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d8e2ef"/>
+      <stop offset="100%" stop-color="#b8c8dc"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8fa3bb"/>
+      <stop offset="100%" stop-color="#6b8199"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="400" fill="url(#bg)"/>
+  <rect x="0" y="280" width="640" height="120" fill="url(#floor)"/>
+  <rect x="88" y="120" width="180" height="160" rx="6" fill="#eef3f8" stroke="#9eb0c4" stroke-width="3"/>
+  <rect x="372" y="96" width="180" height="184" rx="6" fill="#eef3f8" stroke="#9eb0c4" stroke-width="3"/>
+  <rect x="108" y="140" width="140" height="18" rx="3" fill="#c5d3e2"/>
+  <rect x="108" y="168" width="100" height="12" rx="2" fill="#d7e1ec"/>
+  <rect x="392" y="116" width="140" height="18" rx="3" fill="#c5d3e2"/>
+  <rect x="392" y="144" width="110" height="12" rx="2" fill="#d7e1ec"/>
+  <rect x="248" y="208" width="144" height="72" rx="4" fill="#f4efe8" stroke="#c9b8a8" stroke-width="3"/>
+  <rect x="264" y="224" width="112" height="10" rx="2" fill="#dccfbf"/>
+  <text x="320" y="356" text-anchor="middle" fill="#5a7088" font-family="system-ui,sans-serif" font-size="15" font-weight="600" letter-spacing="0.08em">ELITEPREP CENTER</text>
+</svg>

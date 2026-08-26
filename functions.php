@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ADVAY_THEME_VERSION', '2.2.1' );
+define( 'ADVAY_THEME_VERSION', '2.4.2' );
 
 function advay_theme_setup() {
 	add_theme_support( 'title-tag' );
@@ -32,7 +32,7 @@ add_action( 'after_setup_theme', 'advay_theme_setup' );
 function advay_enqueue_assets() {
 	wp_enqueue_style(
 		'advay-fonts',
-		'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap',
+		'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap',
 		array(),
 		null
 	);
@@ -44,7 +44,7 @@ function advay_enqueue_assets() {
 		ADVAY_THEME_VERSION
 	);
 
-	if ( is_front_page() || advay_is_onboarding_page() ) {
+	if ( is_front_page() || advay_is_onboarding_page() || advay_is_receiving_page() ) {
 		wp_enqueue_script(
 			'gsap',
 			'https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js',
@@ -91,6 +91,17 @@ function advay_enqueue_assets() {
 			'advay-onboarding',
 			get_template_directory_uri() . '/assets/js/onboarding.js',
 			array( 'gsap-scrolltrigger', 'advay-theme' ),
+			ADVAY_THEME_VERSION,
+			true
+		);
+	}
+
+	if ( advay_is_receiving_page() ) {
+		/* Sticky+scroll journey works without GSAP; GSAP is optional polish. */
+		wp_enqueue_script(
+			'advay-warehouse-journey',
+			get_template_directory_uri() . '/assets/js/warehouse-journey.js',
+			array( 'advay-theme' ),
 			ADVAY_THEME_VERSION,
 			true
 		);
@@ -319,12 +330,14 @@ function advay_register_onboarding_route() {
 	add_rewrite_rule( '^onboarding/?$', 'index.php?advay_onboarding=1', 'top' );
 	add_rewrite_rule( '^blog/?$', 'index.php?advay_blog=1', 'top' );
 	add_rewrite_rule( '^blog/page/([0-9]{1,})/?$', 'index.php?advay_blog=1&paged=$matches[1]', 'top' );
+	add_rewrite_rule( '^receiving/?$', 'index.php?advay_receiving=1', 'top' );
 }
 add_action( 'init', 'advay_register_onboarding_route' );
 
 function advay_onboarding_query_var( $vars ) {
 	$vars[] = 'advay_onboarding';
 	$vars[] = 'advay_blog';
+	$vars[] = 'advay_receiving';
 	return $vars;
 }
 add_filter( 'query_vars', 'advay_onboarding_query_var' );
@@ -341,6 +354,13 @@ function advay_custom_page_template( $template ) {
 		$blog = get_template_directory() . '/page-blog.php';
 		if ( file_exists( $blog ) ) {
 			return $blog;
+		}
+	}
+
+	if ( (int) get_query_var( 'advay_receiving' ) === 1 ) {
+		$receiving = get_template_directory() . '/page-receiving.php';
+		if ( file_exists( $receiving ) ) {
+			return $receiving;
 		}
 	}
 
@@ -372,19 +392,108 @@ function advay_is_blog_page() {
 	return (int) get_query_var( 'advay_blog' ) === 1;
 }
 
+function advay_is_receiving_page() {
+	if ( (int) get_query_var( 'advay_receiving' ) === 1 ) {
+		return true;
+	}
+	/* Real WP page with slug "receiving" also uses page-receiving.php */
+	return function_exists( 'is_page' ) && is_page( 'receiving' );
+}
+
+/**
+ * Custom rewrite routes must not inherit the front-page / home query flags.
+ * Without this, /receiving/ loads with body.home and homepage assets (Leaflet).
+ */
+function advay_fix_custom_route_query( $query ) {
+	if ( is_admin() || ! $query->is_main_query() ) {
+		return;
+	}
+
+	$onboarding = (int) $query->get( 'advay_onboarding' ) === 1;
+	$blog       = (int) $query->get( 'advay_blog' ) === 1;
+	$receiving  = (int) $query->get( 'advay_receiving' ) === 1;
+
+	if ( ! $onboarding && ! $blog && ! $receiving ) {
+		return;
+	}
+
+	$query->is_home       = false;
+	$query->is_front_page = false;
+	$query->is_archive    = false;
+	$query->is_singular   = true;
+	$query->is_page       = true;
+}
+add_action( 'parse_query', 'advay_fix_custom_route_query' );
+
+/**
+ * Body classes for custom routes (strip misleading home/blog).
+ */
+function advay_custom_route_body_class( $classes ) {
+	if ( advay_is_receiving_page() ) {
+		$classes   = array_values( array_diff( $classes, array( 'home', 'blog' ) ) );
+		$classes[] = 'page-receiving';
+		$classes[] = 'wj-journey';
+		/* Keep warehouse journey assets even when rewrite var is absent. */
+	}
+
+	if ( advay_is_onboarding_page() ) {
+		$classes   = array_values( array_diff( $classes, array( 'home', 'blog' ) ) );
+		$classes[] = 'page-onboarding';
+	}
+
+	if ( advay_is_blog_page() ) {
+		$classes   = array_values( array_diff( $classes, array( 'home' ) ) );
+		$classes[] = 'page-blog-custom';
+	}
+
+	return $classes;
+}
+add_filter( 'body_class', 'advay_custom_route_body_class' );
+
+/**
+ * Receiving / warehouse journey page URL.
+ */
+function advay_receiving_url( $hash = '' ) {
+	$page = get_page_by_path( 'receiving' );
+	$base = $page ? get_permalink( $page ) : home_url( '/receiving/' );
+	if ( $hash ) {
+		return trailingslashit( $base ) . '#' . ltrim( $hash, '#' );
+	}
+	return $base;
+}
+
+function advay_receiving_document_title( $title ) {
+	if ( advay_is_receiving_page() ) {
+		$title['title'] = __( 'Receiving & Inspection', 'advay-theme' );
+	}
+	return $title;
+}
+add_filter( 'document_title_parts', 'advay_receiving_document_title' );
+
 function advay_pricing_url() {
 	$page = get_page_by_path( 'pricing' );
 	return $page ? get_permalink( $page ) : trailingslashit( home_url( '/' ) );
 }
 
 function advay_services_url( $hash = '' ) {
+	$hash = ltrim( (string) $hash, '#' );
+
+	$journey_hashes = array( 'receiving', 'labeling', 'kitting', 'outbound', 'returns' );
+	if ( in_array( $hash, $journey_hashes, true ) ) {
+		return advay_receiving_url( $hash );
+	}
+
 	$page = get_page_by_path( 'services' );
 	if ( $page ) {
 		$url = get_permalink( $page );
 		if ( $hash ) {
-			$url = trailingslashit( $url ) . '#' . ltrim( $hash, '#' );
+			$url = trailingslashit( $url ) . '#' . $hash;
 		}
 		return $url;
+	}
+
+	if ( 'platforms' === $hash ) {
+		return trailingslashit( home_url( '/' ) ) . '#services';
 	}
 
 	return trailingslashit( home_url( '/' ) ) . '#services';
@@ -442,58 +551,46 @@ function advay_blog_url() {
 }
 
 /**
- * Evergreen demo posts for /blog/ when no WP posts exist yet.
+ * Evergreen demo posts for /blog/ mega menu + empty archive fallback.
  *
  * @return array<int, array<string, string>>
  */
 function advay_demo_blog_posts() {
-	$contact = advay_contact_url();
+	$blog = advay_blog_url();
 
 	return array(
 		array(
+			'slug'      => 'fba-walmart-wfs-prep-playbooks',
 			'title'     => __( 'FBA & Walmart WFS prep playbooks for growing brands', 'advay-theme' ),
 			'excerpt'   => __( 'How lean sellers keep inbound moving when Amazon and Walmart rules change — labels, polybags, expiration dates, and what to fix before your next shipment.', 'advay-theme' ),
+			'content'   => __( "Inbound mistakes are expensive. A missing FNSKU, the wrong polybag thickness, or an expiration date that does not match the ASN can trigger chargebacks before the pallet clears the dock.\n\nThis playbook covers the prep checks ElitePrep runs on every Amazon FBA and Walmart WFS shipment: carton counts, label placement, lot/expiry handling for supplements, and how to catch issues in receiving — not after you have already paid freight.\n\nUse it as a pre-ship checklist whether you prep in-house or hand the work to a 3PL that already knows both marketplaces.", 'advay-theme' ),
 			'category'  => __( 'Guides', 'advay-theme' ),
 			'read_time' => __( '6 min read', 'advay-theme' ),
-			'image'     => advay_asset_uri( 'images/svc-warehouse.jpg' ),
-			'date'      => __( 'July 12, 2024', 'advay-theme' ),
-			'url'       => $contact,
+			'image'     => 'images/svc-warehouse.jpg',
+			'date'      => '2026-07-12 10:00:00',
+			'url'       => $blog,
 		),
 		array(
-			'title'     => __( 'Marketplace policy changes sellers should watch in 2024', 'advay-theme' ),
+			'slug'      => 'marketplace-policy-changes-sellers-should-watch',
+			'title'     => __( 'Marketplace policy changes sellers should watch', 'advay-theme' ),
 			'excerpt'   => __( 'Inbound rule updates, chargeback triggers, and prep specs that catch brands off guard — and how to stay ahead without rebuilding your whole operation.', 'advay-theme' ),
+			'content'   => __( "Marketplace prep rules do not stay still. Amazon and Walmart both tighten labeling, packaging, and appointment windows — often with little notice beyond a seller-central banner.\n\nWe track the changes that actually hit prep centers: expiration windows, opaque bag requirements, overbox rules, and LTL appointment SLAs. When a rule shifts, the brands that move first avoid the scramble of rework and rejected loads.\n\nBookmark this roundup and share it with whoever signs off your next inbound.", 'advay-theme' ),
 			'category'  => __( 'Updates', 'advay-theme' ),
 			'read_time' => __( '5 min read', 'advay-theme' ),
-			'image'     => advay_asset_uri( 'images/brand-littlebay.jpg' ),
-			'date'      => __( 'June 28, 2024', 'advay-theme' ),
-			'url'       => $contact,
+			'image'     => 'images/brand-littlebay.jpg',
+			'date'      => '2026-06-28 10:00:00',
+			'url'       => $blog,
 		),
 		array(
+			'slug'      => 'scale-fulfillment-without-a-warehouse',
 			'title'     => __( 'How lean brands scale fulfillment without running a warehouse', 'advay-theme' ),
 			'excerpt'   => __( 'When DIY prep stops working and a generic 3PL starts costing you in chargebacks — what to look for in a partner that actually knows FBA and WFS.', 'advay-theme' ),
+			'content'   => __( "Most brands outgrow garage prep the same way: volume jumps, SKUs multiply, and one person can no longer keep every carton compliant.\n\nA generic 3PL can move boxes — but if they treat FBA and WFS like parcel ecommerce, you pay for it in chargebacks and missed windows. The right partner already speaks marketplace prep, gives you a receiving window, and sends digital proof of what landed.\n\nHere is how lean brands decide when to stop DIY, what to ask a prep center before the first pallet, and how ElitePrep structures that handoff.", 'advay-theme' ),
 			'category'  => __( 'Stories', 'advay-theme' ),
 			'read_time' => __( '7 min read', 'advay-theme' ),
-			'image'     => advay_asset_uri( 'images/brand-gainz.jpg' ),
-			'date'      => __( 'June 14, 2024', 'advay-theme' ),
-			'url'       => $contact,
-		),
-		array(
-			'title'     => __( 'Lot tracking and expiration accuracy: why it matters for supplements', 'advay-theme' ),
-			'excerpt'   => __( 'Real lot tracking is not a spreadsheet — it is how you avoid audit pain, chargebacks, and a 3PL that treats compliance as an afterthought.', 'advay-theme' ),
-			'category'  => __( 'Compliance', 'advay-theme' ),
-			'read_time' => __( '4 min read', 'advay-theme' ),
-			'image'     => advay_asset_uri( 'images/brand-anola.jpg' ),
-			'date'      => __( 'May 30, 2024', 'advay-theme' ),
-			'url'       => $contact,
-		),
-		array(
-			'title'     => __( 'TikTok Shop prep: what brands miss before their first inbound', 'advay-theme' ),
-			'excerpt'   => __( 'Labeling, pack-out, and receiving windows for TikTok Shop — the gaps that stall launches when you treat it like standard FBA prep.', 'advay-theme' ),
-			'category'  => __( 'Guides', 'advay-theme' ),
-			'read_time' => __( '5 min read', 'advay-theme' ),
-			'image'     => advay_asset_uri( 'images/client-success.jpg' ),
-			'date'      => __( 'May 18, 2024', 'advay-theme' ),
-			'url'       => $contact,
+			'image'     => 'images/brand-gainz.jpg',
+			'date'      => '2026-06-14 10:00:00',
+			'url'       => $blog,
 		),
 	);
 }
@@ -511,6 +608,111 @@ function advay_demo_blog_categories() {
 		__( 'Compliance', 'advay-theme' ),
 	);
 }
+
+/**
+ * Create 3 published demo posts once (local Studio / empty blog).
+ */
+function advay_maybe_seed_demo_blog_posts() {
+	if ( is_admin() && ! wp_doing_ajax() && ! ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+		/* Still allow seeding from front-end so Studio sites get content without WP-CLI. */
+	}
+
+	if ( get_option( 'advay_blog_demos_seeded' ) === '2.3.7b' ) {
+		return;
+	}
+
+	$demos = advay_demo_blog_posts();
+	foreach ( $demos as $demo ) {
+		$existing = get_page_by_path( $demo['slug'], OBJECT, 'post' );
+		$post_id  = 0;
+
+		if ( $existing ) {
+			$post_id = (int) $existing->ID;
+		} else {
+			$cat_id = 0;
+			$term   = get_term_by( 'name', $demo['category'], 'category' );
+			if ( ! $term || is_wp_error( $term ) ) {
+				$created = wp_insert_term( $demo['category'], 'category' );
+				if ( ! is_wp_error( $created ) ) {
+					$cat_id = (int) $created['term_id'];
+				}
+			} else {
+				$cat_id = (int) $term->term_id;
+			}
+
+			$paragraphs = array_filter( array_map( 'trim', preg_split( "/\n\n+/", $demo['content'] ) ) );
+			$body       = '';
+			foreach ( $paragraphs as $p ) {
+				$body .= "<!-- wp:paragraph -->\n<p>" . wp_strip_all_tags( $p ) . "</p>\n<!-- /wp:paragraph -->\n\n";
+			}
+
+			$inserted = wp_insert_post(
+				array(
+					'post_title'   => $demo['title'],
+					'post_name'    => $demo['slug'],
+					'post_content' => $body,
+					'post_excerpt' => $demo['excerpt'],
+					'post_status'  => 'publish',
+					'post_type'    => 'post',
+					'post_date'    => $demo['date'],
+					'post_author'  => 1,
+				),
+				true
+			);
+
+			if ( is_wp_error( $inserted ) || ! $inserted ) {
+				continue;
+			}
+
+			$post_id = (int) $inserted;
+			if ( $cat_id ) {
+				wp_set_post_categories( $post_id, array( $cat_id ) );
+			}
+		}
+
+		if ( ! $post_id || has_post_thumbnail( $post_id ) ) {
+			continue;
+		}
+
+		/* Attach theme image as featured image. */
+		$rel  = $demo['image'];
+		$file = get_template_directory() . '/assets/' . ltrim( $rel, '/' );
+		if ( ! file_exists( $file ) ) {
+			continue;
+		}
+
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+		require_once ABSPATH . 'wp-admin/includes/media.php';
+		require_once ABSPATH . 'wp-admin/includes/image.php';
+
+		$bits = wp_upload_bits( basename( $file ), null, file_get_contents( $file ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+		if ( ! empty( $bits['error'] ) || empty( $bits['file'] ) ) {
+			continue;
+		}
+
+		$filetype  = wp_check_filetype( basename( $bits['file'] ), null );
+		$attach_id = wp_insert_attachment(
+			array(
+				'post_mime_type' => $filetype['type'],
+				'post_title'     => sanitize_file_name( pathinfo( $bits['file'], PATHINFO_FILENAME ) ),
+				'post_content'   => '',
+				'post_status'    => 'inherit',
+			),
+			$bits['file'],
+			$post_id
+		);
+		if ( is_wp_error( $attach_id ) ) {
+			continue;
+		}
+
+		$meta = wp_generate_attachment_metadata( $attach_id, $bits['file'] );
+		wp_update_attachment_metadata( $attach_id, $meta );
+		set_post_thumbnail( $post_id, $attach_id );
+	}
+
+	update_option( 'advay_blog_demos_seeded', '2.3.7b' );
+}
+add_action( 'init', 'advay_maybe_seed_demo_blog_posts', 25 );
 
 /**
  * Estimated reading time for a post.
@@ -581,6 +783,44 @@ function advay_asset_uri( $relative ) {
 	return get_template_directory_uri() . '/assets/' . ltrim( $relative, '/' );
 }
 
+/**
+ * Theme image with local file check and optional remote placeholder.
+ */
+function advay_theme_image( $relative, $fallback = '' ) {
+	$path = get_template_directory() . '/assets/' . ltrim( $relative, '/' );
+	if ( file_exists( $path ) ) {
+		return advay_asset_uri( $relative );
+	}
+	if ( $fallback ) {
+		return $fallback;
+	}
+	return advay_asset_uri( 'images/company-placeholder.svg' );
+}
+
+/**
+ * Founder portraits for client success rotation.
+ *
+ * @return string[]
+ */
+function advay_founder_portraits() {
+	$files = array(
+		'images/founder1.png',
+		'images/founder2.png',
+		'images/founder3.jpeg',
+		'images/founder4.jpeg',
+	);
+	$urls  = array();
+
+	foreach ( $files as $file ) {
+		$path = get_template_directory() . '/assets/' . $file;
+		if ( file_exists( $path ) ) {
+			$urls[] = advay_asset_uri( $file );
+		}
+	}
+
+	return $urls;
+}
+
 function advay_logo_url() {
 	return advay_asset_uri( 'images/logo.png' );
 }
@@ -645,16 +885,28 @@ function advay_hero_channels() {
 }
 
 /**
- * Story videos. Drop files at assets/video/testimonials/{slug}.mp4 to replace demos.
+ * Story videos.
+ * First (tall) card: assets/video/testimonials.mp4
+ * Optional overrides: assets/video/testimonials/{slug}.mp4
  */
 function advay_story_video( $slug ) {
+	$slug = sanitize_key( (string) $slug );
+
+	/* Primary success-story clip for the tall/first card. */
+	if ( 'tall' === $slug ) {
+		$primary = get_template_directory() . '/assets/video/testimonials.mp4';
+		if ( file_exists( $primary ) ) {
+			return advay_asset_uri( 'video/testimonials.mp4' );
+		}
+	}
+
 	$file = get_template_directory() . '/assets/video/testimonials/' . $slug . '.mp4';
 	if ( file_exists( $file ) ) {
 		return advay_asset_uri( 'video/testimonials/' . $slug . '.mp4' );
 	}
 
 	$demo = array(
-		'tall'   => 'https://videos.pexels.com/video-files/3209298/3209298-sd_640_360_25fps.mp4',
+		'tall'   => '',
 		'square' => 'https://videos.pexels.com/video-files/3195394/3195394-sd_640_360_25fps.mp4',
 	);
 

@@ -49,7 +49,7 @@
 					<li><a href="<?php echo esc_url( advay_pricing_url() ); ?>"><?php esc_html_e( 'Pricing', 'advay-theme' ); ?></a></li>
 					<li><a href="<?php echo esc_url( advay_onboarding_url() ); ?>"><?php esc_html_e( 'Onboarding', 'advay-theme' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/#how-it-works' ) ); ?>"><?php esc_html_e( 'How it works', 'advay-theme' ); ?></a></li>
-					<li><a href="<?php echo esc_url( home_url( '/#testimonials' ) ); ?>"><?php esc_html_e( 'Testimonials', 'advay-theme' ); ?></a></li>
+					<li><a href="<?php echo esc_url( home_url( '/#testimonials' ) ); ?>"><?php esc_html_e( 'Success stories', 'advay-theme' ); ?></a></li>
 					<li><a href="<?php echo esc_url( advay_contact_url() ); ?>"><?php esc_html_e( 'Contact', 'advay-theme' ); ?></a></li>
 				</ul>
 			</div>
@@ -87,7 +87,9 @@
 </footer>
 
 <?php
-get_template_part( 'template-parts/welcome-popup' );
+if ( is_front_page() ) {
+	get_template_part( 'template-parts/welcome-popup' );
+}
 wp_footer();
 ?>
 </body>

@@ -121,16 +121,21 @@
 		}
 
 		steps.forEach(function (step) {
-			gsap.from(step.querySelector('.ob-card'), {
+			var card = step.querySelector('.ob-card');
+			if (!card) {
+				return;
+			}
+			gsap.from(card, {
 				scrollTrigger: {
 					trigger: step,
-					start: 'top 82%',
-					toggleActions: 'play none none reverse'
+					start: 'top 85%',
+					toggleActions: 'play none none none'
 				},
-				opacity: 0,
-				y: 32,
-				duration: 0.65,
-				ease: 'power2.out'
+				opacity: 0.35,
+				y: 18,
+				duration: 0.55,
+				ease: 'power2.out',
+				clearProps: 'transform,opacity'
 			});
 		});
 	} else if (timeline && spineFill) {

@@ -159,10 +159,9 @@ get_header();
 							<span class="ob-step-kicker">
 								<?php
 								printf(
-									/* translators: 1: step number, 2: step label */
-									esc_html__( 'Step %1$s — %2$s', 'advay-theme' ),
-									esc_html( $step['num'] ),
-									esc_html( $step['label'] )
+									/* translators: %s: step number */
+									esc_html__( 'Step %s', 'advay-theme' ),
+									esc_html( $step['num'] )
 								);
 								?>
 							</span>
@@ -215,10 +214,15 @@ get_header();
 		<div class="container ob-final-inner" data-ob-reveal>
 			<h2><?php esc_html_e( 'Ready to start?', 'advay-theme' ); ?></h2>
 			<p><?php esc_html_e( 'Tell us what you ship. You\'ll get a straight answer — a custom quote if we\'re a fit, a referral if we\'re not.', 'advay-theme' ); ?></p>
+			<div class="ob-final-actions">
 			<a class="button button-primary" href="<?php echo esc_url( $contact ); ?>">
 				<?php esc_html_e( 'Get a custom quote', 'advay-theme' ); ?>
 				<span class="btn-arrow" aria-hidden="true"></span>
 			</a>
+			<a class="button button-ghost ob-final-call" href="<?php echo esc_url( $contact ); ?>">
+				<?php esc_html_e( 'Book a call with MD', 'advay-theme' ); ?>
+			</a>
+			</div>
 		</div>
 	</section>
 </main>

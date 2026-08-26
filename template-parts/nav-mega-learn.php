@@ -2,9 +2,8 @@
 /**
  * Blogs mega panel — image-card dropdown.
  *
- * Shows the most recent real posts first, then fills any remaining slots
- * with evergreen topic cards that link to the blog archive. Card images
- * use real theme assets; no invented post URLs are generated.
+ * Shows the most recent real posts first, then fills remaining slots
+ * with evergreen demo cards from the theme.
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -18,12 +17,20 @@ $recent = get_posts(
 		'numberposts'      => 3,
 		'post_status'      => 'publish',
 		'suppress_filters' => false,
+		/* Prefer seeded demos over the default Hello World post. */
+		'orderby'          => 'date',
+		'order'            => 'DESC',
 	)
 );
 
 foreach ( $recent as $post_obj ) {
+	/* Skip the default WordPress sample post when we have real demos. */
+	if ( 'hello-world' === $post_obj->post_name && count( $recent ) > 1 ) {
+		continue;
+	}
+
 	$cats  = get_the_category( $post_obj->ID );
-	$thumb = has_post_thumbnail( $post_obj->ID ) ? get_the_post_thumbnail_url( $post_obj->ID, 'medium_large' ) : '';
+	$thumb = has_post_thumbnail( $post_obj->ID ) ? get_the_post_thumbnail_url( $post_obj->ID, 'medium_large' ) : advay_blog_fallback_image( $post_obj->ID );
 	$cards[] = array(
 		'label' => ( $cats && ! is_wp_error( $cats ) ) ? $cats[0]->name : __( 'Article', 'advay-theme' ),
 		'title' => get_the_title( $post_obj->ID ),
@@ -32,30 +39,31 @@ foreach ( $recent as $post_obj ) {
 	);
 }
 
-$topics = array(
-	array(
-		'label' => __( 'Guides', 'advay-theme' ),
-		'title' => __( 'FBA & Walmart WFS prep playbooks', 'advay-theme' ),
-		'url'   => $blog_url,
-		'img'   => advay_asset_uri( 'images/brand-gainz.jpg' ),
-	),
-	array(
-		'label' => __( 'Updates', 'advay-theme' ),
-		'title' => __( 'Marketplace policy changes to watch', 'advay-theme' ),
-		'url'   => $blog_url,
-		'img'   => advay_asset_uri( 'images/brand-littlebay.jpg' ),
-	),
-	array(
-		'label' => __( 'Stories', 'advay-theme' ),
-		'title' => __( 'How lean brands scale with a 3PL', 'advay-theme' ),
-		'url'   => $blog_url,
-		'img'   => advay_asset_uri( 'images/brand-anola.jpg' ),
-	),
-);
+foreach ( advay_demo_blog_posts() as $demo ) {
+	if ( count( $cards ) >= 3 ) {
+		break;
+	}
+	/* Avoid duplicating a post already pulled from get_posts(). */
+	$already = false;
+	foreach ( $cards as $existing_card ) {
+		if ( isset( $existing_card['title'] ) && $existing_card['title'] === $demo['title'] ) {
+			$already = true;
+			break;
+		}
+	}
+	if ( $already ) {
+		continue;
+	}
 
-while ( count( $cards ) < 3 && $topics ) {
-	$cards[] = array_shift( $topics );
+	$seeded = get_page_by_path( $demo['slug'], OBJECT, 'post' );
+	$cards[] = array(
+		'label' => $demo['category'],
+		'title' => $demo['title'],
+		'url'   => $seeded ? get_permalink( $seeded ) : $blog_url,
+		'img'   => advay_asset_uri( $demo['image'] ),
+	);
 }
+
 $cards = array_slice( $cards, 0, 3 );
 ?>
 <div class="mega-panel mega-blogs" role="region" aria-label="<?php esc_attr_e( 'Blogs', 'advay-theme' ); ?>">

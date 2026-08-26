@@ -190,6 +190,17 @@
 		if (!card) {
 			return;
 		}
+		var muteBtn = card.querySelector('.story-mute');
+
+		function setMuteUi(muted) {
+			card.classList.toggle('is-unmuted', !muted);
+			if (muteBtn) {
+				muteBtn.setAttribute('aria-pressed', muted ? 'false' : 'true');
+			}
+		}
+
+		setMuteUi(true);
+
 		card.addEventListener('mouseenter', function () {
 			var play = clip.play();
 			if (play && play.catch) {
@@ -198,7 +209,24 @@
 		});
 		card.addEventListener('mouseleave', function () {
 			clip.pause();
+			clip.muted = true;
+			setMuteUi(true);
 		});
+
+		if (muteBtn) {
+			muteBtn.addEventListener('click', function (event) {
+				event.preventDefault();
+				event.stopPropagation();
+				clip.muted = !clip.muted;
+				setMuteUi(clip.muted);
+				if (!clip.muted) {
+					var play = clip.play();
+					if (play && play.catch) {
+						play.catch(function () {});
+					}
+				}
+			});
+		}
 	});
 
 	var mapEl = document.getElementById('epc-map');
@@ -389,18 +417,32 @@
 	}
 
 	var popup = document.getElementById('epc-popup');
-	if (popup) {
-		window.setTimeout(function () {
-			popup.hidden = false;
-			requestAnimationFrame(function () {
-				popup.classList.add('is-open');
-			});
-			document.body.classList.add('popup-open');
-			var closeBtn = popup.querySelector('.epc-popup-close');
-			if (closeBtn) {
-				closeBtn.focus();
-			}
-		}, 8000);
+	if (popup && document.body.classList.contains('home')) {
+		var popupSeen = false;
+		try {
+			popupSeen = window.sessionStorage.getItem('epc_popup_seen') === '1';
+		} catch (err) {
+			popupSeen = false;
+		}
+
+		if (!popupSeen) {
+			window.setTimeout(function () {
+				popup.hidden = false;
+				requestAnimationFrame(function () {
+					popup.classList.add('is-open');
+				});
+				document.body.classList.add('popup-open');
+				try {
+					window.sessionStorage.setItem('epc_popup_seen', '1');
+				} catch (err) {
+					/* ignore */
+				}
+				var closeBtn = popup.querySelector('.epc-popup-close');
+				if (closeBtn) {
+					closeBtn.focus();
+				}
+			}, 8000);
+		}
 
 		function closePopup() {
 			popup.classList.remove('is-open');
@@ -538,5 +580,18 @@
 				window.location.href = blogCategory.value;
 			}
 		});
+	}
+
+	var founderRotate = document.querySelector('[data-founder-rotate]');
+	if (founderRotate && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+		var founderPhotos = founderRotate.querySelectorAll('[data-founder-photo]');
+		if (founderPhotos.length > 1) {
+			var founderIndex = 0;
+			window.setInterval(function () {
+				founderPhotos[founderIndex].classList.remove('is-active');
+				founderIndex = (founderIndex + 1) % founderPhotos.length;
+				founderPhotos[founderIndex].classList.add('is-active');
+			}, 2000);
+		}
 	}
 })();

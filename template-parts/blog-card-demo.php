@@ -11,12 +11,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $card     = isset( $args['card'] ) ? $args['card'] : array();
 $featured = ! empty( $args['featured'] );
+$image    = isset( $card['image'] ) ? (string) $card['image'] : '';
+$img_url  = ( 0 === strpos( $image, 'http' ) ) ? $image : advay_asset_uri( $image );
 ?>
 <article class="<?php echo esc_attr( $featured ? 'blog-item is-featured' : 'blog-item' ); ?>">
 	<a class="blog-item-link" href="<?php echo esc_url( $card['url'] ); ?>">
 		<figure class="blog-item-thumb">
 			<img
-				src="<?php echo esc_url( $card['image'] ); ?>"
+				src="<?php echo esc_url( $img_url ); ?>"
 				alt=""
 				loading="<?php echo $featured ? 'eager' : 'lazy'; ?>"
 				decoding="async"
@@ -26,18 +28,11 @@ $featured = ! empty( $args['featured'] );
 				<span aria-hidden="true">&middot;</span>
 				<?php echo esc_html( $card['read_time'] ); ?>
 			</span>
-			<?php if ( $featured ) : ?>
-				<span class="blog-item-overlay">
-					<strong><?php echo esc_html( $card['title'] ); ?></strong>
-				</span>
-			<?php endif; ?>
 		</figure>
 		<div class="blog-item-body">
-			<?php if ( ! $featured ) : ?>
-				<h2><?php echo esc_html( $card['title'] ); ?></h2>
-			<?php endif; ?>
+			<h2><?php echo esc_html( $card['title'] ); ?></h2>
 			<div class="blog-item-reveal">
-				<p><?php echo esc_html( $card['excerpt'] ); ?></p>
+				<p><?php echo esc_html( wp_trim_words( $card['excerpt'], $featured ? 22 : 14 ) ); ?></p>
 				<span class="blog-item-foot">
 					<time><?php echo esc_html( $card['date'] ); ?></time>
 					<span class="blog-item-more">
