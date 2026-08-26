@@ -69,12 +69,9 @@ if ( ! $categories && $demo_mode ) {
 	<?php if ( ! $demo_mode && have_posts() ) : ?>
 		<div class="blog-stream">
 			<?php
-			$index = 0;
 			while ( have_posts() ) :
 				the_post();
-				$featured = ( 0 === $index && ! is_paged() && ! is_search() && ! is_category() );
-				get_template_part( 'template-parts/blog-card', null, array( 'featured' => $featured ) );
-				++$index;
+				get_template_part( 'template-parts/blog-card', null, array( 'featured' => false ) );
 			endwhile;
 			?>
 		</div>
@@ -99,7 +96,7 @@ if ( ! $categories && $demo_mode ) {
 					null,
 					array(
 						'card'     => $card,
-						'featured' => 0 === $index,
+						'featured' => false,
 					)
 				);
 			endforeach;

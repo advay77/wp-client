@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ADVAY_THEME_VERSION', '2.4.2' );
+define( 'ADVAY_THEME_VERSION', '2.6.2' );
 
 function advay_theme_setup() {
 	add_theme_support( 'title-tag' );
@@ -799,26 +799,42 @@ function advay_theme_image( $relative, $fallback = '' ) {
 
 /**
  * Founder portraits for client success rotation.
+ * Left-column copy stays fixed; photos fade. Caption stays on MD.
  *
- * @return string[]
+ * @return array<int, array{src: string, caption: string}>
  */
 function advay_founder_portraits() {
-	$files = array(
-		'images/founder1.png',
-		'images/founder2.png',
-		'images/founder3.jpeg',
-		'images/founder4.jpeg',
+	$people = array(
+		array(
+			'file'    => 'images/founder1.png',
+			'caption' => __( 'Director of Client Success, Cole Sweetser', 'advay-theme' ),
+		),
+		array(
+			'file'    => 'images/founder2.png',
+			'caption' => __( 'Managing Director, Odi Ikpe', 'advay-theme' ),
+		),
+		array(
+			'file'    => 'images/founder3.jpeg',
+			'caption' => __( 'Director of Client Success, Cole Sweetser', 'advay-theme' ),
+		),
+		array(
+			'file'    => 'images/founder4.jpeg',
+			'caption' => __( 'Managing Director, Odi Ikpe', 'advay-theme' ),
+		),
 	);
-	$urls  = array();
 
-	foreach ( $files as $file ) {
-		$path = get_template_directory() . '/assets/' . $file;
+	$out = array();
+	foreach ( $people as $person ) {
+		$path = get_template_directory() . '/assets/' . $person['file'];
 		if ( file_exists( $path ) ) {
-			$urls[] = advay_asset_uri( $file );
+			$out[] = array(
+				'src'     => advay_asset_uri( $person['file'] ),
+				'caption' => $person['caption'],
+			);
 		}
 	}
 
-	return $urls;
+	return $out;
 }
 
 function advay_logo_url() {
@@ -841,25 +857,33 @@ function advay_hero_channels() {
 
 	$channels = array(
 		array(
-			'id'    => 'amazon',
-			'label' => __( 'Amazon FBA', 'advay-theme' ),
-			'logo'  => advay_asset_uri( 'images/amazon.svg' ),
+			'id'       => 'amazon',
+			'label'    => __( 'Amazon FBA', 'advay-theme' ),
+			'logo'     => advay_asset_uri( 'images/amazon.svg' ),
+			'headline' => __( 'Amazon-ready, without the risk.', 'advay-theme' ),
+			'body'     => __( 'Amazon eliminated its own prep service and raised defect penalties up to $5.72/unit. One mislabeled shipment can now cost more than it saves. We receive, inspect, label, and ship your inventory to FBA standards, accurately and on time, so those penalties never touch your margin.', 'advay-theme' ),
 		),
 		array(
-			'id'    => 'walmart',
-			'label' => __( 'Walmart WFS', 'advay-theme' ),
-			'logo'  => advay_asset_uri( 'images/walmart.svg' ),
+			'id'       => 'walmart',
+			'label'    => __( 'Walmart WFS', 'advay-theme' ),
+			'logo'     => advay_asset_uri( 'images/walmart.svg' ),
+			'headline' => __( 'Walmart-ready, backed by Walmart itself.', 'advay-theme' ),
+			'body'     => __( 'We\'re one of a small number of agencies accepted into Walmart\'s Partner Incubation Program, vetted and approved to move inventory into Walmart Fulfillment Services the right way, the first time. Launch clean on the marketplace still in its early growth window.', 'advay-theme' ),
 		),
 		array(
-			'id'    => 'tiktok',
-			'label' => __( 'TikTok Shop', 'advay-theme' ),
-			'logo'  => advay_asset_uri( 'images/tiktok.svg' ),
+			'id'       => 'tiktok',
+			'label'    => __( 'TikTok Shop', 'advay-theme' ),
+			'logo'     => advay_asset_uri( 'images/tiktok.svg' ),
+			'headline' => __( 'Ride the wave, don\'t miss it.', 'advay-theme' ),
+			'body'     => __( 'A viral moment can turn into a stockout in hours. We keep your inventory prepped and ready to ship the second demand spikes, so a trending video turns into revenue, not a backlog and a bad review.', 'advay-theme' ),
 		),
 		array(
 			'id'       => 'dtc',
 			'label'    => __( 'DTC Fulfillment', 'advay-theme' ),
 			'logo'     => '',
 			'wordmark' => __( 'DTC', 'advay-theme' ),
+			'headline' => __( 'Direct to your customer. Direct from us.', 'advay-theme' ),
+			'body'     => __( 'Orders from your own site or any major platform, picked and packed with 24-hour processing and two daily carrier pickups. You stay the seller of record the entire way through, we just make sure it ships on time, every time.', 'advay-theme' ),
 		),
 	);
 

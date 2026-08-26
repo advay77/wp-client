@@ -7,17 +7,21 @@ $slides = advay_brand_logos();
 if ( ! $slides ) {
 	return;
 }
+
+/* Duplicate once so desktop (and mobile) always have overflow to scroll. */
+$loop_slides = array_merge( $slides, $slides );
 ?>
 <section class="logo-slider" aria-label="<?php esc_attr_e( 'Brand logos', 'advay-theme' ); ?>">
 	<div class="logo-slider-inner">
-		<div class="logo-slider-viewport">
+		<div class="logo-slider-viewport" tabindex="0">
 			<ul class="logo-slider-list">
-				<?php foreach ( $slides as $slide ) : ?>
-					<li>
+				<?php foreach ( $loop_slides as $index => $slide ) : ?>
+					<li<?php echo $index >= count( $slides ) ? ' aria-hidden="true"' : ''; ?>>
 						<img
 							src="<?php echo esc_url( $slide['src'] ); ?>"
-							alt="<?php echo esc_attr( $slide['name'] ); ?>"
+							alt="<?php echo $index >= count( $slides ) ? '' : esc_attr( $slide['name'] ); ?>"
 							decoding="async"
+							draggable="false"
 						>
 					</li>
 				<?php endforeach; ?>

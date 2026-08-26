@@ -3,27 +3,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$quotes = array(
+$video = advay_story_video( 'tall' );
+$clips = array(
 	array(
-		'name'  => 'Candice Adams',
-		'role'  => 'Founder & CEO',
-		'quote' => 'Saltbox has been a game changer for our business. The space, the community, and the support helped us scale without the overhead of a traditional warehouse.',
-		'brand' => 'CHIC GEEKS',
-		'init'  => 'CA',
+		'chip'  => __( 'No Knife Body', 'advay-theme' ),
+		'quote' => __( '“Best decision we ever made — choosing ElitePrep.”', 'advay-theme' ),
+		'brand' => __( 'No Knife Body', 'advay-theme' ),
 	),
 	array(
-		'name'  => 'Jonathan Simpson',
-		'role'  => 'Founder',
-		'quote' => 'We needed a partner that understood wholesale and marketplace growth. The team made fulfillment feel simple so we could focus on the brand.',
-		'brand' => 'POCKET LATTE',
-		'init'  => 'JS',
+		'chip'  => __( 'No Knife Body', 'advay-theme' ),
+		'quote' => __( '“One of the best decisions I\'ve made for No Knife Body was choosing ElitePrep.”', 'advay-theme' ),
+		'brand' => __( 'No Knife Body', 'advay-theme' ),
 	),
 	array(
-		'name'  => 'Sarah Lesko',
-		'role'  => 'Executive Director',
-		'quote' => 'As a nonprofit we needed reliability more than anything. Prep, packing, and shipping just work—and that lets us put energy back into the mission.',
-		'brand' => 'BRAS FOR GIRLS',
-		'init'  => 'SL',
+		'chip'  => __( 'No Knife Body', 'advay-theme' ),
+		'quote' => __( '“Best decision we ever made — choosing ElitePrep.”', 'advay-theme' ),
+		'brand' => __( 'No Knife Body', 'advay-theme' ),
 	),
 );
 ?>
@@ -34,55 +29,22 @@ $quotes = array(
 			<h2 id="stories-heading"><?php esc_html_e( 'Brands that grow with ElitePrep Center.', 'advay-theme' ); ?></h2>
 		</header>
 
-		<div class="stories-grid">
-			<article class="story-media is-tall">
-				<video muted loop playsinline preload="metadata" poster="">
-					<source src="<?php echo esc_url( advay_story_video( 'tall' ) ); ?>" type="video/mp4">
-				</video>
-				<div class="story-media-ui">
-					<span class="story-chip"><?php esc_html_e( 'No Knife Body', 'advay-theme' ); ?></span>
-					<button type="button" class="story-mute" aria-label="<?php esc_attr_e( 'Toggle sound', 'advay-theme' ); ?>"></button>
-				</div>
-				<div class="story-media-copy">
-					<p><?php esc_html_e( '“Best decision we ever made — choosing ElitePrep.”', 'advay-theme' ); ?></p>
-					<strong><?php esc_html_e( 'No Knife Body', 'advay-theme' ); ?></strong>
-				</div>
-			</article>
-
-			<?php foreach ( array_slice( $quotes, 0, 2 ) as $item ) : ?>
-				<blockquote class="story-card">
-					<div class="story-person">
-						<span class="story-avatar"><?php echo esc_html( $item['init'] ); ?></span>
-						<div>
-							<strong><?php echo esc_html( $item['name'] ); ?></strong>
-							<span><?php echo esc_html( $item['role'] ); ?></span>
-						</div>
+		<div class="stories-grid stories-grid--videos">
+			<?php foreach ( $clips as $clip ) : ?>
+				<article class="story-media is-tall">
+					<video muted loop playsinline preload="metadata">
+						<source src="<?php echo esc_url( $video ); ?>" type="video/mp4">
+					</video>
+					<div class="story-media-ui">
+						<span class="story-chip"><?php echo esc_html( $clip['chip'] ); ?></span>
+						<button type="button" class="story-mute" aria-label="<?php esc_attr_e( 'Toggle sound', 'advay-theme' ); ?>"></button>
 					</div>
-					<p>“<?php echo esc_html( $item['quote'] ); ?>”</p>
-					<span class="story-brand"><?php echo esc_html( $item['brand'] ); ?></span>
-				</blockquote>
+					<div class="story-media-copy">
+						<p><?php echo esc_html( $clip['quote'] ); ?></p>
+						<strong><?php echo esc_html( $clip['brand'] ); ?></strong>
+					</div>
+				</article>
 			<?php endforeach; ?>
-
-			<article class="story-media is-square">
-				<video muted loop playsinline preload="metadata">
-					<source src="<?php echo esc_url( advay_story_video( 'square' ) ); ?>" type="video/mp4">
-				</video>
-				<div class="story-media-ui">
-					<span class="story-mute" aria-hidden="true"></span>
-				</div>
-			</article>
-
-			<blockquote class="story-card is-wide">
-				<div class="story-person">
-					<span class="story-avatar"><?php echo esc_html( $quotes[2]['init'] ); ?></span>
-					<div>
-						<strong><?php echo esc_html( $quotes[2]['name'] ); ?></strong>
-						<span><?php echo esc_html( $quotes[2]['role'] ); ?></span>
-					</div>
-				</div>
-				<p>“<?php echo esc_html( $quotes[2]['quote'] ); ?>”</p>
-				<span class="story-brand"><?php echo esc_html( $quotes[2]['brand'] ); ?></span>
-			</blockquote>
 		</div>
 	</div>
 </section>

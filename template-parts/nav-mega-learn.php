@@ -14,7 +14,7 @@ $cards    = array();
 
 $recent = get_posts(
 	array(
-		'numberposts'      => 3,
+		'numberposts'      => 4,
 		'post_status'      => 'publish',
 		'suppress_filters' => false,
 		/* Prefer seeded demos over the default Hello World post. */
@@ -64,7 +64,7 @@ foreach ( advay_demo_blog_posts() as $demo ) {
 	);
 }
 
-$cards = array_slice( $cards, 0, 3 );
+$cards = array_slice( $cards, 0, 4 );
 ?>
 <div class="mega-panel mega-blogs" role="region" aria-label="<?php esc_attr_e( 'Blogs', 'advay-theme' ); ?>">
 	<div class="blogs-intro">
@@ -87,10 +87,10 @@ $cards = array_slice( $cards, 0, 3 );
 				<span class="blog-body">
 					<em><?php echo esc_html( $card['label'] ); ?></em>
 					<strong><?php echo esc_html( $card['title'] ); ?></strong>
-				</span>
-				<span class="blog-more">
-					<?php esc_html_e( 'Read More', 'advay-theme' ); ?>
-					<span aria-hidden="true">&rarr;</span>
+					<span class="blog-more">
+						<?php esc_html_e( 'Read More', 'advay-theme' ); ?>
+						<span aria-hidden="true">&rarr;</span>
+					</span>
 				</span>
 			</a>
 		<?php endforeach; ?>

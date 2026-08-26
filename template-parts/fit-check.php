@@ -11,20 +11,20 @@ $cards = array(
 	),
 	array(
 		'file'  => 'images/brandfit2.png',
-		'title' => __( 'You need real lot tracking and expiration-date accuracy', 'advay-theme' ),
-		'copy'  => __( 'Not a 3PL that treats compliance as an afterthought.', 'advay-theme' ),
+		'title' => __( 'Lot tracking / compliance', 'advay-theme' ),
+		'copy'  => __( 'We track what actually matters. Lot numbers, expiration dates, and recall-ready records, the details that protect your brand when it counts.', 'advay-theme' ),
 	),
 	array(
 		'file'  => 'images/brandfit3.png',
-		'title' => __( 'You’re ready to fix a broken fulfillment setup or scale a growing one', 'advay-theme' ),
-		'copy'  => __( 'Whether that means switching from a 3PL that’s dropping the ball, or outgrowing DIY prep.', 'advay-theme' ),
+		'title' => __( 'Switching / scaling', 'advay-theme' ),
+		'copy'  => __( 'Outgrowing DIY, or done with the loser ones? Whether you\'re switching from a 3PL that\'s letting you down or scaling past in-house prep, we make the move seamless.', 'advay-theme' ),
 	),
 );
 ?>
 <section class="fit-section" id="fit-check" aria-labelledby="fit-heading">
 	<div class="container">
 		<header class="fit-head">
-			<p class="eyebrow"><?php esc_html_e( 'How we work with', 'advay-theme' ); ?></p>
+			<p class="eyebrow"><?php esc_html_e( 'Who we support', 'advay-theme' ); ?></p>
 			<h2 id="fit-heading">
 				<?php esc_html_e( 'Not every brand is a fit.', 'advay-theme' ); ?>
 				<span><?php esc_html_e( 'Are you?', 'advay-theme' ); ?></span>
@@ -55,7 +55,6 @@ $cards = array(
 		</div>
 
 		<div class="fit-cta">
-			<p class="fit-note"><?php esc_html_e( 'Tell us what you ship and you will get a straight answer: a custom quote if we are a fit, a referral to a better-matched 3PL if we are not.', 'advay-theme' ); ?></p>
 			<a class="button button-primary button-fit" href="<?php echo esc_url( advay_contact_url() ); ?>">
 				<?php esc_html_e( 'Get a custom quote', 'advay-theme' ); ?>
 				<span class="btn-arrow" aria-hidden="true"></span>

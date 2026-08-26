@@ -6,8 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$cs_url = advay_blog_url();
-$home   = trailingslashit( home_url( '/' ) );
+$home = trailingslashit( home_url( '/' ) );
 
 $stories = array(
 	array(
@@ -29,13 +28,6 @@ $stories = array(
 );
 ?>
 <div class="mega-panel mega-stories" role="region" aria-label="<?php esc_attr_e( 'Success stories', 'advay-theme' ); ?>">
-	<div class="stories-mega-intro">
-		<strong><?php esc_html_e( 'Unlock the exponential power of together.', 'advay-theme' ); ?></strong>
-		<a class="button button-primary stories-mega-cta" href="<?php echo esc_url( $cs_url ); ?>">
-			<?php esc_html_e( 'View all case studies', 'advay-theme' ); ?>
-			<span class="btn-arrow" aria-hidden="true"></span>
-		</a>
-	</div>
 	<div class="stories-mega-cards">
 		<?php foreach ( $stories as $story ) : ?>
 			<a class="st-card" href="<?php echo esc_url( $home . '#testimonials' ); ?>">

@@ -17,7 +17,13 @@ $warehouse = file_exists( get_template_directory() . '/assets/images/svc-warehou
 
 <main id="main-content" class="svc-page">
 	<section class="svc-hero">
-		<div class="container">
+		<div class="svc-hero-media" aria-hidden="true">
+			<video class="svc-hero-video" autoplay muted loop playsinline preload="metadata">
+				<source src="<?php echo esc_url( advay_asset_uri( 'video/DTC.mp4' ) ); ?>" type="video/mp4">
+			</video>
+			<span class="svc-hero-overlay"></span>
+		</div>
+		<div class="container svc-hero-inner">
 			<p class="svc-pill">
 				<span class="svc-pill-ico" aria-hidden="true"></span>
 				<?php esc_html_e( 'ElitePrep for marketplace prep', 'advay-theme' ); ?>

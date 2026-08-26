@@ -69,7 +69,50 @@ unset( $hub_ref );
 				<strong><?php esc_html_e( 'ELITE PREP CENTER (EPC)', 'advay-theme' ); ?></strong>
 				<span><?php esc_html_e( '1736 Dutch Mill Road, Franklinville, NJ 08322', 'advay-theme' ); ?></span>
 			</div>
-			<div id="epc-map" class="epc-map" role="img" aria-label="<?php esc_attr_e( 'Map of Elite Prep Center and nearby fulfillment centers', 'advay-theme' ); ?>"></div>
+			<div class="map-stage">
+				<div id="epc-map" class="epc-map" role="img" aria-label="<?php esc_attr_e( 'Map of Elite Prep Center and nearby fulfillment centers', 'advay-theme' ); ?>"></div>
+				<div class="map-detail" id="map-detail" role="region" aria-label="<?php esc_attr_e( 'Fulfillment center details', 'advay-theme' ); ?>" hidden>
+					<button class="map-detail-close" type="button" data-detail-close aria-label="<?php esc_attr_e( 'Close details', 'advay-theme' ); ?>">&times;</button>
+
+					<div class="map-detail-info">
+						<span class="map-detail-market" data-detail-market></span>
+						<strong class="map-detail-name" data-detail-name></strong>
+
+						<div class="map-detail-keyfacts">
+							<span class="map-detail-kf">
+								<b data-detail-miles></b>
+								<i><?php esc_html_e( 'from EPC', 'advay-theme' ); ?></i>
+							</span>
+							<span class="map-detail-kf">
+								<b data-detail-drive></b>
+								<i><?php esc_html_e( 'drive time', 'advay-theme' ); ?></i>
+							</span>
+						</div>
+
+						<dl class="map-detail-rows">
+							<div class="map-detail-row">
+								<dt><?php esc_html_e( 'Address', 'advay-theme' ); ?></dt>
+								<dd data-detail-addr></dd>
+							</div>
+							<div class="map-detail-row">
+								<dt><?php esc_html_e( 'Time zone', 'advay-theme' ); ?></dt>
+								<dd data-detail-tz></dd>
+							</div>
+							<div class="map-detail-row">
+								<dt><?php esc_html_e( 'Local time now', 'advay-theme' ); ?></dt>
+								<dd data-detail-localtime>&mdash;</dd>
+							</div>
+						</dl>
+					</div>
+
+					<div class="map-detail-photo">
+						<img src="" alt="" data-detail-photo>
+						<span class="map-detail-photo-fallback" data-detail-fallback aria-hidden="true">
+							<img src="" alt="" data-detail-img>
+						</span>
+					</div>
+				</div>
+			</div>
 			<div class="map-hubs">
 				<?php foreach ( $hubs as $hub ) : ?>
 					<button
@@ -102,48 +145,6 @@ unset( $hub_ref );
 						<span class="map-hub-cue" aria-hidden="true"><?php esc_html_e( 'Click to expand', 'advay-theme' ); ?></span>
 					</button>
 				<?php endforeach; ?>
-			</div>
-
-			<div class="map-detail" id="map-detail" role="region" aria-label="<?php esc_attr_e( 'Fulfillment center details', 'advay-theme' ); ?>" hidden>
-				<button class="map-detail-close" type="button" data-detail-close aria-label="<?php esc_attr_e( 'Close details', 'advay-theme' ); ?>">&times;</button>
-
-				<div class="map-detail-info">
-					<span class="map-detail-market" data-detail-market></span>
-					<strong class="map-detail-name" data-detail-name></strong>
-
-					<div class="map-detail-keyfacts">
-						<span class="map-detail-kf">
-							<b data-detail-miles></b>
-							<i><?php esc_html_e( 'from EPC', 'advay-theme' ); ?></i>
-						</span>
-						<span class="map-detail-kf">
-							<b data-detail-drive></b>
-							<i><?php esc_html_e( 'drive time', 'advay-theme' ); ?></i>
-						</span>
-					</div>
-
-					<dl class="map-detail-rows">
-						<div class="map-detail-row">
-							<dt><?php esc_html_e( 'Address', 'advay-theme' ); ?></dt>
-							<dd data-detail-addr></dd>
-						</div>
-						<div class="map-detail-row">
-							<dt><?php esc_html_e( 'Time zone', 'advay-theme' ); ?></dt>
-							<dd data-detail-tz></dd>
-						</div>
-						<div class="map-detail-row">
-							<dt><?php esc_html_e( 'Local time now', 'advay-theme' ); ?></dt>
-							<dd data-detail-localtime>&mdash;</dd>
-						</div>
-					</dl>
-				</div>
-
-				<div class="map-detail-photo">
-					<img src="" alt="" data-detail-photo>
-					<span class="map-detail-photo-fallback" data-detail-fallback aria-hidden="true">
-						<img src="" alt="" data-detail-img>
-					</span>
-				</div>
 			</div>
 		</div>
 	</div>
