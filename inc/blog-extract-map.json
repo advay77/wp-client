@@ -1,0 +1,313 @@
+{
+  "source": "C:\\Users\\Advay Anand\\.cursor\\projects\\d-wordpress\\agent-tools\\1c8c1327-6337-49e9-a02d-293ff5d967a0.txt",
+  "total_lines": 4296,
+  "blog_count": 11,
+  "encoding_note": "No mojibake (â€™ / â€œ / Ã© etc.) detected. File uses proper Unicode: curly quotes (’ “ ”), en/em dashes (– —), arrows (→), and comparison symbols (≥ ≤ ≠). Export artifacts include missing spaces after commas (e.g. 'center,labeling', '2026,SLAs', 'customers,it') and occasional spacing before commas ('years , until'). Blog 8 has a stray 'm' on line 2848. Blog 9 internal-link header is truncated/garbled at line 3115 (missing '- [').",
+  "encoding_issues": [
+    {
+      "type": "missing_space_after_comma",
+      "examples": [
+        {"line": 258, "snippet": "fulfillment center,labeling, bagging"},
+        {"line": 526, "snippet": "Amazon FBA prep explained,labeling, polybagging"},
+        {"line": 1042, "snippet": "Launch a supplement brand on Amazon,FDA labeling"},
+        {"line": 3293, "snippet": "angry customers,it can suppress"},
+        {"line": 3330, "snippet": "label rules,do not assume"},
+        {"line": 3682, "snippet": "for brands in 2026,SLAs, FBT vs seller shipping"},
+        {"line": 3711, "snippet": "handling returns,without a retailer"},
+        {"line": 4281, "snippet": "in 2026,in-house vs 3PL"}
+      ]
+    },
+    {
+      "type": "truncated_or_stray_text",
+      "examples": [
+        {"line": 2848, "snippet": "m"},
+        {"line": 3115, "snippet": "INTERNAL LINK OPPORTUNITY: Amazon FBA Prep Services]"}
+      ]
+    }
+  ],
+  "notes": {
+    "body_boundary_rule": "body_end_line is the last non-empty content line BEFORE 'Check out other related articles' when present; otherwise BEFORE 'Internal Linking Opportunities'. FAQ is included in body when it appears before that boundary.",
+    "related_articles_rule": "'Check out other related articles' blocks use placeholder titles 'Xx' (5 items). Real suggested titles come from Anchor Text / Internal Linking Opportunities sections after that.",
+    "blog_8_seo": "Blog 8 has no SEO Title / Meta Description / URL Slug / Primary Keyword block before Blog 9."
+  },
+  "blogs": [
+    {
+      "blog_number": 1,
+      "title": "Amazon FBA Prep Guide: Everything Sellers Need to Know in 2026",
+      "title_line": 2,
+      "body_start_line": 5,
+      "body_end_line": 305,
+      "faq_included_before_related": "yes",
+      "faq_heading_line": 251,
+      "related_articles_heading_line": 308,
+      "seo_title": "Amazon FBA Prep Guide: Everything Sellers Need to Know",
+      "meta_description": "Amazon FBA prep explained,labeling, polybagging, bundling, and what changed in 2026. Prep requirements, common errors, and when to use a prep center.",
+      "url_slug": "amazon-fba-prep-guide",
+      "primary_keyword": "Amazon FBA prep",
+      "related_article_suggestions": {
+        "check_out_placeholders": ["Xx", "Xx", "Xx", "Xx", "Xx"],
+        "internal_linking_titles": [
+          "Amazon FBA prep services",
+          "FNSKU vs UPC guide",
+          "Amazon FBA packaging requirements",
+          "Walmart WFS prep",
+          "Elite Prep Center FAQ"
+        ]
+      },
+      "preview": "If you send inventory to Amazon fulfillment centers, Amazon FBA prep is no longer optional background work, it is a core part of your inbound workflow.\n\nAs of January 1, 2026, Amazon ended in-house FBA prep and labeling services in the United States. Every unit must arrive fully prepped and scannable, or you risk delays, unplanned fees, or refused shipments.\n\nThis guide explains:\n1. What FBA prep includes\n2. Who must handle it\n3. How requirements vary by product\n4. How sellers typically manage prep at scale."
+    },
+    {
+      "blog_number": 2,
+      "title": "How to Launch Your Supplement Brands on Amazon in 2026",
+      "title_line": 540,
+      "body_start_line": 543,
+      "body_end_line": 818,
+      "faq_included_before_related": "yes",
+      "faq_heading_line": 775,
+      "related_articles_heading_line": 825,
+      "seo_title": "How to Launch a Supplement Brand on Amazon (2026 Guide)",
+      "meta_description": "Launch a supplement brand on Amazon,FDA labeling, Amazon TIC verification, COAs, FBA prep, expiration rules, and listing compliance for dietary supplements.",
+      "url_slug": "launch-supplement-brand-on-amazon",
+      "primary_keyword": "launch supplement brand on Amazon",
+      "related_article_suggestions": {
+        "check_out_placeholders": ["Xx", "Xx", "Xx", "Xx", "Xx"],
+        "internal_linking_titles": [
+          "Amazon FBA prep for supplements",
+          "Amazon FBA expiration date requirements",
+          "FNSKU vs UPC for FBA",
+          "How to choose a compliance-sensitive 3PL",
+          "Elite Prep Center FAQ"
+        ]
+      },
+      "preview": "Launching a supplement brand on Amazon is not the same as launching a generic consumer product.\n\nYou are operating in a regulated category with two compliance layers:\n\n1. U.S. dietary supplement rules (FDA)\n2. Amazon’s marketplace policies, which are often stricter than the legal minimum.\n\nIf you skip either layer, you risk listing suppression, inbound rejections, or inventory disposal, not just a slow launch."
+    },
+    {
+      "blog_number": 3,
+      "title": "Amazon FBA Packaging Requirements: A Complete Guide in 2026",
+      "title_line": 1056,
+      "body_start_line": 1059,
+      "body_end_line": 1227,
+      "faq_included_before_related": "yes",
+      "faq_heading_line": 1199,
+      "related_articles_heading_line": 1234,
+      "seo_title": "Amazon FBA Packaging Requirements: Complete 2026 Guide",
+      "meta_description": "A complete guide to Amazon FBA packaging requirements in 2026: poly bags, suffocation warnings, box limits, barcodes, and drop-test rules.",
+      "url_slug": "amazon-fba-packaging-requirements",
+      "primary_keyword": "Amazon FBA packaging requirements",
+      "related_article_suggestions": {
+        "check_out_placeholders": ["Xx", "Xx", "Xx", "Xx", "Xx"],
+        "internal_linking_titles": [
+          "FNSKU vs UPC",
+          "Amazon FBA Expiration Date Requirements",
+          "Amazon FBA Prep Services",
+          "The Ultimate Guide to Amazon FBA Prep"
+        ]
+      },
+      "preview": "Amazon's FBA packaging requirements determine whether your inventory checks in cleanly or gets held up at the dock. In 2026, the stakes are higher than in previous years, because Amazon stopped catching sellers' packaging mistakes for them.\n\nAmazon FBA packaging requirements cover poly bag thickness and warnings, box weight and size limits, barcode placement, and protection for fragile items."
+    },
+    {
+      "blog_number": 4,
+      "title": "FNSKU vs UPC: Which Barcode Should You Use for Amazon FBA?",
+      "title_line": 1425,
+      "body_start_line": 1428,
+      "body_end_line": 1561,
+      "faq_included_before_related": "yes",
+      "faq_heading_line": 1531,
+      "related_articles_heading_line": 1568,
+      "seo_title": "FNSKU vs UPC: Which Barcode for Amazon FBA in 2026?",
+      "meta_description": "FNSKU vs UPC for Amazon FBA explained: what each barcode identifies, who must use which one in 2026, and how to avoid shipment rejections.",
+      "url_slug": "fnsku-vs-upc",
+      "primary_keyword": "FNSKU vs UPC",
+      "related_article_suggestions": {
+        "check_out_placeholders": ["Xx", "Xx", "Xx", "Xx", "Xx"],
+        "internal_linking_titles": [
+          "Amazon FBA Prep Services",
+          "The Ultimate Guide to Amazon FBA Prep",
+          "Amazon FBA Packaging Requirements",
+          "Wholesale/Private Label Prep for Amazon FBA & Walmart Fulfillment Services"
+        ]
+      },
+      "preview": "Choosing the wrong barcode for an FBA shipment is one of the fastest ways to get inventory rejected at receiving.\n\nThe confusion is understandable, a UPC and an FNSKU can sit on the same product, serve different purposes, and, depending on your seller status, only one of them may actually be acceptable to Amazon.\n\nA UPC identifies what a product is, while an FNSKU identifies which seller's inventory a specific unit belongs to inside Amazon's fulfillment network."
+    },
+    {
+      "blog_number": 5,
+      "title": "Amazon FBA Expiration Date Requirements for Packaged Foods and Supplements",
+      "title_line": 1755,
+      "title_spans_lines": [1755, 1756],
+      "body_start_line": 1759,
+      "body_end_line": 1909,
+      "faq_included_before_related": "yes",
+      "faq_heading_line": 1881,
+      "related_articles_heading_line": 1912,
+      "seo_title": "Amazon FBA Expiration Date Requirements (2026 Guide)",
+      "meta_description": "Amazon FBA expiration date rules explained: minimum shelf life, label format, font size, and how to avoid disposal of food and supplement inventory.",
+      "url_slug": "amazon-fba-expiration-date-requirements",
+      "primary_keyword": "Amazon FBA expiration date requirements",
+      "related_article_suggestions": {
+        "check_out_placeholders": ["Xx", "Xx", "Xx", "Xx", "Xx"],
+        "internal_linking_titles": [
+          "How to Launch Supplement Brands on Amazon",
+          "Amazon FBA Packaging Requirements",
+          "Amazon FBA Prep Services",
+          "The Ultimate Guide to Amazon FBA Prep"
+        ]
+      },
+      "preview": "Sending expiration-dated inventory to Amazon FBA comes with rules that are stricter, and less forgiving, than most sellers expect.\n\nGet the shelf life or label format wrong, and Amazon won't just flag the issue, it will dispose of the inventory, and that inventory generally isn't coming back.\n\nSummary:\n1. Amazon requires expiration-dated products to have more than 90 days of remaining shelf life when received at a fulfillment center.\n2. Units within roughly 50 days of expiration are marked for disposal."
+    },
+    {
+      "blog_number": 6,
+      "title": "What to Look for in an Amazon FBA Prep Center in New Jersey",
+      "title_line": 2091,
+      "body_start_line": 2094,
+      "body_end_line": 2213,
+      "faq_included_before_related": "yes",
+      "faq_heading_line": 2189,
+      "related_articles_heading_line": 2220,
+      "seo_title": "What to Look for in an Amazon FBA Prep Center in NJ",
+      "meta_description": "A buyer's checklist for choosing an Amazon FBA prep center in New Jersey: turnaround time, pricing, compliance, and location advantages to evaluate.",
+      "url_slug": "amazon-fba-prep-center-new-jersey",
+      "primary_keyword": "Amazon FBA prep center New Jersey",
+      "related_article_suggestions": {
+        "check_out_placeholders": ["Xx", "Xx", "Xx", "Xx", "Xx"],
+        "internal_linking_titles": [
+          "Amazon FBA Prep Services",
+          "Wholesale/Private Label Prep for Amazon FBA & Walmart Fulfillment Services",
+          "The Ultimate Guide to Amazon FBA Prep",
+          "Why Do Brands Use a Backup 3PL?"
+        ]
+      },
+      "preview": "Since Amazon stopped handling FBA prep in-house, choosing the right prep center has gone from a convenience decision to an operational necessity. New Jersey has become one of the most competitive markets for this service, which means sellers have options , but also means it's easy to pick the wrong one without a clear evaluation framework.\n\nSummary:\n\nA strong Amazon FBA prep center in New Jersey should offer:\n1. Transparent per-unit pricing with no hidden minimums\n2. Fast and consistent turnaround times\n3. Proven accuracy on compliance-heavy prep like labeling and expiration dates\n4. Proximity to major East Coast fulfillment and port infrastructure."
+    },
+    {
+      "blog_number": 7,
+      "title": "Walmart WFS Prep Requirements: A Guide for Sellers",
+      "title_line": 2372,
+      "body_start_line": 2375,
+      "body_end_line": 2531,
+      "faq_included_before_related": "yes",
+      "faq_heading_line": 2499,
+      "related_articles_heading_line": 2590,
+      "related_articles_note": "No 'Check out other related articles' block; related suggestions appear under Internal Linking Opportunities only.",
+      "seo_title": "Walmart WFS Prep Requirements: A Guide for Sellers (2026)",
+      "meta_description": "A complete guide to Walmart WFS prep requirements in 2026, covering labeling, packaging, palletizing, and how it compares to Amazon FBA.",
+      "url_slug": "walmart-wfs-prep-requirements",
+      "primary_keyword": "Walmart WFS prep requirements",
+      "related_article_suggestions": {
+        "check_out_placeholders": [],
+        "internal_linking_titles": [
+          "Prep Work for Walmart Fulfillment Services",
+          "FNSKU vs UPC",
+          "Amazon FBA vs Walmart WFS Fees 2026",
+          "Why Do Brands Use a Backup 3PL?"
+        ]
+      },
+      "preview": "Walmart Fulfillment Services has its own prep and packaging rules, and while they overlap with Amazon FBA in some places, treating the two programs as interchangeable is a common way sellers end up with rejected shipments. One meaningful difference stands out immediately: Walmart still offers a paid prep service, something Amazon discontinued in the US at the start of 2026.\n\nSummary:\nWalmart WFS requires every item to:\n1. Carry a GTIN or UPC barcode\n2. Be packaged in a sealed, damage-resistant container\n3. Meet specific palletizing and labeling standards before shipment"
+    },
+    {
+      "blog_number": 8,
+      "title": "Why Do Brands Use a Backup 3PL?",
+      "title_line": 2690,
+      "body_start_line": 2693,
+      "body_end_line": 2806,
+      "faq_included_before_related": "yes",
+      "faq_heading_line": 2776,
+      "related_articles_heading_line": 2839,
+      "related_articles_note": "No 'Check out other related articles' block; related suggestions appear under Internal Linking Opportunities only.",
+      "seo_title": null,
+      "meta_description": null,
+      "url_slug": null,
+      "primary_keyword": null,
+      "seo_note": "No SEO Title / Meta Description / URL Slug / Primary Keyword section present for this blog in the export.",
+      "related_article_suggestions": {
+        "check_out_placeholders": [],
+        "internal_linking_titles": [
+          "Amazon FBA Prep Services",
+          "Prep Work for Walmart Fulfillment Services",
+          "What to Look for in an Amazon FBA Prep Center in New Jersey",
+          "Direct-to-Consumer (DTC) Fulfillment For All Major e-Commerce Platforms"
+        ]
+      },
+      "preview": "A single warehouse, one carrier contract, and one point of origin can work fine for years , until a flood, a port strike, or a system outage stops all of it at once. Brands that build in a backup 3PL aren't preparing for a hypothetical; they're preparing for the version of a disruption that eventually happens to almost every growing operation.\n\nSummary:\nBrands use a backup 3PL to avoid having their entire fulfillment operation depend on a single warehouse, carrier, or provider.\n\nIf the primary 3PL faces a disruption , a facility issue, a carrier problem, or a capacity crunch , the backup can absorb volume and keep orders moving instead of letting the business stall completely."
+    },
+    {
+      "blog_number": 9,
+      "title": "Amazon FBA vs Walmart WFS Fees 2026",
+      "title_line": 2915,
+      "body_start_line": 2918,
+      "body_end_line": 3041,
+      "faq_included_before_related": "yes",
+      "faq_heading_line": 3013,
+      "related_articles_heading_line": 3115,
+      "related_articles_note": "No 'Check out other related articles' block. Internal linking list starts at line 3115 with a truncated/garbled first bullet.",
+      "seo_title": "Amazon FBA vs Walmart WFS Fees 2026: Full Comparison",
+      "meta_description": "Amazon FBA vs Walmart WFS fees compared for 2026: referral fees, fulfillment costs, storage rates, and which model fits different sellers.",
+      "url_slug": "amazon-fba-vs-walmart-wfs-fees-2026",
+      "primary_keyword": "Amazon FBA vs Walmart WFS fees 2026",
+      "related_article_suggestions": {
+        "check_out_placeholders": [],
+        "internal_linking_titles": [
+          "Amazon FBA Prep Services",
+          "Prep Work for Walmart Fulfillment Services",
+          "Wholesale/Private Label Prep for Amazon FBA & Walmart Fulfillment Services",
+          "What to Look for in an Amazon FBA Prep Center in New Jersey"
+        ]
+      },
+      "preview": "Comparing Amazon FBA and Walmart WFS fees isn't as simple as lining up two numbers, because the fee structures aren't built the same way.\n\nAmazon layers more fee types onto a mature, high-competition marketplace.\n\nWalmart runs a simpler structure that's still catching up in seller volume."
+    },
+    {
+      "blog_number": 10,
+      "title": "The Complete Guide to TikTok Shop Fulfillment for Brands in 2026",
+      "title_line": 3217,
+      "title_spans_lines": [3217, 3218],
+      "body_start_line": 3221,
+      "body_end_line": 3561,
+      "faq_included_before_related": "yes",
+      "faq_heading_line": 3522,
+      "related_articles_heading_line": 3591,
+      "related_articles_note": "No 'Check out other related articles' block; related suggestions appear under '9. Internal Linking Opportunities' as a markdown table.",
+      "seo_title": "TikTok Shop Fulfillment Guide for Brands (2026)",
+      "meta_description": "TikTok Shop fulfillment for brands in 2026,SLAs, FBT vs seller shipping, LDR/OTDR metrics, 3PL setup, and multi-channel inventory. Official policy sources.",
+      "url_slug": "tiktok-shop-fulfillment-guide-brands-2026",
+      "primary_keyword": "TikTok Shop fulfillment",
+      "related_article_suggestions": {
+        "check_out_placeholders": [],
+        "internal_linking_titles": [
+          "Direct-to-consumer fulfillment",
+          "Amazon FBA prep services",
+          "Walmart WFS prep services",
+          "DTC fulfillment setup guide",
+          "Multi-channel fulfillment strategy",
+          "Elite Prep Center FAQ"
+        ]
+      },
+      "preview": "Summary:\n\n1. TikTok Shop fulfillment is how orders placed in the app move from your inventory to the customer’s door, and in 2026, TikTok measures that performance strictly.\n\n2. Brands must typically get regular orders scanned In Transit within 2 business days of Awaiting Shipment and Delivered within 6 business days, while maintaining metrics such as Late Dispatch Rate (LDR), On-Time Delivery Rate (OTDR), and Valid Tracking Rate (VTR).\n\n3. You can fulfill through Fulfilled by TikTok (FBT), TikTok Shipping, or seller-controlled shipping (in-house or via a 3PL), depending on what your Seller Center account allows. This guide explains each path, the rules that trip up new sellers, and how to set up fulfillment without breaking multi-channel inventory."
+    },
+    {
+      "blog_number": 11,
+      "title": "How Ecommerce Brands Should Set Up DTC Fulfillment in 2026",
+      "title_line": 3705,
+      "body_start_line": 3708,
+      "body_end_line": 4120,
+      "faq_included_before_related": "yes",
+      "faq_heading_line": 4077,
+      "related_articles_heading_line": 4155,
+      "related_articles_note": "No 'Check out other related articles' block; related suggestions appear under '9. Internal Linking Opportunities' as a markdown table.",
+      "seo_title": "DTC Fulfillment Setup Guide for Ecommerce (2026)",
+      "meta_description": "How ecommerce brands set up DTC fulfillment in 2026,in-house vs 3PL, costs, Shopify integration, multi-channel inventory, and evaluation checklist.",
+      "url_slug": "dtc-fulfillment-setup-guide-ecommerce-2026",
+      "primary_keyword": "DTC fulfillment",
+      "related_article_suggestions": {
+        "check_out_placeholders": [],
+        "internal_linking_titles": [
+          "Direct-to-consumer fulfillment services",
+          "Amazon FBA prep services",
+          "Walmart WFS prep services",
+          "TikTok Shop fulfillment guide (2026)",
+          "Backup 3PL strategy",
+          "Elite Prep Center FAQ"
+        ]
+      },
+      "preview": "Summary\n\n1. DTC fulfillment is the process of storing inventory, picking and packing website orders, shipping directly to consumers, and handling returns,without a retailer or marketplace sitting in the middle.\n\n2. In 2026, most growing ecommerce brands eventually outsource some or all of this work to a 3PL when order volume, SKU complexity, or multi-channel sales (Shopify + TikTok + Amazon) exceed what an in-house team can ship accurately every day.\n\n3. Setup success depends on three decisions: who fulfills (in-house, 3PL, or hybrid), how systems connect (real-time store-to-warehouse sync), and how inventory is allocated across channels so you do not oversell when one channel spikes."
+    }
+  ]
+}

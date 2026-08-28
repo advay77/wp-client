@@ -1,0 +1,171 @@
+Amazon FBA Packaging Requirements: A Complete Guide in 2026
+
+Amazon's FBA packaging requirements determine whether your inventory checks in cleanly or gets held up at the dock. In 2026, the stakes are higher than in previous years, because Amazon stopped catching sellers' packaging mistakes for them. 
+ 
+ 
+Amazon FBA packaging requirements cover poly bag thickness and warnings, box weight and size limits, barcode placement, and protection for fragile items. 
+ 
+ 
+As of January 1, 2026, Amazon no longer fixes packaging errors on arrival, so units must meet every specification before they leave your hands. 
+ 
+ 
+This guide explains: 
+ 1. Does Packaging Compliance Matter for Amazon in 2026? 
+ 2. What are the Poly Bag Requirements that sellers must ensure? 
+ 3. What are the Box and Carton Requirements that sellers must ensure? 
+ 4. What are the Barcode and Labeling Requirements that sellers must ensure? 
+ 5. What are the Category-Specific Packaging Notes that sellers must ensure? 
+ 6. Sustainable and Frustration-Free Packaging Options 
+ 7. Getting Packaging Right at Scale 
+ 
+ 
+Does Packaging Compliance Matter for Amazon in 2026? 
+ 
+ 
+Amazon used to offer a safety net: if a shipment showed up with a missing barcode or an unbagged item, Amazon would prep it for a fee. That option disappeared on January 1, 2026, when Amazon ended its US FBA prep and labeling services entirely. 
+ 
+ 
+Every poly bag, barcode, box, and warning label now has to be correct before the shipment leaves your facility or your prep center. 
+ 
+ 
+The core specifications themselves haven't changed dramatically , they're largely the same rules Amazon has used for years. What changed is enforcement. 
+ 
+ 
+Inbound defect fees for issues like missing or unscannable barcodes have increased substantially, and a shipment with multiple packaging errors can now cost hundreds of dollars in fees on top of the delay. 
+ 
+ 
+Getting the details right the first time is now meaningfully cheaper than fixing them after the fact. 
+ 
+ 
+Poly Bag Requirements 
+ 
+ 
+Poly bags are required for many loose items, apparel, and anything with small parts that could separate or contaminate other inventory. The core specifications: 
+ 
+ 
+ 1. Minimum thickness: 1.5 mil, and bags must be transparent (except for adult products, which require opaque or black bags) 
+ 2. Sealing: Bags must be fully sealed and fit the product without excessive loose material , a bag shouldn't hang more than about 3 inches past the product 
+ 3. Suffocation warning: Required on any poly bag with an opening of 5 inches or more, measured flat. The required font size scales with the bag's combined length and width. Larger bags need larger warning text 
+ 4. Barcode visibility: The barcode must remain scannable either through the bag or via a label applied to the outside 
+ 
+ 
+Example: a cotton t-shirt folded and sealed in a poly bag needs both a visible suffocation warning (since a folded shirt typically creates an opening wider than 5 inches) and a barcode placed on a flat, scannable section of the bag. 
+ 
+ 
+Box and Carton Requirements 
+ 
+ 
+Amazon's carton specifications are more rigid than most sellers expect: 
+ 
+ 
+ 
+ 
+Requirement 
+ Standard 
+ Maximum weight 
+ 50 lbs, unless labeled â€œTeam Liftâ€ 
+ â€œTeam Liftâ€ label required 
+ 50â€“100 lbs 
+ â€œMechanical Liftâ€ label required 
+ Over 100 lbs 
+ Maximum dimension 
+ 25 inches on the longest side, unless the box holds a single oversized unit 
+ Barcode placement 
+ Flat, non-curved, and scannable surface 
+ Structural integrity 
+ Six-sided, fully enclosed boxes 
+ 
+ 
+ 
+ 
+Fragile or perforated items generally need to survive a basic drop test; if a bagged and boxed unit can't survive a 3-foot drop without damage, it needs additional cushioning such as bubble wrap or reinforced corners. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Barcode and Labeling Requirements 
+ 
+ 
+Every unit needs a single, scannable barcode , either an Amazon-issued FNSKU or an eligible manufacturer barcode, depending on your Brand Registry status. (Read our article on FNSKU vs UPC for how to determine which applies to you). 
+ 
+ 
+Barcodes must be placed on a flat surface where a scanner can read them cleanly; curved surfaces, seams, and low-contrast backgrounds are common causes of scan failures at receiving. 
+ 
+ 
+ 
+ 
+Category-Specific Packaging Notes 
+ 
+ 
+Certain product types carry additional requirements beyond the general rules: 
+ 
+ 
+ 1. Liquids need double-sealed, leak-proof packaging 
+ 2. Glass and ceramic items need bubble wrap and box cushioning sufficient to survive standard warehouse handling 
+ 3. Expiration-dated products (food, supplements, topicals) need date labeling in the correct format and font size , covered in detail in our [INTERNAL LINK OPPORTUNITY: Amazon FBA Expiration Date Requirements] 
+ 4. Adult products require opaque or black poly bags, with the same barcode visibility and suffocation warning rules still applying 
+ 5. Bundled or kitted sets need shrink wrap or another method to keep the set together under a single barcode 
+ 
+ 
+Sustainable and Frustration-Free Packaging Options 
+ 
+ 
+Amazon also offers a Frustration-Free Packaging (FFP) program, which can reduce prep requirements and fees for products that ship in their own retail packaging without additional bagging or boxing. Products enrolled in FFP still need to meet Amazon's durability and labeling standards, but they can skip some of the poly-bagging steps required for standard packaging. 
+ 
+ 
+A Practical Example 
+ 
+ 
+A seller ships a set of ceramic mugs bundled as a 4-pack. 
+ 
+ 
+Each mug needs to be individually wrapped to survive shipping, the 4-pack needs to be boxed with enough internal cushioning to pass a drop test, and the outer box needs a single scannable barcode representing the bundled set , not four separate barcodes. 
+ 
+ 
+If the seller instead ships each mug in its original retail packaging that already meets Amazon's protection standards, the set may qualify for reduced poly-bagging requirements under FFP. 
+ 
+ 
+Getting Packaging Right at Scale 
+ 
+ 
+For sellers running high SKU counts or fluctuating monthly volume, maintaining consistent packaging compliance in-house means keeping trained staff on hand for every rule change and every category exception. 
+ 
+ 
+A specialised Amazon FBA Prep Services provider (example - Elite Prep Center in New Jersey) that specializes in Amazon compliance absorbs this variability , including materials, labor, and the constant task of checking Seller Central for ASIN-specific prep requirements before every shipment. 
+ 
+ 
+Frequently Asked Questions 
+ 
+ 
+What thickness do Amazon FBA poly bags need to be? 
+Amazon requires poly bags to be at least 1.5 mil thick and transparent, except for adult products, which require opaque or black bags. 
+ 
+ 
+When does a poly bag need a suffocation warning? 
+Any poly bag with an opening of 5 inches or more, measured flat, needs a suffocation warning printed on the bag or attached as a label, with font size scaling to the bag's overall dimensions. 
+ 
+ 
+What is the maximum weight for an Amazon FBA box? 
+Standard cartons must stay under 50 lbs unless labeled "Team Lift" (50â€“100 lbs) or "Mechanical Lift" (over 100 lbs). 
+ 
+ 
+Does Amazon still fix packaging mistakes for sellers? 
+No. As of January 1, 2026, Amazon no longer offers in-house prep or packaging correction services in the US. Non-compliant shipments are now held, returned, or charged defect fees instead. 
+ 
+ 
+What is Frustration-Free Packaging (FFP)? 
+FFP is an Amazon program that lets qualifying products ship in their own retail packaging without additional poly bagging, provided the packaging meets Amazon's durability and labeling standards. 
+ 
+ 
+Do all items need a suffocation warning label? 
+No. Only poly bags with an opening of 5 inches or more require the warning. Boxed items and smaller bags below that threshold generally don't need it. 
+ 
+ 
+What causes barcode scan failures at Amazon receiving? 
+Common causes include placing barcodes on curved or textured surfaces, low print contrast, damaged labels, and using the wrong barcode type for your seller status. 

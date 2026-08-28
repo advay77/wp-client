@@ -1,0 +1,158 @@
+How to Launch Your Supplement Brands on Amazon in 2026
+
+Launching a supplement brand on Amazon is not the same as launching a generic consumer product.
+
+You are operating in a regulated category with two compliance layers:
+
+1. U.S. dietary supplement rules (FDA)
+2. Amazonâ€™s marketplace policies, which are often stricter than the legal minimum.
+
+If you skip either layer, you risk listing suppression, inbound rejections, or inventory disposal, not just a slow launch.
+
+To launch a supplement brand on Amazon, you need:
+
+1. Compliant product formulation and labeling (Supplement Facts panel, structure/function claims with DSHEA disclaimer, cGMP manufacturing)
+2. Amazon category verification (including third-party cGMP verification through an Amazon-approved Testing, Inspection, and Certification provider where required)
+3. Certificates of Analysis from accredited labs
+4. FBA-ready logistics (FNSKU labeling, expiration dating, tamper-evident packaging).
+5. Verify current document requirements in Seller Central before you order inventory.
+
+We have explained this further through a simple 5 phase process.
+
+Phase 1: Product and Label Compliance (Before You List)
+
+Amazon does not approve supplements before they go to market. The FDA does not either but you must meet federal labeling and manufacturing standards.
+
+Core FDA-aligned requirements include:
+
+Area
+What Amazon and regulators expect
+Labeling
+Supplement Facts panel (21 CFR 101.36), ingredient list, net quantity, manufacturer/distributor information
+Claims
+Structure/function claims only , no disease treatment, cure, or prevention claims
+Manufacturing
+cGMP compliance under 21 CFR Part 111; facility registered with FDA
+Ingredients
+Permitted dietary ingredients; NDI notification where applicable
+Allergens
+Accurate allergen disclosure on the label and listing
+
+Your Amazon listing must match your physical label: title, bullets, images, A+ Content, and Supplement Facts panel must agree on ingredients, amounts, and claims.
+
+Example: You launch a 60-count multivitamin positioned as a â€œdaily immune supportâ€ formula. Bullets cannot imply it treats or prevents illness. The Supplement Facts panel must list each vitamin at the dose shown on the label and the same doses must appear in your listing copy.
+
+-
+
+Phase 2: Amazon Category and Verification Requirements
+
+Supplements sit in a restricted category on Amazon. Expect document requests through Manage Your Compliance in Seller Central.
+
+Common Amazon requirements for dietary supplements:
+
+1. Third-party cGMP verification:
+Amazon has required sellers to demonstrate cGMP compliance through an Amazon-approved TIC (Testing, Inspection, and Certification) organization. Internal audits alone are typically not sufficient; verify the current approved provider list in Seller Central.
+
+2. Certificate of Analysis (COA):
+A COA from an ISO/IEC 17025â€“accredited lab (or compliant in-house lab where accepted) covering identity, potency, and contaminants for your finished product batch. COAs are usually dated within the last 12 months.
+
+3. Label and claim review:
+Amazon compares your detail page to packaging. Mismatched ingredient names, unauthorized drug claims, or incorrect Supplement Facts formatting trigger flags.
+
+4. Product testing panels:
+Depending on ingredients and risk profile, Amazon may require additional testing (e.g., heavy metals). Requirements vary by product, do not assume one COA template covers every SKU.
+
+Operational tip: Build a compliance folder per ASIN and lot number from day one. When Amazon or a TIC provider requests documents, delays often come from disorganized files,not missing tests.
+
+Phase 3: Listing Setup and Brand Protection
+
+UPC/GTIN: Most private-label supplements need a product identifier to create a listing. You can purchase a GS1 UPC or explore GTIN exemption if you qualify.
+
+Brand Registry: Enrollment helps protect your brand and affects barcode options for FBA. Brand-registered owners may use manufacturer barcodes on eligible ASINs; most resellers must use FNSKU labels.
+
+Listing content discipline:
+
+- Use consistent ingredient naming (FDA-preferred terms)
+- Avoid before/after imagery implying medical outcomes
+- Include required disclaimers for structure/function claims
+- Align serving size and count with FBA expiration math (see below)
+
+Phase 4: FBA Logistics for Supplements
+
+Supplements are almost always expiration-dated for FBA even if you use â€œbest byâ€ language instead of â€œexpiration.â€
+
+Expiration and shelf-life rules at FC check-in:
+- Dates in MM-DD-YYYY or MM-YYYY format
+- Visible on each unit and outer packaging (36-point font or larger where required)
+- Remaining shelf life = full consumption period + 90 days at check-in
+
+Example: A 30-day supply (30 servings) must have at least 120 days of remaining shelf life when Amazon receives it.
+
+FBA prep requirements for supplements:
+
+- FNSKU on every unit when Amazon barcode tracking applies
+- Tamper-evident packaging (induction seal, shrink band, or breakaway cap,common buyer expectation)
+- Transparent poly bags with suffocation warnings where bag openings exceed 5 inches
+- No covering expiration dates with labels
+
+Since January 1, 2026, Amazon no longer preps or labels supplement inventory at U.S. FCs. Inventory must arrive ready for sale.
+
+Brands that outsource inbound work often use a supplement-aware prep partner. (example - Elite Prep Center specialises in this field) to inspect lots, verify dates at receiving, apply FNSKUs, and build FC shipments especially when manufacturing overseas with long transit times.
+
+Phase 5: Launch Checklist
+
+Step
+Action
+1
+Confirm all ingredients are permitted; finalize the label with a compliance review
+2
+Manufacture under cGMP; obtain a COA for each batch
+3
+Submit TIC/cGMP verification according to Amazonâ€™s current supplement policy
+4
+Create the listing with label-matched copy and images
+5
+Calculate shelf life before issuing the production PO: consumption period + 90 days + transit
+6
+Prep FBA units: FNSKU, visible dates, and tamper evidence
+7
+Ship through Send to Amazon; monitor Manage Your Compliance for requests
+
+---
+
+Common Launch Failures
+
+1. Short-dated inventory: Product manufactured too long before FC arrival fails shelf-life math.
+2. Claim drift: Marketing copy promises outcomes the label cannot support.
+3. Document lag: Inventory arrives before TIC verification completes.
+4. Barcode confusion: UPC left exposed under FNSKU sticker; FC scans wrong code.
+5. Listing/label mismatch: Amazon flags ASIN when bullet claims do not match Supplement Facts.
+
+7. FAQ
+
+Frequently Asked Questions
+
+Can anyone sell supplements on Amazon?
+Not without meeting Amazonâ€™s category requirements. Supplements are restricted; sellers must provide compliance documentation, pass verification where required, and maintain accurate labeling and testing records.
+
+Does the FDA approve my supplement before I sell on Amazon?
+No. The FDA does not pre-approve dietary supplements. You are responsible for lawful ingredients, cGMP manufacturing, and compliant labeling. Amazon adds its own verification layer.
+
+What is Amazon TIC verification for supplements?
+TIC (Testing, Inspection, and Certification) verification is Amazonâ€™s process for confirming supplement compliance documents,often including cGMP and COA review,through an Amazon-approved third-party provider rather than direct seller uploads alone.
+
+Do supplements need FNSKU labels for FBA?
+Most private-label brands using Amazon barcode tracking need an FNSKU on each unit. Brand-registered owners may use manufacturer barcodes on eligible ASINs. Resellers generally must use FNSKU labels after March 31, 2026.
+
+What expiration date format does Amazon require?
+MM-DD-YYYY or MM-YYYY on individual units and outer packaging. If your manufacturer uses a different format, apply a compliant label that covers the original date.
+
+How much shelf life must supplements have at Amazon check-in?
+Enough remaining shelf life for the product to be consumed in full plus an additional 90 days. A 90-day supply requires at least 180 days remaining at check-in.
+
+What claims can I make on Amazon supplement listings?
+Structure/function claims supported by the product and label, with the required DSHEA disclaimer. Do not make disease treatment, cure, or prevention claims unless the product is an approved drug, which supplements are not.
+
+Should I use a 3PL to launch my supplement brand?
+
+Many founders use prep centers or 3PLs for labeling, lot tracking, expiration checks, and FC shipment build, especially when scaling beyond a garage operation. Choose partners familiar with supplement inbound requirements.

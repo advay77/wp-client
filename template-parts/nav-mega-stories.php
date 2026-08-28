@@ -1,6 +1,6 @@
 <?php
 /**
- * Success stories mega — lifestyle photo cards (no brand logos).
+ * Success stories mega — lifestyle photo cards with brand names.
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -10,20 +10,24 @@ $home = trailingslashit( home_url( '/' ) );
 
 $stories = array(
 	array(
-		'alt' => __( 'Brand fulfillment success story', 'advay-theme' ),
-		'src' => 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80',
+		'brand' => __( 'Ajayi Popcorn', 'advay-theme' ),
+		'alt'   => __( 'Ajayi Popcorn success story', 'advay-theme' ),
+		'src'   => 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80',
 	),
 	array(
-		'alt' => __( 'Small business scaling with prep partner', 'advay-theme' ),
-		'src' => 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80',
+		'brand' => __( 'Daka Vitamins', 'advay-theme' ),
+		'alt'   => __( 'Daka Vitamins success story', 'advay-theme' ),
+		'src'   => 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80',
 	),
 	array(
-		'alt' => __( 'Marketplace seller growth story', 'advay-theme' ),
-		'src' => 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=800&q=80',
+		'brand' => __( 'No Knife Body', 'advay-theme' ),
+		'alt'   => __( 'No Knife Body success story', 'advay-theme' ),
+		'src'   => 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=800&q=80',
 	),
 	array(
-		'alt' => __( 'Warehouse prep and shipping success', 'advay-theme' ),
-		'src' => 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80',
+		'brand' => __( 'Gainz & Airplanes', 'advay-theme' ),
+		'alt'   => __( 'Gainz & Airplanes success story', 'advay-theme' ),
+		'src'   => 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=800&q=80',
 	),
 );
 ?>
@@ -33,6 +37,7 @@ $stories = array(
 			<a class="st-card" href="<?php echo esc_url( $home . '#testimonials' ); ?>">
 				<img src="<?php echo esc_url( $story['src'] ); ?>" alt="<?php echo esc_attr( $story['alt'] ); ?>">
 				<span class="st-overlay">
+					<span class="st-brand"><?php echo esc_html( $story['brand'] ); ?></span>
 					<span class="st-more"><?php esc_html_e( 'Read More', 'advay-theme' ); ?></span>
 				</span>
 			</a>

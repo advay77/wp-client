@@ -12,19 +12,19 @@ $cards = array(
 	array(
 		'title' => __( 'Our Story', 'advay-theme' ),
 		'desc'  => __( 'Learn how ElitePrep Center has grown over the years.', 'advay-theme' ),
-		'url'   => $home . '#company',
+		'url'   => advay_our_story_url(),
 		'img'   => 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=900&q=80',
 		'alt'   => __( 'Warehouse trucks and inbound dock operations', 'advay-theme' ),
 	),
 	array(
-		'title' => __( 'Our Team', 'advay-theme' ),
-		'desc'  => __( 'Meet the team running the warehouse floor.', 'advay-theme' ),
-		'url'   => $home . '#leadership',
+		'title' => __( 'Our Managing Director', 'advay-theme' ),
+		'desc'  => __( 'Meet the man behind EPC and learn what drives the business forward.', 'advay-theme' ),
+		'url'   => advay_managing_director_url(),
 		'img'   => advay_theme_image(
 			'images/client-success.jpg',
 			'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80'
 		),
-		'alt'   => __( 'Operations team collaborating in the warehouse', 'advay-theme' ),
+		'alt'   => __( 'Managing Director at ElitePrep Center', 'advay-theme' ),
 	),
 );
 ?>

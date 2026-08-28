@@ -26,9 +26,15 @@ $book_url  = advay_onboarding_url();
 				<span><?php esc_html_e( 'Walmart WFS', 'advay-theme' ); ?></span>
 				<span><?php esc_html_e( 'TikTok Shop', 'advay-theme' ); ?></span>
 			</div>
-			<div class="epc-popup-scan"></div>
-			<div class="epc-popup-brand">
-				<img src="<?php echo esc_url( advay_logo_url() ); ?>" alt="" width="120" height="36">
+			<div class="epc-popup-cartons" aria-hidden="true">
+				<img
+					src="<?php echo esc_url( advay_asset_uri( 'images/svc-warehouse.jpg' ) ); ?>"
+					alt=""
+					width="320"
+					height="140"
+					loading="lazy"
+					decoding="async"
+				>
 			</div>
 		</div>
 		<div class="epc-popup-copy">
@@ -38,10 +44,10 @@ $book_url  = advay_onboarding_url();
 			</p>
 			<div class="epc-popup-actions">
 				<a class="button button-primary epc-popup-cta" href="<?php echo esc_url( $quote_url ); ?>">
-					<?php esc_html_e( '[Get a Free Quote]', 'advay-theme' ); ?>
+					<?php esc_html_e( 'Get a Free Quote', 'advay-theme' ); ?>
 				</a>
 				<a class="button epc-popup-cta-secondary" href="<?php echo esc_url( $book_url ); ?>">
-					<?php esc_html_e( '[Book a Call with Odi]', 'advay-theme' ); ?>
+					<?php esc_html_e( 'Book a Call with Odi', 'advay-theme' ); ?>
 				</a>
 			</div>
 		</div>

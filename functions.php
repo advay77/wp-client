@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ADVAY_THEME_VERSION', '2.6.7' );
+define( 'ADVAY_THEME_VERSION', '2.15.2' );
 
 function advay_theme_setup() {
 	add_theme_support( 'title-tag' );
@@ -303,6 +303,61 @@ function advay_contact_url() {
 	return trailingslashit( home_url( '/' ) ) . '#contact';
 }
 
+function advay_intake_email_url() {
+	return apply_filters( 'advay_contact_email_url', 'mailto:hello@eliteprepcenter.com' );
+}
+
+function advay_intake_phone_url() {
+	return apply_filters( 'advay_contact_call_url', 'tel:+18555550199' );
+}
+
+/**
+ * Floating dock — MD phone display and dial link.
+ */
+function advay_dock_phone_label() {
+	return apply_filters( 'advay_dock_phone_label', '+1 (212) 814-8815' );
+}
+
+function advay_dock_phone_url() {
+	return apply_filters( 'advay_dock_phone_url', 'tel:+12128148815' );
+}
+
+/**
+ * Floating dock — MD email.
+ */
+function advay_dock_email_label() {
+	return apply_filters( 'advay_dock_email_label', 'odi@eliteprepcenter.com' );
+}
+
+function advay_dock_email_url() {
+	return apply_filters( 'advay_dock_email_url', 'mailto:odi@eliteprepcenter.com' );
+}
+
+/**
+ * Floating dock — Calendly / Google Meet booking.
+ */
+function advay_dock_calendly_url() {
+	return apply_filters( 'advay_dock_calendly_url', 'https://calendly.com/odi-eliteprepcenter/30min' );
+}
+
+/**
+ * SVG icons for the floating contact dock.
+ *
+ * @param string $name Icon key.
+ * @return string SVG markup.
+ */
+function advay_contact_dock_icon( $name ) {
+	$attrs = 'viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
+
+	$icons = array(
+		'phone' => '<svg ' . $attrs . '><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>',
+		'email' => '<svg ' . $attrs . '><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>',
+		'meet'  => '<svg ' . $attrs . '><rect x="2" y="5" width="14" height="12" rx="2"/><path d="M16 9.5 22 6v12l-6-3.5"/><path d="M8 10h4"/><path d="M8 14h2"/></svg>',
+	);
+
+	return isset( $icons[ $name ] ) ? $icons[ $name ] : $icons['phone'];
+}
+
 /**
  * One-click onboarding page URL — existing page slug wins, else /onboarding/ rewrite.
  */
@@ -313,6 +368,76 @@ function advay_onboarding_url() {
 	}
 
 	return home_url( '/onboarding/' );
+}
+
+/**
+ * Our Story page URL.
+ */
+function advay_our_story_url() {
+	$page = get_page_by_path( 'our-story' );
+	if ( $page ) {
+		return get_permalink( $page );
+	}
+
+	return home_url( '/our-story/' );
+}
+
+/**
+ * Join Our Team page URL.
+ */
+function advay_join_team_url() {
+	$page = get_page_by_path( 'join-our-team' );
+	if ( $page ) {
+		return get_permalink( $page );
+	}
+
+	return home_url( '/join-our-team/' );
+}
+
+/**
+ * Managing Director profile page URL.
+ */
+function advay_managing_director_url() {
+	$page = get_page_by_path( 'managing-director' );
+	if ( $page ) {
+		return get_permalink( $page );
+	}
+
+	return home_url( '/managing-director/' );
+}
+
+/**
+ * Line icons for MD ecosystem flow.
+ *
+ * @param string $name Icon key.
+ * @return string SVG markup.
+ */
+function advay_md_ecosystem_icon( $name ) {
+	$attrs = 'viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
+
+	$icons = array(
+		'brands'         => '<svg ' . $attrs . '><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>',
+		'manufacturing'  => '<svg ' . $attrs . '><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
+		'supply'         => '<svg ' . $attrs . '><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5"/><path d="M12 12v10"/></svg>',
+		'distribution'   => '<svg ' . $attrs . '><path d="M3 7h11v9H3z"/><path d="M14 10h3l3 3v3h-6"/><circle cx="7.5" cy="18.5" r="1.75"/><circle cx="17.5" cy="18.5" r="1.75"/></svg>',
+		'customers'      => '<svg ' . $attrs . '><circle cx="9" cy="8" r="2.5"/><circle cx="16" cy="9" r="2"/><path d="M4 19c0-2.5 2.2-4 5-4s5 1.5 5 4"/><path d="M14 19c0-1.8 1.3-3 3.5-3"/></svg>',
+		'sourcing'       => '<svg ' . $attrs . '><path d="M12 22c4-4 8-7.5 8-12a8 8 0 1 0-16 0c0 4.5 4 8 8 12z"/><path d="M12 10v4"/><path d="M12 7h.01"/></svg>',
+		'quality'        => '<svg ' . $attrs . '><path d="M12 3 4 7v6c0 4.5 3.4 7.7 8 9 4.6-1.3 8-4.5 8-9V7z"/><path d="M9.5 12.5 11 14l3.5-3.5"/></svg>',
+		'warehousing'    => '<svg ' . $attrs . '><path d="M3 10h18"/><path d="M5 10V19h14V10"/><path d="M9 10V6h6v4"/><path d="M12 3v4"/></svg>',
+		'market'         => '<svg ' . $attrs . '><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18"/><path d="M12 3a15 15 0 0 0 0 18"/></svg>',
+		'longterm'       => '<svg ' . $attrs . '><path d="M12 3v18"/><path d="M7 8h10"/><path d="M7 16h10"/><path d="M5 12h14"/></svg>',
+		'own'            => '<svg ' . $attrs . '><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg>',
+		'people'         => '<svg ' . $attrs . '><circle cx="12" cy="8" r="3"/><path d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6"/></svg>',
+		'curious'        => '<svg ' . $attrs . '><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>',
+		'empower'        => '<svg ' . $attrs . '><path d="M12 2v4"/><path d="M8 4h8"/><path d="M7 8h10l-1 12H8z"/></svg>',
+		'community'      => '<svg ' . $attrs . '><path d="M3 9l9-6 9 6v11H3z"/><path d="M9 20V12h6v8"/></svg>',
+		'future'         => '<svg ' . $attrs . '><path d="M12 3v18"/><path d="M7 8l5-5 5 5"/></svg>',
+		'rocket'         => '<svg ' . $attrs . '><path d="M4.5 16.5c-1.5 4.5 0 6 4.5 4.5 4.5-1.5 6 0 4.5-4.5-4.5-4.5-6-4.5-4.5 0z"/><path d="M12 15l3-3"/><path d="M9 12l6-6 3 3-6 6"/></svg>',
+		'ventures'       => '<svg ' . $attrs . '><path d="M3 21h18"/><path d="M6 21V9l6-4 6 4v12"/><path d="M10 21v-6h4v6"/></svg>',
+		'mentor'         => '<svg ' . $attrs . '><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2.7 3 6 3s6-1 6-3v-5"/></svg>',
+	);
+
+	return isset( $icons[ $name ] ) ? $icons[ $name ] : $icons['supply'];
 }
 
 function advay_onboarding_icon( $name ) {
@@ -326,11 +451,51 @@ function advay_onboarding_icon( $name ) {
 	echo isset( $icons[ $name ] ) ? $icons[ $name ] : $icons['box']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
+/**
+ * Line icons for homepage hub (flow steps, facts, onboarding).
+ *
+ * @param string $name Icon key.
+ * @param int    $size Pixel size.
+ * @return string SVG markup.
+ */
+function advay_home_hub_icon( $name, $size = 22 ) {
+	$attrs = sprintf(
+		'viewBox="0 0 24 24" width="%1$d" height="%1$d" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"',
+		(int) $size
+	);
+
+	$icons = array(
+		'warehouse' => '<svg ' . $attrs . '><path d="M3 10h18"/><path d="M5 10V19h14V10"/><path d="M9 10V6h6v4"/><path d="M12 3v4"/><circle cx="12" cy="15" r="1.5" fill="currentColor" stroke="none"/></svg>',
+		'receive'   => '<svg ' . $attrs . '><path d="M4 8h16v11H4z"/><path d="M8 8V5h8v3"/><path d="M12 12v4"/><path d="M10 14l2 2 2-2"/></svg>',
+		'prep'      => '<svg ' . $attrs . '><path d="M8 4h8a1 1 0 0 1 1 1v1H7V5a1 1 0 0 1 1-1z"/><rect x="7" y="6" width="10" height="14" rx="1.5"/><path d="M10 11h4"/><path d="M10 14h4"/><path d="M10 17h2"/></svg>',
+		'pack'      => '<svg ' . $attrs . '><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5"/><path d="M12 12v10"/></svg>',
+		'ship'      => '<svg ' . $attrs . '><path d="M3 7h11v9H3z"/><path d="M14 10h3l3 3v3h-6"/><circle cx="7.5" cy="18.5" r="1.75"/><circle cx="17.5" cy="18.5" r="1.75"/></svg>',
+		'report'    => '<svg ' . $attrs . '><path d="M7 4h7l4 4v12H7z"/><path d="M14 4v4h4"/><path d="M10 13v5"/><path d="M13 11v7"/><path d="M16 15v3"/></svg>',
+		'experience' => '<svg ' . $attrs . '><circle cx="12" cy="12" r="8"/><path d="M12 8v4l2.5 2"/></svg>',
+		'units'      => '<svg ' . $attrs . '><path d="M3 15h7v5H3z"/><path d="M7 11h7v9H7z"/><path d="M11 7h7v13h-7z"/></svg>',
+		'tat'        => '<svg ' . $attrs . '><path d="M9 3h6"/><path d="M12 3v2"/><circle cx="12" cy="14" r="7"/><path d="M12 14V10"/><path d="M12 14l2.5 2"/></svg>',
+		'people'    => '<svg ' . $attrs . '><circle cx="9" cy="8" r="2.5"/><circle cx="16" cy="9" r="2"/><path d="M4 19c0-2.5 2.2-4 5-4s5 1.5 5 4"/><path d="M14 19c0-1.8 1.3-3 3.5-3"/></svg>',
+		'box'       => '<svg ' . $attrs . '><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5"/></svg>',
+		'target'    => '<svg ' . $attrs . '><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg>',
+		'sku'       => '<svg ' . $attrs . '><path d="M7 4h7l4 4v12H7z"/><path d="M14 4v4h4"/><path d="M10 12l2 2 4-4"/></svg>',
+		'inbound'   => '<svg ' . $attrs . '><path d="M3 7h11v9H3z"/><path d="M14 10h3l3 3v3h-6"/><circle cx="7.5" cy="18.5" r="1.75"/><circle cx="17.5" cy="18.5" r="1.75"/></svg>',
+		'forward'   => '<svg ' . $attrs . '><path d="M3 12h13"/><path d="M12 7l5 5-5 5"/><path d="M19 5v14"/></svg>',
+		'shield'    => '<svg ' . $attrs . '><path d="M12 3 4 7v6c0 4.5 3.4 7.7 8 9 4.6-1.3 8-4.5 8-9V7z"/><path d="M9.5 12.5 11 14l3.5-3.5"/></svg>',
+	);
+
+	$icon = isset( $icons[ $name ] ) ? $icons[ $name ] : $icons['box'];
+
+	return $icon;
+}
+
 function advay_register_onboarding_route() {
 	add_rewrite_rule( '^onboarding/?$', 'index.php?advay_onboarding=1', 'top' );
 	add_rewrite_rule( '^blog/?$', 'index.php?advay_blog=1', 'top' );
 	add_rewrite_rule( '^blog/page/([0-9]{1,})/?$', 'index.php?advay_blog=1&paged=$matches[1]', 'top' );
 	add_rewrite_rule( '^receiving/?$', 'index.php?advay_receiving=1', 'top' );
+	add_rewrite_rule( '^our-story/?$', 'index.php?advay_our_story=1', 'top' );
+	add_rewrite_rule( '^join-our-team/?$', 'index.php?advay_join_team=1', 'top' );
+	add_rewrite_rule( '^managing-director/?$', 'index.php?advay_managing_director=1', 'top' );
 }
 add_action( 'init', 'advay_register_onboarding_route' );
 
@@ -338,6 +503,9 @@ function advay_onboarding_query_var( $vars ) {
 	$vars[] = 'advay_onboarding';
 	$vars[] = 'advay_blog';
 	$vars[] = 'advay_receiving';
+	$vars[] = 'advay_our_story';
+	$vars[] = 'advay_join_team';
+	$vars[] = 'advay_managing_director';
 	return $vars;
 }
 add_filter( 'query_vars', 'advay_onboarding_query_var' );
@@ -361,6 +529,27 @@ function advay_custom_page_template( $template ) {
 		$receiving = get_template_directory() . '/page-receiving.php';
 		if ( file_exists( $receiving ) ) {
 			return $receiving;
+		}
+	}
+
+	if ( (int) get_query_var( 'advay_our_story' ) === 1 ) {
+		$story = get_template_directory() . '/page-our-story.php';
+		if ( file_exists( $story ) ) {
+			return $story;
+		}
+	}
+
+	if ( (int) get_query_var( 'advay_join_team' ) === 1 ) {
+		$join = get_template_directory() . '/page-join-team.php';
+		if ( file_exists( $join ) ) {
+			return $join;
+		}
+	}
+
+	if ( (int) get_query_var( 'advay_managing_director' ) === 1 ) {
+		$md = get_template_directory() . '/page-managing-director.php';
+		if ( file_exists( $md ) ) {
+			return $md;
 		}
 	}
 
@@ -400,6 +589,30 @@ function advay_is_receiving_page() {
 	return function_exists( 'is_page' ) && is_page( 'receiving' );
 }
 
+function advay_is_our_story_page() {
+	if ( (int) get_query_var( 'advay_our_story' ) === 1 ) {
+		return true;
+	}
+
+	return function_exists( 'is_page' ) && is_page( 'our-story' );
+}
+
+function advay_is_join_team_page() {
+	if ( (int) get_query_var( 'advay_join_team' ) === 1 ) {
+		return true;
+	}
+
+	return function_exists( 'is_page' ) && is_page( 'join-our-team' );
+}
+
+function advay_is_managing_director_page() {
+	if ( (int) get_query_var( 'advay_managing_director' ) === 1 ) {
+		return true;
+	}
+
+	return function_exists( 'is_page' ) && is_page( 'managing-director' );
+}
+
 /**
  * Custom rewrite routes must not inherit the front-page / home query flags.
  * Without this, /receiving/ loads with body.home and homepage assets (Leaflet).
@@ -412,8 +625,11 @@ function advay_fix_custom_route_query( $query ) {
 	$onboarding = (int) $query->get( 'advay_onboarding' ) === 1;
 	$blog       = (int) $query->get( 'advay_blog' ) === 1;
 	$receiving  = (int) $query->get( 'advay_receiving' ) === 1;
+	$our_story  = (int) $query->get( 'advay_our_story' ) === 1;
+	$join_team  = (int) $query->get( 'advay_join_team' ) === 1;
+	$md_page    = (int) $query->get( 'advay_managing_director' ) === 1;
 
-	if ( ! $onboarding && ! $blog && ! $receiving ) {
+	if ( ! $onboarding && ! $blog && ! $receiving && ! $our_story && ! $join_team && ! $md_page ) {
 		return;
 	}
 
@@ -446,9 +662,37 @@ function advay_custom_route_body_class( $classes ) {
 		$classes[] = 'page-blog-custom';
 	}
 
+	if ( advay_is_our_story_page() ) {
+		$classes   = array_values( array_diff( $classes, array( 'home', 'blog' ) ) );
+		$classes[] = 'page-our-story';
+	}
+
+	if ( advay_is_join_team_page() ) {
+		$classes   = array_values( array_diff( $classes, array( 'home', 'blog' ) ) );
+		$classes[] = 'page-join-team';
+	}
+
+	if ( advay_is_managing_director_page() ) {
+		$classes   = array_values( array_diff( $classes, array( 'home', 'blog' ) ) );
+		$classes[] = 'page-managing-director';
+	}
+
 	return $classes;
 }
 add_filter( 'body_class', 'advay_custom_route_body_class' );
+
+/**
+ * Page title for custom routes.
+ */
+function advay_custom_route_document_title( $parts ) {
+	if ( advay_is_managing_director_page() ) {
+		$parts['title'] = __( 'Odi Ikpe', 'advay-theme' );
+		$parts['tagline'] = __( 'Managing Director', 'advay-theme' );
+	}
+
+	return $parts;
+}
+add_filter( 'document_title_parts', 'advay_custom_route_document_title' );
 
 /**
  * Receiving / warehouse journey page URL.
@@ -469,6 +713,67 @@ function advay_receiving_document_title( $title ) {
 	return $title;
 }
 add_filter( 'document_title_parts', 'advay_receiving_document_title' );
+
+/**
+ * Custom SEO title for single posts (from Doc SEO pack / seeder).
+ *
+ * @param array $parts Title parts.
+ * @return array
+ */
+function advay_seo_document_title( $parts ) {
+	if ( ! is_singular( 'post' ) ) {
+		return $parts;
+	}
+	$custom = get_post_meta( get_the_ID(), '_advay_seo_title', true );
+	if ( is_string( $custom ) && '' !== trim( $custom ) ) {
+		$parts['title'] = $custom;
+	}
+	return $parts;
+}
+add_filter( 'document_title_parts', 'advay_seo_document_title', 20 );
+
+/**
+ * Meta description + basic Article schema for blog posts.
+ */
+function advay_seo_head_tags() {
+	if ( ! is_singular( 'post' ) ) {
+		return;
+	}
+	$post_id = get_the_ID();
+	$desc    = get_post_meta( $post_id, '_advay_seo_description', true );
+	if ( ! is_string( $desc ) || '' === trim( $desc ) ) {
+		$desc = has_excerpt( $post_id ) ? get_the_excerpt( $post_id ) : wp_trim_words( wp_strip_all_tags( get_post_field( 'post_content', $post_id ) ), 28 );
+	}
+	$desc = wp_strip_all_tags( $desc );
+	if ( $desc ) {
+		echo '<meta name="description" content="' . esc_attr( $desc ) . '" />' . "\n";
+	}
+
+	$schema = array(
+		'@context'         => 'https://schema.org',
+		'@type'            => 'Article',
+		'headline'         => get_the_title( $post_id ),
+		'datePublished'    => get_the_date( 'c', $post_id ),
+		'dateModified'     => get_the_modified_date( 'c', $post_id ),
+		'mainEntityOfPage' => get_permalink( $post_id ),
+		'author'           => array(
+			'@type' => 'Organization',
+			'name'  => get_bloginfo( 'name' ),
+		),
+		'publisher'        => array(
+			'@type' => 'Organization',
+			'name'  => get_bloginfo( 'name' ),
+		),
+	);
+	if ( $desc ) {
+		$schema['description'] = $desc;
+	}
+	if ( has_post_thumbnail( $post_id ) ) {
+		$schema['image'] = array( get_the_post_thumbnail_url( $post_id, 'full' ) );
+	}
+	echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";
+}
+add_action( 'wp_head', 'advay_seo_head_tags', 5 );
 
 function advay_pricing_url() {
 	$page = get_page_by_path( 'pricing' );
@@ -757,12 +1062,12 @@ function advay_brand_logos() {
 	}
 
 	$logos = array(
-		array( 'name' => 'Little Bay Caribbean Kitchen', 'file' => 'images/brand-littlebay.jpg' ),
+		array( 'name' => 'Little Caribbean Kitchen', 'file' => 'images/brand-littlebay.jpg' ),
 		array( 'name' => 'Gainz & Airplanes', 'file' => 'images/brand-gainz.jpg' ),
 		array( 'name' => "Anola's Creations", 'file' => 'images/brand-anola.jpg' ),
-		array( 'name' => 'Boluwaji Popcorn', 'file' => 'images/brand-ajayi.jpg' ),
-		array( 'name' => 'Daka', 'file' => 'images/brand-daka.png' ),
-		array( 'name' => 'No Knife', 'file' => 'images/brand-noknife.png' ),
+		array( 'name' => 'Ajayi Popcorn', 'file' => 'images/brand-ajayi.jpg' ),
+		array( 'name' => 'Daka Vitamins', 'file' => 'images/brand-daka.png' ),
+		array( 'name' => 'No Knife Body', 'file' => 'images/brand-noknife.png' ),
 	);
 
 	$cache = array();
@@ -859,21 +1164,21 @@ function advay_hero_channels() {
 		array(
 			'id'       => 'amazon',
 			'label'    => __( 'Amazon FBA', 'advay-theme' ),
-			'logo'     => advay_asset_uri( 'images/amazon.svg' ),
+			'logo'     => advay_asset_uri( 'images/logo-amazon.png' ),
 			'headline' => __( 'Amazon-ready, without the risk.', 'advay-theme' ),
 			'body'     => __( 'Amazon eliminated its own prep service and raised defect penalties up to $5.72/unit. One mislabeled shipment can now cost more than it saves. We receive, inspect, label, and ship your inventory to FBA standards, accurately and on time, so those penalties never touch your margin.', 'advay-theme' ),
 		),
 		array(
 			'id'       => 'walmart',
 			'label'    => __( 'Walmart WFS', 'advay-theme' ),
-			'logo'     => advay_asset_uri( 'images/walmart.svg' ),
+			'logo'     => advay_asset_uri( 'images/logo-walmart.png' ),
 			'headline' => __( 'Walmart-ready, backed by Walmart itself.', 'advay-theme' ),
 			'body'     => __( 'We\'re one of a small number of agencies accepted into Walmart\'s Partner Incubation Program, vetted and approved to move inventory into Walmart Fulfillment Services the right way, the first time. Launch clean on the marketplace still in its early growth window.', 'advay-theme' ),
 		),
 		array(
 			'id'       => 'tiktok',
 			'label'    => __( 'TikTok Shop', 'advay-theme' ),
-			'logo'     => advay_asset_uri( 'images/tiktok.svg' ),
+			'logo'     => advay_asset_uri( 'images/logo-tiktok.png' ),
 			'headline' => __( 'Ride the wave, don\'t miss it.', 'advay-theme' ),
 			'body'     => __( 'A viral moment can turn into a stockout in hours. We keep your inventory prepped and ready to ship the second demand spikes, so a trending video turns into revenue, not a backlog and a bad review.', 'advay-theme' ),
 		),

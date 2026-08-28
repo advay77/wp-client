@@ -8,18 +8,19 @@ if ( ! $slides ) {
 	return;
 }
 
-/* Duplicate once so desktop (and mobile) always have overflow to scroll. */
-$loop_slides = array_merge( $slides, $slides );
+/* Triple the set so there is always overflow for a seamless L→R loop. */
+$loop_slides = array_merge( $slides, $slides, $slides );
+$set_count   = count( $slides );
 ?>
 <section class="logo-slider" aria-label="<?php esc_attr_e( 'Brand logos', 'advay-theme' ); ?>">
 	<div class="logo-slider-inner">
 		<div class="logo-slider-viewport" tabindex="0">
 			<ul class="logo-slider-list">
 				<?php foreach ( $loop_slides as $index => $slide ) : ?>
-					<li<?php echo $index >= count( $slides ) ? ' aria-hidden="true"' : ''; ?>>
+					<li<?php echo $index >= $set_count ? ' aria-hidden="true"' : ''; ?>>
 						<img
 							src="<?php echo esc_url( $slide['src'] ); ?>"
-							alt="<?php echo $index >= count( $slides ) ? '' : esc_attr( $slide['name'] ); ?>"
+							alt="<?php echo $index >= $set_count ? '' : esc_attr( $slide['name'] ); ?>"
 							decoding="async"
 							draggable="false"
 						>

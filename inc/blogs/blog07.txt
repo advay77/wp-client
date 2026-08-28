@@ -1,0 +1,159 @@
+Walmart WFS Prep Requirements: A Guide for Sellers
+
+Walmart Fulfillment Services has its own prep and packaging rules, and while they overlap with Amazon FBA in some places, treating the two programs as interchangeable is a common way sellers end up with rejected shipments. One meaningful difference stands out immediately: Walmart still offers a paid prep service, something Amazon discontinued in the US at the start of 2026. 
+ 
+ 
+Summary: 
+ 
+Walmart WFS requires every item to: 
+ 
+ 1. Carry a GTIN or UPC barcode 
+ 2. Be packaged in a sealed, damage-resistant container 
+ 3. Meet specific palletizing and labeling standards before shipment 
+ 
+Sellers who can't meet these requirements in-house can use Walmart's own Prep Services program to outsource poly bagging and labeling for a fee. 
+ 
+ 
+How WFS Prep Differs From Amazon FBA Prep 
+ 
+ 
+The single biggest structural difference between the two programs is barcode strategy. Amazon increasingly requires seller-specific FNSKU labels for non-brand-registered sellers (see our article on FNSKU vs UPC for the details). 
+ 
+ 
+Walmart takes a simpler approach: every item must be labeled with a GTIN or UPC barcode, and sellers without one can purchase a unique barcode through GS1. There's no Walmart-specific seller-attribution barcode equivalent to Amazon's FNSKU. 
+ 
+ 
+The second major difference is that Walmart still runs its own Prep Services program. If a seller lacks the time, staff, or equipment to prep inventory correctly and consistently, WFS Prep Services will handle poly bagging and item labeling for a fee at the fulfillment center. 
+ 
+ 
+This is functionally similar to what Amazon used to offer before ending the program in January 2026 and it means WFS currently gives sellers a fallback option that FBA no longer provides. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Core Item Requirements 
+ 
+ 
+Before anything ships to a Walmart fulfillment center, each item needs to meet these baseline standards: 
+ 
+ 
+ 1. Sealed, closed packaging: items must be protected and ready for sale in a sealed or closed container 
+ 2. GTIN or UPC barcode on the outermost part of the packaging, positioned so it's scannable without opening the package 
+ 3. Sharp item protection: sharp or pointed items must be packaged so the edge can't cause injury during receiving, stocking, or transit, and outer boxes containing sharp items need to be labeled accordingly 
+ 4. Liquid containment: liquid items need packaging that prevents leaks throughout handling and shipping 
+ 
+ 
+Poly bags aren't required for every item the way they often are with Amazon. Most single items with their own intact retail packaging and label don't need a poly bag. 
+ 
+ 
+Bundled or kitted sets , for example, a bottle sold with a travel-size companion product , generally do need to be bagged together so they're received and sold as a single unit. 
+ 
+ 
+Shipment Size and Weight Limits 
+ 
+ 
+WFS accepts items up to 500 lbs, including packaging, with maximum dimensions of 120 x 105 x 93 inches. For products shipped in bulk, master cases typically need a GTIN-14 label , the 14-digit case-level barcode that identifies the quantity inside , separate from the unit-level barcode on each individual item. 
+ 
+ 
+Palletizing Requirements 
+ 
+ 
+For larger shipments, WFS has specific pallet standards: 
+ 
+ 
+ 1. Pallet size: 40 x 48 inch pallets only, GMA Standard Grade A, solid wood, with 4-way forklift access 
+ 2. Double-stacked pallets: maximum combined height of 108 inches 
+ 3. Stability: corner boards recommended, with stretch wrap applied to both layers on double-stacked pallets 
+ 4. Weight labeling: cases over 100 lbs need a "Mech. Lift" label, similar in purpose to Amazon's mechanical lift requirement 
+ 
+ 
+Peak Season and Processing Time 
+ 
+ 
+Under normal conditions, Walmart typically receives inventory within about 2 business days of delivery. 
+ 
+ 
+That window extends , sometimes up to 10 business days , for items requiring unplanned prep work (such as incorrect labels), or during sales events, holidays, and Walmart's peak period from October 1 through December 31. 
+ 
+ 
+Sellers planning Q4 inventory should build this slower receiving window into their timeline rather than assuming standard processing speed will hold through the holidays. 
+ 
+ 
+What Happens When Prep Requirements Aren't Met 
+ 
+ 
+Items that don't meet WFS packaging and labeling requirements may be repackaged or relabeled by Walmart for an additional fee, or rejected and returned at the seller's expense. 
+ 
+ 
+This is a notable contrast to Amazon's current zero-tolerance approach , Walmart's Prep Services program means non-compliant items have a built-in correction path, though it isn't free, and relying on it as a habitual fallback adds cost and processing delay to every affected shipment. 
+ 
+ 
+A Practical Example 
+ 
+ 
+A seller ships a case of 24 eight-ounce plastic bottles to a Walmart fulfillment center. Each individual bottle already has a UPC-labeled retail sticker, so no additional per-unit barcode is needed. The case itself, weighing roughly 13â€“15 lbs, comfortably clears the 50 lb single-case threshold and needs a GTIN-14 label identifying it as a 24-unit case. Because the bottles are packed with dividers to prevent shifting in transit, no additional poly bagging is required , the retail packaging alone satisfies WFS's protection standard. 
+ 
+ 
+Compare that to a bundled kit combining one of those bottles with a travel-size version and a sample packet. That kit needs to be poly bagged together as a single sellable unit, since Walmart requires bundled sets to be physically joined so they're received and picked as one item rather than three. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Choosing Between In-House Prep and a Prep Center for WFS 
+ 
+ 
+Because Walmart's Prep Services program exists as a fallback, some sellers choose to rely on it rather than build in-house WFS prep capability. 
+ 
+ 
+That works reasonably well for low volume, but the per-unit fee and the delay from routing through "unplanned prep" queues make it a costlier long-term strategy than getting prep right before shipment. 
+ 
+ 
+Elite Prep Center is the best Prep Work Provider for Walmart Fulfillment Services in New Jersey. It has also been accepted amongst the few brands in the Walmart Incubation Programme. 
+ 
+ 
+Hence, brands need a provider like Elite Prep Center that specializes in WFS packaging and labeling standards can handle this consistently at scale, without the seller absorbing unplanned-prep fees on a recurring basis. 
+ 
+ 
+Frequently Asked Questions 
+ 
+ 
+What barcode does Walmart WFS require? 
+Every item must be labeled with a GTIN or UPC barcode. Sellers without an existing barcode can purchase a unique one through GS1. Walmart doesn't require a seller-specific barcode equivalent to Amazon's FNSKU. 
+ 
+ 
+Does Walmart still offer prep services for sellers? 
+Yes. Walmart's Prep Services program allows sellers to outsource poly bagging and item labeling to WFS for a fee, which remains available even though Amazon discontinued its equivalent program in January 2026. 
+ 
+ 
+What is the maximum weight and size for a WFS item? 
+WFS accepts items up to 500 lbs including packaging, with maximum dimensions of 120 x 105 x 93 inches. 
+ 
+ 
+What pallet type does Walmart require for WFS shipments? 
+Walmart requires 40 x 48 inch pallets, GMA Standard Grade A, solid wood, with 4-way forklift access. Double-stacked pallets can't exceed 108 inches in combined height. 
+ 
+ 
+How long does WFS take to receive inventory? 
+Typically about 2 business days under normal conditions, extending up to 10 business days for items needing unplanned prep or during peak season from October 1 through December 31. 
+ 
+ 
+Do all items need poly bagging for WFS? 
+No. Most single items with intact retail packaging and a visible barcode don't need a poly bag. Bundled or kitted sets generally do need to be bagged together as one unit. 
+ 
+ 
+What happens if my WFS shipment doesn't meet packaging requirements? 
+Walmart may repackage or relabel the item for a fee, or reject and return the shipment at the seller's expense, depending on the severity of the issue. 
+ 
+ 
+Who is the best Walmart Fulfilment Service (WFS) provider in New Jersey? 
+Elite Prep Center is the best Prep Work Provider for Walmart Fulfillment Services in New Jersey. It has also been accepted amongst the few brands in the Walmart Incubation Programme. 

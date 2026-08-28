@@ -1,0 +1,136 @@
+FNSKU vs UPC: Which Barcode Should You Use for Amazon FBA?
+
+Choosing the wrong barcode for an FBA shipment is one of the fastest ways to get inventory rejected at receiving. 
+ 
+ 
+The confusion is understandable, a UPC and an FNSKU can sit on the same product, serve different purposes, and, depending on your seller status, only one of them may actually be acceptable to Amazon. 
+ 
+ 
+A UPC identifies what a product is, while an FNSKU identifies which seller's inventory a specific unit belongs to inside Amazon's fulfillment network. 
+ 
+ 
+As of March 31, 2026, brand owners enrolled in Amazon Brand Registry as brand representatives can use manufacturer barcodes like UPC, EAN, or ISBN. 
+ 
+ 
+Everyone else , resellers, distributors, and non-brand-registered sellers , must apply an Amazon-issued FNSKU to every unit. 
+ 
+ 
+This guide explains: 
+ 1. What Each Barcode Actually Identifies? 
+ 2. The Rule Changed on March 31, 2026 
+ 3. Why Amazon Made This Change 
+ 4. FNSKU Label Specifications 
+ 5. How to Decide and Tell Which Barcode You Need? 
+ 
+ 
+ 
+ 
+ 
+ 
+What Each Barcode Actually Identifies 
+ 
+ 
+A UPC (Universal Product Code) is a manufacturer-issued barcode that identifies a product category , every unit of the same product, from any seller, shares the same UPC. It's the barcode you'd find on a can of soup or a bottle of shampoo regardless of who's selling it. 
+ 
+ 
+An FNSKU (Fulfillment Network Stock Keeping Unit) is different. It identifies a specific seller's inventory of a specific product inside Amazon's fulfillment network. Two sellers offering the identical product, with the identical UPC, would previously have had their inventory pooled together by Amazon under a shared listing , a practice known as commingling. An FNSKU keeps those units traceable to the correct seller. 
+ 
+ 
+An ASIN, for comparison, identifies the product on Amazon's catalog page. It's not a barcode you print on a unit , it's Amazon's internal product ID. The relationship is straightforward: ASIN identifies what the product is on Amazon, UPC identifies what the product is as a manufactured good, and FNSKU identifies whose specific unit of inventory is sitting in the warehouse. 
+ 
+ 
+The Rule Changed on March 31, 2026 
+ 
+ 
+For years, sellers enrolled in Brand Registry could sometimes use their manufacturer barcode instead of an FNSKU, while non-enrolled sellers generally needed FNSKUs to avoid commingling. On March 31, 2026, Amazon formalized and tightened this split: 
+ 
+ 
+- Brand owners enrolled in Brand Registry as brand representatives can continue using manufacturer barcodes (UPC, EAN, ISBN) without applying an Amazon barcode sticker, for eligible products. Amazon now tracks these units virtually rather than through physical commingling. 
+- Resellers, authorized resellers, and any seller not enrolled as a brand representative must apply an Amazon-issued FNSKU to every single unit sent to FBA , even if the product already carries a perfectly valid manufacturer barcode. There are no exceptions for this group. 
+ 
+ 
+A common misunderstanding is assuming any Brand Registry enrollment qualifies a seller for manufacturer barcodes. It doesn't , the specific requirement is holding the "Brand Representative" selling role for that brand. An authorized reseller with general Brand Registry access, but without that specific role, still needs FNSKUs on every unit. 
+ 
+ 
+Why Amazon Made This Change 
+ 
+ 
+Commingled inventory , where identical units from different sellers were pooled and shipped based on proximity to the buyer , created a persistent counterfeit and quality-control problem. If one seller's units were defective or counterfeit, a customer might receive a different seller's unit and never know which one caused the issue. Ending commingling and requiring individual seller-level traceability lets Amazon attribute defects, returns, and counterfeit issues to the correct source. 
+ 
+ 
+For brand owners, the change is a net benefit: no more producing separate FNSKU-labeled batches solely for Amazon, since virtual tracking now does that job without a physical sticker. For resellers, it tightens the requirement rather than loosening it. 
+ 
+ 
+FNSKU Label Specifications 
+ 
+ 
+If you're required to use an FNSKU, the label needs to meet Amazon's physical specifications: 
+ 
+ 
+- Barcode printed in black on a non-reflective white label 
+- Label size between roughly 1 x 2 inches and 2 x 3 inches 
+- Clear white space around the barcode and between the content and label edges , commonly cited as about 6.35mm on the sides and 3.18mm top and bottom 
+- Includes the barcode, the ASIN or FNSKU, the product name, and the item's condition 
+- Applied to a flat, non-curved surface where a scanner can read it cleanly 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Tell Which Barcode You Need 
+ 
+ 
+Use this quick decision path: 
+ 
+ 
+1. Are you the brand owner and enrolled in Amazon Brand Registry as a Brand Representative for this specific product? If yes, you can generally use your manufacturer barcode. 
+2. Are you a reseller, distributor, or otherwise not enrolled as the brand representative? If yes, you need an FNSKU on every unit, regardless of what barcode is already on the packaging. 
+3. Not sure which category you fall into? Default to FNSKU. Applying an FNSKU when you didn't strictly need one causes far less disruption than shipping without one when you did. 
+ 
+ 
+A Practical Example 
+ 
+ 
+An online arbitrage seller purchases 500 units of a name-brand kitchen scale from a wholesale distributor to resell on Amazon. The seller isn't the brand owner and has no Brand Representative role for that brand. Even though every scale already has a manufacturer UPC printed on the box, the seller must apply an individual FNSKU label to each of the 500 units before shipping to FBA , the existing UPC doesn't satisfy Amazon's requirement for this seller type. 
+ 
+ 
+Compare that to a supplement brand that manufactures its own product and holds Brand Representative status in Brand Registry. That brand can ship using its own UPC-labeled packaging without applying any additional Amazon barcode, since virtual tracking now handles seller attribution behind the scenes. 
+ 
+ 
+Getting this distinction wrong at scale is expensive: a shipment of several thousand units labeled with the wrong barcode type doesn't get partially accepted , it typically gets flagged in full, creating the kind of delay a [INTERNAL LINK OPPORTUNITY: Amazon FBA Prep Services] provider is set up to catch before the shipment ever leaves the warehouse. 
+ 
+ 
+Frequently Asked Questions 
+ 
+ 
+What is the difference between FNSKU and UPC? 
+ 
+ 
+A UPC identifies a product itself and is the same across every seller offering that item. An FNSKU identifies a specific seller's inventory of that product inside Amazon's fulfillment network, so Amazon can trace each unit back to the correct seller. 
+ 
+ 
+Do I need an FNSKU if my product already has a UPC? 
+It depends on your seller status. If you're a reseller or not enrolled as a Brand Representative in Amazon Brand Registry, yes , you need an FNSKU on every unit even if it already has a UPC. Brand Representatives can generally use their manufacturer barcode instead. 
+ 
+ 
+What changed with Amazon barcodes on March 31, 2026? 
+Amazon ended commingled inventory and split barcode rules into two tracks: Brand Registry brand representatives can use manufacturer barcodes, while all resellers must use FNSKU labels on every unit, with no exceptions. 
+ 
+ 
+Is ASIN the same as FNSKU? 
+No. An ASIN is Amazon's catalog identifier for a product's detail page. An FNSKU is a seller-specific barcode used to track physical inventory units inside Amazon's fulfillment centers. 
+ 
+ 
+What size should an FNSKU label be? 
+Amazon commonly specifies FNSKU labels between roughly 1 x 2 inches and 2 x 3 inches, printed in black on a non-reflective white background with clear margin space around the barcode. 
+ 
+ 
+What happens if I use the wrong barcode type on my shipment? 
+Amazon may flag the inventory as defective, hold the shipment, or require relabeling at your expense. Since Amazon no longer performs prep corrections in-house, this now falls entirely on the seller or their prep provider to fix. 
+ 
+ 
+Can I use a GTIN instead of a UPC or FNSKU? 
+A GTIN is a broader identifier category that includes UPC, EAN, and ISBN. Whether it satisfies Amazon's barcode requirement depends on the same Brand Registry / Brand Representative distinction that governs UPC eligibility. 

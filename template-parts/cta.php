@@ -11,11 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<p class="cta-copy"><?php esc_html_e( 'Share SKU counts, marketplace, and timing. We will reply with capacity, pricing structure, and a receiving plan.', 'advay-theme' ); ?></p>
 		</div>
 		<div class="cta-actions">
-			<a class="button button-light" href="<?php echo esc_url( advay_contact_url() ); ?>">
+			<a class="button button-light" href="<?php echo esc_url( advay_intake_email_url() ); ?>">
 				<?php esc_html_e( 'Email intake', 'advay-theme' ); ?>
 				<span class="btn-arrow" aria-hidden="true"></span>
 			</a>
-			<a class="button button-ghost-light" href="<?php echo esc_url( advay_contact_url() ); ?>">
+			<a class="button button-ghost-light" href="<?php echo esc_url( advay_intake_phone_url() ); ?>">
 				<?php esc_html_e( 'Call the warehouse', 'advay-theme' ); ?>
 				<span class="btn-arrow" aria-hidden="true"></span>
 			</a>

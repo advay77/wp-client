@@ -48,6 +48,27 @@ if ( function_exists( 'wp_body_open' ) ) {
 			</div>
 		</nav>
 
+		<div class="header-partners" aria-label="<?php esc_attr_e( 'Partner certifications', 'advay-theme' ); ?>">
+			<span class="header-partner">
+				<img
+					src="<?php echo esc_url( advay_asset_uri( 'images/logo-amazon-spn.png' ) ); ?>"
+					alt="<?php esc_attr_e( 'Amazon SPN', 'advay-theme' ); ?>"
+					width="110"
+					height="28"
+					decoding="async"
+				>
+			</span>
+			<span class="header-partner">
+				<img
+					src="<?php echo esc_url( advay_asset_uri( 'images/logo-walmart-marketplace.png' ) ); ?>"
+					alt="<?php esc_attr_e( 'Walmart Marketplace Approved Solution Provider', 'advay-theme' ); ?>"
+					width="110"
+					height="36"
+					decoding="async"
+				>
+			</span>
+		</div>
+
 		<div class="header-actions">
 			<a class="button button-header header-cta is-secondary" href="<?php echo esc_url( advay_contact_url() ); ?>">
 				<?php esc_html_e( 'Book a call', 'advay-theme' ); ?>

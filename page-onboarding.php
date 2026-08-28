@@ -23,20 +23,24 @@ $steps = array(
 		'icon'   => 'phone',
 		'pills'  => array(
 			array(
-				'label' => __( 'Call with MD', 'advay-theme' ),
-				'url'   => $contact,
+				'label' => __( 'Call', 'advay-theme' ),
+				'url'   => apply_filters( 'advay_contact_call_url', 'tel:+18555550199' ),
 			),
 			array(
 				'label' => __( 'Email', 'advay-theme' ),
-				'url'   => $contact,
+				'url'   => apply_filters( 'advay_contact_email_url', 'mailto:hello@eliteprepcenter.com' ),
 			),
 			array(
 				'label' => __( 'WhatsApp', 'advay-theme' ),
+				'url'   => apply_filters( 'advay_contact_whatsapp_url', 'https://wa.me/18555550199' ),
+			),
+			array(
+				'label' => __( 'Fill a form', 'advay-theme' ),
 				'url'   => $contact,
 			),
 			array(
-				'label' => __( 'Form', 'advay-theme' ),
-				'url'   => $contact,
+				'label' => __( 'Book a meeting with the MD', 'advay-theme' ),
+				'url'   => advay_onboarding_url(),
 			),
 		),
 		'drawer' => array(

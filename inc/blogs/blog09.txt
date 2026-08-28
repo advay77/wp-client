@@ -1,0 +1,126 @@
+Amazon FBA vs Walmart WFS Fees 2026
+
+Comparing Amazon FBA and Walmart WFS fees isn't as simple as lining up two numbers, because the fee structures aren't built the same way. 
+ 
+ 
+Amazon layers more fee types onto a mature, high-competition marketplace. 
+ 
+ 
+Walmart runs a simpler structure that's still catching up in seller volume. 
+ 
+ 
+Both are worth modeling against your actual catalog before choosing where , or whether , to fulfill through each. 
+ 
+ 
+Summary: 
+ 1. Amazon FBA charges a monthly Professional plan fee, referral fees of roughly 8â€“17% (higher for some categories), per-unit fulfillment fees based on size and weight, and monthly storage fees that rise during Q4. 
+ 2. Walmart WFS has no monthly subscription fee, charges referral fees of roughly 6â€“15%, and bills fulfillment based on shipping weight starting around $3.45 per unit, plus storage based on cubic footage. 
+ 
+ 
+Fee Structure Overview 
+ 
+ 
+ 
+ 
+Fee Type 
+ Amazon FBA 
+ Walmart WFS 
+ Monthly account fee 
+ $39.99/month (Professional plan) 
+ $0 
+ Referral fee 
+ Roughly 8â€“17% of sale price, up to 45% for some categories 
+ Roughly 6â€“15% of sale price 
+ Fulfillment fee 
+ Per unit, based on size tier and weight 
+ Per unit, based on shipping weight (greater of unit or dimensional weight) 
+ Storage fee 
+ Monthly, based on cubic footage, higher in Q4 peak 
+ Monthly, based on cubic footage, higher during Octâ€“Dec peak 
+ Long-term storage surcharge 
+ Applies to aged inventory, roughly 12+ months 
+ Applies to aged inventory, escalating tiers introduced in 2026 
+ Category surcharges 
+ Aged inventory, low-inventory-level, inbound placement, returns processing 
+ Apparel, hazmat, low retail price (under $10), oversize tiers 
+ 
+ 
+ 
+ 
+Amazon FBA Fee Breakdown 
+ 
+ 
+Amazon's Professional selling plan runs $39.99 per month, on top of which every sale carries a referral fee. Most categories fall between roughly 8% and 17%, though Amazon device accessories can reach as high as 45% , the often-cited "15% flat fee" is really just a rough average across categories, not a universal rate. 
+ 
+ 
+FBA fulfillment fees are charged per unit and depend on size tier (Small Standard, Large Standard, Large Bulky, Extra-Large) and shipping weight. In 2026, Amazon raised fulfillment fees by roughly $0.08 per unit on average in January, then added a 3.5% fuel and logistics surcharge across US and Canada fulfillment fees in April. Some categories saw reductions , Extra-Large items, for instance, saw fulfillment fees decrease on average, while standard-size items priced above $50 saw modest increases. 
+ 
+ 
+Beyond the core fulfillment fee, Amazon layers on several conditional charges: an aged inventory surcharge for stock sitting in fulfillment centers beyond a set threshold, an inbound placement fee (avoidable by routing shipments through Amazon's Partnered Carrier Program or AWD), a low-inventory-level fee tied to how many days of supply you're carrying, and a returns processing fee that only activates for products exceeding a category-specific return-rate threshold. 
+ 
+ 
+Walmart WFS Fee Breakdown 
+ 
+ 
+Walmart's fee structure is comparatively simple: no monthly subscription, no signup fee, and no minimum volume requirement. Every sale carries a referral fee ranging roughly from 6% to 15% depending on category, deducted before payment regardless of fulfillment method. 
+ 
+ 
+WFS fulfillment fees start around $3.45 per unit for items at or under 1 lb, scaling up based on the greater of actual unit weight or dimensional weight. Storage fees run roughly $0.75 per cubic foot per month during standard months, with higher rates during Walmart's Octoberâ€“December peak season. In 2026, Walmart also introduced escalating long-term storage tiers for aged inventory , sellers should verify the current bands directly in Seller Center, since third-party sources report different thresholds and this is one of the more actively changing parts of Walmart's fee schedule. 
+ 
+ 
+Standard WFS items can pick up additional surcharges on top of the base fulfillment fee: roughly $0.50 for apparel, $0.50 for hazmat classification, $1.00 for items retailing under $10, and $3.00 to $20.00 for items in oversize tiers. 
+ 
+ 
+Where the Two Programs Diverge Most 
+ 
+ 
+ 1. Barrier to entry: Walmart's $0 monthly fee and lower average referral rate make it comparatively cheaper to test a new catalog before committing to volume. Amazon's $39.99 monthly Professional plan fee is a fixed cost regardless of sales volume. 
+ 
+ 2. Fulfillment fee predictability: Amazon's fee schedule has grown more complex over recent years, with more conditional surcharges (aged inventory, low-inventory-level, inbound placement) layered on top of the base fulfillment fee. Walmart's structure currently has fewer conditional fee types, though its long-term storage tiers were actively evolving through 2026. 
+ 
+ 3. Prep cost exposure: Since Amazon ended its own FBA prep services in January 2026, any packaging or labeling error now shows up as an inbound defect fee with no in-house correction option. Walmart still offers Prep Services as a paid fallback, which changes the risk calculation for sellers deciding how much to invest in getting prep right in-house versus a specialist prep center and 3PL provider like Elite Prep Center. 
+ 
+ 4. Marketplace maturity and competition: Amazon's referral fees and marketplace competition are generally higher, reflecting its larger buyer base and search volume. Walmart's lower average fees can mean better net margins per sale, though often against a smaller pool of potential buyers. 
+ 
+ 
+A Practical Example 
+ 
+ 
+A seller with a $25 standard-size home goods item weighing 1.5 lbs might pay roughly a 15% Amazon referral fee ($3.75) plus a per-unit FBA fulfillment fee in the $4â€“5 range, plus monthly storage , landing total fulfillment-related costs somewhere around $8â€“9 per unit before advertising and product cost. The same item sold through Walmart WFS might carry a similar referral percentage but a lower base fulfillment fee starting near $3.45 and scaling with weight, plus a comparable but generally lower storage rate , often landing a dollar or two lower in total fulfillment cost per unit, though the gap narrows or reverses depending on the specific size tier, category surcharges, and season. 
+ 
+ 
+The right move for most sellers isn't necessarily choosing one platform exclusively , it's modeling both fee schedules against a specific SKU's dimensions, weight, and price point, since the cheaper option can flip depending on those inputs. Selling through both, with fulfillment prep handled by a provider experienced in both platforms' requirements, is increasingly the default for sellers who don't want to concentrate all their fee exposure , or all their platform risk , in one place. 
+ 
+ 
+Because both fee schedules change multiple times a year, sellers should treat the numbers in this article as a planning reference and verify current rates in Amazon Seller Central and Walmart Seller Center before finalizing pricing decisions. 
+ 
+ 
+Frequently Asked Questions 
+ 
+ 
+Is Walmart WFS cheaper than Amazon FBA? 
+It depends on the product. Walmart has no monthly account fee and a generally lower starting fulfillment fee, but the actual comparison depends on the item's size, weight, price, and category surcharges , it's not consistently cheaper across every product type. 
+ 
+ 
+What is Amazon's referral fee in 2026? 
+Most categories fall between roughly 8% and 17% of the sale price, though some categories, like Amazon device accessories, can reach as high as 45%. The commonly cited 15% is an average, not a fixed rate. 
+ 
+ 
+Does Walmart charge a monthly seller fee? 
+No. Walmart Marketplace has no monthly subscription fee, unlike Amazon's $39.99/month Professional selling plan. 
+ 
+ 
+How are Walmart WFS fulfillment fees calculated? 
+WFS fulfillment fees are based on the greater of the item's actual weight or its dimensional weight, starting around $3.45 per unit for items at or under 1 lb and scaling up from there. 
+ 
+ 
+Do both platforms charge storage fees? 
+Yes. Both charge monthly storage fees based on cubic footage, with higher rates during peak season (Octoberâ€“December for both platforms) and escalating surcharges for aged, slow-moving inventory. 
+ 
+ 
+Did Amazon FBA fees increase in 2026? 
+Yes. Amazon raised fulfillment fees by roughly $0.08 per unit on average in January 2026 and added a 3.5% fuel and logistics surcharge in April 2026, though some size tiers saw fee reductions. 
+ 
+ 
+Can I sell the same product through both Amazon FBA and Walmart WFS? 
+Yes, and many sellers do specifically to diversify fee exposure and reduce dependence on a single marketplace's fee schedule or policy changes. 

@@ -1,0 +1,175 @@
+Amazon FBA Prep Guide: Everything Sellers Need to Know in 2026
+
+If you send inventory to Amazon fulfillment centers, Amazon FBA prep is no longer optional background work, it is a core part of your inbound workflow.
+
+As of January 1, 2026, Amazon ended in-house FBA prep and labeling services in the United States. Every unit must arrive fully prepped and scannable, or you risk delays, unplanned fees, or refused shipments.
+
+This guide explains:
+
+1. What FBA prep includes
+2. Who must handle it
+3. How requirements vary by product
+4. How sellers typically manage prep at scale.
+
+What is Amazon FBA Prep?
+
+Amazon FBA prep is the work required before inventory reaches a fulfillment center. This includes the following:
+
+1. Applying scannable barcodes (usually FNSKU labels)
+2. Securing loose items, polybagging, bubble wrapping, bundling multipacks, and meeting category-specific packaging rules.
+
+Since January 1, 2026, Amazon no longer performs this work in the U.S.
+
+Thus, Sellers must prep themselves, use a prep center, or have suppliers ship FBA-ready units.
+
+What Amazon FBA Prep Actually Means?
+
+FBA prep is not one task. It is the set of physical steps that make each sellable unit receivable, scannable, and safe to store and ship inside Amazonâ€™s network.
+
+Common prep categories include:
+
+Prep Type
+When It Applies
+Basic Requirement
+Labeling
+Most FBA units
+Scannable FNSKU or eligible manufacturer barcode on the outermost packaging
+Polybagging
+Loose items, apparel, sets
+Transparent bag, minimum 1.5 mil thick, sealed, with a suffocation warning if opening is â‰¥5 inches
+Bubble Wrap
+Fragile items (glass, ceramics)
+Protect from breakage; label on smooth outer surface
+Boxing / Over-boxing
+Items that fail drop testing
+Six-sided box that stays closed under medium pressure
+Bundling
+Multipacks sold as one ASIN
+Units secured so they cannot separate; single scannable label
+Opaque Bagging
+Adult products
+Non-transparent outer bag per Amazon rules
+
+Amazon assigns prep instructions at the ASIN or SKU level.
+
+Always check Prep Guidance in Seller Central and your Send to Amazon shipment workflow before you print labels or buy supplies.
+
+The Two 2026 Changes Every Seller Should Know
+
+Two policy shifts reshaped prep for most U.S. sellers:
+
+1. Amazon prep services ended (January 1, 2026)
+
+Amazon no longer polybags, bubble wraps, labels, or bundles inventory on your behalf at U.S. fulfillment centers. This applies across FBA inbound paths, including Send to Amazon and Supply Chain by Amazon. Sellers who relied on Amazon to apply FNSKU labels must now print and apply labels themselves or outsource to a prep partner.
+
+2. Commingling ended for most resellers (March 31, 2026)
+
+Resellers who are not brand representatives in Brand Registry must use Amazon barcodes (FNSKU) on eligible FBA units, even when a manufacturer UPC is already on the package.
+
+Brand-registered owners may still use manufacturer barcodes on eligible ASINs.
+
+Verify your accountâ€™s barcode settings in Seller Central under Use Amazon barcodes.
+
+Together, these changes mean most sellers now label every unit with an FNSKU before inbounding.
+
+How Does Amazon FBA Prep Work?
+
+Here is an exhaustive step by step process:
+
+Step 1: Create your shipment in â€œSend to Amazonâ€
+Confirm quantities, FC destinations, and prep owner settings. Prep owner must reflect that you (or your prep partner) perform prep, not Amazon.
+
+Step 2: Review prep requirements per SKU
+In Seller Central, open each SKUâ€™s prep details. Requirements differ by category. A plush toy may need polybagging; a sealed retail box may need only an FNSKU label.
+
+Step 3: Generate and print labels
+Print FNSKU labels from Send to Amazon or Manage Inventory. Use a thermal or laser printer at sufficient resolution (300 DPI is commonly recommended) so labels scan reliably.
+
+Step 4: Prep each unit
+Apply labels on flat, scannable surfaces. Cover any exposed manufacturer barcode if you are using FNSKU tracking. Polybag, wrap, or box as required.
+
+Step 5: Pack cartons and ship
+Follow Amazonâ€™s carton content and shipping label rules. Mispacked cartons can delay receiving even when individual units are prepped correctly.
+
+---
+
+Practical Examples
+
+Example 1: Wholesale reseller
+You buy branded protein bars with UPCs already on each wrapper. After March 31, 2026, you print an FNSKU for each unit, cover the UPC completely, and ship cartons to the assigned FC. No Amazon relabeling at receiving.
+
+Example 2: Apparel private label
+T-shirts arrive from your manufacturer in loose bundles. Each unit needs a transparent poly bag with a suffocation warning (opening 5 inches or larger when laid flat), an FNSKU on the outside of the bag, and cartons that do not exceed weight limits.
+
+Example 3: Fragile supplement bottle
+Glass bottles need bubble wrap or rigid boxing so they survive FC handling. If you polybag the wrapped bottle, the expiration date and FNSKU must remain visible and scannable on the outermost layer.
+
+Factor
+DIY / In-House Prep
+FBA Prep Center / 3PL
+Best for
+Low-volume sellers with simple SKUs
+Growing brands, high volumes, or complex prep requirements
+Cost structure
+Labor + equipment + packaging supplies
+Per-unit prep and handling fees
+Amazon compliance
+Managed internally; requires knowledge of FBA requirements
+Handled by experienced prep teams following Amazon requirements
+Error risk
+Higher without trained staff and quality checks
+Typically lower with standardized processes and QC
+Time & effort
+Requires ongoing labor and operational oversight
+Frees up time for sourcing, marketing, and sales
+Scalability
+Can become difficult during peak periods such as Q4
+Easier to scale capacity as order volumes increase
+Operational complexity
+Seller manages receiving, prep, labeling, and shipping
+Prep center manages the prep workflow and outbound shipments
+
+For sellers who do not want to manage labeling, inspection, bundling, and carton prep themselves, a specialized Amazon FBA prep partner such as Elite Prep Center can receive supplier shipments, prep to Amazon standards, and stage FC-bound cartons while you remain a seller of record.
+
+Common Prep Mistakes That Cause Receiving Problems
+
+1. Partial barcode coverage: FNSKU sticker placed over only part of the UPC; scanners read the wrong code.
+2. Non-scannable labels: Smudged, wrinkled, or low-resolution barcodes.
+3. Missing suffocation warnings: Poly bags with 5-inch+ openings and no compliant warning text.
+4. Loose multipacks: Bundles that can separate in the FC.
+5. Ignoring SKU-level prep flags: Assuming all items in a category share the same prep rules.
+6. When in doubt, re-check Seller Central for the specific ASIN before shipping your next batch.
+
+7. FAQ
+
+Frequently Asked Questions
+
+What is Amazon FBA prep?
+Amazon FBA prep is the physical preparation required before inventory arrives at an Amazon fulfillment center,labeling, bagging, wrapping, bundling, and packaging so each unit is scannable, secure, and compliant with Amazonâ€™s inbound standards.
+
+Does Amazon still prep my FBA inventory?
+No. As of January 1, 2026, Amazon no longer offers in-house FBA prep and labeling services in the United States. Sellers must prep inventory before it reaches the FC or use an approved prep provider.
+
+Do I need an FNSKU on every unit?
+For most resellers after March 31, 2026, yes,eligible FBA units need an Amazon barcode (FNSKU), even if a manufacturer UPC is present. Brand-registered brand owners may use manufacturer barcodes on eligible ASINs. Confirm your settings in Seller Central.
+
+How much does an FBA prep center cost?
+Pricing varies by prep type, volume, and SKU complexity. Common models charge per unit for labeling, polybagging, and carton handling. Request quotes from prep centers and compare against your in-house labor and defect costs.
+
+Check detailed pricing here
+
+What happens if my shipment is not prepped correctly?
+
+Amazon may apply unplanned prep fees, reprocess inventory at your expense, delay receiving, or refuse non-compliant shipments depending on the issue and category.
+
+Can my supplier prep inventory for FBA?
+
+Yes. Many sellers coordinate with manufacturers to apply FNSKU labels and required packaging before goods ship to a prep center or directly to Amazon. Provide suppliers with clear SOPs and label files.
+
+Where do I find prep requirements for my products?
+
+In Seller Central: Send to Amazon workflow, Manage Inventory prep details, and Amazonâ€™s Packaging and prep requirements help pages. Requirements are ASIN-specific.
+
+Can one prep center handle Amazon and Walmart?
+
+Some 3PLs prep for both, but Amazon FBA and Walmart WFS use different labeling and packaging rules. Do not assume FBA-ready inventory is WFS-ready without checking Walmartâ€™s routing guide.

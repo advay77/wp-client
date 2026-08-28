@@ -4,15 +4,16 @@
  */
 get_header();
 
-$amazon  = advay_asset_uri( 'images/amazon.svg' );
-$walmart = advay_asset_uri( 'images/walmart.svg' );
-$tiktok  = advay_asset_uri( 'images/tiktok.svg' );
+$amazon  = advay_asset_uri( 'images/logo-amazon.png' );
+$walmart = advay_asset_uri( 'images/logo-walmart.png' );
+$tiktok  = advay_asset_uri( 'images/logo-tiktok.png' );
 $person  = file_exists( get_template_directory() . '/assets/images/client-success.jpg' )
 	? advay_asset_uri( 'images/client-success.jpg' )
 	: advay_asset_uri( 'images/logo.png' );
 $warehouse = file_exists( get_template_directory() . '/assets/images/svc-warehouse.jpg' )
 	? advay_asset_uri( 'images/svc-warehouse.jpg' )
 	: $person;
+$onboard = advay_onboarding_url();
 ?>
 
 <main id="main-content" class="svc-page">
@@ -28,18 +29,25 @@ $warehouse = file_exists( get_template_directory() . '/assets/images/svc-warehou
 				<span class="svc-pill-ico" aria-hidden="true"></span>
 				<?php esc_html_e( 'ElitePrep for marketplace prep', 'advay-theme' ); ?>
 			</p>
-			<h1><?php esc_html_e( 'Get more inventory into Amazon, Walmart, and TikTok.', 'advay-theme' ); ?></h1>
-			<p class="lead"><?php esc_html_e( 'Receiving, labeling, kitting, and forwarding from Franklinville — built for FBA, WFS, and TikTok Shop, not a generic 3PL floor.', 'advay-theme' ); ?></p>
+			<h1><?php esc_html_e( 'Get more inventory into Amazon, Walmart, TikTok, and DTC.', 'advay-theme' ); ?></h1>
+			<p class="lead"><?php esc_html_e( 'Receiving, labeling, kitting, and forwarding from Franklinville — built for FBA, WFS, TikTok Shop, and DTC, not a generic 3PL floor.', 'advay-theme' ); ?></p>
 			<div class="svc-hero-actions">
 				<a class="button button-primary" href="<?php echo esc_url( advay_contact_url() ); ?>"><?php esc_html_e( 'Get a custom quote', 'advay-theme' ); ?></a>
 				<a class="svc-text-link" href="#why"><?php esc_html_e( 'See how it works', 'advay-theme' ); ?></a>
 			</div>
 			<div class="svc-tiles" id="platforms">
-				<div class="svc-tile"><img src="<?php echo esc_url( $amazon ); ?>" alt="<?php esc_attr_e( 'Amazon', 'advay-theme' ); ?>"></div>
-				<div class="svc-tile"><img src="<?php echo esc_url( $walmart ); ?>" alt="<?php esc_attr_e( 'Walmart', 'advay-theme' ); ?>"></div>
-				<div class="svc-tile is-feature"><span><?php esc_html_e( 'Prep', 'advay-theme' ); ?></span></div>
-				<div class="svc-tile"><img src="<?php echo esc_url( $tiktok ); ?>" alt="<?php esc_attr_e( 'TikTok Shop', 'advay-theme' ); ?>"></div>
-				<div class="svc-tile"><span><?php esc_html_e( 'DTC', 'advay-theme' ); ?></span></div>
+				<div class="svc-tile svc-tile--amazon">
+					<img src="<?php echo esc_url( $amazon ); ?>" alt="<?php esc_attr_e( 'Amazon', 'advay-theme' ); ?>">
+				</div>
+				<div class="svc-tile svc-tile--walmart">
+					<img src="<?php echo esc_url( $walmart ); ?>" alt="<?php esc_attr_e( 'Walmart', 'advay-theme' ); ?>">
+				</div>
+				<div class="svc-tile svc-tile--tiktok">
+					<img src="<?php echo esc_url( $tiktok ); ?>" alt="<?php esc_attr_e( 'TikTok Shop', 'advay-theme' ); ?>">
+				</div>
+				<div class="svc-tile svc-tile-dtc">
+					<span><?php esc_html_e( 'DTC', 'advay-theme' ); ?></span>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -48,7 +56,7 @@ $warehouse = file_exists( get_template_directory() . '/assets/images/svc-warehou
 		<div class="container svc-why-grid">
 			<div>
 				<h2><?php esc_html_e( 'Why brands pick ElitePrep.', 'advay-theme' ); ?></h2>
-				<p><?php esc_html_e( 'One warehouse, named owners, and lanes into the three marketplaces that actually move units.', 'advay-theme' ); ?></p>
+				<p><?php esc_html_e( 'One warehouse, named owners, and lanes into the marketplaces that actually move units — plus DTC.', 'advay-theme' ); ?></p>
 			</div>
 			<div class="svc-why-cards">
 				<article id="receiving">
@@ -86,7 +94,7 @@ $warehouse = file_exists( get_template_directory() . '/assets/images/svc-warehou
 			</div>
 			<ul class="svc-benefits">
 				<li><?php esc_html_e( 'Minutes from Amazon, Walmart, and TikTok fulfillment — not a cross-country hop.', 'advay-theme' ); ?></li>
-				<li><?php esc_html_e( 'Prep specs that change with FBA, WFS, and FBT, not a one-label-fits-all station.', 'advay-theme' ); ?></li>
+				<li><?php esc_html_e( 'Prep specs that change with FBA, WFS, FBT, and DTC — not a one-label-fits-all station.', 'advay-theme' ); ?></li>
 				<li><?php esc_html_e( 'Photos and counts on every exception so chargebacks do not become a surprise.', 'advay-theme' ); ?></li>
 				<li><?php esc_html_e( 'Month-to-month or a longer lane — you pick the terms.', 'advay-theme' ); ?></li>
 			</ul>
@@ -99,21 +107,48 @@ $warehouse = file_exists( get_template_directory() . '/assets/images/svc-warehou
 
 	<section class="svc-steps" id="outbound">
 		<div class="container">
-			<h2><?php esc_html_e( 'Prep with ElitePrep. It is simple.', 'advay-theme' ); ?></h2>
+			<div class="svc-steps-head">
+				<h2><?php esc_html_e( 'Prep with ElitePrep. It is simple.', 'advay-theme' ); ?></h2>
+				<a class="button button-primary svc-onboard-btn" href="<?php echo esc_url( $onboard ); ?>">
+					<?php esc_html_e( 'One-click onboarding', 'advay-theme' ); ?>
+					<span class="btn-arrow" aria-hidden="true"></span>
+				</a>
+			</div>
 			<div class="svc-step-grid">
 				<article>
 					<header><?php esc_html_e( 'First, ship inbound', 'advay-theme' ); ?></header>
-					<div class="svc-step-visual is-one"></div>
+					<div class="svc-step-visual is-one">
+						<img
+							src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&q=80"
+							alt="<?php esc_attr_e( 'Inbound cartons arriving at warehouse', 'advay-theme' ); ?>"
+							loading="lazy"
+							decoding="async"
+						>
+					</div>
 					<p><?php esc_html_e( 'Send cartons or a container to Franklinville. We check in against your list and flag misses the same day.', 'advay-theme' ); ?></p>
 				</article>
 				<article id="returns">
 					<header><?php esc_html_e( 'Then, we prep to spec', 'advay-theme' ); ?></header>
-					<div class="svc-step-visual is-two"></div>
-					<p><?php esc_html_e( 'Label, bag, kit, and rebuild cartons for Amazon, Walmart, or TikTok — including returns that need a second pass.', 'advay-theme' ); ?></p>
+					<div class="svc-step-visual is-two">
+						<img
+							src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=900&q=80"
+							alt="<?php esc_attr_e( 'Products being labeled and prepped for shipping', 'advay-theme' ); ?>"
+							loading="lazy"
+							decoding="async"
+						>
+					</div>
+					<p><?php esc_html_e( 'Label, bag, kit, and rebuild cartons for Amazon, Walmart, TikTok, or DTC — including returns that need a second pass.', 'advay-theme' ); ?></p>
 				</article>
 				<article>
 					<header><?php esc_html_e( 'Finally, we forward', 'advay-theme' ); ?></header>
-					<div class="svc-step-visual is-three"></div>
+					<div class="svc-step-visual is-three">
+						<img
+							src="<?php echo esc_url( advay_asset_uri( 'images/svc-warehouse.jpg' ) ); ?>"
+							alt="<?php esc_attr_e( 'Outbound freight ready for fulfillment centers', 'advay-theme' ); ?>"
+							loading="lazy"
+							decoding="async"
+						>
+					</div>
 					<p><?php esc_html_e( 'Pallets and parcels leave for the FC with tracking. You stay in stock without running the warehouse.', 'advay-theme' ); ?></p>
 				</article>
 			</div>

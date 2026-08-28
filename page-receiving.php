@@ -48,10 +48,16 @@ get_header();
 ?>
 
 <main id="main-content" class="wj-page">
-	<section class="wj-intro">
+	<section class="wj-intro" aria-labelledby="wj-intro-heading">
+		<div class="wj-intro-media" aria-hidden="true">
+			<video class="wj-intro-video" autoplay muted loop playsinline preload="metadata">
+				<source src="<?php echo esc_url( advay_asset_uri( 'video/DTC.mp4' ) ); ?>" type="video/mp4">
+			</video>
+			<span class="wj-intro-overlay"></span>
+		</div>
 		<div class="wj-intro-inner">
 			<p class="wj-eyebrow"><?php esc_html_e( 'What we do', 'advay-theme' ); ?></p>
-			<h1><?php esc_html_e( 'How your inventory moves through Elite Prep Center', 'advay-theme' ); ?></h1>
+			<h1 id="wj-intro-heading"><?php esc_html_e( 'How your inventory moves through Elite Prep Center', 'advay-theme' ); ?></h1>
 			<p class="wj-lede">
 				<?php esc_html_e( 'One warehouse, five stages. Scroll down — the journey moves left to right through the warehouse.', 'advay-theme' ); ?>
 			</p>

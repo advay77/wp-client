@@ -5,19 +5,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $niche_cards = array(
 	array(
-		'file'  => 'images/brandfit1.png',
+		'file'  => 'images/niche1.png',
 		'tag'   => __( 'Health & Wellness', 'advay-theme' ),
 		'title' => __( 'Health & Wellness', 'advay-theme' ),
 		'copy'  => __( 'Health & wellness runs on credibility. ElitePrep helps you scale without compromising the trust you\'ve built.', 'advay-theme' ),
 	),
 	array(
-		'file'  => 'images/niche-beauty.jpg',
+		'file'  => 'images/niche2.png',
 		'tag'   => __( 'Beauty', 'advay-theme' ),
 		'title' => __( 'Beauty', 'advay-theme' ),
 		'copy'  => __( 'Beauty is built on identity. ElitePrep makes sure yours shines on every marketplace.', 'advay-theme' ),
 	),
 	array(
-		'file'  => 'images/niche-packaged-food.jpg',
+		'file'  => 'images/niche3.png',
 		'tag'   => __( 'Packaged Food', 'advay-theme' ),
 		'title' => __( 'Packaged Food', 'advay-theme' ),
 		'copy'  => __( 'Packaged food lives and dies by shelf life. Elite Prep Center keeps your lot tracking and expiration dates airtight.', 'advay-theme' ),
@@ -27,11 +27,13 @@ $niche_cards = array(
 $spec_cards = array(
 	array(
 		'file'  => 'images/brandfit2.png',
+		'tag'   => __( 'Lot tracking / compliance', 'advay-theme' ),
 		'title' => __( 'Lot tracking / compliance', 'advay-theme' ),
 		'copy'  => __( 'We track what actually matters. Lot numbers, expiration dates, and recall-ready records, the details that protect your brand when it counts.', 'advay-theme' ),
 	),
 	array(
 		'file'  => 'images/brandfit3.png',
+		'tag'   => __( 'Switching / scaling', 'advay-theme' ),
 		'title' => __( 'Switching / scaling', 'advay-theme' ),
 		'copy'  => __( 'Outgrowing DIY, or done with the loser ones? Whether you\'re switching from a 3PL that\'s letting you down or scaling past in-house prep, we make the move seamless.', 'advay-theme' ),
 	),
@@ -113,7 +115,7 @@ $spec_cards = array(
 		>
 			<div class="fit-cards fit-cards--spec">
 				<?php foreach ( $spec_cards as $i => $card ) : ?>
-					<article class="fit-card">
+					<article class="fit-card fit-card--niche">
 						<div class="fit-card-visual">
 							<img
 								src="<?php echo esc_url( advay_asset_uri( $card['file'] ) ); ?>"
@@ -123,10 +125,10 @@ $spec_cards = array(
 								loading="lazy"
 								decoding="async"
 							>
+							<span class="fit-card-tag"><?php echo esc_html( $card['tag'] ); ?></span>
 						</div>
 						<div class="fit-card-body">
-							<span class="fit-card-num"><?php echo esc_html( sprintf( '%02d', $i + 1 ) ); ?></span>
-							<h3><?php echo esc_html( $card['title'] ); ?></h3>
+							<h3 class="screen-reader-text"><?php echo esc_html( $card['title'] ); ?></h3>
 							<p><?php echo esc_html( $card['copy'] ); ?></p>
 						</div>
 					</article>

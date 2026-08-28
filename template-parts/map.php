@@ -70,6 +70,9 @@ unset( $hub_ref );
 				<span><?php esc_html_e( '1736 Dutch Mill Road, Franklinville, NJ 08322', 'advay-theme' ); ?></span>
 			</div>
 			<div class="map-stage">
+				<a class="map-onboard-btn" href="<?php echo esc_url( advay_onboarding_url() ); ?>">
+					<?php esc_html_e( 'One-click onboarding', 'advay-theme' ); ?>
+				</a>
 				<div id="epc-map" class="epc-map" role="img" aria-label="<?php esc_attr_e( 'Map of Elite Prep Center and nearby fulfillment centers', 'advay-theme' ); ?>"></div>
 				<div class="map-detail" id="map-detail" role="region" aria-label="<?php esc_attr_e( 'Fulfillment center details', 'advay-theme' ); ?>" hidden>
 					<button class="map-detail-close" type="button" data-detail-close aria-label="<?php esc_attr_e( 'Close details', 'advay-theme' ); ?>">&times;</button>

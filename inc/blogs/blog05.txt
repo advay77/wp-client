@@ -1,0 +1,153 @@
+Amazon FBA Expiration Date Requirements for Packaged Foods and Supplements
+
+Sending expiration-dated inventory to Amazon FBA comes with rules that are stricter, and less forgiving, than most sellers expect. 
+ 
+ 
+Get the shelf life or label format wrong, and Amazon won't just flag the issue, it will dispose of the inventory, and that inventory generally isn't coming back. 
+ 
+ 
+Summary: 
+ 
+ 1. Amazon requires expiration-dated products to have more than 90 days of remaining shelf life when received at a fulfillment center. 
+ 2. Units within roughly 50 days of expiration are marked for disposal. 
+ 3. Dates must be printed in MM-DD-YYYY or MM-YYYY format, in 36-point font or larger, on both the master carton and the individual unit. 
+ 
+ 
+Which Products Need Expiration Date Labeling 
+ 
+ 
+Amazon requires visible expiration dates on any product that is ingestible or topical, including: 
+ 
+ 
+- Food and beverage products, and any product that ships bundled with food or beverages 
+- Health supplements and vitamins 
+- Beauty and skincare products with active ingredients 
+- Baby food and formula 
+- Pet food and treats 
+ 
+ 
+Amazon also treats a product as expiration-dated if it loses effectiveness over time, even without a printed expiration date on the packaging. 
+ 
+ 
+This can include cleaning products, items with a Period After Opening (PAO) symbol, and anything bundled with a component that has its own shelf life. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The 90-Day Rule 
+ 
+ 
+To be eligible for FBA, expiration-dated products must be lot-controlled and have a remaining shelf life greater than 90 days at the time Amazon receives them. 
+ 
+ 
+This isn't measured from when you ship the product, it's measured from the moment it arrives at the fulfillment center, so build in transit time when planning your ship date. 
+ 
+ 
+There's a more precise version of this rule for products with long usage periods. The general principle is that products need at least 90 days of shelf life remaining beyond however long the product normally takes to use. 
+ 
+ 
+A two-month supply of a daily supplement, for example, should arrive with roughly five months of shelf life remaining , 90 days of buffer on top of the two months it will take a customer to use it. A 90-day supply shipped with only 60 days left before expiration wouldn't leave enough time to reasonably use the product before it expires. 
+ 
+ 
+What Happens Near the Expiration Date 
+ 
+ 
+Amazon treats inventory within about 50 days of its expiration date as disposal-risk inventory. Once flagged, those units are typically not returnable , they're simply removed from sellable inventory and disposed of. 
+ 
+ 
+This is a deliberate policy: Amazon would rather dispose of borderline inventory early than risk shipping an expired product to a customer. 
+ 
+ 
+The consequences of letting inventory drift into this window go beyond losing the product itself. Expired product complaints count against account health, and enough of them can trigger a listing suspension that requires relabeling and resending inventory to resolve. 
+ 
+ 
+Label Format Requirements 
+ 
+ 
+Expiration dates must appear in one of two formats: 
+ 
+ 
+ 1. MM-DD-YYYY, or 
+ 2. MM-YYYY 
+ 
+ 
+The date must be printed in 36-point font or larger, on both the master carton and the individual retail unit. If a product already has an expiration date printed in a different format, it isn't enough to leave it as-is , a compliant sticker must be applied over the original date, in the correct format and font size. 
+ 
+ 
+When shipping expiration-dated inventory, each box should contain only ASINs with a single expiration date. 
+ 
+ 
+Multiple ASINs can share a box only if every ASIN inside has the same expiration date , mixing dates within one carton creates exactly the kind of inventory tracking problem Amazon's rules are designed to prevent. 
+ 
+ 
+Lot Numbers and Traceability 
+ 
+ 
+While lot numbers aren't universally required for every FBA product, Amazon recommends including them wherever applicable, and certain categories , particularly food and supplements , may require them for compliance. 
+ 
+ 
+Lot numbers matter most during a recall: if a specific production batch has an issue, the lot number is what allows Amazon and the seller to identify exactly which units need to be pulled, rather than treating the entire ASIN as affected. 
+ 
+ 
+Temperature and Meltable Product Rules 
+ 
+ 
+Expiration-dated products also carry temperature requirements. Amazon expects products to withstand a minimum of 50Â°F and a maximum of 100Â°F for the duration of their shelf life without quality loss, and carton markings can't specify storage temperature requirements outside that range. 
+ 
+ 
+Products that melt, such as chocolate, are only accepted between October 1 and April 30 each year , meltable inventory arriving between May 1 and September 30 is marked unfulfillable and disposed of, and any unsold meltable inventory still in a fulfillment center after May 1 faces the same fate unless removed beforehand. 
+ 
+ 
+A Practical Example 
+ 
+ 
+A supplement brand sells a 240-tablet bottle of a daily vitamin, meant to last 240 days. Under Amazon's shelf-life logic, that bottle needs at least 240 days of remaining shelf life when it arrives at the fulfillment center; the standard 90-day minimum isn't enough on its own, because it doesn't account for how long the full bottle will take a customer to use. 
+ 
+ 
+ 
+ 
+The same brand's 60-tablet bottle, by contrast, only needs roughly 60 days plus the 90-day buffer. 
+ 
+ 
+Getting this math wrong at the SKU level is a common way sellers unintentionally ship inventory that gets disposed of within weeks of arrival , a costly mistake that's easy to avoid by mapping remaining shelf life against expected usage duration before every shipment, something a [INTERNAL LINK OPPORTUNITY: Amazon FBA Prep Services] provider experienced with regulated products will typically check as a standard part of receiving inventory. 
+ 
+ 
+Frequently Asked Questions 
+ 
+ 
+What is Amazon's minimum shelf life requirement for FBA? 
+Products must have a remaining shelf life greater than 90 days at the time Amazon receives them. For products with a longer usage duration, the shelf life should extend at least 90 days beyond how long the product will take to use. 
+ 
+ 
+What happens if my inventory is close to its expiration date? 
+Amazon typically marks inventory within about 50 days of its expiration date for disposal. Disposed inventory is generally not returned to the seller. 
+ 
+ 
+What format should expiration dates be printed in for Amazon FBA? 
+Dates must be printed as MM-DD-YYYY or MM-YYYY, in 36-point font or larger, on both the master carton and the individual retail unit. 
+ 
+ 
+Do supplements need lot numbers on Amazon? 
+Lot numbers aren't universally required, but Amazon recommends them and some categories, particularly food and supplements, may require them for traceability and recall purposes. 
+ 
+ 
+Can I ship different expiration dates for different ASINs in the same box? 
+Only if every ASIN in the box shares the same expiration date. Mixed expiration dates across ASINs within a single carton aren't permitted. 
+ 
+ 
+Does Amazon accept meltable products year-round? 
+No. Meltable products like chocolate are only accepted between October 1 and April 30 each year. Inventory arriving outside that window is marked unfulfillable and disposed of. 
+ 
+ 
+What products count as "expiration-dated" even without a printed date? 
+Amazon can classify a product as expiration-dated if it loses effectiveness over time, even without a visible expiration date , this includes some cleaning products and items with a Period After Opening symbol. 

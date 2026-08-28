@@ -87,6 +87,8 @@
 </footer>
 
 <?php
+get_template_part( 'template-parts/contact-dock' );
+
 if ( is_front_page() ) {
 	get_template_part( 'template-parts/welcome-popup' );
 }

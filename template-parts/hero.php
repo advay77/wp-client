@@ -58,7 +58,14 @@ $first    = reset( $channels );
 					<span class="tab-top">
 						<span class="tab-logo<?php echo empty( $channel['logo'] ) ? ' is-wordmark' : ''; ?>">
 							<?php if ( ! empty( $channel['logo'] ) ) : ?>
-								<img src="<?php echo esc_url( $channel['logo'] ); ?>" alt="" width="72" height="24">
+								<img
+									src="<?php echo esc_url( $channel['logo'] ); ?>"
+									alt="<?php echo esc_attr( $channel['label'] ); ?>"
+									width="88"
+									height="28"
+									loading="eager"
+									decoding="async"
+								>
 							<?php else : ?>
 								<?php echo esc_html( isset( $channel['wordmark'] ) ? $channel['wordmark'] : $channel['label'] ); ?>
 							<?php endif; ?>

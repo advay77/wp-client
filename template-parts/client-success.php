@@ -14,7 +14,7 @@ if ( empty( $founders ) ) {
 	);
 }
 
-$md_url      = home_url( '/#company' );
+$md_url      = advay_managing_director_url();
 $book_md_url = advay_onboarding_url();
 ?>
 <section class="success-section" id="client-success" aria-labelledby="success-heading">

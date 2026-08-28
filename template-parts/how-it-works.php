@@ -28,9 +28,11 @@ $steps = array(
 ?>
 <section class="process-section" id="how-it-works" aria-labelledby="process-heading">
 	<div class="container">
-		<header class="section-heading">
-			<p class="eyebrow"><?php esc_html_e( 'Process', 'advay-theme' ); ?></p>
-			<h2 id="process-heading"><?php esc_html_e( 'Four steps. No mystery.', 'advay-theme' ); ?></h2>
+		<header class="section-heading process-heading-row">
+			<div class="process-heading-copy">
+				<p class="eyebrow"><?php esc_html_e( 'Process', 'advay-theme' ); ?></p>
+				<h2 id="process-heading"><?php esc_html_e( 'Four steps. No mystery.', 'advay-theme' ); ?></h2>
+			</div>
 			<a class="button button-primary process-onboard" href="<?php echo esc_url( advay_onboarding_url() ); ?>">
 				<?php esc_html_e( 'One-Click Onboarding', 'advay-theme' ); ?>
 				<span class="btn-arrow" aria-hidden="true"></span>

@@ -5,13 +5,26 @@
 	var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 	if (toggle && nav) {
+		function closeAllMegas() {
+			nav.querySelectorAll('.has-mega.is-open').forEach(function (el) {
+				el.classList.remove('is-open');
+			});
+		}
+
 		function setOpen(open) {
 			toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
 			document.body.classList.toggle('nav-open', open);
+			if (!open) {
+				closeAllMegas();
+			}
 		}
 
 		toggle.addEventListener('click', function () {
-			setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+			var willOpen = toggle.getAttribute('aria-expanded') !== 'true';
+			if (willOpen) {
+				closeAllMegas();
+			}
+			setOpen(willOpen);
 		});
 
 		nav.querySelectorAll('a').forEach(function (link) {
@@ -20,7 +33,9 @@
 					event.preventDefault();
 					var item = link.closest('.has-mega');
 					if (item) {
-						item.classList.toggle('is-open');
+						var willOpen = !item.classList.contains('is-open');
+						closeAllMegas();
+						item.classList.toggle('is-open', willOpen);
 					}
 					return;
 				}
@@ -172,26 +187,27 @@
 			return Math.max(0, viewport.scrollWidth - viewport.clientWidth);
 		}
 
-		/* List is duplicated once — loop on the first half. */
+		/* List is duplicated 3× — loop on one set width. */
 		function loopWidth() {
 			if (!list) {
 				return maxScroll();
 			}
-			return Math.max(1, Math.round(list.scrollWidth / 2));
+			return Math.max(1, Math.round(list.scrollWidth / 3));
 		}
 
 		function normalizeLoop() {
 			var half = loopWidth();
-			if (viewport.scrollLeft >= half) {
+			if (viewport.scrollLeft >= half * 2) {
 				viewport.scrollLeft -= half;
-			} else if (viewport.scrollLeft < 0) {
+			} else if (viewport.scrollLeft < half) {
 				viewport.scrollLeft += half;
 			}
 		}
 
 		function updateThumb() {
 			var half = loopWidth();
-			var ratio = half ? (viewport.scrollLeft % half) / half : 0;
+			var pos = ((viewport.scrollLeft % half) + half) % half;
+			var ratio = half ? pos / half : 0;
 			var travel = Math.max(0, track.clientWidth - thumb.offsetWidth);
 			thumb.style.transform = 'translate(' + (ratio * travel) + 'px, -50%)';
 		}
@@ -218,6 +234,9 @@
 			{ passive: true }
 		);
 		window.addEventListener('resize', updateThumb);
+
+		/* Start mid-set so L→R auto-scroll can loop both ways. */
+		viewport.scrollLeft = loopWidth();
 		updateThumb();
 
 		/* Drag-to-scroll on desktop. */
@@ -270,10 +289,11 @@
 		prevBtn.addEventListener('mouseenter', pause);
 		nextBtn.addEventListener('mouseenter', pause);
 
+		/* Auto-move logos left → right. */
 		function autoSlide() {
 			if (!paused && !reduce && !drag.active) {
 				if (maxScroll() > 1) {
-					viewport.scrollLeft += 0.6;
+					viewport.scrollLeft -= 0.75;
 					normalizeLoop();
 					updateThumb();
 				}
@@ -341,12 +361,18 @@
 		};
 		var map = L.map('epc-map', {
 			scrollWheelZoom: false,
-			zoomControl: true
+			zoomControl: false
 		});
+		L.control.zoom({ position: 'bottomright' }).addTo(map);
 
-		L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-			maxZoom: 18,
-			attribution: '&copy; OpenStreetMap &copy; CARTO'
+		/* Esri dark gray — no API key (CARTO raster now watermarks without one). */
+		L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+			maxZoom: 16,
+			attribution: 'Tiles &copy; Esri'
+		}).addTo(map);
+		L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+			maxZoom: 16,
+			attribution: ''
 		}).addTo(map);
 
 		function hubIcon(color) {
@@ -803,4 +829,143 @@
 			});
 		});
 	})();
+
+	/* Our Story — continuous photo marquee */
+	(function () {
+		var viewport = document.querySelector('[data-os-gallery]');
+		if (!viewport) {
+			return;
+		}
+
+		var track = viewport.querySelector('.os-gallery-track');
+		if (!track) {
+			return;
+		}
+
+		function maxScroll() {
+			return Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+		}
+
+		function loopWidth() {
+			return Math.max(1, Math.round(track.scrollWidth / 3));
+		}
+
+		function normalizeLoop() {
+			var half = loopWidth();
+			if (viewport.scrollLeft >= half * 2) {
+				viewport.scrollLeft -= half;
+			} else if (viewport.scrollLeft < half) {
+				viewport.scrollLeft += half;
+			}
+		}
+
+		var paused = false;
+		var drag = { active: false, startX: 0, startLeft: 0 };
+
+		viewport.scrollLeft = loopWidth();
+
+		viewport.addEventListener('mouseenter', function () {
+			paused = true;
+		});
+		viewport.addEventListener('mouseleave', function () {
+			paused = false;
+		});
+		viewport.addEventListener('focusin', function () {
+			paused = true;
+		});
+		viewport.addEventListener('focusout', function () {
+			paused = false;
+		});
+
+		viewport.addEventListener('pointerdown', function (event) {
+			if (event.pointerType === 'mouse' && event.button !== 0) {
+				return;
+			}
+			drag.active = true;
+			paused = true;
+			drag.startX = event.clientX;
+			drag.startLeft = viewport.scrollLeft;
+			viewport.classList.add('is-dragging');
+			try {
+				viewport.setPointerCapture(event.pointerId);
+			} catch (err) {}
+		});
+
+		viewport.addEventListener('pointermove', function (event) {
+			if (!drag.active) {
+				return;
+			}
+			viewport.scrollLeft = drag.startLeft - (event.clientX - drag.startX);
+		});
+
+		function endDrag(event) {
+			if (!drag.active) {
+				return;
+			}
+			drag.active = false;
+			paused = false;
+			viewport.classList.remove('is-dragging');
+			normalizeLoop();
+			try {
+				viewport.releasePointerCapture(event.pointerId);
+			} catch (err) {}
+		}
+
+		viewport.addEventListener('pointerup', endDrag);
+		viewport.addEventListener('pointercancel', endDrag);
+
+		function autoSlide() {
+			if (!paused && !reduce && !drag.active && maxScroll() > 1) {
+				viewport.scrollLeft -= 0.65;
+				normalizeLoop();
+			}
+			requestAnimationFrame(autoSlide);
+		}
+
+		if (!reduce) {
+			requestAnimationFrame(autoSlide);
+		}
+	})();
+
+	var mdToggle = document.querySelector('.md-bar-toggle');
+	var mdMobileNav = document.getElementById('md-mobile-nav');
+
+	if (mdToggle && mdMobileNav) {
+		mdToggle.addEventListener('click', function () {
+			var open = mdToggle.getAttribute('aria-expanded') === 'true';
+			mdToggle.setAttribute('aria-expanded', open ? 'false' : 'true');
+			mdMobileNav.hidden = open;
+		});
+
+		mdMobileNav.querySelectorAll('a').forEach(function (link) {
+			link.addEventListener('click', function () {
+				mdToggle.setAttribute('aria-expanded', 'false');
+				mdMobileNav.hidden = true;
+			});
+		});
+	}
+
+	var mdSlider = document.querySelector('[data-md-slider]');
+	var mdLegacySlider = document.querySelector('[data-md-legacy-slider]');
+
+	function initMdFadeSlider(root, interval) {
+		if (!root || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			return;
+		}
+
+		var slides = root.querySelectorAll('[data-md-slide]');
+		if (slides.length <= 1) {
+			return;
+		}
+
+		var slideIndex = 0;
+		window.setInterval(function () {
+			slides[slideIndex].classList.remove('is-active');
+			slideIndex = (slideIndex + 1) % slides.length;
+			slides[slideIndex].classList.add('is-active');
+		}, interval);
+	}
+
+	initMdFadeSlider(mdSlider, 2800);
+	initMdFadeSlider(mdLegacySlider, 3000);
 })();

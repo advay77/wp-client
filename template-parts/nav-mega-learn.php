@@ -67,14 +67,6 @@ foreach ( advay_demo_blog_posts() as $demo ) {
 $cards = array_slice( $cards, 0, 3 );
 ?>
 <div class="mega-panel mega-blogs" role="region" aria-label="<?php esc_attr_e( 'Blogs', 'advay-theme' ); ?>">
-	<div class="blogs-intro">
-		<strong><?php esc_html_e( 'From the blog', 'advay-theme' ); ?></strong>
-		<p><?php esc_html_e( 'Prep playbooks, marketplace updates, and seller wins.', 'advay-theme' ); ?></p>
-		<a class="blogs-all" href="<?php echo esc_url( $blog_url ); ?>">
-			<?php esc_html_e( 'View all posts', 'advay-theme' ); ?>
-			<span aria-hidden="true">&rarr;</span>
-		</a>
-	</div>
 	<div class="blogs-cards">
 		<?php foreach ( $cards as $card ) : ?>
 			<a class="blog-card" href="<?php echo esc_url( $card['url'] ); ?>">
@@ -94,5 +86,11 @@ $cards = array_slice( $cards, 0, 3 );
 				</span>
 			</a>
 		<?php endforeach; ?>
+		<a class="blog-card blog-card--all" href="<?php echo esc_url( $blog_url ); ?>">
+			<span class="blog-all-inner">
+				<strong><?php esc_html_e( 'View all blogs', 'advay-theme' ); ?></strong>
+				<span class="blog-more" aria-hidden="true">&rarr;</span>
+			</span>
+		</a>
 	</div>
 </div>
