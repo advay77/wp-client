@@ -89,7 +89,10 @@ get_header();
 				<p class="eyebrow"><?php esc_html_e( 'Our Story', 'advay-theme' ); ?></p>
 				<h1 id="os-intro-heading">
 					<?php esc_html_e( 'ElitePrep Center is built on a simple idea:', 'advay-theme' ); ?>
-					<strong><?php esc_html_e( 'getting your units to market should feel effortless, not risky.', 'advay-theme' ); ?></strong>
+					<strong>
+						<span class="os-intro-accent"><?php esc_html_e( 'getting your units to market', 'advay-theme' ); ?></span>
+						<?php esc_html_e( ' should feel effortless, not risky.', 'advay-theme' ); ?>
+					</strong>
 				</h1>
 			</div>
 			<div class="os-intro-aside">
@@ -120,14 +123,20 @@ get_header();
 	<section class="os-mission" aria-labelledby="os-mission-heading">
 		<div class="os-mission-bg" aria-hidden="true"></div>
 		<div class="container os-mission-inner">
-			<div class="os-mission-block">
-				<p class="os-mission-label" id="os-mission-heading"><?php esc_html_e( 'Mission', 'advay-theme' ); ?></p>
+			<div class="os-mission-block os-mission-block--mission" data-os-reveal="left">
+				<div class="os-mission-label-row">
+					<p class="os-mission-label" id="os-mission-heading"><?php esc_html_e( 'Mission', 'advay-theme' ); ?></p>
+					<span class="os-mission-line" aria-hidden="true"></span>
+				</div>
 				<p class="os-mission-text">
 					<?php esc_html_e( 'To make marketplace prep seamless for growing brands — combining deep fulfillment expertise, human-first service, and compliant operations from one integrated warehouse.', 'advay-theme' ); ?>
 				</p>
 			</div>
-			<div class="os-mission-block">
-				<p class="os-mission-label"><?php esc_html_e( 'Vision', 'advay-theme' ); ?></p>
+			<div class="os-mission-block os-mission-block--vision" data-os-reveal="right">
+				<div class="os-mission-label-row">
+					<span class="os-mission-line" aria-hidden="true"></span>
+					<p class="os-mission-label"><?php esc_html_e( 'Vision', 'advay-theme' ); ?></p>
+				</div>
 				<p class="os-mission-text">
 					<?php esc_html_e( 'To be the most trusted prep partner for Amazon, Walmart, TikTok, and DTC sellers — driven by people, powered by precision, and united by a legacy of getting it right the first time.', 'advay-theme' ); ?>
 				</p>

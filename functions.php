@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ADVAY_THEME_VERSION', '2.15.2' );
+define( 'ADVAY_THEME_VERSION', '2.18.1' );
 
 function advay_theme_setup() {
 	add_theme_support( 'title-tag' );
@@ -481,6 +481,14 @@ function advay_home_hub_icon( $name, $size = 22 ) {
 		'inbound'   => '<svg ' . $attrs . '><path d="M3 7h11v9H3z"/><path d="M14 10h3l3 3v3h-6"/><circle cx="7.5" cy="18.5" r="1.75"/><circle cx="17.5" cy="18.5" r="1.75"/></svg>',
 		'forward'   => '<svg ' . $attrs . '><path d="M3 12h13"/><path d="M12 7l5 5-5 5"/><path d="M19 5v14"/></svg>',
 		'shield'    => '<svg ' . $attrs . '><path d="M12 3 4 7v6c0 4.5 3.4 7.7 8 9 4.6-1.3 8-4.5 8-9V7z"/><path d="M9.5 12.5 11 14l3.5-3.5"/></svg>',
+		'funnel'    => '<svg ' . $attrs . '><path d="M5 4h14l-5.5 6.5V18l-3 1.5V10.5z"/></svg>',
+		'growth'    => '<svg ' . $attrs . '><path d="M4 18h16"/><path d="M6 14l3-3 3 2 4-4 3-2"/><path d="M17 7h3v3"/></svg>',
+		'chart-bars' => '<svg ' . $attrs . '><path d="M5 19V12"/><path d="M9 19V9"/><path d="M13 19V14"/><path d="M17 19V7"/><path d="M6 10l2.5-2.5 2.5 2 3.5-4.5"/></svg>',
+		'arrow-circle' => '<svg ' . $attrs . '><circle cx="12" cy="12" r="8"/><path d="M9 15l6-6"/><path d="M11 9h4v4"/></svg>',
+		'clock-circle' => '<svg ' . $attrs . '><circle cx="12" cy="12" r="8"/><path d="M12 8v4.5l2.5 2.5"/></svg>',
+		'insight-head' => '<svg ' . $attrs . '><path d="M8 20h8"/><path d="M12 20v-2"/><path d="M7 14c-2.2-1.6-3.5-4-3.5-6.8C3.5 4.5 7.2 2 12 2s8.5 2.5 8.5 5.2c0 2.8-1.3 5.2-3.5 6.8"/><path d="M12 6.5a2.5 2.5 0 0 0-2.5 2.5c0 1.2.6 2 1.5 2.5"/><path d="M12 6.5a2.5 2.5 0 0 1 2.5 2.5c0 1.2-.6 2-1.5 2.5"/><path d="M12 11v2.5"/></svg>',
+		'warn-triangle' => '<svg ' . $attrs . '><path d="M12 4 3 19h18L12 4z"/><path d="M12 9v4"/><circle cx="12" cy="15.5" r="0.75" fill="currentColor" stroke="none"/></svg>',
+		'dollar-circle' => '<svg ' . $attrs . '><circle cx="12" cy="12" r="8"/><path d="M12 7.5v9"/><path d="M9.5 10c0-1 1-1.5 2.5-1.5s2.5.5 2.5 1.5-1 1.5-2.5 1.5-2.5.5-2.5 1.5 1 1.5 2.5 1.5 2.5-.5 2.5-1.5"/></svg>',
 	);
 
 	$icon = isset( $icons[ $name ] ) ? $icons[ $name ] : $icons['box'];
@@ -496,6 +504,7 @@ function advay_register_onboarding_route() {
 	add_rewrite_rule( '^our-story/?$', 'index.php?advay_our_story=1', 'top' );
 	add_rewrite_rule( '^join-our-team/?$', 'index.php?advay_join_team=1', 'top' );
 	add_rewrite_rule( '^managing-director/?$', 'index.php?advay_managing_director=1', 'top' );
+	add_rewrite_rule( '^success-stories/no-knife-body/?$', 'index.php?advay_success_story=no-knife-body', 'top' );
 }
 add_action( 'init', 'advay_register_onboarding_route' );
 
@@ -506,6 +515,7 @@ function advay_onboarding_query_var( $vars ) {
 	$vars[] = 'advay_our_story';
 	$vars[] = 'advay_join_team';
 	$vars[] = 'advay_managing_director';
+	$vars[] = 'advay_success_story';
 	return $vars;
 }
 add_filter( 'query_vars', 'advay_onboarding_query_var' );
@@ -550,6 +560,14 @@ function advay_custom_page_template( $template ) {
 		$md = get_template_directory() . '/page-managing-director.php';
 		if ( file_exists( $md ) ) {
 			return $md;
+		}
+	}
+
+	$success_story = sanitize_key( (string) get_query_var( 'advay_success_story' ) );
+	if ( 'no-knife-body' === $success_story ) {
+		$ss = get_template_directory() . '/page-success-story.php';
+		if ( file_exists( $ss ) ) {
+			return $ss;
 		}
 	}
 
@@ -613,6 +631,118 @@ function advay_is_managing_director_page() {
 	return function_exists( 'is_page' ) && is_page( 'managing-director' );
 }
 
+function advay_is_success_story_page() {
+	$slug = sanitize_key( (string) get_query_var( 'advay_success_story' ) );
+	return '' !== $slug;
+}
+
+/**
+ * Success story page URL.
+ *
+ * @param string $slug Story slug.
+ */
+function advay_success_story_url( $slug = 'no-knife-body' ) {
+	$slug = sanitize_key( $slug );
+	if ( 'no-knife-body' === $slug ) {
+		return home_url( '/success-stories/no-knife-body/' );
+	}
+
+	return home_url( '/success-stories/' . $slug . '/' );
+}
+
+/**
+ * Success story content by slug.
+ *
+ * @param string $slug Story slug.
+ * @return array<string, mixed>
+ */
+function advay_get_success_story( $slug = 'no-knife-body' ) {
+	$stories = array(
+		'no-knife-body' => array(
+			'brand'            => __( 'No Knife Body', 'advay-theme' ),
+			'headline_prefix'  => __( 'From prep chaos to', 'advay-theme' ),
+			'headline_highlight' => __( 'marketplace-ready shipments in weeks.', 'advay-theme' ),
+			'lead'             => __( 'A growing body-care brand needed FBA prep they could trust — without slowing every launch or risking compliance.', 'advay-theme' ),
+			'video'            => advay_asset_uri( 'video/testimonials.mp4' ),
+			'insight_lead'     => __( 'They didn\'t need more ads. They needed a ', 'advay-theme' ),
+			'insight_bold'     => __( 'growth system', 'advay-theme' ),
+			'insight_tail'     => __( ' built around their brand, customers, and unit economics.', 'advay-theme' ),
+			'quote'            => __( 'Best decision we ever made — choosing ElitePrep.', 'advay-theme' ),
+			'founder'          => __( 'No Knife Body team', 'advay-theme' ),
+			'founder_role'     => __( 'Founder', 'advay-theme' ),
+			'results_summary'  => __( 'The result wasn\'t just more revenue. It created a predictable growth engine and a brand customers love and trust.', 'advay-theme' ),
+			'before'           => array(
+				__( 'Sales had plateaued for 8+ months', 'advay-theme' ),
+				__( 'High customer acquisition cost with low returns', 'advay-theme' ),
+				__( 'No clear positioning or offer differentiation', 'advay-theme' ),
+				__( 'Ad campaigns weren\'t converting', 'advay-theme' ),
+			),
+			'after'            => array(
+				__( 'Standardized prep with compliant labels every time', 'advay-theme' ),
+				__( '28-hour average turnaround from dock to ready-to-ship', 'advay-theme' ),
+				__( 'Clear reporting and photo documentation on every lot', 'advay-theme' ),
+				__( 'Direct access to client success and the MD when needed', 'advay-theme' ),
+			),
+			'transform_before' => array(
+				__( 'Reactive prep with no standard workflow', 'advay-theme' ),
+				__( 'Slow turnaround blocking launches', 'advay-theme' ),
+				__( 'Compliance issues creating chargeback risk', 'advay-theme' ),
+				__( 'No visibility into shipment status', 'advay-theme' ),
+			),
+			'transform_after'  => array(
+				__( 'Standardized prep process across all SKUs', 'advay-theme' ),
+				__( '28-hour average turnaround time', 'advay-theme' ),
+				__( 'Zero prep-related chargebacks', 'advay-theme' ),
+				__( 'Real-time reporting and direct MD access', 'advay-theme' ),
+			),
+			'strategies'       => array(
+				array(
+					'icon'  => 'target',
+					'title' => __( 'Clarified positioning & offer', 'advay-theme' ),
+					'text'  => __( 'Refined their brand message and created an irresistible offer for their target audience.', 'advay-theme' ),
+				),
+				array(
+					'icon'  => 'funnel',
+					'title' => __( 'Built a full-funnel growth system', 'advay-theme' ),
+					'text'  => __( 'Optimized their ads, landing pages, email flows, and remarketing for maximum conversions.', 'advay-theme' ),
+				),
+				array(
+					'icon'  => 'growth',
+					'title' => __( 'Improved LTV & retention', 'advay-theme' ),
+					'text'  => __( 'Introduced retention flows and subscription model to increase repeat purchases.', 'advay-theme' ),
+				),
+			),
+			'results'          => array(
+				array(
+					'icon'     => 'chart-bars',
+					'value'    => '$120K → $480K',
+					'label'    => __( 'Monthly revenue', 'advay-theme' ),
+					'sublabel' => __( 'in 6 months', 'advay-theme' ),
+				),
+				array(
+					'icon'  => 'arrow-circle',
+					'value' => '300%',
+					'label' => __( 'Revenue growth', 'advay-theme' ),
+				),
+				array(
+					'icon'  => 'clock-circle',
+					'value' => '6 MONTHS',
+					'label' => __( 'Time to result', 'advay-theme' ),
+				),
+				array(
+					'icon'  => 'dollar-circle',
+					'value' => '4.2X',
+					'label' => __( 'Return on ad spend', 'advay-theme' ),
+				),
+			),
+		),
+	);
+
+	$slug = sanitize_key( $slug );
+
+	return isset( $stories[ $slug ] ) ? $stories[ $slug ] : $stories['no-knife-body'];
+}
+
 /**
  * Custom rewrite routes must not inherit the front-page / home query flags.
  * Without this, /receiving/ loads with body.home and homepage assets (Leaflet).
@@ -628,8 +758,9 @@ function advay_fix_custom_route_query( $query ) {
 	$our_story  = (int) $query->get( 'advay_our_story' ) === 1;
 	$join_team  = (int) $query->get( 'advay_join_team' ) === 1;
 	$md_page    = (int) $query->get( 'advay_managing_director' ) === 1;
+	$ss_page    = '' !== sanitize_key( (string) $query->get( 'advay_success_story' ) );
 
-	if ( ! $onboarding && ! $blog && ! $receiving && ! $our_story && ! $join_team && ! $md_page ) {
+	if ( ! $onboarding && ! $blog && ! $receiving && ! $our_story && ! $join_team && ! $md_page && ! $ss_page ) {
 		return;
 	}
 
@@ -677,6 +808,11 @@ function advay_custom_route_body_class( $classes ) {
 		$classes[] = 'page-managing-director';
 	}
 
+	if ( advay_is_success_story_page() ) {
+		$classes   = array_values( array_diff( $classes, array( 'home', 'blog' ) ) );
+		$classes[] = 'page-success-story';
+	}
+
 	return $classes;
 }
 add_filter( 'body_class', 'advay_custom_route_body_class' );
@@ -688,6 +824,12 @@ function advay_custom_route_document_title( $parts ) {
 	if ( advay_is_managing_director_page() ) {
 		$parts['title'] = __( 'Odi Ikpe', 'advay-theme' );
 		$parts['tagline'] = __( 'Managing Director', 'advay-theme' );
+	}
+
+	if ( advay_is_success_story_page() ) {
+		$story = advay_get_success_story( sanitize_key( (string) get_query_var( 'advay_success_story' ) ) );
+		$parts['title'] = $story['brand'];
+		$parts['tagline'] = __( 'Success Story', 'advay-theme' );
 	}
 
 	return $parts;
