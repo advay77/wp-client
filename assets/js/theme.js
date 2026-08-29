@@ -27,9 +27,15 @@
 			setOpen(willOpen);
 		});
 
+		window.addEventListener('resize', function () {
+			if (window.matchMedia('(min-width: 768px)').matches) {
+				setOpen(false);
+			}
+		});
+
 		nav.querySelectorAll('a').forEach(function (link) {
 			link.addEventListener('click', function (event) {
-				if (link.classList.contains('nav-trigger') && window.matchMedia('(max-width: 899px)').matches) {
+				if (link.classList.contains('nav-trigger') && window.matchMedia('(max-width: 767px)').matches) {
 					event.preventDefault();
 					var item = link.closest('.has-mega');
 					if (item) {
@@ -39,7 +45,7 @@
 					}
 					return;
 				}
-				if (window.matchMedia('(max-width: 899px)').matches) {
+				if (window.matchMedia('(max-width: 767px)').matches) {
 					setOpen(false);
 				}
 			});
@@ -293,7 +299,7 @@
 		function autoSlide() {
 			if (!paused && !reduce && !drag.active) {
 				if (maxScroll() > 1) {
-					viewport.scrollLeft -= 0.75;
+					viewport.scrollLeft += 0.75;
 					normalizeLoop();
 					updateThumb();
 				}

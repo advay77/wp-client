@@ -1,6 +1,6 @@
 <?php
 /**
- * Success story — No Knife Body case study.
+ * Success story case study template.
  *
  * @package Advay_Theme
  */
@@ -9,13 +9,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$story             = advay_get_success_story( 'no-knife-body' );
-$video_url         = $story['video'];
+$slug              = sanitize_key( (string) get_query_var( 'advay_success_story', 'no-knife-body' ) );
+$story             = advay_get_success_story( $slug );
+$video_url         = isset( $story['video'] ) ? $story['video'] : '';
+$hero_image        = isset( $story['hero_image'] ) ? $story['hero_image'] : '';
 $before_list       = $story['before'];
 $transform_before  = isset( $story['transform_before'] ) ? $story['transform_before'] : $before_list;
-$transform_after   = isset( $story['transform_after'] ) ? $story['transform_after'] : $story['after'];
+$transform_after   = isset( $story['transform_after'] ) ? $story['transform_after'] : ( isset( $story['after'] ) ? $story['after'] : array() );
 $strategies        = $story['strategies'];
 $results           = $story['results'];
+$before_heading    = ! empty( $story['before_heading'] ) ? $story['before_heading'] : __( 'Before working together', 'advay-theme' );
+$strategies_heading = ! empty( $story['strategies_heading'] ) ? $story['strategies_heading'] : __( 'What we changed', 'advay-theme' );
+$founder_image     = ! empty( $story['founder_image'] ) ? $story['founder_image'] : advay_asset_uri( 'images/md-portrait.jpg' );
+$founder_caption   = ! empty( $story['founder_caption'] ) ? $story['founder_caption'] : __( 'Managing Director, Odi Ikpe', 'advay-theme' );
 
 get_header();
 ?>
@@ -31,26 +37,41 @@ get_header();
 					<span class="ss-accent"><?php echo esc_html( $story['headline_highlight'] ); ?></span>
 				</h1>
 				<p class="ss-lead"><?php echo esc_html( $story['lead'] ); ?></p>
-				<a class="ss-btn ss-btn--primary" href="#ss-hero-video">
-					<?php esc_html_e( 'Watch their story', 'advay-theme' ); ?>
-					<span class="ss-btn-play" aria-hidden="true"></span>
-				</a>
+				<?php if ( $video_url ) : ?>
+					<a class="ss-btn ss-btn--primary" href="#ss-hero-video">
+						<?php esc_html_e( 'Watch their story', 'advay-theme' ); ?>
+						<span class="ss-btn-play" aria-hidden="true"></span>
+					</a>
+				<?php endif; ?>
 			</div>
 			<div class="ss-hero-media" id="ss-hero-video">
-				<?php
-				get_template_part(
-					'template-parts/success-story-video',
-					null,
-					array(
-						'video' => $video_url,
-						'label' => sprintf(
-							/* translators: %s: brand name */
-							__( '%s testimonial video', 'advay-theme' ),
-							$story['brand']
-						),
-					)
-				);
-				?>
+				<?php if ( $video_url ) : ?>
+					<?php
+					get_template_part(
+						'template-parts/success-story-video',
+						null,
+						array(
+							'video' => $video_url,
+							'label' => sprintf(
+								/* translators: %s: brand name */
+								__( '%s testimonial video', 'advay-theme' ),
+								$story['brand']
+							),
+						)
+					);
+					?>
+				<?php elseif ( $hero_image ) : ?>
+					<figure class="ss-hero-photo">
+						<img
+							src="<?php echo esc_url( $hero_image ); ?>"
+							alt="<?php echo esc_attr( $story['brand'] ); ?>"
+							width="640"
+							height="400"
+							loading="eager"
+							decoding="async"
+						>
+					</figure>
+				<?php endif; ?>
 			</div>
 		</div>
 	</section>
@@ -63,7 +84,7 @@ get_header();
 						<span class="ss-before-kicker-icon" aria-hidden="true">
 							<?php echo advay_home_hub_icon( 'warn-triangle', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 						</span>
-						<?php esc_html_e( 'Before working together', 'advay-theme' ); ?>
+						<?php echo esc_html( $before_heading ); ?>
 					</h2>
 					<ul class="ss-list ss-list--before-panel">
 						<?php foreach ( $before_list as $item ) : ?>
@@ -86,8 +107,8 @@ get_header();
 
 	<section class="ss-strategy" aria-labelledby="ss-strategy-heading">
 		<div class="container">
-			<h2 id="ss-strategy-heading" class="ss-section-title"><?php esc_html_e( 'What we changed', 'advay-theme' ); ?></h2>
-			<div class="ss-strategy-grid">
+			<h2 id="ss-strategy-heading" class="ss-section-title"><?php echo esc_html( $strategies_heading ); ?></h2>
+			<div class="ss-strategy-grid<?php echo count( $strategies ) > 3 ? ' ss-strategy-grid--wide' : ''; ?>">
 				<?php foreach ( $strategies as $index => $step ) : ?>
 					<article class="ss-strategy-card">
 						<span class="ss-strategy-icon" aria-hidden="true">
@@ -136,19 +157,21 @@ get_header();
 			<div class="ss-quote-media">
 				<figure class="ss-md-portrait">
 					<img
-						src="<?php echo esc_url( advay_asset_uri( 'images/md-portrait.jpg' ) ); ?>"
-						alt="<?php esc_attr_e( 'Odi Ikpe, Managing Director of ElitePrep Center', 'advay-theme' ); ?>"
+						src="<?php echo esc_url( $founder_image ); ?>"
+						alt="<?php echo esc_attr( $story['founder'] ); ?>"
 						width="480"
 						height="600"
 						loading="lazy"
 						decoding="async"
 					>
-					<figcaption class="ss-md-portrait-caption"><?php esc_html_e( 'Managing Director, Odi Ikpe', 'advay-theme' ); ?></figcaption>
+					<figcaption class="ss-md-portrait-caption"><?php echo esc_html( $founder_caption ); ?></figcaption>
 				</figure>
-				<a class="ss-quote-link" href="#ss-hero-video">
-					<span class="ss-link-play" aria-hidden="true"></span>
-					<?php esc_html_e( 'Watch the full testimonial', 'advay-theme' ); ?>
-				</a>
+				<?php if ( $video_url ) : ?>
+					<a class="ss-quote-link" href="#ss-hero-video">
+						<span class="ss-link-play" aria-hidden="true"></span>
+						<?php esc_html_e( 'Watch the full testimonial', 'advay-theme' ); ?>
+					</a>
+				<?php endif; ?>
 			</div>
 		</div>
 	</section>

@@ -3,18 +3,16 @@
  * Brand case-study slider.
  *
  * Logos act as tabs; clicking one reveals that brand's case-study panel
- * below. Demo content — "Read Case Study" links to the real blog archive,
- * no invented case-study URLs are generated.
+ * below. "Read Case Study" links to each brand's success story page.
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$cs_url = advay_blog_url();
-
 $brands = array(
 	array(
 		'name'     => 'Daka Vitamins',
+		'slug'     => 'daka-vitamins',
 		'file'     => 'images/brand-daka.png',
 		'initials' => 'DV',
 		'quote'    => __( 'Vitamin labeling and lot tracking used to slow every inbound. EPC keeps our FBA prep compliant so supplements stay in stock without account risk.', 'advay-theme' ),
@@ -27,6 +25,7 @@ $brands = array(
 	),
 	array(
 		'name'     => 'Gainz & Airplanes',
+		'slug'     => 'gainz-airplanes',
 		'file'     => 'images/brand-gainz.jpg',
 		'initials' => 'GA',
 		'quote'    => __( 'Supplement prep has zero room for labeling errors. EPC\'s inspection and FNSKU process keeps our Amazon account clean and in stock.', 'advay-theme' ),
@@ -39,6 +38,7 @@ $brands = array(
 	),
 	array(
 		'name'     => 'Little Caribbean Kitchen',
+		'slug'     => 'littlebay-caribbean-kitchen',
 		'file'     => 'images/brand-littlebay.jpg',
 		'initials' => 'LC',
 		'quote'    => __( 'We went from packing orders on the kitchen table to same-day dispatch. EPC handles receiving, prep, and shipping so we can focus on the food.', 'advay-theme' ),
@@ -51,6 +51,7 @@ $brands = array(
 	),
 	array(
 		'name'     => 'Ajayi Popcorn',
+		'slug'     => 'ajayi-popcorn',
 		'file'     => 'images/brand-ajayi.jpg',
 		'initials' => 'AP',
 		'quote'    => __( 'Seasonal snack spikes used to break us. Now EPC scales fulfillment up and down with demand — no missed launches.', 'advay-theme' ),
@@ -69,7 +70,7 @@ $brands = array(
 			<h2 id="brands-heading" class="brands-title">
 				<?php esc_html_e( 'Brands that said yes, and scaled through it', 'advay-theme' ); ?>
 			</h2>
-			<a class="brands-all" href="<?php echo esc_url( $cs_url ); ?>">
+			<a class="brands-all" href="<?php echo esc_url( home_url( '/#testimonials' ) ); ?>">
 				<?php esc_html_e( 'See All Case Studies', 'advay-theme' ); ?>
 				<span aria-hidden="true">&rsaquo;</span>
 			</a>
@@ -129,7 +130,7 @@ $brands = array(
 								<em><?php echo esc_html( $brand['role'] ); ?></em>
 							</span>
 						</div>
-						<a class="cs-link" href="<?php echo esc_url( $cs_url ); ?>">
+						<a class="cs-link" href="<?php echo esc_url( advay_success_story_url( $brand['slug'] ) ); ?>">
 							<?php esc_html_e( 'Read Case Study', 'advay-theme' ); ?>
 							<span aria-hidden="true">&rarr;</span>
 						</a>

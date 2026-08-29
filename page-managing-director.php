@@ -69,29 +69,6 @@ $milestones = array(
 	),
 );
 
-$ecosystem = array(
-	array(
-		'icon'  => 'brands',
-		'label' => __( 'Brands', 'advay-theme' ),
-	),
-	array(
-		'icon'  => 'manufacturing',
-		'label' => __( 'Manufacturing', 'advay-theme' ),
-	),
-	array(
-		'icon'  => 'supply',
-		'label' => __( 'Supply Chain', 'advay-theme' ),
-	),
-	array(
-		'icon'  => 'distribution',
-		'label' => __( 'Distribution', 'advay-theme' ),
-	),
-	array(
-		'icon'  => 'customers',
-		'label' => __( 'Customers', 'advay-theme' ),
-	),
-);
-
 $nav_links = array(
 	array(
 		'label' => __( 'Journey', 'advay-theme' ),
@@ -362,31 +339,6 @@ get_header();
 		</div>
 	</section>
 
-	<section class="md-ecosystem" id="md-business" aria-labelledby="md-ecosystem-heading">
-		<div class="container">
-			<header class="md-section-head md-section-head--center">
-				<h2 id="md-ecosystem-heading"><?php esc_html_e( 'An Ecosystem Built With Purpose', 'advay-theme' ); ?></h2>
-				<p><?php esc_html_e( 'From an idea to a full-fledged ecosystem that creates value at every step.', 'advay-theme' ); ?></p>
-			</header>
-			<div class="md-ecosystem-flow">
-				<?php
-				$last_index = count( $ecosystem ) - 1;
-				foreach ( $ecosystem as $index => $step ) :
-					?>
-					<div class="md-eco-step">
-						<span class="md-eco-icon" aria-hidden="true">
-							<?php echo advay_md_ecosystem_icon( $step['icon'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-						</span>
-						<span class="md-eco-label"><?php echo esc_html( $step['label'] ); ?></span>
-					</div>
-					<?php if ( $index < $last_index ) : ?>
-						<span class="md-eco-arrow" aria-hidden="true"></span>
-					<?php endif; ?>
-				<?php endforeach; ?>
-			</div>
-		</div>
-	</section>
-
 	<section class="md-brand" id="md-brand" aria-labelledby="md-brand-heading">
 		<div class="md-brand-grid">
 			<figure class="md-brand-photo">
@@ -409,8 +361,6 @@ get_header();
 				</a>
 			</div>
 		</div>
-	</section>
-
 	</section>
 
 	<section class="md-business-chain" id="md-business-chain" aria-labelledby="md-business-chain-heading">

@@ -10,7 +10,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ADVAY_THEME_VERSION', '2.18.1' );
+define( 'ADVAY_THEME_VERSION', '2.20.4' );
+
+require get_template_directory() . '/inc/success-stories.php';
 
 function advay_theme_setup() {
 	add_theme_support( 'title-tag' );
@@ -504,7 +506,7 @@ function advay_register_onboarding_route() {
 	add_rewrite_rule( '^our-story/?$', 'index.php?advay_our_story=1', 'top' );
 	add_rewrite_rule( '^join-our-team/?$', 'index.php?advay_join_team=1', 'top' );
 	add_rewrite_rule( '^managing-director/?$', 'index.php?advay_managing_director=1', 'top' );
-	add_rewrite_rule( '^success-stories/no-knife-body/?$', 'index.php?advay_success_story=no-knife-body', 'top' );
+	add_rewrite_rule( '^success-stories/([^/]+)/?$', 'index.php?advay_success_story=$matches[1]', 'top' );
 }
 add_action( 'init', 'advay_register_onboarding_route' );
 
@@ -564,7 +566,7 @@ function advay_custom_page_template( $template ) {
 	}
 
 	$success_story = sanitize_key( (string) get_query_var( 'advay_success_story' ) );
-	if ( 'no-knife-body' === $success_story ) {
+	if ( $success_story && advay_success_story_exists( $success_story ) ) {
 		$ss = get_template_directory() . '/page-success-story.php';
 		if ( file_exists( $ss ) ) {
 			return $ss;
@@ -633,7 +635,7 @@ function advay_is_managing_director_page() {
 
 function advay_is_success_story_page() {
 	$slug = sanitize_key( (string) get_query_var( 'advay_success_story' ) );
-	return '' !== $slug;
+	return '' !== $slug && advay_success_story_exists( $slug );
 }
 
 /**
@@ -643,104 +645,11 @@ function advay_is_success_story_page() {
  */
 function advay_success_story_url( $slug = 'no-knife-body' ) {
 	$slug = sanitize_key( $slug );
-	if ( 'no-knife-body' === $slug ) {
-		return home_url( '/success-stories/no-knife-body/' );
+	if ( ! advay_success_story_exists( $slug ) ) {
+		$slug = 'no-knife-body';
 	}
 
 	return home_url( '/success-stories/' . $slug . '/' );
-}
-
-/**
- * Success story content by slug.
- *
- * @param string $slug Story slug.
- * @return array<string, mixed>
- */
-function advay_get_success_story( $slug = 'no-knife-body' ) {
-	$stories = array(
-		'no-knife-body' => array(
-			'brand'            => __( 'No Knife Body', 'advay-theme' ),
-			'headline_prefix'  => __( 'From prep chaos to', 'advay-theme' ),
-			'headline_highlight' => __( 'marketplace-ready shipments in weeks.', 'advay-theme' ),
-			'lead'             => __( 'A growing body-care brand needed FBA prep they could trust — without slowing every launch or risking compliance.', 'advay-theme' ),
-			'video'            => advay_asset_uri( 'video/testimonials.mp4' ),
-			'insight_lead'     => __( 'They didn\'t need more ads. They needed a ', 'advay-theme' ),
-			'insight_bold'     => __( 'growth system', 'advay-theme' ),
-			'insight_tail'     => __( ' built around their brand, customers, and unit economics.', 'advay-theme' ),
-			'quote'            => __( 'Best decision we ever made — choosing ElitePrep.', 'advay-theme' ),
-			'founder'          => __( 'No Knife Body team', 'advay-theme' ),
-			'founder_role'     => __( 'Founder', 'advay-theme' ),
-			'results_summary'  => __( 'The result wasn\'t just more revenue. It created a predictable growth engine and a brand customers love and trust.', 'advay-theme' ),
-			'before'           => array(
-				__( 'Sales had plateaued for 8+ months', 'advay-theme' ),
-				__( 'High customer acquisition cost with low returns', 'advay-theme' ),
-				__( 'No clear positioning or offer differentiation', 'advay-theme' ),
-				__( 'Ad campaigns weren\'t converting', 'advay-theme' ),
-			),
-			'after'            => array(
-				__( 'Standardized prep with compliant labels every time', 'advay-theme' ),
-				__( '28-hour average turnaround from dock to ready-to-ship', 'advay-theme' ),
-				__( 'Clear reporting and photo documentation on every lot', 'advay-theme' ),
-				__( 'Direct access to client success and the MD when needed', 'advay-theme' ),
-			),
-			'transform_before' => array(
-				__( 'Reactive prep with no standard workflow', 'advay-theme' ),
-				__( 'Slow turnaround blocking launches', 'advay-theme' ),
-				__( 'Compliance issues creating chargeback risk', 'advay-theme' ),
-				__( 'No visibility into shipment status', 'advay-theme' ),
-			),
-			'transform_after'  => array(
-				__( 'Standardized prep process across all SKUs', 'advay-theme' ),
-				__( '28-hour average turnaround time', 'advay-theme' ),
-				__( 'Zero prep-related chargebacks', 'advay-theme' ),
-				__( 'Real-time reporting and direct MD access', 'advay-theme' ),
-			),
-			'strategies'       => array(
-				array(
-					'icon'  => 'target',
-					'title' => __( 'Clarified positioning & offer', 'advay-theme' ),
-					'text'  => __( 'Refined their brand message and created an irresistible offer for their target audience.', 'advay-theme' ),
-				),
-				array(
-					'icon'  => 'funnel',
-					'title' => __( 'Built a full-funnel growth system', 'advay-theme' ),
-					'text'  => __( 'Optimized their ads, landing pages, email flows, and remarketing for maximum conversions.', 'advay-theme' ),
-				),
-				array(
-					'icon'  => 'growth',
-					'title' => __( 'Improved LTV & retention', 'advay-theme' ),
-					'text'  => __( 'Introduced retention flows and subscription model to increase repeat purchases.', 'advay-theme' ),
-				),
-			),
-			'results'          => array(
-				array(
-					'icon'     => 'chart-bars',
-					'value'    => '$120K → $480K',
-					'label'    => __( 'Monthly revenue', 'advay-theme' ),
-					'sublabel' => __( 'in 6 months', 'advay-theme' ),
-				),
-				array(
-					'icon'  => 'arrow-circle',
-					'value' => '300%',
-					'label' => __( 'Revenue growth', 'advay-theme' ),
-				),
-				array(
-					'icon'  => 'clock-circle',
-					'value' => '6 MONTHS',
-					'label' => __( 'Time to result', 'advay-theme' ),
-				),
-				array(
-					'icon'  => 'dollar-circle',
-					'value' => '4.2X',
-					'label' => __( 'Return on ad spend', 'advay-theme' ),
-				),
-			),
-		),
-	);
-
-	$slug = sanitize_key( $slug );
-
-	return isset( $stories[ $slug ] ) ? $stories[ $slug ] : $stories['no-knife-body'];
 }
 
 /**
