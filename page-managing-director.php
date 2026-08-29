@@ -69,33 +69,6 @@ $milestones = array(
 	),
 );
 
-$nav_links = array(
-	array(
-		'label' => __( 'Journey', 'advay-theme' ),
-		'href'  => '#md-journey',
-	),
-	array(
-		'label' => __( 'Business', 'advay-theme' ),
-		'href'  => '#md-business-chain',
-	),
-	array(
-		'label' => __( 'Brand', 'advay-theme' ),
-		'href'  => '#md-brand',
-	),
-	array(
-		'label' => __( 'Philosophy', 'advay-theme' ),
-		'href'  => '#md-my-philosophy',
-	),
-	array(
-		'label' => __( 'Impact', 'advay-theme' ),
-		'href'  => '#md-legacy',
-	),
-	array(
-		'label' => __( 'Connect', 'advay-theme' ),
-		'href'  => '#md-connect',
-	),
-);
-
 $impact_stats = array(
 	array(
 		'value' => '20+',
@@ -233,28 +206,6 @@ get_header();
 ?>
 
 <main id="main-content" class="md-page">
-	<header class="md-bar" aria-label="<?php esc_attr_e( 'Managing Director profile navigation', 'advay-theme' ); ?>">
-		<div class="md-bar-inner">
-			<a class="md-bar-name" href="<?php echo esc_url( advay_managing_director_url() ); ?>">
-				<?php esc_html_e( 'Odi Ikpe', 'advay-theme' ); ?>
-			</a>
-			<nav class="md-bar-nav" aria-label="<?php esc_attr_e( 'On this page', 'advay-theme' ); ?>">
-				<?php foreach ( $nav_links as $link ) : ?>
-					<a href="<?php echo esc_url( $link['href'] ); ?>"><?php echo esc_html( $link['label'] ); ?></a>
-				<?php endforeach; ?>
-			</nav>
-			<button class="md-bar-toggle" type="button" aria-expanded="false" aria-controls="md-mobile-nav">
-				<span class="md-bar-toggle-bars" aria-hidden="true"></span>
-				<span class="screen-reader-text"><?php esc_html_e( 'Menu', 'advay-theme' ); ?></span>
-			</button>
-		</div>
-		<nav class="md-bar-mobile" id="md-mobile-nav" hidden>
-			<?php foreach ( $nav_links as $link ) : ?>
-				<a href="<?php echo esc_url( $link['href'] ); ?>"><?php echo esc_html( $link['label'] ); ?></a>
-			<?php endforeach; ?>
-		</nav>
-	</header>
-
 	<section class="md-hero" aria-labelledby="md-hero-heading">
 		<div class="md-hero-grid">
 			<div class="md-hero-copy">

@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ADVAY_THEME_VERSION', '2.20.4' );
+define( 'ADVAY_THEME_VERSION', '2.21.1' );
 
 require get_template_directory() . '/inc/success-stories.php';
 
@@ -1286,8 +1286,10 @@ function advay_story_video( $slug ) {
 	}
 
 	$demo = array(
-		'tall'   => '',
-		'square' => 'https://videos.pexels.com/video-files/3195394/3195394-sd_640_360_25fps.mp4',
+		'tall'                        => '',
+		'square'                      => 'https://videos.pexels.com/video-files/3195394/3195394-sd_640_360_25fps.mp4',
+		'gainz-airplanes'             => 'https://videos.pexels.com/video-files/4761412/4761412-sd_640_360_25fps.mp4',
+		'littlebay-caribbean-kitchen' => 'https://videos.pexels.com/video-files/4259140/4259140-sd_640_360_25fps.mp4',
 	);
 
 	return isset( $demo[ $slug ] ) ? $demo[ $slug ] : '';

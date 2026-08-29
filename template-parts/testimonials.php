@@ -3,26 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$clips = array(
-	array(
-		'chip'  => __( 'Ajayi Popcorn', 'advay-theme' ),
-		'quote' => __( '“Seasonal spikes used to break us. ElitePrep scales with demand — every launch ships on time.”', 'advay-theme' ),
-		'brand' => __( 'Ajayi Popcorn', 'advay-theme' ),
-		'video' => advay_asset_uri( 'video/testimonials2.mp4' ),
-	),
-	array(
-		'chip'  => __( 'No Knife Body', 'advay-theme' ),
-		'quote' => __( '“Best decision we ever made — choosing ElitePrep.”', 'advay-theme' ),
-		'brand' => __( 'No Knife Body', 'advay-theme' ),
-		'video' => advay_asset_uri( 'video/testimonials.mp4' ),
-	),
-	array(
-		'chip'  => __( 'Daka Vitamins', 'advay-theme' ),
-		'quote' => __( '“Labeling and lot tracking used to slow every inbound. ElitePrep keeps our prep compliant and in stock.”', 'advay-theme' ),
-		'brand' => __( 'Daka Vitamins', 'advay-theme' ),
-		'video' => advay_asset_uri( 'video/testimonials3.mp4' ),
-	),
-);
+$clips = advay_home_testimonial_clips();
 ?>
 <section class="stories-section" id="testimonials" aria-labelledby="stories-heading">
 	<div class="container">
@@ -44,6 +25,9 @@ $clips = array(
 					<div class="story-media-copy">
 						<p><?php echo esc_html( $clip['quote'] ); ?></p>
 						<strong><?php echo esc_html( $clip['brand'] ); ?></strong>
+						<?php if ( ! empty( $clip['role'] ) ) : ?>
+							<span><?php echo esc_html( $clip['role'] ); ?></span>
+						<?php endif; ?>
 					</div>
 				</article>
 			<?php endforeach; ?>

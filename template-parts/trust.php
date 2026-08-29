@@ -11,6 +11,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $brands = array(
 	array(
+		'name'     => 'No Knife Body',
+		'slug'     => 'no-knife-body',
+		'file'     => 'images/brand-noknife.png',
+		'initials' => 'NK',
+		'quote'    => __( 'Better service for our customers and more precious family time for me.', 'advay-theme' ),
+		'author'   => __( 'No Knife Body', 'advay-theme' ),
+		'role'     => __( 'Founder', 'advay-theme' ),
+		'stats'    => array(
+			array( 'n' => '28 hr', 'l' => __( 'Prep turnaround', 'advay-theme' ) ),
+			array( 'n' => '99.8%', 'l' => __( 'Label accuracy', 'advay-theme' ) ),
+		),
+	),
+	array(
 		'name'     => 'Daka Vitamins',
 		'slug'     => 'daka-vitamins',
 		'file'     => 'images/brand-daka.png',

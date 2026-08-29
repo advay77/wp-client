@@ -129,7 +129,7 @@ get_header();
 					<span class="os-mission-line" aria-hidden="true"></span>
 				</div>
 				<p class="os-mission-text">
-					<?php esc_html_e( 'To make marketplace prep seamless for growing brands — combining deep fulfillment expertise, human-first service, and compliant operations from one integrated warehouse.', 'advay-theme' ); ?>
+					<?php esc_html_e( 'To make fulfillment simple, fast, and reliable for growing brands, handling the operational complexity from warehouse to marketplace and customer, so founders can focus on building their brands and creating lasting wealth.', 'advay-theme' ); ?>
 				</p>
 			</div>
 			<div class="os-mission-block os-mission-block--vision" data-os-reveal="right">
@@ -138,7 +138,7 @@ get_header();
 					<p class="os-mission-label"><?php esc_html_e( 'Vision', 'advay-theme' ); ?></p>
 				</div>
 				<p class="os-mission-text">
-					<?php esc_html_e( 'To be the most trusted prep partner for Amazon, Walmart, TikTok, and DTC sellers — driven by people, powered by precision, and united by a legacy of getting it right the first time.', 'advay-theme' ); ?>
+					<?php esc_html_e( 'To help build a million consumer brands scale faster by becoming the supply chain partner behind their growth.', 'advay-theme' ); ?>
 				</p>
 			</div>
 		</div>

@@ -933,24 +933,6 @@
 		}
 	})();
 
-	var mdToggle = document.querySelector('.md-bar-toggle');
-	var mdMobileNav = document.getElementById('md-mobile-nav');
-
-	if (mdToggle && mdMobileNav) {
-		mdToggle.addEventListener('click', function () {
-			var open = mdToggle.getAttribute('aria-expanded') === 'true';
-			mdToggle.setAttribute('aria-expanded', open ? 'false' : 'true');
-			mdMobileNav.hidden = open;
-		});
-
-		mdMobileNav.querySelectorAll('a').forEach(function (link) {
-			link.addEventListener('click', function () {
-				mdToggle.setAttribute('aria-expanded', 'false');
-				mdMobileNav.hidden = true;
-			});
-		});
-	}
-
 	var mdSlider = document.querySelector('[data-md-slider]');
 	var mdLegacySlider = document.querySelector('[data-md-legacy-slider]');
 

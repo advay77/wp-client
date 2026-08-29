@@ -42,6 +42,112 @@ function advay_get_success_story( $slug = 'no-knife-body' ) {
 }
 
 /**
+ * Homepage testimonial slugs (video row — 3 brands).
+ *
+ * @return string[]
+ */
+function advay_home_testimonial_slugs() {
+	return array(
+		'no-knife-body',
+		'ajayi-popcorn',
+		'daka-vitamins',
+	);
+}
+
+/**
+ * Featured success stories in display order (nav mega hover cards).
+ *
+ * @return string[]
+ */
+function advay_success_story_featured_slugs() {
+	return array(
+		'no-knife-body',
+		'ajayi-popcorn',
+		'daka-vitamins',
+		'gainz-airplanes',
+		'littlebay-caribbean-kitchen',
+	);
+}
+
+/**
+ * Card image for a success story (nav mega hover cards).
+ *
+ * @param string $slug Story slug.
+ */
+function advay_success_story_card_image( $slug ) {
+	$map = array(
+		'no-knife-body'               => array(
+			'images/founders/no-knife-body.png',
+			'',
+		),
+		'ajayi-popcorn'               => array( 'images/founders/ajayi-popcorn.jpg', '' ),
+		'daka-vitamins'               => array( 'images/founders/daka-vitamins.jpg', '' ),
+		'gainz-airplanes'             => array( 'images/founders/gainz-airplanes.jpg', '' ),
+		'littlebay-caribbean-kitchen' => array( 'images/founders/littlebay.png', '' ),
+	);
+
+	$slug = sanitize_key( $slug );
+	if ( ! isset( $map[ $slug ] ) ) {
+		return advay_theme_image( 'images/company-placeholder.svg' );
+	}
+
+	return advay_theme_image( $map[ $slug ][0], $map[ $slug ][1] );
+}
+
+/**
+ * Success story cards for the nav mega menu.
+ *
+ * @return array<int, array{brand: string, slug: string, alt: string, src: string}>
+ */
+function advay_success_story_nav_cards() {
+	$cards = array();
+
+	foreach ( advay_success_story_featured_slugs() as $slug ) {
+		$story = advay_get_success_story( $slug );
+		$cards[] = array(
+			'brand' => $story['brand'],
+			'slug'  => $slug,
+			'alt'   => sprintf(
+				/* translators: %s: brand name */
+				__( '%s success story', 'advay-theme' ),
+				$story['brand']
+			),
+			'src'   => advay_success_story_card_image( $slug ),
+		);
+	}
+
+	return $cards;
+}
+
+/**
+ * Homepage testimonial video clips (3-column row).
+ *
+ * @return array<int, array{slug: string, chip: string, quote: string, brand: string, role: string, video: string}>
+ */
+function advay_home_testimonial_clips() {
+	$clips  = array();
+	$videos = array(
+		'no-knife-body' => advay_asset_uri( 'video/testimonials.mp4' ),
+		'ajayi-popcorn' => advay_asset_uri( 'video/testimonials2.mp4' ),
+		'daka-vitamins' => advay_asset_uri( 'video/testimonials3.mp4' ),
+	);
+
+	foreach ( advay_home_testimonial_slugs() as $slug ) {
+		$story = advay_get_success_story( $slug );
+		$clips[] = array(
+			'slug'  => $slug,
+			'chip'  => $story['brand'],
+			'quote' => '“' . $story['quote'] . '”',
+			'brand' => $story['founder'],
+			'role'  => $story['founder_role'],
+			'video' => isset( $videos[ $slug ] ) ? $videos[ $slug ] : advay_story_video( $slug ),
+		);
+	}
+
+	return $clips;
+}
+
+/**
  * All success stories keyed by slug.
  *
  * @return array<string, array<string, mixed>>
@@ -57,82 +163,85 @@ function advay_success_stories_data() {
 		'no-knife-body' => array(
 			'brand'              => __( 'No Knife Body', 'advay-theme' ),
 			'headline_prefix'    => __( 'From prep chaos to', 'advay-theme' ),
-			'headline_highlight' => __( 'marketplace-ready shipments in weeks.', 'advay-theme' ),
-			'lead'               => __( 'A growing body-care brand needed FBA prep they could trust — without slowing every launch or risking compliance.', 'advay-theme' ),
+			'headline_highlight' => __( 'marketplace-ready body-care shipments.', 'advay-theme' ),
+			'lead'               => __( 'No Knife Body built a loyal following for clean body-care — and needed FBA prep that protected compliance without slowing every restock or launch.', 'advay-theme' ),
 			'video'              => advay_asset_uri( 'video/testimonials.mp4' ),
-			'before_heading'     => __( 'Before working together', 'advay-theme' ),
-			'strategies_heading' => __( 'What we changed', 'advay-theme' ),
-			'insight_lead'       => __( 'They didn\'t need more ads. They needed a ', 'advay-theme' ),
-			'insight_bold'       => __( 'growth system', 'advay-theme' ),
-			'insight_tail'       => __( ' built around their brand, customers, and unit economics.', 'advay-theme' ),
-			'quote'              => __( 'Best decision we ever made — choosing ElitePrep.', 'advay-theme' ),
-			'founder'            => __( 'No Knife Body team', 'advay-theme' ),
+			'before_heading'     => __( 'Before EPC', 'advay-theme' ),
+			'strategies_heading' => __( 'What EPC did', 'advay-theme' ),
+			'insight_lead'       => __( 'They didn\'t need another warehouse. They needed a ', 'advay-theme' ),
+			'insight_bold'       => __( 'prep partner', 'advay-theme' ),
+			'insight_tail'       => __( ' that understood body-care packaging, labeling, and marketplace requirements.', 'advay-theme' ),
+			'quote'              => __( 'Better service for our customers and more precious family time for me.', 'advay-theme' ),
+			'founder'            => __( 'No Knife Body', 'advay-theme' ),
 			'founder_role'       => __( 'Founder', 'advay-theme' ),
-			'founder_image'      => advay_asset_uri( 'images/md-portrait.jpg' ),
-			'founder_caption'    => __( 'Managing Director, Odi Ikpe', 'advay-theme' ),
-			'results_summary'    => __( 'The result wasn\'t just more revenue. It created a predictable growth engine and a brand customers love and trust.', 'advay-theme' ),
+			'founder_image'      => advay_theme_image( 'images/founders/no-knife-body.png' ),
+			'hero_image'         => advay_theme_image( 'images/founders/no-knife-body.png' ),
+			'founder_caption'    => __( 'Founder, No Knife Body', 'advay-theme' ),
+			'results_summary'    => __( 'No Knife Body moved from reactive prep to a repeatable FBA workflow — compliant labels, faster turnarounds, and fewer listing interruptions.', 'advay-theme' ),
 			'before'             => array(
-				__( 'Sales had plateaued for 8+ months', 'advay-theme' ),
-				__( 'High customer acquisition cost with low returns', 'advay-theme' ),
-				__( 'No clear positioning or offer differentiation', 'advay-theme' ),
-				__( 'Ad campaigns weren\'t converting', 'advay-theme' ),
-			),
-			'after'              => array(
-				__( 'Standardized prep with compliant labels every time', 'advay-theme' ),
-				__( '28-hour average turnaround from dock to ready-to-ship', 'advay-theme' ),
-				__( 'Clear reporting and photo documentation on every lot', 'advay-theme' ),
-				__( 'Direct access to client success and the MD when needed', 'advay-theme' ),
+				__( 'Growing body-care catalog with inconsistent prep standards across SKUs and inbound lots.', 'advay-theme' ),
+				__( 'Needed a partner that understood FBA labeling, poly-bagging, and marketplace compliance for personal-care products.', 'advay-theme' ),
 			),
 			'transform_before'   => array(
 				__( 'Reactive prep with no standard workflow', 'advay-theme' ),
-				__( 'Slow turnaround blocking launches', 'advay-theme' ),
-				__( 'Compliance issues creating chargeback risk', 'advay-theme' ),
-				__( 'No visibility into shipment status', 'advay-theme' ),
+				__( 'Slow turnaround blocking restocks and launches', 'advay-theme' ),
+				__( 'Labeling and packaging errors creating compliance risk', 'advay-theme' ),
+				__( 'Limited visibility into shipment and prep status', 'advay-theme' ),
 			),
 			'transform_after'    => array(
-				__( 'Standardized prep process across all SKUs', 'advay-theme' ),
-				__( '28-hour average turnaround time', 'advay-theme' ),
-				__( 'Zero prep-related chargebacks', 'advay-theme' ),
-				__( 'Real-time reporting and direct MD access', 'advay-theme' ),
+				__( 'Standardized prep process across all body-care SKUs', 'advay-theme' ),
+				__( '28-hour average turnaround from dock to ready-to-ship', 'advay-theme' ),
+				__( 'Zero prep-related chargebacks on recent inbound', 'advay-theme' ),
+				__( 'Photo documentation and direct access when issues arise', 'advay-theme' ),
 			),
 			'strategies'         => array(
 				array(
+					'icon'  => 'receive',
+					'title' => __( 'Receiving, storage & prep', 'advay-theme' ),
+					'text'  => __( 'Managed inbound receiving, storage, inspection, and prep for body-care SKUs at EPC\'s New Jersey facility.', 'advay-theme' ),
+				),
+				array(
 					'icon'  => 'target',
-					'title' => __( 'Clarified positioning & offer', 'advay-theme' ),
-					'text'  => __( 'Refined their brand message and created an irresistible offer for their target audience.', 'advay-theme' ),
+					'title' => __( 'FBA labeling & compliance', 'advay-theme' ),
+					'text'  => __( 'Standardized FNSKU labeling, poly-bagging, and packaging checks aligned with Amazon requirements.', 'advay-theme' ),
 				),
 				array(
 					'icon'  => 'funnel',
-					'title' => __( 'Built a full-funnel growth system', 'advay-theme' ),
-					'text'  => __( 'Optimized their ads, landing pages, email flows, and remarketing for maximum conversions.', 'advay-theme' ),
+					'title' => __( 'Body-care prep workflows', 'advay-theme' ),
+					'text'  => __( 'Built repeatable workflows for lot tracking, expiration-sensitive handling, and multi-SKU inbound.', 'advay-theme' ),
 				),
 				array(
 					'icon'  => 'growth',
-					'title' => __( 'Improved LTV & retention', 'advay-theme' ),
-					'text'  => __( 'Introduced retention flows and subscription model to increase repeat purchases.', 'advay-theme' ),
+					'title' => __( 'Marketplace readiness support', 'advay-theme' ),
+					'text'  => __( 'Provided operational support for shipment creation, carton content accuracy, and prep documentation.', 'advay-theme' ),
+				),
+				array(
+					'icon'  => 'arrow-circle',
+					'title' => __( 'Scalable fulfillment model', 'advay-theme' ),
+					'text'  => __( 'Created a model that scales with restocks and new launches without adding internal warehouse overhead.', 'advay-theme' ),
 				),
 			),
 			'results'            => array(
 				array(
-					'icon'     => 'chart-bars',
-					'value'    => '$120K → $480K',
-					'label'    => __( 'Monthly revenue', 'advay-theme' ),
-					'sublabel' => __( 'in 6 months', 'advay-theme' ),
+					'icon'  => 'clock-circle',
+					'value' => '28 HR',
+					'label' => __( 'Average prep turnaround', 'advay-theme' ),
+				),
+				array(
+					'icon'  => 'chart-bars',
+					'value' => '99.8%',
+					'label' => __( 'Label accuracy', 'advay-theme' ),
 				),
 				array(
 					'icon'  => 'arrow-circle',
-					'value' => '300%',
-					'label' => __( 'Revenue growth', 'advay-theme' ),
+					'value' => '0',
+					'label' => __( 'Prep-related chargebacks', 'advay-theme' ),
 				),
 				array(
-					'icon'  => 'clock-circle',
-					'value' => '6 MONTHS',
-					'label' => __( 'Time to result', 'advay-theme' ),
-				),
-				array(
-					'icon'  => 'dollar-circle',
-					'value' => '4.2X',
-					'label' => __( 'Return on ad spend', 'advay-theme' ),
+					'icon'     => 'dollar-circle',
+					'value'    => __( 'LIVE', 'advay-theme' ),
+					'label'    => __( 'Listings protected', 'advay-theme' ),
+					'sublabel' => __( 'compliant inbound flow', 'advay-theme' ),
 				),
 			),
 		),
