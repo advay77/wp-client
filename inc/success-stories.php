@@ -191,9 +191,9 @@ function advay_success_story_from_post( $post, $fallback = array() ) {
  */
 function advay_home_testimonial_slugs() {
 	return array(
+		'no-knife-body',
 		'ajayi-popcorn',
 		'daka-vitamins',
-		'gainz-airplanes',
 	);
 }
 
