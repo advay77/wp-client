@@ -1,3 +1,6 @@
+<?php
+$footer_cta = advay_footer_cta();
+?>
 <footer class="site-footer" id="site-footer">
 	<div class="container">
 		<div class="footer-top">
@@ -6,11 +9,11 @@
 					<img src="<?php echo esc_url( advay_logo_url() ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" width="168" height="48">
 				</a>
 				<p class="footer-tagline">
-					<?php echo esc_html( get_bloginfo( 'description' ) ? get_bloginfo( 'description' ) : __( 'Amazon FBA, Walmart WFS, and TikTok Shop prep for sellers who need accuracy, speed, and a partner they can trust.', 'advay-theme' ) ); ?>
+					<?php echo esc_html( advay_footer_tagline() ); ?>
 				</p>
 			</div>
-			<a class="button button-light footer-cta" href="<?php echo esc_url( advay_contact_url() ); ?>">
-				<?php esc_html_e( 'Book a call with our MD', 'advay-theme' ); ?>
+			<a class="button button-light footer-cta" href="<?php echo esc_url( $footer_cta['url'] ); ?>">
+				<?php echo esc_html( $footer_cta['label'] ); ?>
 				<span class="btn-arrow" aria-hidden="true"></span>
 			</a>
 		</div>
@@ -57,7 +60,17 @@
 			<div class="footer-col">
 				<h2 class="footer-heading"><?php esc_html_e( 'Contact', 'advay-theme' ); ?></h2>
 				<ul class="footer-menu footer-contact">
-					<li><?php esc_html_e( 'Warehouse address on request', 'advay-theme' ); ?></li>
+					<li>
+						<a href="<?php echo esc_url( advay_dock_phone_url() ); ?>">
+							<?php echo esc_html( advay_dock_phone_label() ); ?>
+						</a>
+					</li>
+					<li>
+						<a href="<?php echo esc_url( advay_dock_email_url() ); ?>">
+							<?php echo esc_html( advay_dock_email_label() ); ?>
+						</a>
+					</li>
+					<li><?php echo esc_html( advay_footer_contact_line() ); ?></li>
 				</ul>
 			</div>
 		</div>

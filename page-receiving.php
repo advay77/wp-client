@@ -1,6 +1,10 @@
 <?php
 /**
+ * Template Name: Receiving
+ * Template Post Type: page
+ *
  * Receiving & Inspection — scroll-down drives left→right warehouse journey.
+ * Prefer a published Page with slug "receiving" for Rank Math + ACF editing.
  *
  * @package Advay_Theme
  */
@@ -9,7 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$stations = array(
+$slug = 'receiving';
+
+$stations_defaults = array(
 	array(
 		'id'    => 'receiving',
 		'tag'   => __( 'Station 01 — Receiving', 'advay-theme' ),
@@ -42,7 +48,33 @@ $stations = array(
 	),
 );
 
+$stations = array();
+foreach ( $stations_defaults as $i => $row ) {
+	$n = $i + 1;
+	$stations[] = array(
+		'id'    => $row['id'],
+		'tag'   => advay_page_acf( $slug, 'receiving_station_' . $n . '_tag', $row['tag'] ),
+		'title' => advay_page_acf( $slug, 'receiving_station_' . $n . '_title', $row['title'] ),
+		'desc'  => advay_page_acf( $slug, 'receiving_station_' . $n . '_description', $row['desc'] ),
+	);
+}
+
 $total = count( $stations );
+
+$recv_eyebrow = advay_page_acf( $slug, 'receiving_eyebrow', __( 'What we do', 'advay-theme' ) );
+$recv_heading = advay_page_acf( $slug, 'receiving_heading', __( 'How your inventory moves through Elite Prep Center', 'advay-theme' ) );
+$recv_lede    = advay_page_acf( $slug, 'receiving_lede', __( 'One warehouse, five stages. Scroll down — the journey moves left to right through the warehouse.', 'advay-theme' ) );
+$recv_hint    = advay_page_acf( $slug, 'receiving_scroll_hint', __( 'Scroll to move through the warehouse', 'advay-theme' ) );
+$recv_video   = advay_page_acf( $slug, 'receiving_video_url', advay_asset_uri( 'video/DTC.mp4' ) );
+
+$recv_cta_heading = advay_page_acf( $slug, 'receiving_cta_heading', __( 'Ready to send your next inbound?', 'advay-theme' ) );
+$recv_cta_copy    = advay_page_acf( $slug, 'receiving_cta_copy', __( 'Share SKU counts, marketplace, and timing — we\'ll reply with capacity and a receiving plan.', 'advay-theme' ) );
+$recv_cta_p       = advay_page_acf( $slug, 'receiving_cta_primary', '' );
+$recv_cta_s       = advay_page_acf( $slug, 'receiving_cta_secondary', '' );
+$recv_cta_p_label = advay_acf_link_title( $recv_cta_p, __( 'Talk to ElitePrep', 'advay-theme' ) );
+$recv_cta_p_url   = advay_acf_link_url( $recv_cta_p, advay_contact_url() );
+$recv_cta_s_label = advay_acf_link_title( $recv_cta_s, __( 'See platforms', 'advay-theme' ) );
+$recv_cta_s_url   = advay_acf_link_url( $recv_cta_s, advay_services_url( 'platforms' ) );
 
 get_header();
 ?>
@@ -51,19 +83,19 @@ get_header();
 	<section class="wj-intro" aria-labelledby="wj-intro-heading">
 		<div class="wj-intro-media" aria-hidden="true">
 			<video class="wj-intro-video" autoplay muted loop playsinline preload="metadata">
-				<source src="<?php echo esc_url( advay_asset_uri( 'video/DTC.mp4' ) ); ?>" type="video/mp4">
+				<source src="<?php echo esc_url( $recv_video ); ?>" type="video/mp4">
 			</video>
 			<span class="wj-intro-overlay"></span>
 		</div>
 		<div class="wj-intro-inner">
-			<p class="wj-eyebrow"><?php esc_html_e( 'What we do', 'advay-theme' ); ?></p>
-			<h1 id="wj-intro-heading"><?php esc_html_e( 'How your inventory moves through Elite Prep Center', 'advay-theme' ); ?></h1>
+			<p class="wj-eyebrow"><?php echo esc_html( $recv_eyebrow ); ?></p>
+			<h1 id="wj-intro-heading"><?php echo esc_html( $recv_heading ); ?></h1>
 			<p class="wj-lede">
-				<?php esc_html_e( 'One warehouse, five stages. Scroll down — the journey moves left to right through the warehouse.', 'advay-theme' ); ?>
+				<?php echo esc_html( $recv_lede ); ?>
 			</p>
 			<p class="wj-scroll-hint">
 				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-				<?php esc_html_e( 'Scroll to move through the warehouse', 'advay-theme' ); ?>
+				<?php echo esc_html( $recv_hint ); ?>
 			</p>
 		</div>
 	</section>
@@ -231,15 +263,15 @@ get_header();
 
 	<section class="wj-cta">
 		<div class="container wj-cta-inner">
-			<h2><?php esc_html_e( 'Ready to send your next inbound?', 'advay-theme' ); ?></h2>
-			<p><?php esc_html_e( 'Share SKU counts, marketplace, and timing — we\'ll reply with capacity and a receiving plan.', 'advay-theme' ); ?></p>
+			<h2><?php echo esc_html( $recv_cta_heading ); ?></h2>
+			<p><?php echo esc_html( $recv_cta_copy ); ?></p>
 			<div class="wj-cta-actions">
-				<a class="button button-primary" href="<?php echo esc_url( advay_contact_url() ); ?>">
-					<?php esc_html_e( 'Talk to ElitePrep', 'advay-theme' ); ?>
+				<a class="button button-primary" href="<?php echo esc_url( $recv_cta_p_url ); ?>">
+					<?php echo esc_html( $recv_cta_p_label ); ?>
 					<span class="btn-arrow" aria-hidden="true"></span>
 				</a>
-				<a class="button button-ghost" href="<?php echo esc_url( advay_services_url( 'platforms' ) ); ?>">
-					<?php esc_html_e( 'See platforms', 'advay-theme' ); ?>
+				<a class="button button-ghost" href="<?php echo esc_url( $recv_cta_s_url ); ?>">
+					<?php echo esc_html( $recv_cta_s_label ); ?>
 				</a>
 			</div>
 		</div>

@@ -6,99 +6,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$facts = array(
-	array(
-		'stat' => __( '8+ Years', 'advay-theme' ),
-		'text' => __( 'of hands-on experience in eCommerce fulfillment and supply chain operations.', 'advay-theme' ),
-		'icon' => 'experience',
-	),
-	array(
-		'stat' => __( '5M+ Units', 'advay-theme' ),
-		'text' => __( 'prepared and shipped for thousands of marketplace sellers across categories.', 'advay-theme' ),
-		'icon' => 'units',
-	),
-	array(
-		'stat' => __( '28-Hour TAT', 'advay-theme' ),
-		'text' => __( 'industry-leading average turnaround time with 98.7% accuracy rate.', 'advay-theme' ),
-		'icon' => 'tat',
-	),
-);
+$facts         = advay_home_hub_facts();
+$flow_inbound  = advay_home_hub_flow_inbound();
+$flow_outbound = advay_home_hub_flow_outbound();
+$steps         = advay_home_hub_steps();
 
-$flow_inbound = array(
-	array(
-		'label' => __( 'Receive', 'advay-theme' ),
-		'text'  => __( 'We receive and verify your inventory.', 'advay-theme' ),
-		'icon'  => 'receive',
-	),
-	array(
-		'label' => __( 'Inspect', 'advay-theme' ),
-		'text'  => __( 'We inspect every unit to spec.', 'advay-theme' ),
-		'icon'  => 'target',
-	),
-	array(
-		'label' => __( 'Prep', 'advay-theme' ),
-		'text'  => __( 'We prep marketplace-ready.', 'advay-theme' ),
-		'icon'  => 'prep',
-	),
-);
+$front = advay_acf_front_id();
+$hub_who_kicker   = advay_get_acf( 'home_hub_who_kicker', __( 'Who are we', 'advay-theme' ), $front );
+$hub_who_heading  = advay_get_acf( 'home_hub_who_heading', __( 'Three facts that define us.', 'advay-theme' ), $front );
+$hub_who_lead     = advay_get_acf( 'home_hub_who_lead', __( 'A fulfillment partner built on experience, precision, and performance.', 'advay-theme' ), $front );
+$hub_what_kicker  = advay_get_acf( 'home_hub_what_kicker', __( 'What we do', 'advay-theme' ), $front );
+$hub_what_heading = advay_get_acf( 'home_hub_what_heading', __( 'Every step from dock to fulfillment center.', 'advay-theme' ), $front );
+$hub_what_lead    = advay_get_acf( 'home_hub_what_lead', __( 'You send inventory; we return marketplace-ready shipments and a clear paper trail.', 'advay-theme' ), $front );
+$hub_how_kicker   = advay_get_acf( 'home_hub_how_kicker', __( 'How to get started', 'advay-theme' ), $front );
+$hub_how_heading  = advay_get_acf( 'home_hub_how_heading', __( 'Four steps. No mystery.', 'advay-theme' ), $front );
+$hub_how_lead     = advay_get_acf( 'home_hub_how_lead', __( 'Getting started is simple. Share your SKUs, send us your inventory, and we\'ll handle the rest.', 'advay-theme' ), $front );
 
-$flow_outbound = array(
-	array(
-		'label' => __( 'Pack', 'advay-theme' ),
-		'text'  => __( 'We pack and label marketplace-ready.', 'advay-theme' ),
-		'icon'  => 'pack',
-	),
-	array(
-		'label' => __( 'Ship', 'advay-theme' ),
-		'text'  => __( 'We ship to Amazon, Walmart or others.', 'advay-theme' ),
-		'icon'  => 'ship',
-	),
-	array(
-		'label' => __( 'Report', 'advay-theme' ),
-		'text'  => __( 'You get full visibility and reporting.', 'advay-theme' ),
-		'icon'  => 'report',
-	),
-);
-
-$steps = array(
-	array(
-		'num'   => '01',
-		'title' => __( 'Share your SKUs', 'advay-theme' ),
-		'text'  => __( 'Send your packing list, FNSKUs or GTINs, and any special prep requirements.', 'advay-theme' ),
-		'icon'  => 'sku',
-	),
-	array(
-		'num'   => '02',
-		'title' => __( 'Ship inbound', 'advay-theme' ),
-		'text'  => __( 'Freight or parcel to our warehouse. We receive, count and flag exceptions.', 'advay-theme' ),
-		'icon'  => 'inbound',
-	),
-	array(
-		'num'   => '03',
-		'title' => __( 'We prep to spec', 'advay-theme' ),
-		'text'  => __( 'Label, bag, inspect, bundle or prep according to your requirements.', 'advay-theme' ),
-		'icon'  => 'prep',
-	),
-	array(
-		'num'   => '04',
-		'title' => __( 'We forward', 'advay-theme' ),
-		'text'  => __( 'Shipments leave for Amazon, Walmart or your marketplace of choice — with tracking.', 'advay-theme' ),
-		'icon'  => 'forward',
-	),
-);
+$cta_who  = advay_get_acf( 'home_hub_cta_who', __( 'Know more about us', 'advay-theme' ), $front );
+$cta_what = advay_get_acf( 'home_hub_cta_what', __( 'Explore what we do', 'advay-theme' ), $front );
+$cta_how  = advay_get_acf( 'home_hub_cta_how', __( 'Start your onboarding', 'advay-theme' ), $front );
 ?>
 <section class="home-hub" id="services" aria-labelledby="home-hub-heading">
 	<div class="container">
 		<article class="home-hub-card">
 			<div class="home-hub-grid">
 				<div class="home-hub-col home-hub-who">
-					<p class="home-hub-kicker"><?php esc_html_e( 'Who are we', 'advay-theme' ); ?></p>
-					<h2 id="home-hub-heading"><?php esc_html_e( 'Three facts that define us.', 'advay-theme' ); ?></h2>
+					<p class="home-hub-kicker"><?php echo esc_html( $hub_who_kicker ); ?></p>
+					<h2 id="home-hub-heading"><?php echo esc_html( $hub_who_heading ); ?></h2>
 					<div class="home-hub-lead-slot">
-						<p class="home-hub-lead"><?php esc_html_e( 'A fulfillment partner built on experience, precision, and performance.', 'advay-theme' ); ?></p>
+						<p class="home-hub-lead"><?php echo esc_html( $hub_who_lead ); ?></p>
 					</div>
 					<a class="button button-primary home-hub-cta" href="<?php echo esc_url( advay_our_story_url() ); ?>">
-						<?php esc_html_e( 'Know more about us', 'advay-theme' ); ?>
+						<?php echo esc_html( $cta_who ); ?>
 						<span class="btn-arrow" aria-hidden="true"></span>
 					</a>
 					<div class="home-hub-col-body">
@@ -119,13 +58,13 @@ $steps = array(
 				</div>
 
 				<div class="home-hub-col home-hub-what">
-					<p class="home-hub-kicker"><?php esc_html_e( 'What we do', 'advay-theme' ); ?></p>
-					<h2><?php esc_html_e( 'Every step from dock to fulfillment center.', 'advay-theme' ); ?></h2>
+					<p class="home-hub-kicker"><?php echo esc_html( $hub_what_kicker ); ?></p>
+					<h2><?php echo esc_html( $hub_what_heading ); ?></h2>
 					<div class="home-hub-lead-slot">
-						<p class="home-hub-lead home-hub-sub"><?php esc_html_e( 'You send inventory; we return marketplace-ready shipments and a clear paper trail.', 'advay-theme' ); ?></p>
+						<p class="home-hub-lead home-hub-sub"><?php echo esc_html( $hub_what_lead ); ?></p>
 					</div>
 					<a class="button button-primary home-hub-cta" href="<?php echo esc_url( advay_services_url() ); ?>">
-						<?php esc_html_e( 'Explore what we do', 'advay-theme' ); ?>
+						<?php echo esc_html( $cta_what ); ?>
 						<span class="btn-arrow" aria-hidden="true"></span>
 					</a>
 					<div class="home-hub-col-body">
@@ -157,13 +96,13 @@ $steps = array(
 				</div>
 
 				<div class="home-hub-col home-hub-start" id="how-it-works">
-					<p class="home-hub-kicker"><?php esc_html_e( 'How to get started', 'advay-theme' ); ?></p>
-					<h2><?php esc_html_e( 'Four steps. No mystery.', 'advay-theme' ); ?></h2>
+					<p class="home-hub-kicker"><?php echo esc_html( $hub_how_kicker ); ?></p>
+					<h2><?php echo esc_html( $hub_how_heading ); ?></h2>
 					<div class="home-hub-lead-slot">
-						<p class="home-hub-lead"><?php esc_html_e( 'Getting started is simple. Share your SKUs, send us your inventory, and we\'ll handle the rest.', 'advay-theme' ); ?></p>
+						<p class="home-hub-lead"><?php echo esc_html( $hub_how_lead ); ?></p>
 					</div>
 					<a class="button button-primary home-hub-cta" href="<?php echo esc_url( advay_onboarding_url() ); ?>">
-						<?php esc_html_e( 'Start your onboarding', 'advay-theme' ); ?>
+						<?php echo esc_html( $cta_how ); ?>
 						<span class="btn-arrow" aria-hidden="true"></span>
 					</a>
 					<div class="home-hub-col-body">

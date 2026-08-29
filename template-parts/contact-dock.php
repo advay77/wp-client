@@ -24,14 +24,14 @@ $dock_items = array(
 	array(
 		'class' => 'contact-dock-item--email',
 		'url'   => advay_dock_email_url(),
-		'label' => __( 'Reach out to us via mail', 'advay-theme' ),
+		'label' => advay_dock_email_cta_label(),
 		'icon'  => 'email',
 		'external' => false,
 	),
 	array(
 		'class' => 'contact-dock-item--meet',
 		'url'   => advay_dock_calendly_url(),
-		'label' => __( 'Book a call with our MD', 'advay-theme' ),
+		'label' => advay_dock_calendly_label(),
 		'icon'  => 'meet',
 		'external' => true,
 	),

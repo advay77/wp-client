@@ -3,51 +3,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$niche_cards = array(
-	array(
-		'file'  => 'images/niche1.png',
-		'tag'   => __( 'Health & Wellness', 'advay-theme' ),
-		'title' => __( 'Health & Wellness', 'advay-theme' ),
-		'copy'  => __( 'Health & wellness runs on credibility. ElitePrep helps you scale without compromising the trust you\'ve built.', 'advay-theme' ),
-	),
-	array(
-		'file'  => 'images/niche2.png',
-		'tag'   => __( 'Beauty', 'advay-theme' ),
-		'title' => __( 'Beauty', 'advay-theme' ),
-		'copy'  => __( 'Beauty is built on identity. ElitePrep makes sure yours shines on every marketplace.', 'advay-theme' ),
-	),
-	array(
-		'file'  => 'images/niche3.png',
-		'tag'   => __( 'Packaged Food', 'advay-theme' ),
-		'title' => __( 'Packaged Food', 'advay-theme' ),
-		'copy'  => __( 'Packaged food lives and dies by shelf life. Elite Prep Center keeps your lot tracking and expiration dates airtight.', 'advay-theme' ),
-	),
-);
+$front       = advay_acf_front_id();
+$niche_cards = advay_home_fit_niche_cards();
+$spec_cards  = advay_home_fit_spec_cards();
 
-$spec_cards = array(
-	array(
-		'file'  => 'images/brandfit2.png',
-		'tag'   => __( 'Lot tracking / compliance', 'advay-theme' ),
-		'title' => __( 'Lot tracking / compliance', 'advay-theme' ),
-		'copy'  => __( 'We track what actually matters. Lot numbers, expiration dates, and recall-ready records, the details that protect your brand when it counts.', 'advay-theme' ),
-	),
-	array(
-		'file'  => 'images/brandfit3.png',
-		'tag'   => __( 'Switching / scaling', 'advay-theme' ),
-		'title' => __( 'Switching / scaling', 'advay-theme' ),
-		'copy'  => __( 'Outgrowing DIY, or done with the loser ones? Whether you\'re switching from a 3PL that\'s letting you down or scaling past in-house prep, we make the move seamless.', 'advay-theme' ),
-	),
-);
+$fit_eyebrow = advay_get_acf( 'home_fit_eyebrow', __( 'Who we support', 'advay-theme' ), $front );
+$fit_heading = advay_get_acf( 'home_fit_heading', __( 'Not every brand is a fit.', 'advay-theme' ), $front );
+$fit_accent  = advay_get_acf( 'home_fit_heading_accent', __( 'Are you?', 'advay-theme' ), $front );
+$fit_lead    = advay_get_acf( 'home_fit_lead', __( 'You\'re probably a fit if these sound like you.', 'advay-theme' ), $front );
+
+$fit_cta       = advay_get_acf( 'home_fit_cta', '', $front );
+$fit_cta_label = advay_acf_link_title( $fit_cta, __( 'Get a custom quote', 'advay-theme' ) );
+$fit_cta_url   = advay_acf_link_url( $fit_cta, advay_contact_url() );
+$fit_tab_niche = advay_get_acf( 'home_fit_tab_niche', __( 'Niche', 'advay-theme' ), $front );
+$fit_tab_spec  = advay_get_acf( 'home_fit_tab_spec', __( 'Specification', 'advay-theme' ), $front );
 ?>
 <section class="fit-section" id="fit-check" aria-labelledby="fit-heading">
 	<div class="container">
 		<header class="fit-head">
-			<p class="eyebrow"><?php esc_html_e( 'Who we support', 'advay-theme' ); ?></p>
+			<p class="eyebrow"><?php echo esc_html( $fit_eyebrow ); ?></p>
 			<h2 id="fit-heading">
-				<?php esc_html_e( 'Not every brand is a fit.', 'advay-theme' ); ?>
-				<span><?php esc_html_e( 'Are you?', 'advay-theme' ); ?></span>
+				<?php echo esc_html( $fit_heading ); ?>
+				<span><?php echo esc_html( $fit_accent ); ?></span>
 			</h2>
-			<p class="fit-lead"><?php esc_html_e( 'You\'re probably a fit if these sound like you.', 'advay-theme' ); ?></p>
+			<p class="fit-lead"><?php echo esc_html( $fit_lead ); ?></p>
 
 			<div class="fit-tabs" role="tablist" aria-label="<?php esc_attr_e( 'Fit categories', 'advay-theme' ); ?>">
 				<button
@@ -59,7 +38,7 @@ $spec_cards = array(
 					aria-controls="fit-panel-niche"
 					data-fit-tab="niche"
 				>
-					<?php esc_html_e( 'Niche', 'advay-theme' ); ?>
+					<?php echo esc_html( $fit_tab_niche ); ?>
 				</button>
 				<button
 					type="button"
@@ -70,7 +49,7 @@ $spec_cards = array(
 					aria-controls="fit-panel-spec"
 					data-fit-tab="spec"
 				>
-					<?php esc_html_e( 'Specification', 'advay-theme' ); ?>
+					<?php echo esc_html( $fit_tab_spec ); ?>
 				</button>
 			</div>
 		</header>
@@ -87,8 +66,8 @@ $spec_cards = array(
 					<article class="fit-card fit-card--niche">
 						<div class="fit-card-visual">
 							<img
-								src="<?php echo esc_url( advay_asset_uri( $card['file'] ) ); ?>"
-								alt=""
+								src="<?php echo esc_url( $card['src'] ); ?>"
+								alt="<?php echo esc_attr( $card['alt'] ); ?>"
 								width="1536"
 								height="1024"
 								loading="<?php echo 0 === $i ? 'eager' : 'lazy'; ?>"
@@ -118,8 +97,8 @@ $spec_cards = array(
 					<article class="fit-card fit-card--niche">
 						<div class="fit-card-visual">
 							<img
-								src="<?php echo esc_url( advay_asset_uri( $card['file'] ) ); ?>"
-								alt=""
+								src="<?php echo esc_url( $card['src'] ); ?>"
+								alt="<?php echo esc_attr( $card['alt'] ); ?>"
 								width="1536"
 								height="1024"
 								loading="lazy"
@@ -137,8 +116,8 @@ $spec_cards = array(
 		</div>
 
 		<div class="fit-cta">
-			<a class="button button-primary button-fit" href="<?php echo esc_url( advay_contact_url() ); ?>">
-				<?php esc_html_e( 'Get a custom quote', 'advay-theme' ); ?>
+			<a class="button button-primary button-fit" href="<?php echo esc_url( $fit_cta_url ); ?>">
+				<?php echo esc_html( $fit_cta_label ); ?>
 				<span class="btn-arrow" aria-hidden="true"></span>
 			</a>
 		</div>

@@ -10,9 +10,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ADVAY_THEME_VERSION', '2.21.1' );
+define( 'ADVAY_THEME_VERSION', '2.32.0' );
 
+require get_template_directory() . '/inc/success-story-cpt.php';
 require get_template_directory() . '/inc/success-stories.php';
+require get_template_directory() . '/inc/pricing-rate-cpt.php';
+require get_template_directory() . '/inc/acf-fields.php';
+require get_template_directory() . '/inc/acf-success-story-fields.php';
+require get_template_directory() . '/inc/acf-homepage-complete.php';
+require get_template_directory() . '/inc/homepage-content.php';
+require get_template_directory() . '/inc/page-cms.php';
+require get_template_directory() . '/inc/acf-marketing-pages.php';
+require get_template_directory() . '/inc/global-chrome.php';
+require get_template_directory() . '/inc/ensure-marketing-pages.php';
+require get_template_directory() . '/inc/migrate-success-stories.php';
+require get_template_directory() . '/inc/migrate-pricing-rates.php';
 
 function advay_theme_setup() {
 	add_theme_support( 'title-tag' );
@@ -306,40 +318,76 @@ function advay_contact_url() {
 }
 
 function advay_intake_email_url() {
-	return apply_filters( 'advay_contact_email_url', 'mailto:hello@eliteprepcenter.com' );
+	$front = advay_acf_front_id();
+	$value = advay_get_acf( 'site_intake_email_url', '', $front );
+	if ( ! is_string( $value ) || '' === trim( $value ) ) {
+		$value = 'mailto:hello@eliteprepcenter.com';
+	}
+	return apply_filters( 'advay_contact_email_url', $value );
 }
 
 function advay_intake_phone_url() {
-	return apply_filters( 'advay_contact_call_url', 'tel:+18555550199' );
+	$front = advay_acf_front_id();
+	$value = advay_get_acf( 'site_intake_phone_url', '', $front );
+	if ( ! is_string( $value ) || '' === trim( $value ) ) {
+		// No invented placeholder — fall back to verified dock / MD phone.
+		$value = advay_dock_phone_url();
+	}
+	return apply_filters( 'advay_contact_call_url', $value );
 }
 
 /**
  * Floating dock — MD phone display and dial link.
  */
 function advay_dock_phone_label() {
-	return apply_filters( 'advay_dock_phone_label', '+1 (212) 814-8815' );
+	$front = advay_acf_front_id();
+	$value = advay_get_acf( 'site_phone_label', '', $front );
+	if ( ! is_string( $value ) || '' === trim( $value ) ) {
+		$value = '+1 (212) 814-8815';
+	}
+	return apply_filters( 'advay_dock_phone_label', $value );
 }
 
 function advay_dock_phone_url() {
-	return apply_filters( 'advay_dock_phone_url', 'tel:+12128148815' );
+	$front = advay_acf_front_id();
+	$value = advay_get_acf( 'site_phone_url', '', $front );
+	if ( ! is_string( $value ) || '' === trim( $value ) ) {
+		$value = 'tel:+12128148815';
+	}
+	return apply_filters( 'advay_dock_phone_url', $value );
 }
 
 /**
  * Floating dock — MD email.
  */
 function advay_dock_email_label() {
-	return apply_filters( 'advay_dock_email_label', 'odi@eliteprepcenter.com' );
+	$front = advay_acf_front_id();
+	$value = advay_get_acf( 'site_email_label', '', $front );
+	if ( ! is_string( $value ) || '' === trim( $value ) ) {
+		$value = 'odi@eliteprepcenter.com';
+	}
+	return apply_filters( 'advay_dock_email_label', $value );
 }
 
 function advay_dock_email_url() {
-	return apply_filters( 'advay_dock_email_url', 'mailto:odi@eliteprepcenter.com' );
+	$front = advay_acf_front_id();
+	$value = advay_get_acf( 'site_email_url', '', $front );
+	if ( ! is_string( $value ) || '' === trim( $value ) ) {
+		$value = 'mailto:odi@eliteprepcenter.com';
+	}
+	return apply_filters( 'advay_dock_email_url', $value );
 }
 
 /**
  * Floating dock — Calendly / Google Meet booking.
  */
 function advay_dock_calendly_url() {
-	return apply_filters( 'advay_dock_calendly_url', 'https://calendly.com/odi-eliteprepcenter/30min' );
+	$front = advay_acf_front_id();
+	$value = advay_get_acf( 'site_calendly_url', '', $front );
+	if ( ! is_string( $value ) || '' === trim( $value ) ) {
+		$value = 'https://calendly.com/odi-eliteprepcenter/30min';
+	}
+	return apply_filters( 'advay_dock_calendly_url', $value );
 }
 
 /**
@@ -373,15 +421,15 @@ function advay_onboarding_url() {
 }
 
 /**
- * Our Story page URL.
+ * Our Story page URL (public path remains /about-us/).
  */
 function advay_our_story_url() {
-	$page = get_page_by_path( 'our-story' );
+	$page = get_page_by_path( 'about-us' );
 	if ( $page ) {
 		return get_permalink( $page );
 	}
 
-	return home_url( '/our-story/' );
+	return home_url( '/about-us/' );
 }
 
 /**
@@ -503,7 +551,6 @@ function advay_register_onboarding_route() {
 	add_rewrite_rule( '^blog/?$', 'index.php?advay_blog=1', 'top' );
 	add_rewrite_rule( '^blog/page/([0-9]{1,})/?$', 'index.php?advay_blog=1&paged=$matches[1]', 'top' );
 	add_rewrite_rule( '^receiving/?$', 'index.php?advay_receiving=1', 'top' );
-	add_rewrite_rule( '^our-story/?$', 'index.php?advay_our_story=1', 'top' );
 	add_rewrite_rule( '^join-our-team/?$', 'index.php?advay_join_team=1', 'top' );
 	add_rewrite_rule( '^managing-director/?$', 'index.php?advay_managing_director=1', 'top' );
 	add_rewrite_rule( '^success-stories/([^/]+)/?$', 'index.php?advay_success_story=$matches[1]', 'top' );
@@ -523,42 +570,46 @@ function advay_onboarding_query_var( $vars ) {
 add_filter( 'query_vars', 'advay_onboarding_query_var' );
 
 function advay_custom_page_template( $template ) {
-	if ( (int) get_query_var( 'advay_onboarding' ) === 1 ) {
+	if ( (int) get_query_var( 'advay_onboarding' ) === 1 || ( function_exists( 'is_page' ) && is_page( 'onboarding' ) ) ) {
 		$onboarding = get_template_directory() . '/page-onboarding.php';
 		if ( file_exists( $onboarding ) ) {
 			return $onboarding;
 		}
 	}
 
-	if ( (int) get_query_var( 'advay_blog' ) === 1 ) {
+	/*
+	 * Blog: only force page-blog.php for the virtual rewrite or a singular Blog page.
+	 * When Blog is the Posts page (is_home), leave core template selection alone.
+	 */
+	if ( (int) get_query_var( 'advay_blog' ) === 1 || ( function_exists( 'is_page' ) && is_page( 'blog' ) && ! is_home() ) ) {
 		$blog = get_template_directory() . '/page-blog.php';
 		if ( file_exists( $blog ) ) {
 			return $blog;
 		}
 	}
 
-	if ( (int) get_query_var( 'advay_receiving' ) === 1 ) {
+	if ( (int) get_query_var( 'advay_receiving' ) === 1 || ( function_exists( 'is_page' ) && is_page( 'receiving' ) ) ) {
 		$receiving = get_template_directory() . '/page-receiving.php';
 		if ( file_exists( $receiving ) ) {
 			return $receiving;
 		}
 	}
 
-	if ( (int) get_query_var( 'advay_our_story' ) === 1 ) {
+	if ( (int) get_query_var( 'advay_our_story' ) === 1 || ( function_exists( 'is_page' ) && is_page( 'about-us' ) ) ) {
 		$story = get_template_directory() . '/page-our-story.php';
 		if ( file_exists( $story ) ) {
 			return $story;
 		}
 	}
 
-	if ( (int) get_query_var( 'advay_join_team' ) === 1 ) {
+	if ( (int) get_query_var( 'advay_join_team' ) === 1 || ( function_exists( 'is_page' ) && is_page( 'join-our-team' ) ) ) {
 		$join = get_template_directory() . '/page-join-team.php';
 		if ( file_exists( $join ) ) {
 			return $join;
 		}
 	}
 
-	if ( (int) get_query_var( 'advay_managing_director' ) === 1 ) {
+	if ( (int) get_query_var( 'advay_managing_director' ) === 1 || ( function_exists( 'is_page' ) && is_page( 'managing-director' ) ) ) {
 		$md = get_template_directory() . '/page-managing-director.php';
 		if ( file_exists( $md ) ) {
 			return $md;
@@ -594,11 +645,21 @@ function advay_maybe_flush_onboarding_rewrite() {
 add_action( 'init', 'advay_maybe_flush_onboarding_rewrite', 99 );
 
 function advay_is_onboarding_page() {
-	return (int) get_query_var( 'advay_onboarding' ) === 1;
+	if ( (int) get_query_var( 'advay_onboarding' ) === 1 ) {
+		return true;
+	}
+	return function_exists( 'is_page' ) && is_page( 'onboarding' );
 }
 
 function advay_is_blog_page() {
-	return (int) get_query_var( 'advay_blog' ) === 1;
+	if ( (int) get_query_var( 'advay_blog' ) === 1 ) {
+		return true;
+	}
+	/* Reading → Posts page uses is_home(), not is_page(). */
+	if ( function_exists( 'is_home' ) && is_home() && ! is_front_page() ) {
+		return true;
+	}
+	return function_exists( 'is_page' ) && is_page( 'blog' );
 }
 
 function advay_is_receiving_page() {
@@ -614,7 +675,7 @@ function advay_is_our_story_page() {
 		return true;
 	}
 
-	return function_exists( 'is_page' ) && is_page( 'our-story' );
+	return function_exists( 'is_page' ) && is_page( 'about-us' );
 }
 
 function advay_is_join_team_page() {
@@ -634,12 +695,16 @@ function advay_is_managing_director_page() {
 }
 
 function advay_is_success_story_page() {
+	if ( function_exists( 'is_singular' ) && is_singular( 'success_story' ) ) {
+		return true;
+	}
+
 	$slug = sanitize_key( (string) get_query_var( 'advay_success_story' ) );
 	return '' !== $slug && advay_success_story_exists( $slug );
 }
 
 /**
- * Success story page URL.
+ * Success story page URL — prefers CPT permalink when published.
  *
  * @param string $slug Story slug.
  */
@@ -647,6 +712,16 @@ function advay_success_story_url( $slug = 'no-knife-body' ) {
 	$slug = sanitize_key( $slug );
 	if ( ! advay_success_story_exists( $slug ) ) {
 		$slug = 'no-knife-body';
+	}
+
+	if ( function_exists( 'advay_get_success_story_post' ) ) {
+		$post = advay_get_success_story_post( $slug );
+		if ( $post ) {
+			$permalink = get_permalink( $post );
+			if ( $permalink ) {
+				return $permalink;
+			}
+		}
 	}
 
 	return home_url( '/success-stories/' . $slug . '/' );
@@ -727,25 +802,6 @@ function advay_custom_route_body_class( $classes ) {
 add_filter( 'body_class', 'advay_custom_route_body_class' );
 
 /**
- * Page title for custom routes.
- */
-function advay_custom_route_document_title( $parts ) {
-	if ( advay_is_managing_director_page() ) {
-		$parts['title'] = __( 'Odi Ikpe', 'advay-theme' );
-		$parts['tagline'] = __( 'Managing Director', 'advay-theme' );
-	}
-
-	if ( advay_is_success_story_page() ) {
-		$story = advay_get_success_story( sanitize_key( (string) get_query_var( 'advay_success_story' ) ) );
-		$parts['title'] = $story['brand'];
-		$parts['tagline'] = __( 'Success Story', 'advay-theme' );
-	}
-
-	return $parts;
-}
-add_filter( 'document_title_parts', 'advay_custom_route_document_title' );
-
-/**
  * Receiving / warehouse journey page URL.
  */
 function advay_receiving_url( $hash = '' ) {
@@ -756,75 +812,6 @@ function advay_receiving_url( $hash = '' ) {
 	}
 	return $base;
 }
-
-function advay_receiving_document_title( $title ) {
-	if ( advay_is_receiving_page() ) {
-		$title['title'] = __( 'Receiving & Inspection', 'advay-theme' );
-	}
-	return $title;
-}
-add_filter( 'document_title_parts', 'advay_receiving_document_title' );
-
-/**
- * Custom SEO title for single posts (from Doc SEO pack / seeder).
- *
- * @param array $parts Title parts.
- * @return array
- */
-function advay_seo_document_title( $parts ) {
-	if ( ! is_singular( 'post' ) ) {
-		return $parts;
-	}
-	$custom = get_post_meta( get_the_ID(), '_advay_seo_title', true );
-	if ( is_string( $custom ) && '' !== trim( $custom ) ) {
-		$parts['title'] = $custom;
-	}
-	return $parts;
-}
-add_filter( 'document_title_parts', 'advay_seo_document_title', 20 );
-
-/**
- * Meta description + basic Article schema for blog posts.
- */
-function advay_seo_head_tags() {
-	if ( ! is_singular( 'post' ) ) {
-		return;
-	}
-	$post_id = get_the_ID();
-	$desc    = get_post_meta( $post_id, '_advay_seo_description', true );
-	if ( ! is_string( $desc ) || '' === trim( $desc ) ) {
-		$desc = has_excerpt( $post_id ) ? get_the_excerpt( $post_id ) : wp_trim_words( wp_strip_all_tags( get_post_field( 'post_content', $post_id ) ), 28 );
-	}
-	$desc = wp_strip_all_tags( $desc );
-	if ( $desc ) {
-		echo '<meta name="description" content="' . esc_attr( $desc ) . '" />' . "\n";
-	}
-
-	$schema = array(
-		'@context'         => 'https://schema.org',
-		'@type'            => 'Article',
-		'headline'         => get_the_title( $post_id ),
-		'datePublished'    => get_the_date( 'c', $post_id ),
-		'dateModified'     => get_the_modified_date( 'c', $post_id ),
-		'mainEntityOfPage' => get_permalink( $post_id ),
-		'author'           => array(
-			'@type' => 'Organization',
-			'name'  => get_bloginfo( 'name' ),
-		),
-		'publisher'        => array(
-			'@type' => 'Organization',
-			'name'  => get_bloginfo( 'name' ),
-		),
-	);
-	if ( $desc ) {
-		$schema['description'] = $desc;
-	}
-	if ( has_post_thumbnail( $post_id ) ) {
-		$schema['image'] = array( get_the_post_thumbnail_url( $post_id, 'full' ) );
-	}
-	echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";
-}
-add_action( 'wp_head', 'advay_seo_head_tags', 5 );
 
 function advay_pricing_url() {
 	$page = get_page_by_path( 'pricing' );
@@ -855,37 +842,18 @@ function advay_services_url( $hash = '' ) {
 	return trailingslashit( home_url( '/' ) ) . '#services';
 }
 
+/**
+ * Pricing rate rows for /pricing/ — CPT first, PHP defaults as fallback.
+ *
+ * @return array<int, array<string, string>>
+ */
 function advay_pricing_rows() {
-	return array(
-		array( 'cat' => 'prep', 'service' => __( 'Item prep, 1–1,000 / month', 'advay-theme' ), 'type' => 'standard', 'volume' => '1–1,000', 'uom' => __( 'Unit', 'advay-theme' ), 'charge' => '$1.00', 'notes' => '' ),
-		array( 'cat' => 'prep', 'service' => __( 'Item prep, 1,001–5,000 / month', 'advay-theme' ), 'type' => 'standard', 'volume' => '1,001–5,000', 'uom' => __( 'Unit', 'advay-theme' ), 'charge' => '$0.85', 'notes' => '' ),
-		array( 'cat' => 'prep', 'service' => __( 'Item prep, 5,001+ / month', 'advay-theme' ), 'type' => 'standard', 'volume' => '5,001+', 'uom' => __( 'Unit', 'advay-theme' ), 'charge' => '$0.70', 'notes' => '' ),
-		array( 'cat' => 'prep', 'service' => __( 'Bundle / multi-pack', 'advay-theme' ), 'type' => 'standard', 'volume' => 'N/A', 'uom' => __( 'Unit', 'advay-theme' ), 'charge' => '$0.75', 'notes' => __( 'In addition to item prep.', 'advay-theme' ) ),
-		array( 'cat' => 'prep', 'service' => __( 'FNSKU labeling', 'advay-theme' ), 'type' => 'standard', 'volume' => 'N/A', 'uom' => __( 'Unit', 'advay-theme' ), 'charge' => '$0.25', 'notes' => '' ),
-		array( 'cat' => 'prep', 'service' => __( 'Polybag', 'advay-theme' ), 'type' => 'standard', 'volume' => 'N/A', 'uom' => __( 'Unit', 'advay-theme' ), 'charge' => '$0.20', 'notes' => '' ),
-		array( 'cat' => 'prep', 'service' => __( 'Suffocation warning', 'advay-theme' ), 'type' => 'standard', 'volume' => 'N/A', 'uom' => __( 'Unit', 'advay-theme' ), 'charge' => '$0.10', 'notes' => '' ),
-		array( 'cat' => 'prep', 'service' => __( 'Inspection', 'advay-theme' ), 'type' => 'standard', 'volume' => 'N/A', 'uom' => __( 'Unit', 'advay-theme' ), 'charge' => '$0.35', 'notes' => '' ),
-		array( 'cat' => 'prep', 'service' => __( 'Fragile / bubble wrap', 'advay-theme' ), 'type' => 'addon', 'volume' => 'N/A', 'uom' => __( 'Unit', 'advay-theme' ), 'charge' => '$0.55', 'notes' => __( 'Added per unit.', 'advay-theme' ) ),
-		array( 'cat' => 'prep', 'service' => __( 'Inserts', 'advay-theme' ), 'type' => 'addon', 'volume' => 'N/A', 'uom' => __( 'Unit', 'advay-theme' ), 'charge' => '$0.30', 'notes' => '' ),
-		array( 'cat' => 'prep', 'service' => __( 'Product photos', 'advay-theme' ), 'type' => 'addon', 'volume' => 'N/A', 'uom' => __( 'Unit', 'advay-theme' ), 'charge' => '$1.50', 'notes' => '' ),
-		array( 'cat' => 'prep', 'service' => __( 'Relabel', 'advay-theme' ), 'type' => 'addon', 'volume' => 'N/A', 'uom' => __( 'Unit', 'advay-theme' ), 'charge' => '$0.40', 'notes' => '' ),
-		array( 'cat' => 'prep', 'service' => __( 'Carton rebuild', 'advay-theme' ), 'type' => 'addon', 'volume' => 'N/A', 'uom' => __( 'Carton', 'advay-theme' ), 'charge' => '$1.50', 'notes' => '' ),
-		array( 'cat' => 'inbound', 'service' => __( 'Carton receive', 'advay-theme' ), 'type' => 'standard', 'volume' => 'N/A', 'uom' => __( 'Carton', 'advay-theme' ), 'charge' => '$1.25', 'notes' => '' ),
-		array( 'cat' => 'inbound', 'service' => __( 'Pallet receive', 'advay-theme' ), 'type' => 'standard', 'volume' => 'N/A', 'uom' => __( 'Pallet', 'advay-theme' ), 'charge' => '$12.00', 'notes' => '' ),
-		array( 'cat' => 'inbound', 'service' => __( '20ft container unload', 'advay-theme' ), 'type' => 'addon', 'volume' => 'N/A', 'uom' => __( 'Container', 'advay-theme' ), 'charge' => '$315.00', 'notes' => '' ),
-		array( 'cat' => 'inbound', 'service' => __( '40ft container unload', 'advay-theme' ), 'type' => 'addon', 'volume' => 'N/A', 'uom' => __( 'Container', 'advay-theme' ), 'charge' => '$475.00', 'notes' => '' ),
-		array( 'cat' => 'inbound', 'service' => __( 'Truck unload', 'advay-theme' ), 'type' => 'addon', 'volume' => 'N/A', 'uom' => __( 'Truck', 'advay-theme' ), 'charge' => '$185.00', 'notes' => '' ),
-		array( 'cat' => 'storage', 'service' => __( 'Pallet storage', 'advay-theme' ), 'type' => 'addon', 'volume' => 'N/A', 'uom' => __( 'Pallet', 'advay-theme' ), 'charge' => '$40.00', 'notes' => __( 'Billed monthly after inventory is on hand more than 30 days.', 'advay-theme' ) ),
-		array( 'cat' => 'storage', 'service' => __( 'Carton storage', 'advay-theme' ), 'type' => 'addon', 'volume' => 'N/A', 'uom' => __( 'Carton', 'advay-theme' ), 'charge' => '$4.00', 'notes' => __( 'Billed monthly after 30 days.', 'advay-theme' ) ),
-		array( 'cat' => 'outbound', 'service' => __( 'FBM pick & pack', 'advay-theme' ), 'type' => 'standard', 'volume' => 'N/A', 'uom' => __( 'Unit', 'advay-theme' ), 'charge' => '$2.50', 'notes' => '' ),
-		array( 'cat' => 'outbound', 'service' => __( 'Carton outbound', 'advay-theme' ), 'type' => 'standard', 'volume' => 'N/A', 'uom' => __( 'Carton', 'advay-theme' ), 'charge' => '$3.50', 'notes' => '' ),
-		array( 'cat' => 'outbound', 'service' => __( 'Pallet outbound', 'advay-theme' ), 'type' => 'standard', 'volume' => 'N/A', 'uom' => __( 'Pallet', 'advay-theme' ), 'charge' => '$18.00', 'notes' => '' ),
-		array( 'cat' => 'labor', 'service' => __( 'Rush / weekend work', 'advay-theme' ), 'type' => 'addon', 'volume' => 'N/A', 'uom' => __( 'Hourly', 'advay-theme' ), 'charge' => '$90.00', 'notes' => __( 'Two-hour minimum.', 'advay-theme' ) ),
-		array( 'cat' => 'labor', 'service' => __( 'Special project labor', 'advay-theme' ), 'type' => 'addon', 'volume' => 'N/A', 'uom' => __( '15 min', 'advay-theme' ), 'charge' => '$22.50', 'notes' => __( 'Billed in 15-minute increments.', 'advay-theme' ) ),
-		array( 'cat' => 'labor', 'service' => __( 'Returns inspection', 'advay-theme' ), 'type' => 'addon', 'volume' => 'N/A', 'uom' => __( 'Unit', 'advay-theme' ), 'charge' => '$1.75', 'notes' => '' ),
-		array( 'cat' => 'labor', 'service' => __( 'Disposal', 'advay-theme' ), 'type' => 'addon', 'volume' => 'N/A', 'uom' => __( 'Unit', 'advay-theme' ), 'charge' => '$0.50', 'notes' => '' ),
-		array( 'cat' => 'labor', 'service' => __( 'High-volume program', 'advay-theme' ), 'type' => 'standard', 'volume' => 'N/A', 'uom' => __( 'Unit', 'advay-theme' ), 'charge' => __( 'Custom', 'advay-theme' ), 'notes' => __( 'Ask for a SKU-level quote.', 'advay-theme' ) ),
-	);
+	$from_cpt = advay_pricing_rows_from_cpt();
+	if ( ! empty( $from_cpt ) ) {
+		return $from_cpt;
+	}
+
+	return advay_pricing_rows_defaults();
 }
 
 function advay_blog_url() {
@@ -966,111 +934,6 @@ function advay_demo_blog_categories() {
 }
 
 /**
- * Create 3 published demo posts once (local Studio / empty blog).
- */
-function advay_maybe_seed_demo_blog_posts() {
-	if ( is_admin() && ! wp_doing_ajax() && ! ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
-		/* Still allow seeding from front-end so Studio sites get content without WP-CLI. */
-	}
-
-	if ( get_option( 'advay_blog_demos_seeded' ) === '2.3.7b' ) {
-		return;
-	}
-
-	$demos = advay_demo_blog_posts();
-	foreach ( $demos as $demo ) {
-		$existing = get_page_by_path( $demo['slug'], OBJECT, 'post' );
-		$post_id  = 0;
-
-		if ( $existing ) {
-			$post_id = (int) $existing->ID;
-		} else {
-			$cat_id = 0;
-			$term   = get_term_by( 'name', $demo['category'], 'category' );
-			if ( ! $term || is_wp_error( $term ) ) {
-				$created = wp_insert_term( $demo['category'], 'category' );
-				if ( ! is_wp_error( $created ) ) {
-					$cat_id = (int) $created['term_id'];
-				}
-			} else {
-				$cat_id = (int) $term->term_id;
-			}
-
-			$paragraphs = array_filter( array_map( 'trim', preg_split( "/\n\n+/", $demo['content'] ) ) );
-			$body       = '';
-			foreach ( $paragraphs as $p ) {
-				$body .= "<!-- wp:paragraph -->\n<p>" . wp_strip_all_tags( $p ) . "</p>\n<!-- /wp:paragraph -->\n\n";
-			}
-
-			$inserted = wp_insert_post(
-				array(
-					'post_title'   => $demo['title'],
-					'post_name'    => $demo['slug'],
-					'post_content' => $body,
-					'post_excerpt' => $demo['excerpt'],
-					'post_status'  => 'publish',
-					'post_type'    => 'post',
-					'post_date'    => $demo['date'],
-					'post_author'  => 1,
-				),
-				true
-			);
-
-			if ( is_wp_error( $inserted ) || ! $inserted ) {
-				continue;
-			}
-
-			$post_id = (int) $inserted;
-			if ( $cat_id ) {
-				wp_set_post_categories( $post_id, array( $cat_id ) );
-			}
-		}
-
-		if ( ! $post_id || has_post_thumbnail( $post_id ) ) {
-			continue;
-		}
-
-		/* Attach theme image as featured image. */
-		$rel  = $demo['image'];
-		$file = get_template_directory() . '/assets/' . ltrim( $rel, '/' );
-		if ( ! file_exists( $file ) ) {
-			continue;
-		}
-
-		require_once ABSPATH . 'wp-admin/includes/file.php';
-		require_once ABSPATH . 'wp-admin/includes/media.php';
-		require_once ABSPATH . 'wp-admin/includes/image.php';
-
-		$bits = wp_upload_bits( basename( $file ), null, file_get_contents( $file ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-		if ( ! empty( $bits['error'] ) || empty( $bits['file'] ) ) {
-			continue;
-		}
-
-		$filetype  = wp_check_filetype( basename( $bits['file'] ), null );
-		$attach_id = wp_insert_attachment(
-			array(
-				'post_mime_type' => $filetype['type'],
-				'post_title'     => sanitize_file_name( pathinfo( $bits['file'], PATHINFO_FILENAME ) ),
-				'post_content'   => '',
-				'post_status'    => 'inherit',
-			),
-			$bits['file'],
-			$post_id
-		);
-		if ( is_wp_error( $attach_id ) ) {
-			continue;
-		}
-
-		$meta = wp_generate_attachment_metadata( $attach_id, $bits['file'] );
-		wp_update_attachment_metadata( $attach_id, $meta );
-		set_post_thumbnail( $post_id, $attach_id );
-	}
-
-	update_option( 'advay_blog_demos_seeded', '2.3.7b' );
-}
-add_action( 'init', 'advay_maybe_seed_demo_blog_posts', 25 );
-
-/**
  * Estimated reading time for a post.
  */
 function advay_reading_time( $post_id = null ) {
@@ -1121,15 +984,22 @@ function advay_brand_logos() {
 		array( 'name' => 'No Knife Body', 'file' => 'images/brand-noknife.png' ),
 	);
 
+	$front = advay_acf_front_id();
 	$cache = array();
-	foreach ( $logos as $logo ) {
-		$path = get_template_directory() . '/assets/' . $logo['file'];
-		if ( file_exists( $path ) ) {
-			$cache[] = array(
-				'name' => $logo['name'],
-				'src'  => advay_asset_uri( $logo['file'] ),
-			);
+	foreach ( $logos as $i => $logo ) {
+		$n        = $i + 1;
+		$name     = advay_get_acf( 'home_logo_' . $n . '_name', $logo['name'], $front );
+		$acf_img  = advay_get_acf( 'home_logo_' . $n . '_image', null, $front );
+		$path     = get_template_directory() . '/assets/' . $logo['file'];
+		$fallback = file_exists( $path ) ? advay_asset_uri( $logo['file'] ) : '';
+		$src      = advay_acf_image_url( $acf_img, $fallback );
+		if ( ! $src ) {
+			continue;
 		}
+		$cache[] = array(
+			'name' => $name,
+			'src'  => $src,
+		);
 	}
 
 	return $cache;
@@ -1179,15 +1049,23 @@ function advay_founder_portraits() {
 		),
 	);
 
-	$out = array();
-	foreach ( $people as $person ) {
-		$path = get_template_directory() . '/assets/' . $person['file'];
-		if ( file_exists( $path ) ) {
-			$out[] = array(
-				'src'     => advay_asset_uri( $person['file'] ),
-				'caption' => $person['caption'],
-			);
+	$front = advay_acf_front_id();
+	$out   = array();
+	foreach ( $people as $i => $person ) {
+		$n        = $i + 1;
+		$caption  = advay_get_acf( 'home_founder_' . $n . '_caption', $person['caption'], $front );
+		$acf_img  = advay_get_acf( 'home_founder_' . $n . '_image', null, $front );
+		$path     = get_template_directory() . '/assets/' . $person['file'];
+		$fallback = file_exists( $path ) ? advay_asset_uri( $person['file'] ) : '';
+		$src      = advay_acf_image_url( $acf_img, $fallback );
+		if ( ! $src ) {
+			continue;
 		}
+		$alt = advay_acf_image_alt( $acf_img, $caption );
+		$out[] = array(
+			'src'     => $src,
+			'caption' => $alt ? $alt : $caption,
+		);
 	}
 
 	return $out;
@@ -1243,6 +1121,8 @@ function advay_hero_channels() {
 		),
 	);
 
+	$front = advay_acf_front_id();
+
 	foreach ( $channels as &$channel ) {
 		$id         = $channel['id'];
 		$candidates = array( $id . '.mp4', strtoupper( $id ) . '.mp4', ucfirst( $id ) . '.mp4' );
@@ -1257,6 +1137,47 @@ function advay_hero_channels() {
 			$channel['video'] = $base . $found . '?v=' . filemtime( $folder . $found );
 		} else {
 			$channel['video'] = $remote[ $id ];
+		}
+
+		/* Prefer home_hero_{id}_*; keep legacy hero_{id}_* and Amazon-only fields. */
+		$label   = advay_get_acf( 'home_hero_' . $id . '_label', '', $front );
+		$heading = advay_get_acf( 'home_hero_' . $id . '_heading', '', $front );
+		$body    = advay_get_acf( 'home_hero_' . $id . '_description', '', $front );
+		$video   = advay_get_acf( 'home_hero_' . $id . '_video', '', $front );
+
+		if ( ! is_string( $heading ) || '' === trim( $heading ) ) {
+			$heading = advay_get_acf( 'hero_' . $id . '_heading', '', $front );
+		}
+		if ( ! is_string( $body ) || '' === trim( $body ) ) {
+			$body = advay_get_acf( 'hero_' . $id . '_description', '', $front );
+		}
+		if ( ! is_string( $video ) || '' === trim( $video ) ) {
+			$video = advay_get_acf( 'hero_' . $id . '_video', '', $front );
+		}
+
+		if ( 'amazon' === $id ) {
+			if ( ! is_string( $heading ) || '' === trim( $heading ) ) {
+				$heading = advay_get_acf( 'home_hero_heading', '', $front );
+			}
+			if ( ! is_string( $body ) || '' === trim( $body ) ) {
+				$body = advay_get_acf( 'home_hero_description', '', $front );
+			}
+		}
+
+		if ( is_string( $label ) && '' !== trim( $label ) ) {
+			$channel['label'] = $label;
+			if ( 'dtc' === $id ) {
+				$channel['wordmark'] = $label;
+			}
+		}
+		if ( is_string( $heading ) && '' !== trim( $heading ) ) {
+			$channel['headline'] = $heading;
+		}
+		if ( is_string( $body ) && '' !== trim( $body ) ) {
+			$channel['body'] = $body;
+		}
+		if ( is_string( $video ) && '' !== trim( $video ) ) {
+			$channel['video'] = $video;
 		}
 	}
 	unset( $channel );

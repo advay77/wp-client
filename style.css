@@ -2,7 +2,7 @@
 Theme Name: Advay Theme
 Author: Advay
 Description: FBA / Walmart WFS prep center theme.
-Version: 1.4.0
+Version: 2.32.0
 Text Domain: advay-theme
 */
 
@@ -7678,7 +7678,7 @@ a.ob-pill:hover {
 	inset: 0;
 	background:
 		linear-gradient(135deg, rgba(6, 16, 24, 0.9) 0%, rgba(6, 16, 24, 0.72) 48%, rgba(6, 16, 24, 0.88) 100%),
-		url("https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=2400&q=80") center 35% / cover no-repeat;
+		url("assets/images/os-mission-map.png") center 35% / cover no-repeat;
 }
 
 .os-mission-bg::after {

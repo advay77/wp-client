@@ -1,7 +1,13 @@
 <?php
 /**
+ * Template Name: Pricing
+ * Template Post Type: page
+ *
  * Pricing page (slug: pricing).
+ *
+ * @package Advay_Theme
  */
+
 get_header();
 
 $groups = array(
@@ -11,6 +17,39 @@ $groups = array(
 	'outbound' => __( 'Outbound', 'advay-theme' ),
 	'labor'    => __( 'Labor & extras', 'advay-theme' ),
 );
+
+$highlight_defaults = array(
+	array(
+		'label' => __( 'Item prep from', 'advay-theme' ),
+		'value' => '$1.00',
+		'note'  => __( 'per unit at 1–1,000 / month', 'advay-theme' ),
+	),
+	array(
+		'label' => __( 'Pallet storage', 'advay-theme' ),
+		'value' => '$40',
+		'note'  => __( 'per pallet after 30 days', 'advay-theme' ),
+	),
+	array(
+		'label' => __( '20ft unload', 'advay-theme' ),
+		'value' => '$315',
+		'note'  => __( 'per container', 'advay-theme' ),
+	),
+	array(
+		'label' => __( 'Rush / weekend', 'advay-theme' ),
+		'value' => '$90',
+		'note'  => __( 'per hour, 2-hour minimum', 'advay-theme' ),
+	),
+);
+
+$highlights = array();
+foreach ( $highlight_defaults as $i => $row ) {
+	$n            = $i + 1;
+	$highlights[] = array(
+		'label' => advay_page_acf( 'pricing', 'pricing_highlight_' . $n . '_label', $row['label'] ),
+		'value' => advay_page_acf( 'pricing', 'pricing_highlight_' . $n . '_value', $row['value'] ),
+		'note'  => advay_page_acf( 'pricing', 'pricing_highlight_' . $n . '_note', $row['note'] ),
+	);
+}
 ?>
 
 <main id="main-content" class="pricing-page">
@@ -24,26 +63,13 @@ $groups = array(
 
 	<section class="pricing-highlights">
 		<div class="container highlights-grid">
-			<article>
-				<p><?php esc_html_e( 'Item prep from', 'advay-theme' ); ?></p>
-				<strong>$1.00</strong>
-				<span><?php esc_html_e( 'per unit at 1–1,000 / month', 'advay-theme' ); ?></span>
-			</article>
-			<article>
-				<p><?php esc_html_e( 'Pallet storage', 'advay-theme' ); ?></p>
-				<strong>$40</strong>
-				<span><?php esc_html_e( 'per pallet after 30 days', 'advay-theme' ); ?></span>
-			</article>
-			<article>
-				<p><?php esc_html_e( '20ft unload', 'advay-theme' ); ?></p>
-				<strong>$315</strong>
-				<span><?php esc_html_e( 'per container', 'advay-theme' ); ?></span>
-			</article>
-			<article>
-				<p><?php esc_html_e( 'Rush / weekend', 'advay-theme' ); ?></p>
-				<strong>$90</strong>
-				<span><?php esc_html_e( 'per hour, 2-hour minimum', 'advay-theme' ); ?></span>
-			</article>
+			<?php foreach ( $highlights as $hl ) : ?>
+				<article>
+					<p><?php echo esc_html( $hl['label'] ); ?></p>
+					<strong><?php echo esc_html( $hl['value'] ); ?></strong>
+					<span><?php echo esc_html( $hl['note'] ); ?></span>
+				</article>
+			<?php endforeach; ?>
 		</div>
 	</section>
 

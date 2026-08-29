@@ -119,10 +119,12 @@ $onboard = advay_onboarding_url();
 					<header><?php esc_html_e( 'First, ship inbound', 'advay-theme' ); ?></header>
 					<div class="svc-step-visual is-one">
 						<img
-							src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&q=80"
+							src="<?php echo esc_url( advay_asset_uri( 'images/svc-warehouse.jpg' ) ); ?>"
 							alt="<?php esc_attr_e( 'Inbound cartons arriving at warehouse', 'advay-theme' ); ?>"
 							loading="lazy"
 							decoding="async"
+							width="900"
+							height="600"
 						>
 					</div>
 					<p><?php esc_html_e( 'Send cartons or a container to Franklinville. We check in against your list and flag misses the same day.', 'advay-theme' ); ?></p>
@@ -131,10 +133,12 @@ $onboard = advay_onboarding_url();
 					<header><?php esc_html_e( 'Then, we prep to spec', 'advay-theme' ); ?></header>
 					<div class="svc-step-visual is-two">
 						<img
-							src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=900&q=80"
+							src="<?php echo esc_url( advay_asset_uri( 'images/client-success.jpg' ) ); ?>"
 							alt="<?php esc_attr_e( 'Products being labeled and prepped for shipping', 'advay-theme' ); ?>"
 							loading="lazy"
 							decoding="async"
+							width="900"
+							height="600"
 						>
 					</div>
 					<p><?php esc_html_e( 'Label, bag, kit, and rebuild cartons for Amazon, Walmart, TikTok, or DTC — including returns that need a second pass.', 'advay-theme' ); ?></p>

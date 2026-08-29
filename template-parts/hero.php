@@ -5,6 +5,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $channels = advay_hero_channels();
 $first    = reset( $channels );
+$front    = advay_acf_front_id();
+
+$hero_cta_primary = advay_get_acf( 'home_hero_cta', '', $front );
+$hero_cta_label   = advay_acf_link_title( $hero_cta_primary, __( 'Grow with ElitePrep', 'advay-theme' ) );
+$hero_cta_url     = advay_acf_link_url( $hero_cta_primary, advay_contact_url() );
+
+$hero_cta_secondary       = advay_get_acf( 'home_hero_cta_secondary', '', $front );
+$hero_cta_secondary_label = advay_acf_link_title( $hero_cta_secondary, __( 'Learn more', 'advay-theme' ) );
+$hero_cta_secondary_url   = advay_acf_link_url( $hero_cta_secondary, home_url( '/#services' ) );
+
+$hero_image     = advay_get_acf( 'home_hero_image', '', $front );
+$hero_image_url = advay_acf_image_url( $hero_image, '' );
 ?>
 <section class="hero" aria-labelledby="hero-heading" data-hero>
 	<div class="hero-media" data-hero-media>
@@ -16,6 +28,7 @@ $first    = reset( $channels );
 			loop
 			playsinline
 			preload="metadata"
+			<?php echo $hero_image_url ? 'poster="' . esc_url( $hero_image_url ) . '"' : ''; ?>
 		>
 			<source src="<?php echo esc_url( $first['video'] ); ?>" type="video/mp4">
 		</video>
@@ -27,12 +40,12 @@ $first    = reset( $channels );
 			<h1 id="hero-heading"><?php echo esc_html( $first['headline'] ); ?></h1>
 			<p class="lede" data-hero-lede><?php echo esc_html( $first['body'] ); ?></p>
 			<div class="hero-actions">
-				<a class="button button-light" href="<?php echo esc_url( advay_contact_url() ); ?>">
-					<?php esc_html_e( 'Grow with ElitePrep', 'advay-theme' ); ?>
+				<a class="button button-light" href="<?php echo esc_url( $hero_cta_url ); ?>">
+					<?php echo esc_html( $hero_cta_label ); ?>
 					<span class="btn-arrow" aria-hidden="true"></span>
 				</a>
-				<a class="button button-ghost-light" href="<?php echo esc_url( home_url( '/#services' ) ); ?>">
-					<?php esc_html_e( 'Learn more', 'advay-theme' ); ?>
+				<a class="button button-ghost-light" href="<?php echo esc_url( $hero_cta_secondary_url ); ?>">
+					<?php echo esc_html( $hero_cta_secondary_label ); ?>
 					<span class="btn-arrow" aria-hidden="true"></span>
 				</a>
 			</div>

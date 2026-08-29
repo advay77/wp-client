@@ -2,6 +2,9 @@
 /**
  * Join Our Team — vision and mission.
  *
+ * Template Name: Join Our Team
+ * Template Post Type: page
+ *
  * @package Advay_Theme
  */
 

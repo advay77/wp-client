@@ -19,17 +19,24 @@ function advay_success_story_slugs() {
 }
 
 /**
- * Whether a success story slug exists.
+ * Whether a success story slug exists (CPT or PHP fallback data).
  *
  * @param string $slug Story slug.
  */
 function advay_success_story_exists( $slug ) {
 	$slug = sanitize_key( $slug );
-	return isset( advay_success_stories_data()[ $slug ] );
+	if ( isset( advay_success_stories_data()[ $slug ] ) ) {
+		return true;
+	}
+
+	return function_exists( 'advay_get_success_story_post' ) && (bool) advay_get_success_story_post( $slug );
 }
 
 /**
  * Success story content by slug.
+ *
+ * Prefers published CPT + ACF fields; empty ACF fields fall back to PHP array
+ * for the same slug. PHP data file is never deleted by this layer.
  *
  * @param string $slug Story slug.
  * @return array<string, mixed>
@@ -37,8 +44,144 @@ function advay_success_story_exists( $slug ) {
 function advay_get_success_story( $slug = 'no-knife-body' ) {
 	$slug    = sanitize_key( $slug );
 	$stories = advay_success_stories_data();
+	$fallback = isset( $stories[ $slug ] ) ? $stories[ $slug ] : $stories['no-knife-body'];
 
-	return isset( $stories[ $slug ] ) ? $stories[ $slug ] : $stories['no-knife-body'];
+	if ( function_exists( 'advay_get_success_story_post' ) ) {
+		$post = advay_get_success_story_post( $slug );
+		if ( $post ) {
+			return advay_success_story_from_post( $post, $fallback );
+		}
+	}
+
+	return $fallback;
+}
+
+/**
+ * Build story array from CPT + ACF Free fields, merging empty fields with $fallback.
+ *
+ * @param WP_Post              $post     Success story post.
+ * @param array<string, mixed> $fallback PHP defaults for this slug (may be empty).
+ * @return array<string, mixed>
+ */
+function advay_success_story_from_post( $post, $fallback = array() ) {
+	$post_id = (int) $post->ID;
+	$fb      = is_array( $fallback ) ? $fallback : array();
+
+	$brand = advay_get_acf( 'ss_brand', isset( $fb['brand'] ) ? $fb['brand'] : $post->post_title, $post_id );
+
+	$hero_fallback = isset( $fb['hero_image'] ) ? $fb['hero_image'] : '';
+	$founder_fb    = isset( $fb['founder_image'] ) ? $fb['founder_image'] : $hero_fallback;
+	$thumb         = get_the_post_thumbnail_url( $post_id, 'full' );
+	if ( $thumb ) {
+		$hero_fallback = $hero_fallback ? $hero_fallback : $thumb;
+		$founder_fb    = $founder_fb ? $founder_fb : $thumb;
+	}
+
+	$story = array(
+		'brand'              => $brand,
+		'headline_prefix'    => advay_get_acf( 'ss_headline_prefix', isset( $fb['headline_prefix'] ) ? $fb['headline_prefix'] : '', $post_id ),
+		'headline_highlight' => advay_get_acf( 'ss_headline_highlight', isset( $fb['headline_highlight'] ) ? $fb['headline_highlight'] : '', $post_id ),
+		'lead'               => advay_get_acf( 'ss_lead', isset( $fb['lead'] ) ? $fb['lead'] : '', $post_id ),
+		'video'              => advay_get_acf( 'ss_video_url', isset( $fb['video'] ) ? $fb['video'] : '', $post_id ),
+		'before_heading'     => advay_get_acf( 'ss_before_heading', isset( $fb['before_heading'] ) ? $fb['before_heading'] : '', $post_id ),
+		'strategies_heading' => advay_get_acf( 'ss_strategies_heading', isset( $fb['strategies_heading'] ) ? $fb['strategies_heading'] : '', $post_id ),
+		'insight_lead'       => advay_get_acf( 'ss_insight_lead', isset( $fb['insight_lead'] ) ? $fb['insight_lead'] : '', $post_id ),
+		'insight_bold'       => advay_get_acf( 'ss_insight_bold', isset( $fb['insight_bold'] ) ? $fb['insight_bold'] : '', $post_id ),
+		'insight_tail'       => advay_get_acf( 'ss_insight_tail', isset( $fb['insight_tail'] ) ? $fb['insight_tail'] : '', $post_id ),
+		'quote'              => advay_get_acf( 'ss_quote', isset( $fb['quote'] ) ? $fb['quote'] : '', $post_id ),
+		'founder'            => advay_get_acf( 'ss_founder', isset( $fb['founder'] ) ? $fb['founder'] : '', $post_id ),
+		'founder_role'       => advay_get_acf( 'ss_founder_role', isset( $fb['founder_role'] ) ? $fb['founder_role'] : '', $post_id ),
+		'founder_caption'    => advay_get_acf( 'ss_founder_caption', isset( $fb['founder_caption'] ) ? $fb['founder_caption'] : '', $post_id ),
+		'results_summary'    => advay_get_acf( 'ss_results_summary', isset( $fb['results_summary'] ) ? $fb['results_summary'] : '', $post_id ),
+		'hero_image'         => advay_acf_image_url( advay_get_acf( 'ss_hero_image', null, $post_id ), $hero_fallback ),
+		'founder_image'      => advay_acf_image_url( advay_get_acf( 'ss_founder_image', null, $post_id ), $founder_fb ),
+		'before'             => array(),
+		'transform_before'   => array(),
+		'transform_after'    => array(),
+		'strategies'         => array(),
+		'results'            => array(),
+	);
+
+	$fb_before = isset( $fb['before'] ) && is_array( $fb['before'] ) ? $fb['before'] : array();
+	for ( $i = 1; $i <= 2; $i++ ) {
+		$default = isset( $fb_before[ $i - 1 ] ) ? $fb_before[ $i - 1 ] : '';
+		$item    = advay_get_acf( 'ss_before_' . $i, $default, $post_id );
+		if ( '' !== (string) $item ) {
+			$story['before'][] = $item;
+		}
+	}
+	if ( empty( $story['before'] ) && $fb_before ) {
+		$story['before'] = $fb_before;
+	}
+
+	$fb_tb = isset( $fb['transform_before'] ) && is_array( $fb['transform_before'] ) ? $fb['transform_before'] : array();
+	for ( $i = 1; $i <= 4; $i++ ) {
+		$default = isset( $fb_tb[ $i - 1 ] ) ? $fb_tb[ $i - 1 ] : '';
+		$item    = advay_get_acf( 'ss_transform_before_' . $i, $default, $post_id );
+		if ( '' !== (string) $item ) {
+			$story['transform_before'][] = $item;
+		}
+	}
+	if ( empty( $story['transform_before'] ) && $fb_tb ) {
+		$story['transform_before'] = $fb_tb;
+	}
+
+	$fb_ta = isset( $fb['transform_after'] ) && is_array( $fb['transform_after'] ) ? $fb['transform_after'] : array();
+	for ( $i = 1; $i <= 4; $i++ ) {
+		$default = isset( $fb_ta[ $i - 1 ] ) ? $fb_ta[ $i - 1 ] : '';
+		$item    = advay_get_acf( 'ss_transform_after_' . $i, $default, $post_id );
+		if ( '' !== (string) $item ) {
+			$story['transform_after'][] = $item;
+		}
+	}
+	if ( empty( $story['transform_after'] ) && $fb_ta ) {
+		$story['transform_after'] = $fb_ta;
+	}
+
+	$fb_strategies = isset( $fb['strategies'] ) && is_array( $fb['strategies'] ) ? $fb['strategies'] : array();
+	for ( $i = 1; $i <= 5; $i++ ) {
+		$fb_step = isset( $fb_strategies[ $i - 1 ] ) ? $fb_strategies[ $i - 1 ] : array();
+		$title   = advay_get_acf( 'ss_strategy_' . $i . '_title', isset( $fb_step['title'] ) ? $fb_step['title'] : '', $post_id );
+		$text    = advay_get_acf( 'ss_strategy_' . $i . '_text', isset( $fb_step['text'] ) ? $fb_step['text'] : '', $post_id );
+		$icon    = advay_get_acf( 'ss_strategy_' . $i . '_icon', isset( $fb_step['icon'] ) ? $fb_step['icon'] : 'target', $post_id );
+		if ( '' === (string) $title && '' === (string) $text ) {
+			continue;
+		}
+		$story['strategies'][] = array(
+			'icon'  => $icon ? $icon : 'target',
+			'title' => $title,
+			'text'  => $text,
+		);
+	}
+	if ( empty( $story['strategies'] ) && $fb_strategies ) {
+		$story['strategies'] = $fb_strategies;
+	}
+
+	$fb_results = isset( $fb['results'] ) && is_array( $fb['results'] ) ? $fb['results'] : array();
+	for ( $i = 1; $i <= 4; $i++ ) {
+		$fb_stat = isset( $fb_results[ $i - 1 ] ) ? $fb_results[ $i - 1 ] : array();
+		$value   = advay_get_acf( 'ss_result_' . $i . '_value', isset( $fb_stat['value'] ) ? $fb_stat['value'] : '', $post_id );
+		$label   = advay_get_acf( 'ss_result_' . $i . '_label', isset( $fb_stat['label'] ) ? $fb_stat['label'] : '', $post_id );
+		$icon    = advay_get_acf( 'ss_result_' . $i . '_icon', isset( $fb_stat['icon'] ) ? $fb_stat['icon'] : 'chart-bars', $post_id );
+		$sub     = advay_get_acf( 'ss_result_' . $i . '_sublabel', isset( $fb_stat['sublabel'] ) ? $fb_stat['sublabel'] : '', $post_id );
+		if ( '' === (string) $value && '' === (string) $label ) {
+			continue;
+		}
+		$stat = array(
+			'icon'  => $icon ? $icon : 'chart-bars',
+			'value' => $value,
+			'label' => $label,
+		);
+		if ( '' !== (string) $sub ) {
+			$stat['sublabel'] = $sub;
+		}
+		$story['results'][] = $stat;
+	}
+	if ( empty( $story['results'] ) && $fb_results ) {
+		$story['results'] = $fb_results;
+	}
+
+	return $story;
 }
 
 /**
@@ -75,6 +218,22 @@ function advay_success_story_featured_slugs() {
  * @param string $slug Story slug.
  */
 function advay_success_story_card_image( $slug ) {
+	$slug = sanitize_key( $slug );
+
+	if ( function_exists( 'advay_get_success_story_post' ) ) {
+		$post = advay_get_success_story_post( $slug );
+		if ( $post ) {
+			$thumb = get_the_post_thumbnail_url( $post, 'medium_large' );
+			if ( $thumb ) {
+				return $thumb;
+			}
+			$acf_hero = advay_acf_image_url( advay_get_acf( 'ss_hero_image', null, $post->ID ), '' );
+			if ( $acf_hero ) {
+				return $acf_hero;
+			}
+		}
+	}
+
 	$map = array(
 		'no-knife-body'               => array(
 			'images/founders/no-knife-body.png',
@@ -86,7 +245,6 @@ function advay_success_story_card_image( $slug ) {
 		'littlebay-caribbean-kitchen' => array( 'images/founders/littlebay.png', '' ),
 	);
 
-	$slug = sanitize_key( $slug );
 	if ( ! isset( $map[ $slug ] ) ) {
 		return advay_theme_image( 'images/company-placeholder.svg' );
 	}
@@ -134,13 +292,21 @@ function advay_home_testimonial_clips() {
 
 	foreach ( advay_home_testimonial_slugs() as $slug ) {
 		$story = advay_get_success_story( $slug );
+		$video = '';
+		if ( ! empty( $story['video'] ) ) {
+			$video = $story['video'];
+		} elseif ( isset( $videos[ $slug ] ) ) {
+			$video = $videos[ $slug ];
+		} else {
+			$video = advay_story_video( $slug );
+		}
 		$clips[] = array(
 			'slug'  => $slug,
 			'chip'  => $story['brand'],
 			'quote' => '“' . $story['quote'] . '”',
 			'brand' => $story['founder'],
 			'role'  => $story['founder_role'],
-			'video' => isset( $videos[ $slug ] ) ? $videos[ $slug ] : advay_story_video( $slug ),
+			'video' => $video,
 		);
 	}
 

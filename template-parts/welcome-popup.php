@@ -3,8 +3,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$quote_url = advay_contact_url();
-$book_url  = advay_onboarding_url();
+$front = advay_acf_front_id();
+
+$popup_kicker = advay_get_acf( 'home_popup_kicker', __( 'Walmart-approved · Amazon-ready', 'advay-theme' ), $front );
+$popup_visual = advay_get_acf( 'home_popup_visual_title', __( 'Your inventory shouldn\'t wait.', 'advay-theme' ), $front );
+$popup_title  = advay_get_acf( 'home_popup_title', __( 'Prep that ships on time, every time.', 'advay-theme' ), $front );
+$popup_copy   = advay_get_acf( 'home_popup_copy', __( 'One flat rate. No hidden fees. No minimums. Compliant, accurate, and out the door in 24-48 hours.', 'advay-theme' ), $front );
+
+$cta_primary       = advay_get_acf( 'home_popup_cta_primary', '', $front );
+$cta_primary_label = advay_acf_link_title( $cta_primary, __( 'Get a Free Quote', 'advay-theme' ) );
+$cta_primary_url   = advay_acf_link_url( $cta_primary, advay_contact_url() );
+
+$cta_secondary       = advay_get_acf( 'home_popup_cta_secondary', '', $front );
+$cta_secondary_label = advay_acf_link_title( $cta_secondary, __( 'Book a Call with Odi', 'advay-theme' ) );
+$cta_secondary_url   = advay_acf_link_url( $cta_secondary, advay_onboarding_url() );
+
+$popup_img     = advay_get_acf( 'home_popup_image', null, $front );
+$popup_img_src = advay_acf_image_url( $popup_img, advay_asset_uri( 'images/svc-warehouse.jpg' ) );
+$popup_lane_1  = advay_get_acf( 'home_popup_lane_1', __( 'Amazon FBA', 'advay-theme' ), $front );
+$popup_lane_2  = advay_get_acf( 'home_popup_lane_2', __( 'Walmart WFS', 'advay-theme' ), $front );
+$popup_lane_3  = advay_get_acf( 'home_popup_lane_3', __( 'TikTok Shop', 'advay-theme' ), $front );
 ?>
 <div class="epc-popup" id="epc-popup" hidden>
 	<div class="epc-popup-backdrop" data-popup-close></div>
@@ -19,16 +37,16 @@ $book_url  = advay_onboarding_url();
 			<span aria-hidden="true">&times;</span>
 		</button>
 		<div class="epc-popup-visual" aria-hidden="true">
-			<p class="epc-popup-kicker"><?php esc_html_e( 'Walmart-approved · Amazon-ready', 'advay-theme' ); ?></p>
-			<p class="epc-popup-visual-title"><?php esc_html_e( 'Your inventory shouldn\'t wait.', 'advay-theme' ); ?></p>
+			<p class="epc-popup-kicker"><?php echo esc_html( $popup_kicker ); ?></p>
+			<p class="epc-popup-visual-title"><?php echo esc_html( $popup_visual ); ?></p>
 			<div class="epc-popup-lanes">
-				<span><?php esc_html_e( 'Amazon FBA', 'advay-theme' ); ?></span>
-				<span><?php esc_html_e( 'Walmart WFS', 'advay-theme' ); ?></span>
-				<span><?php esc_html_e( 'TikTok Shop', 'advay-theme' ); ?></span>
+				<span><?php echo esc_html( $popup_lane_1 ); ?></span>
+				<span><?php echo esc_html( $popup_lane_2 ); ?></span>
+				<span><?php echo esc_html( $popup_lane_3 ); ?></span>
 			</div>
 			<div class="epc-popup-cartons" aria-hidden="true">
 				<img
-					src="<?php echo esc_url( advay_asset_uri( 'images/svc-warehouse.jpg' ) ); ?>"
+					src="<?php echo esc_url( $popup_img_src ); ?>"
 					alt=""
 					width="320"
 					height="140"
@@ -38,16 +56,16 @@ $book_url  = advay_onboarding_url();
 			</div>
 		</div>
 		<div class="epc-popup-copy">
-			<h2 id="epc-popup-title"><?php esc_html_e( 'Prep that ships on time, every time.', 'advay-theme' ); ?></h2>
+			<h2 id="epc-popup-title"><?php echo esc_html( $popup_title ); ?></h2>
 			<p id="epc-popup-copy">
-				<?php esc_html_e( 'One flat rate. No hidden fees. No minimums. Compliant, accurate, and out the door in 24-48 hours.', 'advay-theme' ); ?>
+				<?php echo esc_html( $popup_copy ); ?>
 			</p>
 			<div class="epc-popup-actions">
-				<a class="button button-primary epc-popup-cta" href="<?php echo esc_url( $quote_url ); ?>">
-					<?php esc_html_e( 'Get a Free Quote', 'advay-theme' ); ?>
+				<a class="button button-primary epc-popup-cta" href="<?php echo esc_url( $cta_primary_url ); ?>">
+					<?php echo esc_html( $cta_primary_label ); ?>
 				</a>
-				<a class="button epc-popup-cta-secondary" href="<?php echo esc_url( $book_url ); ?>">
-					<?php esc_html_e( 'Book a Call with Odi', 'advay-theme' ); ?>
+				<a class="button epc-popup-cta-secondary" href="<?php echo esc_url( $cta_secondary_url ); ?>">
+					<?php echo esc_html( $cta_secondary_label ); ?>
 				</a>
 			</div>
 		</div>

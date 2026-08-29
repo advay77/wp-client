@@ -9,82 +9,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$brands = array(
-	array(
-		'name'     => 'No Knife Body',
-		'slug'     => 'no-knife-body',
-		'file'     => 'images/brand-noknife.png',
-		'initials' => 'NK',
-		'quote'    => __( 'Better service for our customers and more precious family time for me.', 'advay-theme' ),
-		'author'   => __( 'No Knife Body', 'advay-theme' ),
-		'role'     => __( 'Founder', 'advay-theme' ),
-		'stats'    => array(
-			array( 'n' => '28 hr', 'l' => __( 'Prep turnaround', 'advay-theme' ) ),
-			array( 'n' => '99.8%', 'l' => __( 'Label accuracy', 'advay-theme' ) ),
-		),
-	),
-	array(
-		'name'     => 'Daka Vitamins',
-		'slug'     => 'daka-vitamins',
-		'file'     => 'images/brand-daka.png',
-		'initials' => 'DV',
-		'quote'    => __( 'Vitamin labeling and lot tracking used to slow every inbound. EPC keeps our FBA prep compliant so supplements stay in stock without account risk.', 'advay-theme' ),
-		'author'   => __( 'Ada Okoro', 'advay-theme' ),
-		'role'     => __( 'Founder, Daka Vitamins', 'advay-theme' ),
-		'stats'    => array(
-			array( 'n' => '99.8%', 'l' => __( 'Label accuracy', 'advay-theme' ) ),
-			array( 'n' => '0', 'l' => __( 'Compliance holds', 'advay-theme' ) ),
-		),
-	),
-	array(
-		'name'     => 'Gainz & Airplanes',
-		'slug'     => 'gainz-airplanes',
-		'file'     => 'images/brand-gainz.jpg',
-		'initials' => 'GA',
-		'quote'    => __( 'Supplement prep has zero room for labeling errors. EPC\'s inspection and FNSKU process keeps our Amazon account clean and in stock.', 'advay-theme' ),
-		'author'   => __( 'Devon Cross', 'advay-theme' ),
-		'role'     => __( 'Founder, Gainz & Airplanes', 'advay-theme' ),
-		'stats'    => array(
-			array( 'n' => '99.6%', 'l' => __( 'Prep accuracy', 'advay-theme' ) ),
-			array( 'n' => '0', 'l' => __( 'Stranded inventory events', 'advay-theme' ) ),
-		),
-	),
-	array(
-		'name'     => 'Little Caribbean Kitchen',
-		'slug'     => 'littlebay-caribbean-kitchen',
-		'file'     => 'images/brand-littlebay.jpg',
-		'initials' => 'LC',
-		'quote'    => __( 'We went from packing orders on the kitchen table to same-day dispatch. EPC handles receiving, prep, and shipping so we can focus on the food.', 'advay-theme' ),
-		'author'   => __( 'Marlon Bay', 'advay-theme' ),
-		'role'     => __( 'Founder, Little Caribbean Kitchen', 'advay-theme' ),
-		'stats'    => array(
-			array( 'n' => __( '24 hrs', 'advay-theme' ), 'l' => __( 'Order turnaround', 'advay-theme' ) ),
-			array( 'n' => '3×', 'l' => __( 'Orders shipped / month', 'advay-theme' ) ),
-		),
-	),
-	array(
-		'name'     => 'Ajayi Popcorn',
-		'slug'     => 'ajayi-popcorn',
-		'file'     => 'images/brand-ajayi.jpg',
-		'initials' => 'AP',
-		'quote'    => __( 'Seasonal snack spikes used to break us. Now EPC scales fulfillment up and down with demand — no missed launches.', 'advay-theme' ),
-		'author'   => __( 'Tunde Ajayi', 'advay-theme' ),
-		'role'     => __( 'Founder, Ajayi Popcorn', 'advay-theme' ),
-		'stats'    => array(
-			array( 'n' => __( '2 Days', 'advay-theme' ), 'l' => __( 'Nationwide shipping', 'advay-theme' ) ),
-			array( 'n' => '$1M+', 'l' => __( 'Peak-season volume', 'advay-theme' ) ),
-		),
-	),
+$brands = advay_home_brands_case_studies();
+$front  = advay_acf_front_id();
+$brands_title = advay_get_acf(
+	'home_brands_title',
+	__( 'Brands that said yes, and scaled through it', 'advay-theme' ),
+	$front
 );
+$see_all = advay_get_acf( 'home_brands_see_all_label', __( 'See All Case Studies', 'advay-theme' ), $front );
+$read_cs = advay_get_acf( 'home_brands_read_label', __( 'Read Case Study', 'advay-theme' ), $front );
 ?>
 <section class="brands-section" aria-labelledby="brands-heading">
 	<div class="container brands-wrap">
 		<div class="brands-head">
 			<h2 id="brands-heading" class="brands-title">
-				<?php esc_html_e( 'Brands that said yes, and scaled through it', 'advay-theme' ); ?>
+				<?php echo esc_html( $brands_title ); ?>
 			</h2>
 			<a class="brands-all" href="<?php echo esc_url( home_url( '/#testimonials' ) ); ?>">
-				<?php esc_html_e( 'See All Case Studies', 'advay-theme' ); ?>
+				<?php echo esc_html( $see_all ); ?>
 				<span aria-hidden="true">&rsaquo;</span>
 			</a>
 		</div>
@@ -96,9 +38,8 @@ $brands = array(
 			<ul class="cs-tabs" role="tablist" aria-label="<?php esc_attr_e( 'Brand case studies', 'advay-theme' ); ?>" data-cs-primary>
 				<?php foreach ( $brands as $i => $brand ) : ?>
 					<?php
-					$path = get_template_directory() . '/assets/' . $brand['file'];
-					$src  = file_exists( $path ) ? advay_asset_uri( $brand['file'] ) : '';
-					$sel  = 0 === $i ? 'true' : 'false';
+					$src = ! empty( $brand['logo_src'] ) ? $brand['logo_src'] : '';
+					$sel = 0 === $i ? 'true' : 'false';
 					?>
 					<li class="cs-tab-item" role="presentation">
 						<button
@@ -144,7 +85,7 @@ $brands = array(
 							</span>
 						</div>
 						<a class="cs-link" href="<?php echo esc_url( advay_success_story_url( $brand['slug'] ) ); ?>">
-							<?php esc_html_e( 'Read Case Study', 'advay-theme' ); ?>
+							<?php echo esc_html( $read_cs ); ?>
 							<span aria-hidden="true">&rarr;</span>
 						</a>
 					</div>

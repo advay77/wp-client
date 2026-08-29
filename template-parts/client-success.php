@@ -14,27 +14,58 @@ if ( empty( $founders ) ) {
 	);
 }
 
+$front = advay_acf_front_id();
+$success_image = advay_get_acf( 'home_success_image', '', $front );
+$success_image_url = advay_acf_image_url( $success_image, '' );
+$success_image_alt = advay_acf_image_alt( $success_image, '' );
+$success_caption   = advay_get_acf(
+	'home_success_caption',
+	__( 'Managing Director, Odi Ikpe', 'advay-theme' ),
+	$front
+);
+
+if ( $success_image_url ) {
+	$founders[0] = array(
+		'src'     => $success_image_url,
+		'caption' => $success_image_alt ? $success_image_alt : $success_caption,
+	);
+}
+
+$kicker     = advay_get_acf( 'home_success_kicker', __( 'Client success', 'advay-theme' ), $front );
+$heading_1  = advay_get_acf( 'home_success_heading_1', __( 'Talk to a human who', 'advay-theme' ), $front );
+$heading_2  = advay_get_acf( 'home_success_heading_2', __( 'knows your name.', 'advay-theme' ), $front );
+$p1         = advay_get_acf( 'home_success_p1', __( 'At most 3PLs, you are just a number. Handed off between reps who do not know you, re-explaining your business every time.', 'advay-theme' ), $front );
+$p2         = advay_get_acf( 'home_success_p2', __( 'Not here. You get a real, U.S.-based person who knows your account, with a direct line to the warehouse floor. Something is off? They get the right people on it, fast.', 'advay-theme' ), $front );
+
 $md_url      = advay_managing_director_url();
 $book_md_url = advay_onboarding_url();
+
+$success_cta_primary       = advay_get_acf( 'home_success_cta_primary', '', $front );
+$success_cta_primary_label = advay_acf_link_title( $success_cta_primary, __( 'Book a call with our MD', 'advay-theme' ) );
+$success_cta_primary_url   = advay_acf_link_url( $success_cta_primary, $book_md_url );
+
+$success_cta_secondary       = advay_get_acf( 'home_success_cta_secondary', '', $front );
+$success_cta_secondary_label = advay_acf_link_title( $success_cta_secondary, __( 'Know more about our Managing Director', 'advay-theme' ) );
+$success_cta_secondary_url   = advay_acf_link_url( $success_cta_secondary, $md_url );
 ?>
 <section class="success-section" id="client-success" aria-labelledby="success-heading">
 	<div class="container success-grid">
 		<div class="success-copy">
-			<p class="success-kicker"><?php esc_html_e( 'Client success', 'advay-theme' ); ?></p>
+			<p class="success-kicker"><?php echo esc_html( $kicker ); ?></p>
 			<h2 id="success-heading">
-				<?php esc_html_e( 'Talk to a human who', 'advay-theme' ); ?>
-				<span><?php esc_html_e( 'knows your name.', 'advay-theme' ); ?></span>
+				<?php echo esc_html( $heading_1 ); ?>
+				<span><?php echo esc_html( $heading_2 ); ?></span>
 			</h2>
-			<p><?php esc_html_e( 'At most 3PLs, you are just a number. Handed off between reps who do not know you, re-explaining your business every time.', 'advay-theme' ); ?></p>
-			<p><?php esc_html_e( 'Not here. You get a real, U.S.-based person who knows your account, with a direct line to the warehouse floor. Something is off? They get the right people on it, fast.', 'advay-theme' ); ?></p>
+			<p><?php echo esc_html( $p1 ); ?></p>
+			<p><?php echo esc_html( $p2 ); ?></p>
 
 			<div class="success-actions">
-				<a class="button button-primary" href="<?php echo esc_url( $book_md_url ); ?>">
-					<?php esc_html_e( 'Book a call with our MD', 'advay-theme' ); ?>
+				<a class="button button-primary" href="<?php echo esc_url( $success_cta_primary_url ); ?>">
+					<?php echo esc_html( $success_cta_primary_label ); ?>
 					<span class="btn-arrow" aria-hidden="true"></span>
 				</a>
-				<a class="button button-primary" href="<?php echo esc_url( $md_url ); ?>">
-					<?php esc_html_e( 'Know more about our Managing Director', 'advay-theme' ); ?>
+				<a class="button button-primary" href="<?php echo esc_url( $success_cta_secondary_url ); ?>">
+					<?php echo esc_html( $success_cta_secondary_label ); ?>
 				</a>
 			</div>
 		</div>
@@ -45,6 +76,8 @@ $book_md_url = advay_onboarding_url();
 						class="success-founder-photo<?php echo 0 === $index ? ' is-active' : ''; ?>"
 						src="<?php echo esc_url( $person['src'] ); ?>"
 						alt="<?php echo esc_attr( $person['caption'] ); ?>"
+						width="640"
+						height="800"
 						loading="<?php echo 0 === $index ? 'eager' : 'lazy'; ?>"
 						decoding="async"
 						data-founder-photo
@@ -52,7 +85,7 @@ $book_md_url = advay_onboarding_url();
 					>
 				<?php endforeach; ?>
 			</div>
-			<figcaption><?php esc_html_e( 'Managing Director, Odi Ikpe', 'advay-theme' ); ?></figcaption>
+			<figcaption><?php echo esc_html( $success_caption ); ?></figcaption>
 		</figure>
 	</div>
 </section>

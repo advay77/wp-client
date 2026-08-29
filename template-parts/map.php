@@ -48,30 +48,45 @@ $hubs = array(
 	),
 );
 
-foreach ( $hubs as &$hub_ref ) {
+$front = advay_acf_front_id();
+foreach ( $hubs as $i => &$hub_ref ) {
+	$n = $i + 1;
+	$hub_ref['label']  = advay_get_acf( 'home_map_hub_' . $n . '_label', $hub_ref['label'], $front );
+	$hub_ref['addr']   = advay_get_acf( 'home_map_hub_' . $n . '_addr', $hub_ref['addr'], $front );
+	$hub_ref['miles']  = advay_get_acf( 'home_map_hub_' . $n . '_miles', $hub_ref['miles'], $front );
+	$hub_ref['drive']  = advay_get_acf( 'home_map_hub_' . $n . '_drive', $hub_ref['drive'], $front );
+	$hub_ref['market'] = advay_get_acf( 'home_map_hub_' . $n . '_market', $hub_ref['market'], $front );
+	$hub_ref['meta']   = advay_get_acf( 'home_map_hub_' . $n . '_meta', $hub_ref['meta'], $front );
 	$photo_path = get_template_directory() . '/assets/' . $hub_ref['photo'];
 	$hub_ref['photo'] = file_exists( $photo_path ) ? advay_asset_uri( $hub_ref['photo'] ) : '';
 }
 unset( $hub_ref );
+
+$map_eyebrow = advay_get_acf( 'home_map_eyebrow', __( 'Coverage', 'advay-theme' ), $front );
+$map_heading = advay_get_acf( 'home_map_heading', __( 'Strategically Located', 'advay-theme' ), $front );
+$map_lead    = advay_get_acf( 'home_map_lead', __( 'One Franklinville hub. Three marketplace doors. Same-day lanes into Amazon, Walmart, and TikTok Shop.', 'advay-theme' ), $front );
+$map_banner_title = advay_get_acf( 'home_map_banner_title', __( 'ELITE PREP CENTER (EPC)', 'advay-theme' ), $front );
+$map_banner_addr  = advay_get_acf( 'home_map_banner_addr', __( '1736 Dutch Mill Road, Franklinville, NJ 08322', 'advay-theme' ), $front );
+$map_onboard      = advay_get_acf( 'home_map_onboard_label', __( 'One-click onboarding', 'advay-theme' ), $front );
 ?>
 <section class="map-section" id="location" aria-labelledby="map-heading">
 	<div class="map-glow" aria-hidden="true"></div>
 	<div class="container map-intro">
-		<p class="eyebrow"><?php esc_html_e( 'Coverage', 'advay-theme' ); ?></p>
-		<h2 id="map-heading"><?php esc_html_e( 'Strategically Located', 'advay-theme' ); ?></h2>
+		<p class="eyebrow"><?php echo esc_html( $map_eyebrow ); ?></p>
+		<h2 id="map-heading"><?php echo esc_html( $map_heading ); ?></h2>
 		<p class="lead map-lead">
-			<?php esc_html_e( 'One Franklinville hub. Three marketplace doors. Same-day lanes into Amazon, Walmart, and TikTok Shop.', 'advay-theme' ); ?>
+			<?php echo esc_html( $map_lead ); ?>
 		</p>
 	</div>
 	<div class="container">
 		<div class="map-canvas">
 			<div class="map-banner">
-				<strong><?php esc_html_e( 'ELITE PREP CENTER (EPC)', 'advay-theme' ); ?></strong>
-				<span><?php esc_html_e( '1736 Dutch Mill Road, Franklinville, NJ 08322', 'advay-theme' ); ?></span>
+				<strong><?php echo esc_html( $map_banner_title ); ?></strong>
+				<span><?php echo esc_html( $map_banner_addr ); ?></span>
 			</div>
 			<div class="map-stage">
 				<a class="map-onboard-btn" href="<?php echo esc_url( advay_onboarding_url() ); ?>">
-					<?php esc_html_e( 'One-click onboarding', 'advay-theme' ); ?>
+					<?php echo esc_html( $map_onboard ); ?>
 				</a>
 				<div id="epc-map" class="epc-map" role="img" aria-label="<?php esc_attr_e( 'Map of Elite Prep Center and nearby fulfillment centers', 'advay-theme' ); ?>"></div>
 				<div class="map-detail" id="map-detail" role="region" aria-label="<?php esc_attr_e( 'Fulfillment center details', 'advay-theme' ); ?>" hidden>

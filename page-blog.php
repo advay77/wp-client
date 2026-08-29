@@ -1,6 +1,9 @@
 <?php
 /**
- * Blog listing — served at /blog/ via rewrite (no WP admin setup required).
+ * Blog listing — served at /blog/ (Page slug blog, or rewrite fallback).
+ *
+ * Template Name: Blog
+ * Template Post Type: page
  *
  * @package Advay_Theme
  */
