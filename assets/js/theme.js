@@ -327,7 +327,24 @@
 			}
 		}
 
+		function freezeFirstFrame() {
+			clip.pause();
+			if (clip.readyState >= 2) {
+				try {
+					clip.currentTime = 0.001;
+				} catch (err) {}
+				return;
+			}
+			clip.addEventListener('loadeddata', function () {
+				try {
+					clip.currentTime = 0.001;
+				} catch (err) {}
+				clip.pause();
+			}, { once: true });
+		}
+
 		setMuteUi(true);
+		freezeFirstFrame();
 
 		card.addEventListener('mouseenter', function () {
 			var play = clip.play();
@@ -337,6 +354,9 @@
 		});
 		card.addEventListener('mouseleave', function () {
 			clip.pause();
+			try {
+				clip.currentTime = 0.001;
+			} catch (err) {}
 			clip.muted = true;
 			setMuteUi(true);
 		});

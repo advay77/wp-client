@@ -16,9 +16,9 @@ $stories_heading = advay_get_acf( 'home_stories_heading', __( 'Brands that grow 
 		</header>
 
 		<div class="stories-grid stories-grid--videos">
-			<?php foreach ( $clips as $i => $clip ) : ?>
+			<?php foreach ( $clips as $clip ) : ?>
 				<article class="story-media is-tall">
-					<video muted loop playsinline preload="<?php echo 0 === (int) $i ? 'metadata' : 'none'; ?>">
+					<video muted loop playsinline preload="metadata"<?php echo ! empty( $clip['poster'] ) ? ' poster="' . esc_url( $clip['poster'] ) . '"' : ''; ?>>
 						<source src="<?php echo esc_url( $clip['video'] ); ?>" type="video/mp4">
 					</video>
 					<div class="story-media-ui">

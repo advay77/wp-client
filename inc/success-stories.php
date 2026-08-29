@@ -313,13 +313,21 @@ function advay_home_testimonial_clips() {
 		} else {
 			$video = advay_story_video( $slug );
 		}
+		$poster = '';
+		if ( ! empty( $story['founder_image'] ) ) {
+			$poster = $story['founder_image'];
+		} elseif ( ! empty( $story['hero_image'] ) ) {
+			$poster = $story['hero_image'];
+		}
+
 		$clips[] = array(
-			'slug'  => $slug,
-			'chip'  => $story['brand'],
-			'quote' => '“' . $story['quote'] . '”',
-			'brand' => $story['founder'],
-			'role'  => $story['founder_role'],
-			'video' => $video,
+			'slug'   => $slug,
+			'chip'   => $story['brand'],
+			'quote'  => '“' . $story['quote'] . '”',
+			'brand'  => $story['founder'],
+			'role'   => $story['founder_role'],
+			'video'  => $video,
+			'poster' => $poster,
 		);
 	}
 
