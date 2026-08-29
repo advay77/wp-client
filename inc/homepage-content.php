@@ -239,25 +239,12 @@ function advay_home_fit_spec_cards() {
 }
 
 /**
- * Brands case-study tabs (5 fixed).
+ * Brands case-study tabs (4 fixed).
  *
  * @return array<int, array<string, mixed>>
  */
 function advay_home_brands_case_studies() {
 	$defaults = array(
-		array(
-			'name'     => 'No Knife Body',
-			'slug'     => 'no-knife-body',
-			'file'     => 'images/brand-noknife.png',
-			'initials' => 'NK',
-			'quote'    => __( 'Better service for our customers and more precious family time for me.', 'advay-theme' ),
-			'author'   => __( 'No Knife Body', 'advay-theme' ),
-			'role'     => __( 'Founder', 'advay-theme' ),
-			'stats'    => array(
-				array( 'n' => '28 hr', 'l' => __( 'Prep turnaround', 'advay-theme' ) ),
-				array( 'n' => '99.8%', 'l' => __( 'Label accuracy', 'advay-theme' ) ),
-			),
-		),
 		array(
 			'name'     => 'Daka Vitamins',
 			'slug'     => 'daka-vitamins',

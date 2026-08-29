@@ -164,7 +164,7 @@ function advay_register_homepage_complete_acf_fields() {
 		'label' => 'Logo slider',
 		'type'  => 'tab',
 	);
-	for ( $i = 1; $i <= 6; $i++ ) {
+	for ( $i = 1; $i <= 5; $i++ ) {
 		$fields[] = advay_acf_text_field( 'field_home_logo_' . $i . '_name', 'Logo ' . $i . ' — name', 'home_logo_' . $i . '_name' );
 		$fields[] = advay_acf_image_field( 'field_home_logo_' . $i . '_image', 'Logo ' . $i . ' — image', 'home_logo_' . $i . '_image' );
 	}
@@ -176,7 +176,7 @@ function advay_register_homepage_complete_acf_fields() {
 		'type'  => 'tab',
 	);
 	$fields[] = advay_acf_text_field( 'field_home_brands_see_all', 'See all case studies — label', 'home_brands_see_all_label' );
-	for ( $i = 1; $i <= 5; $i++ ) {
+	for ( $i = 1; $i <= 4; $i++ ) {
 		$fields[] = advay_acf_text_field( 'field_home_cs_' . $i . '_name', 'Brand ' . $i . ' — tab name', 'home_cs_' . $i . '_name' );
 		$fields[] = advay_acf_image_field( 'field_home_cs_' . $i . '_logo', 'Brand ' . $i . ' — logo', 'home_cs_' . $i . '_logo' );
 		$fields[] = advay_acf_text_field( 'field_home_cs_' . $i . '_quote', 'Brand ' . $i . ' — quote', 'home_cs_' . $i . '_quote', 'textarea', 3 );

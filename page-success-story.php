@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$slug  = sanitize_key( (string) get_query_var( 'advay_success_story', 'no-knife-body' ) );
+$slug  = sanitize_key( (string) get_query_var( 'advay_success_story', 'ajayi-popcorn' ) );
 $story = advay_get_success_story( $slug );
 
 get_header();

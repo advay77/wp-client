@@ -820,7 +820,7 @@ a:hover {
 	grid-template-columns: 1fr;
 	gap: 0;
 	align-items: center;
-	width: min(1180px, calc(100vw - 2rem));
+	width: min(980px, calc(100vw - 2rem));
 	max-height: min(78vh, 640px);
 	overflow: auto;
 	padding: 1.15rem 1.25rem;
@@ -833,8 +833,8 @@ a:hover {
 
 .stories-mega-cards {
 	display: grid;
-	grid-template-columns: repeat(5, minmax(0, 1fr));
-	gap: 0.75rem;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 0.85rem;
 	align-items: stretch;
 }
 
@@ -847,6 +847,13 @@ a:hover {
 	aspect-ratio: 3 / 4;
 	border-radius: 16px;
 	background: #111;
+	transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.st-card:hover {
+	box-shadow: 0 14px 32px rgba(11, 18, 32, 0.2);
+	transform: translateY(-2px);
+	text-decoration: none;
 }
 
 .st-card img {

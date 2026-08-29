@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $post = get_queried_object();
-$slug = ( $post instanceof WP_Post ) ? $post->post_name : 'no-knife-body';
+$slug = ( $post instanceof WP_Post ) ? $post->post_name : 'ajayi-popcorn';
 $story = advay_get_success_story( $slug );
 
 get_header();

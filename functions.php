@@ -708,10 +708,10 @@ function advay_is_success_story_page() {
  *
  * @param string $slug Story slug.
  */
-function advay_success_story_url( $slug = 'no-knife-body' ) {
+function advay_success_story_url( $slug = 'ajayi-popcorn' ) {
 	$slug = sanitize_key( $slug );
 	if ( ! advay_success_story_exists( $slug ) ) {
-		$slug = 'no-knife-body';
+		$slug = 'ajayi-popcorn';
 	}
 
 	if ( function_exists( 'advay_get_success_story_post' ) ) {
@@ -981,7 +981,6 @@ function advay_brand_logos() {
 		array( 'name' => "Anola's Creations", 'file' => 'images/brand-anola.jpg' ),
 		array( 'name' => 'Ajayi Popcorn', 'file' => 'images/brand-ajayi.jpg' ),
 		array( 'name' => 'Daka Vitamins', 'file' => 'images/brand-daka.png' ),
-		array( 'name' => 'No Knife Body', 'file' => 'images/brand-noknife.png' ),
 	);
 
 	$front = advay_acf_front_id();

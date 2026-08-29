@@ -41,10 +41,10 @@ function advay_success_story_exists( $slug ) {
  * @param string $slug Story slug.
  * @return array<string, mixed>
  */
-function advay_get_success_story( $slug = 'no-knife-body' ) {
+function advay_get_success_story( $slug = 'ajayi-popcorn' ) {
 	$slug    = sanitize_key( $slug );
 	$stories = advay_success_stories_data();
-	$fallback = isset( $stories[ $slug ] ) ? $stories[ $slug ] : $stories['no-knife-body'];
+	$fallback = isset( $stories[ $slug ] ) ? $stories[ $slug ] : $stories['ajayi-popcorn'];
 
 	if ( function_exists( 'advay_get_success_story_post' ) ) {
 		$post = advay_get_success_story_post( $slug );
@@ -191,9 +191,9 @@ function advay_success_story_from_post( $post, $fallback = array() ) {
  */
 function advay_home_testimonial_slugs() {
 	return array(
-		'no-knife-body',
 		'ajayi-popcorn',
 		'daka-vitamins',
+		'gainz-airplanes',
 	);
 }
 
@@ -204,7 +204,6 @@ function advay_home_testimonial_slugs() {
  */
 function advay_success_story_featured_slugs() {
 	return array(
-		'no-knife-body',
 		'ajayi-popcorn',
 		'daka-vitamins',
 		'gainz-airplanes',
@@ -219,6 +218,20 @@ function advay_success_story_featured_slugs() {
  */
 function advay_success_story_card_image( $slug ) {
 	$slug = sanitize_key( $slug );
+
+	$card_map = array(
+		'ajayi-popcorn'               => 'images/stories/ajayi-popcorn-card.png',
+		'daka-vitamins'               => 'images/stories/daka-vitamins-card.jpg',
+		'gainz-airplanes'             => 'images/stories/gainz-airplanes-card.png',
+		'littlebay-caribbean-kitchen' => 'images/stories/littlebay-caribbean-kitchen-card.jpg',
+	);
+
+	if ( isset( $card_map[ $slug ] ) ) {
+		$path = get_template_directory() . '/assets/' . ltrim( $card_map[ $slug ], '/' );
+		if ( file_exists( $path ) ) {
+			return advay_asset_uri( $card_map[ $slug ] );
+		}
+	}
 
 	if ( function_exists( 'advay_get_success_story_post' ) ) {
 		$post = advay_get_success_story_post( $slug );
@@ -239,10 +252,10 @@ function advay_success_story_card_image( $slug ) {
 			'images/founders/no-knife-body.png',
 			'',
 		),
-		'ajayi-popcorn'               => array( 'images/founders/ajayi-popcorn.jpg', '' ),
-		'daka-vitamins'               => array( 'images/founders/daka-vitamins.jpg', '' ),
-		'gainz-airplanes'             => array( 'images/founders/gainz-airplanes.jpg', '' ),
-		'littlebay-caribbean-kitchen' => array( 'images/founders/littlebay.png', '' ),
+		'ajayi-popcorn'               => array( 'images/stories/ajayi-popcorn-card.png', '' ),
+		'daka-vitamins'               => array( 'images/stories/daka-vitamins-card.jpg', '' ),
+		'gainz-airplanes'             => array( 'images/stories/gainz-airplanes-card.png', '' ),
+		'littlebay-caribbean-kitchen' => array( 'images/stories/littlebay-caribbean-kitchen-card.jpg', '' ),
 	);
 
 	if ( ! isset( $map[ $slug ] ) ) {
