@@ -154,6 +154,12 @@ function advay_primary_menu_fallback() {
 			'mega'  => 'learn',
 			'class' => 'has-mega is-blogs',
 		),
+		array(
+			'label' => __( 'Onboarding', 'advay-theme' ),
+			'url'   => advay_onboarding_url(),
+			'mega'  => '',
+			'class' => '',
+		),
 	);
 
 	echo '<ul class="menu">';
@@ -220,6 +226,29 @@ function advay_nav_mega_type( $item ) {
 
 	return '';
 }
+
+/**
+ * Primary nav — onboarding labels always route to the onboarding page.
+ *
+ * @param WP_Post[] $items Menu items.
+ * @param stdClass  $args  Menu args.
+ * @return WP_Post[]
+ */
+function advay_nav_menu_onboarding_urls( $items, $args ) {
+	if ( ! advay_is_primary_nav( $args ) ) {
+		return $items;
+	}
+
+	foreach ( $items as $item ) {
+		$title = strtolower( trim( wp_strip_all_tags( $item->title ) ) );
+		if ( false !== strpos( $title, 'onboarding' ) ) {
+			$item->url = advay_onboarding_url();
+		}
+	}
+
+	return $items;
+}
+add_filter( 'wp_nav_menu_objects', 'advay_nav_menu_onboarding_urls', 10, 2 );
 
 function advay_primary_mega_markup( $type ) {
 	$allowed = array( 'what', 'learn', 'company', 'stories' );

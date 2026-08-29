@@ -93,17 +93,39 @@ foreach ( $milestones_defaults as $i => $row ) {
 }
 
 $impact_defaults = array(
-	array( 'value' => '20+', 'label' => __( 'Years in business', 'advay-theme' ) ),
-	array( 'value' => '100+', 'label' => __( 'Shipped to markets worldwide', 'advay-theme' ) ),
-	array( 'value' => '5+', 'label' => __( 'Billion-dollar product supply chains managed', 'advay-theme' ) ),
-	array( 'value' => '2.5B+', 'label' => __( 'Units shipped in career', 'advay-theme' ) ),
+	array(
+		'icon'     => 'chart-bars',
+		'value'    => '20+',
+		'label'    => __( 'Years in business', 'advay-theme' ),
+		'sublabel' => '',
+	),
+	array(
+		'icon'     => 'arrow-circle',
+		'value'    => '100+',
+		'label'    => __( 'Shipped to markets worldwide', 'advay-theme' ),
+		'sublabel' => '',
+	),
+	array(
+		'icon'     => 'clock-circle',
+		'value'    => '5+',
+		'label'    => __( 'Billion-dollar product supply chains managed', 'advay-theme' ),
+		'sublabel' => '',
+	),
+	array(
+		'icon'     => 'dollar-circle',
+		'value'    => '2.5B+',
+		'label'    => __( 'Units shipped in career', 'advay-theme' ),
+		'sublabel' => '',
+	),
 );
 $impact_stats = array();
 foreach ( $impact_defaults as $i => $row ) {
 	$n = $i + 1;
 	$impact_stats[] = array(
-		'value' => advay_page_acf( $slug, 'md_stat_' . $n . '_value', $row['value'] ),
-		'label' => advay_page_acf( $slug, 'md_stat_' . $n . '_label', $row['label'] ),
+		'icon'     => $row['icon'],
+		'value'    => advay_page_acf( $slug, 'md_stat_' . $n . '_value', $row['value'] ),
+		'label'    => advay_page_acf( $slug, 'md_stat_' . $n . '_label', $row['label'] ),
+		'sublabel' => $row['sublabel'],
 	);
 }
 
@@ -228,6 +250,11 @@ $md_brand_cta_u    = advay_acf_link_url( $md_brand_cta, advay_our_story_url() );
 $md_chain_heading  = advay_page_acf( $slug, 'md_chain_heading', __( 'The Business Behind the Brand', 'advay-theme' ) );
 $md_chain_lead     = advay_page_acf( $slug, 'md_chain_lead', __( 'A resilient supply chain. End-to-end control. Consistent quality.', 'advay-theme' ) );
 $md_numbers_heading = advay_page_acf( $slug, 'md_numbers_heading', __( 'By The Numbers', 'advay-theme' ) );
+$md_numbers_footer  = advay_page_acf(
+	$slug,
+	'md_numbers_footer',
+	__( 'The result wasn\'t just more volume. It built resilient supply chains, trusted brands, and teams that scale with confidence.', 'advay-theme' )
+);
 $md_phil_heading   = advay_page_acf( $slug, 'md_philosophy_heading', __( 'My Philosophy', 'advay-theme' ) );
 $md_phil_quote     = advay_page_acf( $slug, 'md_philosophy_quote', __( 'Business is not just about numbers. It\'s about people, purpose, and creating long-term value.', 'advay-theme' ) );
 $md_legacy_heading = advay_page_acf( $slug, 'md_legacy_heading', __( 'Legacy & Impact', 'advay-theme' ) );
@@ -379,15 +406,26 @@ get_header();
 
 	<section class="md-numbers" id="md-numbers" aria-labelledby="md-numbers-heading">
 		<div class="container">
-			<h2 id="md-numbers-heading"><?php echo esc_html( $md_numbers_heading ); ?></h2>
+			<header class="md-numbers-head">
+				<h2 id="md-numbers-heading"><?php echo esc_html( $md_numbers_heading ); ?></h2>
+			</header>
 			<ul class="md-numbers-grid">
 				<?php foreach ( $impact_stats as $stat ) : ?>
 					<li>
-						<strong><?php echo esc_html( $stat['value'] ); ?></strong>
-						<span><?php echo esc_html( $stat['label'] ); ?></span>
+						<span class="md-numbers-icon" aria-hidden="true">
+							<?php echo advay_home_hub_icon( $stat['icon'], 34 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						</span>
+						<strong class="md-numbers-value"><?php echo esc_html( $stat['value'] ); ?></strong>
+						<span class="md-numbers-label"><?php echo esc_html( $stat['label'] ); ?></span>
+						<?php if ( ! empty( $stat['sublabel'] ) ) : ?>
+							<em class="md-numbers-sublabel"><?php echo esc_html( $stat['sublabel'] ); ?></em>
+						<?php endif; ?>
 					</li>
 				<?php endforeach; ?>
 			</ul>
+			<?php if ( $md_numbers_footer ) : ?>
+				<p class="md-numbers-footer"><?php echo esc_html( $md_numbers_footer ); ?></p>
+			<?php endif; ?>
 		</div>
 	</section>
 

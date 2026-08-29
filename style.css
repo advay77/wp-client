@@ -6250,15 +6250,15 @@ a.ob-pill:hover {
 
 	.hero-inner {
 		justify-content: flex-start;
-		gap: 1.5rem;
-		padding: 5.5rem 0 1.15rem;
+		gap: 2.65rem;
+		padding: 5.5rem 0 1.25rem;
 		min-height: min(88svh, 640px);
 	}
 
-	/* Vertically center copy in the free space above equal logo row. */
+	/* Headline + CTAs sit directly above marketplace logo row at bottom of hero. */
 	.hero-copy {
 		margin-top: auto;
-		margin-bottom: auto;
+		margin-bottom: 0;
 		width: 100%;
 	}
 
@@ -6328,7 +6328,8 @@ a.ob-pill:hover {
 		align-items: stretch;
 		gap: 0.45rem;
 		width: 100%;
-		margin-top: 0;
+		margin-top: 0.35rem;
+		flex-shrink: 0;
 		overflow: visible;
 		padding-bottom: 0;
 	}
@@ -6484,14 +6485,15 @@ a.ob-pill:hover {
 	}
 
 	.cs-tabs {
-		flex: 1 1 auto;
+		display: flex;
 		flex-wrap: nowrap;
-		justify-content: flex-start;
+		align-items: stretch;
+		justify-content: space-between;
+		gap: 0.35rem;
 		overflow-x: auto;
 		-webkit-overflow-scrolling: touch;
 		scroll-snap-type: x mandatory;
-		gap: 0.5rem;
-		padding-bottom: 0.35rem;
+		padding-bottom: 0.15rem;
 		scrollbar-width: none;
 	}
 
@@ -6500,20 +6502,23 @@ a.ob-pill:hover {
 	}
 
 	.cs-tab-item {
-		flex: 0 0 auto;
+		flex: 1 1 0;
 		min-width: 0;
 		scroll-snap-align: start;
 	}
 
 	.cs-tab {
-		height: 76px;
-		min-width: 76px;
-		padding: 0.5rem 0.85rem;
+		width: 100%;
+		height: 64px;
+		min-width: 0;
+		padding: 0.45rem 0.35rem 0.55rem;
 	}
 
 	.cs-tab-logo {
-		max-height: 52px;
+		max-height: 40px;
 		max-width: 100%;
+		width: auto;
+		margin-inline: auto;
 	}
 
 	.cs-panels {
@@ -8717,64 +8722,117 @@ body.page-managing-director {
 }
 
 .md-numbers {
-	padding: 4rem 0;
-	background: #fff;
+	padding: 4.5rem 0 4rem;
+	background: #f7f4ee;
 	color: var(--ink);
-	border-top: 1px solid var(--line);
-	border-bottom: 1px solid var(--line);
+}
+
+.md-numbers-head {
+	margin: 0 0 2.75rem;
+	text-align: center;
 }
 
 .md-numbers h2 {
-	margin: 0 0 2rem;
-	text-align: center;
+	margin: 0;
 	font-family: var(--font);
-	font-size: clamp(1.85rem, 3.5vw, 2.45rem);
-	line-height: 1.15;
-	font-weight: 700;
-	letter-spacing: -0.03em;
+	font-size: clamp(1.45rem, 2.6vw, 1.95rem);
+	line-height: 1.2;
+	font-weight: 800;
+	letter-spacing: 0.07em;
+	text-transform: uppercase;
 	color: var(--ink);
+}
+
+.md-numbers-head::after {
+	content: '';
+	display: block;
+	width: 2.75rem;
+	height: 3px;
+	margin: 0.9rem auto 0;
+	background: var(--blue);
+	border-radius: 2px;
 }
 
 .md-numbers-grid {
 	display: grid;
 	grid-template-columns: repeat(4, minmax(0, 1fr));
-	gap: 0;
+	column-gap: 2rem;
 	align-items: stretch;
-	margin: 0;
+	max-width: 1020px;
+	margin: 0 auto;
 	padding: 0;
 	list-style: none;
 }
 
 .md-numbers-grid li {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-start;
-	padding: 0.75rem 1.25rem;
+	padding: 0.75rem 1.5rem 0.5rem;
 	text-align: center;
-	border-left: 1px solid var(--line);
 }
 
-.md-numbers-grid li:first-child {
-	border-left: none;
+.md-numbers-grid li + li::before {
+	content: '';
+	position: absolute;
+	left: -1rem;
+	top: 12%;
+	bottom: 12%;
+	width: 1px;
+	background: var(--line);
 }
 
-.md-numbers-grid strong {
+.md-numbers-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.75rem;
+	height: 2.75rem;
+	margin-bottom: 1.25rem;
+	color: var(--blue);
+}
+
+.md-numbers-value {
 	display: block;
-	margin-bottom: 0.55rem;
+	margin-bottom: 0.85rem;
 	font-family: var(--font);
-	font-size: clamp(1.75rem, 3vw, 2.35rem);
+	font-size: clamp(1.65rem, 2.8vw, 2.15rem);
 	font-weight: 800;
-	line-height: 1;
+	line-height: 1.05;
+	letter-spacing: -0.02em;
 	color: var(--ink);
 }
 
-.md-numbers-grid span {
+.md-numbers-label {
 	display: block;
-	min-height: 3.2em;
-	color: var(--muted);
-	font-size: 0.82rem;
+	max-width: 12rem;
+	font-size: 0.72rem;
+	font-weight: 700;
 	line-height: 1.45;
+	letter-spacing: 0.07em;
+	text-transform: uppercase;
+	color: var(--ink);
+}
+
+.md-numbers-sublabel {
+	display: block;
+	margin-top: 0.35rem;
+	font-style: normal;
+	font-size: 0.78rem;
+	line-height: 1.4;
+	color: var(--muted);
+}
+
+.md-numbers-footer {
+	max-width: 38rem;
+	margin: 2.75rem auto 0;
+	padding: 0 0.5rem;
+	text-align: center;
+	font-size: 0.95rem;
+	line-height: 1.65;
+	color: var(--muted);
 }
 
 .md-my-philosophy {
@@ -9201,12 +9259,30 @@ body.page-managing-director {
 
 	.md-numbers-grid {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 1rem;
+		column-gap: 1.5rem;
+		row-gap: 1.35rem;
+		max-width: 540px;
+		border: none;
+		border-radius: 0;
+		overflow: visible;
 	}
 
 	.md-numbers-grid li {
-		border-left: none;
-		padding: 0.5rem;
+		padding: 0.5rem 0.75rem;
+	}
+
+	.md-numbers-grid li + li::before,
+	.md-numbers-grid li:nth-child(n + 3)::after {
+		display: none;
+	}
+
+	.md-numbers-icon {
+		margin-bottom: 0.95rem;
+	}
+
+	.md-numbers-footer {
+		margin-top: 2rem;
+		font-size: 0.9rem;
 	}
 
 	.md-future-grid {
@@ -9296,8 +9372,18 @@ body.page-managing-director {
 	}
 
 	.md-numbers-grid {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 1.25rem 0.75rem;
+		column-gap: 1.15rem;
+		row-gap: 1.15rem;
+		max-width: 100%;
+	}
+
+	.md-numbers-grid li {
+		padding: 0.35rem 0.5rem;
+	}
+
+	.md-numbers-label {
+		max-width: 10rem;
+		font-size: 0.68rem;
 	}
 
 	.md-ecosystem-flow {

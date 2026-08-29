@@ -108,7 +108,7 @@ $home = trailingslashit( home_url( '/' ) );
 				<em><?php esc_html_e( 'Published prep rates', 'advay-theme' ); ?></em>
 			</span>
 		</a>
-		<a href="<?php echo esc_url( $home . '#contact' ); ?>">
+		<a href="<?php echo esc_url( advay_onboarding_url() ); ?>">
 			<span class="mega-dot" aria-hidden="true"></span>
 			<span>
 				<strong><?php esc_html_e( 'One-click Onboarding', 'advay-theme' ); ?></strong>

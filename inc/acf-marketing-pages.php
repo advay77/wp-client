@@ -249,6 +249,7 @@ function advay_register_marketing_page_acf_fields() {
 	}
 	$md[] = array( 'key' => 'field_md_tab_numbers', 'label' => 'Numbers', 'type' => 'tab' );
 	$md[] = advay_acf_text_field( 'field_md_numbers_heading', 'Numbers heading', 'md_numbers_heading' );
+	$md[] = advay_acf_text_field( 'field_md_numbers_footer', 'Numbers footer text', 'md_numbers_footer', 'textarea', 3 );
 	for ( $i = 1; $i <= 4; $i++ ) {
 		$md[] = advay_acf_text_field( 'field_md_stat_' . $i . '_value', 'Stat ' . $i . ' — value', 'md_stat_' . $i . '_value' );
 		$md[] = advay_acf_text_field( 'field_md_stat_' . $i . '_label', 'Stat ' . $i . ' — label', 'md_stat_' . $i . '_label' );
