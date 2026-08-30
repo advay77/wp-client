@@ -13,9 +13,9 @@ $cta_primary       = advay_get_acf( 'home_cta_primary', '', $front );
 $cta_primary_label = advay_acf_link_title( $cta_primary, __( 'Email intake', 'advay-theme' ) );
 $cta_primary_url   = advay_acf_link_url( $cta_primary, advay_intake_email_url() );
 
-$cta_secondary       = advay_get_acf( 'home_cta_secondary', '', $front );
-$cta_secondary_label = advay_acf_link_title( $cta_secondary, __( 'Call the warehouse', 'advay-theme' ) );
-$cta_secondary_url   = advay_acf_link_url( $cta_secondary, advay_intake_phone_url() );
+$cta_secondary       = advay_get_acf( 'home_cta_tertiary', '', $front );
+$cta_secondary_label = advay_acf_link_title( $cta_secondary, __( 'Send us a message', 'advay-theme' ) );
+$cta_secondary_url   = advay_acf_link_url( $cta_secondary, advay_contact_page_url() );
 ?>
 <section class="cta-section" id="contact" aria-labelledby="cta-heading">
 	<div class="container cta-inner">

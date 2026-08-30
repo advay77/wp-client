@@ -28,7 +28,7 @@ $reasons = array(
 			<p class="eyebrow"><?php esc_html_e( 'Why this warehouse', 'advay-theme' ); ?></p>
 			<h2 id="why-heading"><?php esc_html_e( 'Ops you can put on a P&L.', 'advay-theme' ); ?></h2>
 			<p><?php esc_html_e( 'Prep is not a side hustle for us. It is the product: accurate units, documented exceptions, and outbound that Amazon and Walmart actually accept.', 'advay-theme' ); ?></p>
-			<a class="text-link" href="<?php echo esc_url( advay_contact_url() ); ?>">
+			<a class="text-link" href="<?php echo esc_url( advay_contact_page_url() ); ?>">
 				<?php esc_html_e( 'Talk to intake', 'advay-theme' ); ?>
 			</a>
 		</div>

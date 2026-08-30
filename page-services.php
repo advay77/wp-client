@@ -20,7 +20,7 @@ $onboard = advay_onboarding_url();
 	<section class="svc-hero">
 		<div class="svc-hero-media" aria-hidden="true">
 			<video class="svc-hero-video" autoplay muted loop playsinline preload="metadata">
-				<source src="<?php echo esc_url( advay_asset_uri( 'video/DTC.mp4' ) ); ?>" type="video/mp4">
+				<source src="<?php echo esc_url( advay_asset_uri( 'video/amazon.mp4' ) ); ?>" type="video/mp4">
 			</video>
 			<span class="svc-hero-overlay"></span>
 		</div>
@@ -32,22 +32,26 @@ $onboard = advay_onboarding_url();
 			<h1><?php esc_html_e( 'Get more inventory into Amazon, Walmart, TikTok, and DTC.', 'advay-theme' ); ?></h1>
 			<p class="lead"><?php esc_html_e( 'Receiving, labeling, kitting, and forwarding from Franklinville — built for FBA, WFS, TikTok Shop, and DTC, not a generic 3PL floor.', 'advay-theme' ); ?></p>
 			<div class="svc-hero-actions">
-				<a class="button button-primary" href="<?php echo esc_url( advay_contact_url() ); ?>"><?php esc_html_e( 'Get a custom quote', 'advay-theme' ); ?></a>
+				<a class="button button-primary" href="<?php echo esc_url( advay_quote_url() ); ?>"><?php esc_html_e( 'Get a custom quote', 'advay-theme' ); ?></a>
 				<a class="svc-text-link" href="#why"><?php esc_html_e( 'See how it works', 'advay-theme' ); ?></a>
 			</div>
 			<div class="svc-tiles" id="platforms">
-				<div class="svc-tile svc-tile--amazon">
+				<a class="svc-tile svc-tile--amazon" id="amazon" href="<?php echo esc_url( advay_platform_url( 'amazon' ) ); ?>">
 					<img src="<?php echo esc_url( $amazon ); ?>" alt="<?php esc_attr_e( 'Amazon', 'advay-theme' ); ?>">
-				</div>
-				<div class="svc-tile svc-tile--walmart">
+					<span class="svc-tile-more"><?php esc_html_e( 'Learn more', 'advay-theme' ); ?></span>
+				</a>
+				<a class="svc-tile svc-tile--walmart" id="walmart" href="<?php echo esc_url( advay_platform_url( 'walmart' ) ); ?>">
 					<img src="<?php echo esc_url( $walmart ); ?>" alt="<?php esc_attr_e( 'Walmart', 'advay-theme' ); ?>">
-				</div>
-				<div class="svc-tile svc-tile--tiktok">
+					<span class="svc-tile-more"><?php esc_html_e( 'Learn more', 'advay-theme' ); ?></span>
+				</a>
+				<a class="svc-tile svc-tile--tiktok" id="tiktok" href="<?php echo esc_url( advay_platform_url( 'tiktok' ) ); ?>">
 					<img src="<?php echo esc_url( $tiktok ); ?>" alt="<?php esc_attr_e( 'TikTok Shop', 'advay-theme' ); ?>">
-				</div>
-				<div class="svc-tile svc-tile-dtc">
+					<span class="svc-tile-more"><?php esc_html_e( 'Learn more', 'advay-theme' ); ?></span>
+				</a>
+				<a class="svc-tile svc-tile-dtc" id="dtc" href="<?php echo esc_url( advay_platform_url( 'dtc' ) ); ?>">
 					<span><?php esc_html_e( 'DTC', 'advay-theme' ); ?></span>
-				</div>
+					<span class="svc-tile-more"><?php esc_html_e( 'Learn more', 'advay-theme' ); ?></span>
+				</a>
 			</div>
 		</div>
 	</section>
@@ -100,7 +104,7 @@ $onboard = advay_onboarding_url();
 			</ul>
 			<div class="svc-apply">
 				<p><?php esc_html_e( 'Ready to send the next inbound?', 'advay-theme' ); ?></p>
-				<a href="<?php echo esc_url( advay_contact_url() ); ?>"><?php esc_html_e( 'Book a receiving window', 'advay-theme' ); ?></a>
+				<a href="<?php echo esc_url( advay_receiving_url() ); ?>"><?php esc_html_e( 'Book a receiving window', 'advay-theme' ); ?></a>
 			</div>
 		</div>
 	</section>
@@ -159,10 +163,12 @@ $onboard = advay_onboarding_url();
 		</div>
 	</section>
 
+	<?php get_template_part( 'template-parts/editor-zone' ); ?>
+
 	<section class="svc-final">
 		<div class="container">
 			<h2><?php esc_html_e( 'Send the next inbound. No long-term lock required.', 'advay-theme' ); ?></h2>
-			<a class="button button-primary svc-final-btn" href="<?php echo esc_url( advay_contact_url() ); ?>"><?php esc_html_e( 'Get a custom quote', 'advay-theme' ); ?></a>
+			<a class="button button-primary svc-final-btn" href="<?php echo esc_url( advay_quote_url() ); ?>"><?php esc_html_e( 'Get a custom quote', 'advay-theme' ); ?></a>
 		</div>
 	</section>
 </main>

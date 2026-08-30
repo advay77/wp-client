@@ -14,7 +14,7 @@ $fit_lead    = advay_get_acf( 'home_fit_lead', __( 'You\'re probably a fit if th
 
 $fit_cta       = advay_get_acf( 'home_fit_cta', '', $front );
 $fit_cta_label = advay_acf_link_title( $fit_cta, __( 'Get a custom quote', 'advay-theme' ) );
-$fit_cta_url   = advay_acf_link_url( $fit_cta, advay_contact_url() );
+$fit_cta_url   = advay_acf_quote_link_url( $fit_cta, advay_quote_url() );
 $fit_tab_niche = advay_get_acf( 'home_fit_tab_niche', __( 'Niche', 'advay-theme' ), $front );
 $fit_tab_spec  = advay_get_acf( 'home_fit_tab_spec', __( 'Specification', 'advay-theme' ), $front );
 ?>

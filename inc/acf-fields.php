@@ -125,19 +125,62 @@ function advay_acf_image_alt( $image, $fallback = '' ) {
  * @return string
  */
 function advay_acf_link_url( $link, $fallback = '' ) {
-	if ( empty( $link ) ) {
+	$url = '';
+
+	if ( ! empty( $link ) ) {
+		if ( is_array( $link ) && ! empty( $link['url'] ) ) {
+			$url = trim( (string) $link['url'] );
+		} elseif ( is_string( $link ) ) {
+			$url = trim( $link );
+		}
+	}
+
+	if ( '' === $url || '#' === $url ) {
 		return $fallback;
 	}
 
-	if ( is_array( $link ) && ! empty( $link['url'] ) ) {
-		return $link['url'];
+	/* ACF often stores "#contact" — broken on inner pages without id="contact". */
+	if ( '#' === substr( $url, 0, 1 ) ) {
+		return rtrim( home_url( '/' ), '/' ) . $url;
 	}
 
-	if ( is_string( $link ) ) {
-		return $link;
+	return $url;
+}
+
+/**
+ * Quote / intake CTAs — ignore stale homepage anchors saved in ACF link fields.
+ *
+ * @param mixed  $link     ACF link array.
+ * @param string $fallback Fallback URL (defaults to /quote/).
+ * @return string
+ */
+function advay_acf_quote_link_url( $link, $fallback = '' ) {
+	$fallback = $fallback ? $fallback : advay_quote_url();
+	$url      = advay_acf_link_url( $link, $fallback );
+
+	if ( $url === advay_contact_url() || '#contact' === $url ) {
+		return $fallback;
 	}
 
-	return $fallback;
+	return $url;
+}
+
+/**
+ * Book-a-call CTAs — ignore stale homepage contact anchors in ACF.
+ *
+ * @param mixed  $link     ACF link array.
+ * @param string $fallback Fallback URL (defaults to Calendly / contact page).
+ * @return string
+ */
+function advay_acf_book_call_link_url( $link, $fallback = '' ) {
+	$fallback = $fallback ? $fallback : advay_book_call_url();
+	$url      = advay_acf_link_url( $link, $fallback );
+
+	if ( $url === advay_contact_url() || '#contact' === $url ) {
+		return $fallback;
+	}
+
+	return $url;
 }
 
 /**
@@ -212,7 +255,7 @@ function advay_register_acf_field_groups() {
 					'name'          => 'home_hero_cta_secondary',
 					'type'          => 'link',
 					'return_format' => 'array',
-					'instructions'  => 'Button label + URL for the secondary hero CTA (defaults to Learn more → /#services).',
+					'instructions'  => 'Button label + URL for the secondary hero CTA (defaults to Learn more → /receiving/).',
 				),
 				array(
 					'key'   => 'field_advay_tab_partner',
@@ -408,11 +451,11 @@ function advay_register_acf_field_groups() {
 				),
 				array(
 					'key'           => 'field_advay_home_cta_secondary',
-					'label'         => 'CTA secondary button',
+					'label'         => 'Footer — Call the warehouse',
 					'name'          => 'home_cta_secondary',
 					'type'          => 'link',
 					'return_format' => 'array',
-					'instructions'  => 'Defaults to Call the warehouse (tel).',
+					'instructions'  => 'Footer button above “Book a call with our MD”. Defaults to Call the warehouse (tel).',
 				),
 			),
 			'location'              => array(

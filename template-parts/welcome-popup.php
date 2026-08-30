@@ -12,11 +12,11 @@ $popup_copy   = advay_get_acf( 'home_popup_copy', __( 'One flat rate. No hidden 
 
 $cta_primary       = advay_get_acf( 'home_popup_cta_primary', '', $front );
 $cta_primary_label = advay_acf_link_title( $cta_primary, __( 'Get a Free Quote', 'advay-theme' ) );
-$cta_primary_url   = advay_acf_link_url( $cta_primary, advay_contact_url() );
+$cta_primary_url   = advay_acf_quote_link_url( $cta_primary, advay_quote_url() );
 
 $cta_secondary       = advay_get_acf( 'home_popup_cta_secondary', '', $front );
 $cta_secondary_label = advay_acf_link_title( $cta_secondary, __( 'Book a Call with Odi', 'advay-theme' ) );
-$cta_secondary_url   = advay_acf_link_url( $cta_secondary, advay_onboarding_url() );
+$cta_secondary_url   = advay_acf_book_call_link_url( $cta_secondary, advay_book_call_url() );
 
 $popup_img     = advay_get_acf( 'home_popup_image', null, $front );
 $popup_img_src = advay_acf_image_url( $popup_img, advay_asset_uri( 'images/svc-warehouse.jpg' ) );

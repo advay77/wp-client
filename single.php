@@ -56,6 +56,34 @@ get_header();
 			</article>
 		</div>
 		<?php
+		$related = advay_related_posts( get_the_ID(), 4 );
+		if ( ! empty( $related ) ) :
+			$related_heading = advay_get_acf(
+				'blog_related_heading',
+				__( 'Related articles', 'advay-theme' ),
+				advay_acf_front_id()
+			);
+			?>
+			<section class="blog-related" aria-labelledby="blog-related-heading">
+				<div class="container">
+					<h2 id="blog-related-heading"><?php echo esc_html( $related_heading ); ?></h2>
+					<div class="blog-stream">
+						<?php
+						global $post;
+						foreach ( $related as $related_post ) {
+							$post = $related_post; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+							setup_postdata( $post );
+							get_template_part( 'template-parts/blog-card', null, array( 'featured' => false ) );
+						}
+						wp_reset_postdata();
+						?>
+					</div>
+				</div>
+			</section>
+			<?php
+		endif;
+		?>
+		<?php
 	endwhile;
 	?>
 

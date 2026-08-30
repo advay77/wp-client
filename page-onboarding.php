@@ -13,7 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $slug    = 'onboarding';
-$contact = advay_contact_url();
 $wa_url  = advay_whatsapp_url();
 
 $steps_defaults = array(
@@ -79,7 +78,7 @@ $steps_defaults = array(
 		'tone'   => 'coral',
 		'icon'   => 'box',
 		'pills'  => array(
-			array( 'label' => __( 'Receiving open', 'advay-theme' ), 'url' => $contact ),
+			array( 'label' => __( 'Receiving open', 'advay-theme' ), 'url' => advay_receiving_url() ),
 		),
 		'drawer' => array(
 			'label' => __( 'Day-one checklist', 'advay-theme' ),
@@ -137,7 +136,7 @@ foreach ( $steps_defaults as $i => $def ) {
 			),
 			array(
 				'label' => advay_page_acf( $slug, 'onboarding_pill_form_label', __( 'Fill a form', 'advay-theme' ) ),
-				'url'   => $contact,
+				'url'   => advay_contact_page_url(),
 			),
 			array(
 				'label' => advay_page_acf( $slug, 'onboarding_pill_book_label', __( 'Book a meeting with the MD', 'advay-theme' ) ),
@@ -158,9 +157,9 @@ $ob_final_copy    = advay_page_acf( $slug, 'onboarding_final_copy', __( 'Tell us
 $ob_final_p       = advay_page_acf( $slug, 'onboarding_final_primary', '' );
 $ob_final_s       = advay_page_acf( $slug, 'onboarding_final_secondary', '' );
 $ob_final_p_label = advay_acf_link_title( $ob_final_p, __( 'Get a custom quote', 'advay-theme' ) );
-$ob_final_p_url   = advay_acf_link_url( $ob_final_p, $contact );
+$ob_final_p_url   = advay_acf_quote_link_url( $ob_final_p, advay_quote_url() );
 $ob_final_s_label = advay_acf_link_title( $ob_final_s, __( 'Book a call with MD', 'advay-theme' ) );
-$ob_final_s_url   = advay_acf_link_url( $ob_final_s, $contact );
+$ob_final_s_url   = advay_acf_book_call_link_url( $ob_final_s, advay_book_call_url() );
 
 get_header();
 ?>
@@ -252,6 +251,8 @@ get_header();
 			</ol>
 		</div>
 	</section>
+
+	<?php get_template_part( 'template-parts/editor-zone' ); ?>
 
 	<section class="ob-final">
 		<div class="container ob-final-inner" data-ob-reveal>

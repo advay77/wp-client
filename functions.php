@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ADVAY_THEME_VERSION', '2.32.0' );
+define( 'ADVAY_THEME_VERSION', '2.44.7' );
 
 require get_template_directory() . '/inc/success-story-cpt.php';
 require get_template_directory() . '/inc/success-stories.php';
@@ -153,12 +153,6 @@ function advay_primary_menu_fallback() {
 			'url'   => advay_blog_url(),
 			'mega'  => 'learn',
 			'class' => 'has-mega is-blogs',
-		),
-		array(
-			'label' => __( 'Onboarding', 'advay-theme' ),
-			'url'   => advay_onboarding_url(),
-			'mega'  => '',
-			'class' => '',
 		),
 	);
 
@@ -327,7 +321,8 @@ function advay_footer_menu_fallback() {
 		array( 'label' => __( 'What we do', 'advay-theme' ), 'url' => $home . '#services' ),
 		array( 'label' => __( 'Success stories', 'advay-theme' ), 'url' => $home . '#testimonials' ),
 		array( 'label' => __( 'Learn', 'advay-theme' ), 'url' => $home . '#how-it-works' ),
-		array( 'label' => __( 'Onboarding', 'advay-theme' ), 'url' => advay_onboarding_url() ),
+		array( 'label' => __( 'Get an Instant Quote', 'advay-theme' ), 'url' => advay_quote_url() ),
+		array( 'label' => __( 'Contact', 'advay-theme' ), 'url' => advay_contact_page_url() ),
 		array( 'label' => __( 'Company', 'advay-theme' ), 'url' => $home . '#company' ),
 	);
 
@@ -344,6 +339,34 @@ function advay_footer_menu_fallback() {
 
 function advay_contact_url() {
 	return trailingslashit( home_url( '/' ) ) . '#contact';
+}
+
+/**
+ * Calendly booking URL. Falls back to the contact page.
+ *
+ * @return string
+ */
+function advay_book_call_url() {
+	$url = advay_get_acf( 'site_calendly_url', '', advay_acf_front_id() );
+	if ( is_string( $url ) && '' !== trim( $url ) ) {
+		return $url;
+	}
+
+	return advay_contact_page_url();
+}
+
+/**
+ * Contact page URL. Falls back to the homepage contact anchor.
+ *
+ * @return string
+ */
+function advay_contact_page_url() {
+	$page = get_page_by_path( 'contact-us' );
+	if ( $page ) {
+		return get_permalink( $page );
+	}
+
+	return advay_contact_url();
 }
 
 function advay_intake_email_url() {
@@ -447,6 +470,19 @@ function advay_onboarding_url() {
 	}
 
 	return home_url( '/onboarding/' );
+}
+
+/**
+ * Instant Quote page URL. Falls back to the contact anchor when no
+ * /quote/ page exists (e.g. installs without that page).
+ */
+function advay_quote_url() {
+	$page = get_page_by_path( 'quote' );
+	if ( $page ) {
+		return get_permalink( $page );
+	}
+
+	return advay_contact_url();
 }
 
 /**
@@ -786,6 +822,27 @@ function advay_fix_custom_route_query( $query ) {
 add_action( 'parse_query', 'advay_fix_custom_route_query' );
 
 /**
+ * Blog listing shows every post on a single page (no pagination).
+ */
+function advay_blog_show_all_posts( $query ) {
+	if ( is_admin() || ! $query->is_main_query() ) {
+		return;
+	}
+
+	$is_blog_route = (int) $query->get( 'advay_blog' ) === 1;
+	$is_posts_page = $query->is_home() && ! $query->is_front_page();
+
+	if ( ! $is_blog_route && ! $is_posts_page ) {
+		return;
+	}
+
+	$query->set( 'posts_per_page', -1 );
+	$query->set( 'nopaging', true );
+	$query->set( 'paged', 1 );
+}
+add_action( 'pre_get_posts', 'advay_blog_show_all_posts' );
+
+/**
  * Body classes for custom routes (strip misleading home/blog).
  */
 function advay_custom_route_body_class( $classes ) {
@@ -819,6 +876,10 @@ function advay_custom_route_body_class( $classes ) {
 	if ( advay_is_managing_director_page() ) {
 		$classes   = array_values( array_diff( $classes, array( 'home', 'blog' ) ) );
 		$classes[] = 'page-managing-director';
+	}
+
+	if ( function_exists( 'is_page' ) && is_page( 'quote' ) ) {
+		$classes[] = 'page-quote';
 	}
 
 	if ( advay_is_success_story_page() ) {
@@ -855,6 +916,11 @@ function advay_services_url( $hash = '' ) {
 		return advay_receiving_url( $hash );
 	}
 
+	$platform_ids = array( 'amazon', 'walmart', 'tiktok', 'dtc' );
+	if ( in_array( $hash, $platform_ids, true ) ) {
+		return advay_platform_url( $hash );
+	}
+
 	$page = get_page_by_path( 'services' );
 	if ( $page ) {
 		$url = get_permalink( $page );
@@ -865,10 +931,25 @@ function advay_services_url( $hash = '' ) {
 	}
 
 	if ( 'platforms' === $hash ) {
-		return trailingslashit( home_url( '/' ) ) . '#services';
+		return home_url( '/services/#platforms' );
 	}
 
 	return trailingslashit( home_url( '/' ) ) . '#services';
+}
+
+/**
+ * Homepage hero channel deep-link (Amazon / Walmart / TikTok / DTC).
+ *
+ * @param string $id Channel id.
+ * @return string
+ */
+function advay_platform_url( $id ) {
+	$id = sanitize_key( (string) $id );
+	if ( ! in_array( $id, array( 'amazon', 'walmart', 'tiktok', 'dtc' ), true ) ) {
+		$id = 'amazon';
+	}
+
+	return add_query_arg( 'channel', $id, home_url( '/' ) );
 }
 
 /**
@@ -994,6 +1075,136 @@ function advay_blog_fallback_image( $post_id = null ) {
 }
 
 /**
+ * One-time content repair for the imported blog posts.
+ *
+ * The twelve posts imported in Aug 2026 shipped with the writer's authoring
+ * notes pasted below the article (internal-link tables, image briefs, an
+ * SEO/AEO/GEO checklist) and, in one case, unconverted Markdown. Those were
+ * cleaned offline and verified; the finished HTML is stored in
+ * inc/blog-cleaned-content.json keyed by slug. This migration swaps each post
+ * to its cleaned version exactly, running no pattern-matching on live content.
+ *
+ * The original content is saved to post meta (_advay_content_backup) before the
+ * first replacement, so the change is reversible.
+ */
+function advay_repair_imported_blog_content() {
+	if ( get_option( 'advay_blog_content_repaired' ) === ADVAY_THEME_VERSION ) {
+		return;
+	}
+
+	$file = get_template_directory() . '/inc/blog-cleaned-content.json';
+	if ( ! is_readable( $file ) ) {
+		return;
+	}
+
+	$map = json_decode( (string) file_get_contents( $file ), true );
+	if ( ! is_array( $map ) ) {
+		return;
+	}
+
+	foreach ( $map as $slug => $clean ) {
+		if ( ! is_string( $clean ) || '' === $clean ) {
+			continue;
+		}
+
+		$found = get_posts(
+			array(
+				'name'        => $slug,
+				'post_type'   => 'post',
+				'post_status' => 'any',
+				'numberposts' => 1,
+			)
+		);
+		if ( ! $found ) {
+			continue;
+		}
+
+		$post = $found[0];
+		if ( $post->post_content === $clean ) {
+			continue;
+		}
+
+		if ( ! get_post_meta( $post->ID, '_advay_content_backup', true ) ) {
+			update_post_meta( $post->ID, '_advay_content_backup', $post->post_content );
+		}
+
+		wp_update_post(
+			array(
+				'ID'           => (int) $post->ID,
+				'post_content' => $clean,
+			)
+		);
+	}
+
+	update_option( 'advay_blog_content_repaired', ADVAY_THEME_VERSION, false );
+}
+add_action( 'init', 'advay_repair_imported_blog_content', 30 );
+
+/**
+ * Related posts for a single article.
+ *
+ * Prefers posts that share a category with $post_id. If fewer than
+ * $limit are found, tops up with the most recent other posts.
+ *
+ * @param int $post_id Current post ID.
+ * @param int $limit   Max posts to return.
+ * @return WP_Post[]
+ */
+function advay_related_posts( $post_id = 0, $limit = 4 ) {
+	$post_id = $post_id ? (int) $post_id : (int) get_the_ID();
+	$limit   = max( 1, (int) $limit );
+
+	if ( $post_id < 1 ) {
+		return array();
+	}
+
+	$exclude = array( $post_id );
+	$found   = array();
+
+	$cat_ids = wp_get_post_categories( $post_id );
+	if ( ! is_wp_error( $cat_ids ) && ! empty( $cat_ids ) ) {
+		$by_category = new WP_Query(
+			array(
+				'post_type'           => 'post',
+				'post_status'         => 'publish',
+				'posts_per_page'      => $limit,
+				'post__not_in'        => $exclude,
+				'category__in'        => $cat_ids,
+				'ignore_sticky_posts' => true,
+				'no_found_rows'       => true,
+			)
+		);
+
+		if ( $by_category->have_posts() ) {
+			$found = $by_category->posts;
+			foreach ( $found as $related_post ) {
+				$exclude[] = (int) $related_post->ID;
+			}
+		}
+	}
+
+	$needed = $limit - count( $found );
+	if ( $needed > 0 ) {
+		$recent = new WP_Query(
+			array(
+				'post_type'           => 'post',
+				'post_status'         => 'publish',
+				'posts_per_page'      => $needed,
+				'post__not_in'        => $exclude,
+				'ignore_sticky_posts' => true,
+				'no_found_rows'       => true,
+			)
+		);
+
+		if ( $recent->have_posts() ) {
+			$found = array_merge( $found, $recent->posts );
+		}
+	}
+
+	return $found;
+}
+
+/**
  * Client brand logos used across homepage slider and onboarding.
  *
  * @return array<int, array{name: string, src: string}>
@@ -1035,6 +1246,15 @@ function advay_brand_logos() {
 
 function advay_asset_uri( $relative ) {
 	return get_template_directory_uri() . '/assets/' . ltrim( $relative, '/' );
+}
+
+/**
+ * Managing Director feature video (homepage client success + MD hero).
+ *
+ * @return string
+ */
+function advay_md_feature_video_url() {
+	return advay_asset_uri( 'video/managing-director.mp4' );
 }
 
 /**

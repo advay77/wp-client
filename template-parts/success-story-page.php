@@ -149,8 +149,7 @@ $founder_caption    = ! empty( $story['founder_caption'] ) ? $story['founder_cap
 	<section class="ss-quote" aria-labelledby="ss-quote-heading">
 		<div class="container ss-quote-grid">
 			<blockquote class="ss-quote-copy">
-				<p class="ss-quote-mark" aria-hidden="true">“</p>
-				<p id="ss-quote-heading"><?php echo esc_html( $story['quote'] ); ?></p>
+				<p id="ss-quote-heading"><?php echo advay_ss_format_quote( $story['quote'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped + allowlisted span in helper. ?></p>
 				<footer>
 					<strong><?php echo esc_html( $story['founder'] ); ?></strong>
 					<span><?php echo esc_html( $story['founder_role'] ); ?></span>
@@ -208,6 +207,8 @@ $founder_caption    = ! empty( $story['founder_caption'] ) ? $story['founder_cap
 			</div>
 		</div>
 	</section>
+
+	<?php get_template_part( 'template-parts/editor-zone' ); ?>
 
 	<section class="ss-cta">
 		<div class="container ss-cta-inner">

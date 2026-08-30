@@ -76,17 +76,6 @@ if ( ! $categories && $demo_mode ) {
 			?>
 		</div>
 
-		<nav class="blog-pagination" aria-label="<?php esc_attr_e( 'Blog pages', 'advay-theme' ); ?>">
-			<?php
-			the_posts_pagination(
-				array(
-					'mid_size'  => 1,
-					'prev_text' => '&larr;',
-					'next_text' => '&rarr;',
-				)
-			);
-			?>
-		</nav>
 	<?php elseif ( $demo_mode ) : ?>
 		<div class="blog-stream">
 			<?php

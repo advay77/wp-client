@@ -103,7 +103,7 @@ $total  = count( $stages );
 			<?php esc_html_e( 'Every step of the', 'advay-theme' ); ?><br>
 			<?php esc_html_e( 'inventory journey.', 'advay-theme' ); ?>
 		</h2>
-		<a class="button button-primary ij-outro-cta" href="<?php echo esc_url( advay_contact_url() ); ?>">
+		<a class="button button-primary ij-outro-cta" href="<?php echo esc_url( advay_contact_page_url() ); ?>">
 			<?php esc_html_e( 'Talk to ElitePrep', 'advay-theme' ); ?> →
 		</a>
 	</div>

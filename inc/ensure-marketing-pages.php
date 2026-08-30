@@ -60,6 +60,10 @@ function advay_marketing_pages_spec() {
 			'title'    => 'Managing Director',
 			'template' => 'page-managing-director.php',
 		),
+		'quote'              => array(
+			'title'    => 'Get a Free Quote',
+			'template' => 'page-quote.php',
+		),
 		'blog'               => array(
 			'title'    => 'Blog',
 			'template' => 'page-blog.php',

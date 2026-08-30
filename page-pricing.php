@@ -73,6 +73,8 @@ foreach ( $highlight_defaults as $i => $row ) {
 		</div>
 	</section>
 
+	<?php get_template_part( 'template-parts/editor-zone' ); ?>
+
 	<section class="pricing-board">
 		<div class="container">
 			<div class="pricing-toolbar">
@@ -124,7 +126,7 @@ foreach ( $highlight_defaults as $i => $row ) {
 
 			<div class="pricing-cta">
 				<p><?php esc_html_e( 'Need a SKU-level program? Send volume, marketplace, and timing.', 'advay-theme' ); ?></p>
-				<a class="button button-primary" href="<?php echo esc_url( advay_contact_url() ); ?>">
+				<a class="button button-primary" href="<?php echo esc_url( advay_quote_url() ); ?>">
 					<?php esc_html_e( 'Get a custom quote', 'advay-theme' ); ?>
 					<span class="btn-arrow" aria-hidden="true"></span>
 				</a>

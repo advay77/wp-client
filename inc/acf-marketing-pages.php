@@ -295,6 +295,35 @@ function advay_register_marketing_page_acf_fields() {
 		)
 	);
 
+	/* ---------- Quote (Instant Quote) ---------- */
+	$quote = array(
+		array( 'key' => 'field_quote_tab_hero', 'label' => 'Hero', 'type' => 'tab' ),
+		advay_acf_text_field( 'field_quote_eyebrow', 'Eyebrow', 'quote_eyebrow' ),
+		advay_acf_text_field( 'field_quote_heading', 'Heading (H1)', 'quote_heading' ),
+		advay_acf_text_field( 'field_quote_lead', 'Supporting line', 'quote_lead', 'textarea', 3 ),
+		array( 'key' => 'field_quote_tab_points', 'label' => 'Reassurance points', 'type' => 'tab' ),
+	);
+	for ( $i = 1; $i <= 3; $i++ ) {
+		$quote[] = advay_acf_text_field( 'field_quote_pt_' . $i . '_value', 'Point ' . $i . ' — headline', 'quote_point_' . $i . '_value' );
+		$quote[] = advay_acf_text_field( 'field_quote_pt_' . $i . '_label', 'Point ' . $i . ' — label', 'quote_point_' . $i . '_label' );
+		$quote[] = advay_acf_text_field( 'field_quote_pt_' . $i . '_note', 'Point ' . $i . ' — note', 'quote_point_' . $i . '_note' );
+	}
+	$quote[] = array( 'key' => 'field_quote_tab_form', 'label' => 'Form', 'type' => 'tab' );
+	$quote[] = advay_acf_text_field( 'field_quote_form_intro', 'Form intro line', 'quote_form_intro', 'textarea', 2 );
+	$quote[] = array( 'key' => 'field_quote_tab_alt', 'label' => 'Talk instead', 'type' => 'tab' );
+	$quote[] = advay_acf_text_field( 'field_quote_alt_heading', 'Alternate path heading', 'quote_alt_heading' );
+	$quote[] = advay_acf_text_field( 'field_quote_alt_lead', 'Alternate path lead', 'quote_alt_lead', 'textarea', 2 );
+
+	acf_add_local_field_group(
+		array(
+			'key'      => 'group_advay_quote',
+			'title'    => 'Quote Page Content',
+			'fields'   => $quote,
+			'location' => advay_acf_location_page_template( 'page-quote.php' ),
+			'active'   => true,
+		)
+	);
+
 	$pricing_fields = array(
 		array(
 			'key'   => 'field_pricing_hl_tab',

@@ -20,14 +20,17 @@ $fallback = advay_blog_fallback_image( get_the_ID() );
 			<?php if ( has_post_thumbnail() ) : ?>
 				<?php
 				the_post_thumbnail(
-					$featured ? 'medium_large' : 'medium',
+					'large',
 					array(
-						'alt' => the_title_attribute( array( 'echo' => false ) ),
+						'alt'      => the_title_attribute( array( 'echo' => false ) ),
+						'loading'  => 'lazy',
+						'decoding' => 'async',
+						'class'    => 'blog-item-img',
 					)
 				);
 				?>
 			<?php else : ?>
-				<img src="<?php echo esc_url( $fallback ); ?>" alt="" loading="lazy" decoding="async">
+				<img class="blog-item-img" src="<?php echo esc_url( $fallback ); ?>" alt="" loading="lazy" decoding="async">
 			<?php endif; ?>
 			<span class="blog-item-badge">
 				<?php echo esc_html( $cat_name ); ?>

@@ -14,18 +14,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 
-$paged = max( 1, (int) get_query_var( 'paged' ), (int) get_query_var( 'page' ) );
 
 $blog_query = new WP_Query(
 	array(
 		'post_type'      => 'post',
 		'post_status'    => 'publish',
-		'posts_per_page' => 12,
-		'paged'          => $paged,
+		'posts_per_page' => -1,
+		'nopaging'       => true,
 	)
 );
 ?>
 <main id="main-content" class="blog-main">
+	<?php get_template_part( 'template-parts/editor-zone' ); ?>
 	<?php
 	if ( $blog_query->have_posts() ) {
 		global $wp_query;

@@ -1,5 +1,6 @@
 <?php
-$footer_cta = advay_footer_cta();
+$footer_call = advay_footer_call_warehouse_cta();
+$footer_cta  = advay_footer_cta();
 ?>
 <footer class="site-footer" id="site-footer">
 	<div class="container">
@@ -12,10 +13,16 @@ $footer_cta = advay_footer_cta();
 					<?php echo esc_html( advay_footer_tagline() ); ?>
 				</p>
 			</div>
-			<a class="button button-light footer-cta" href="<?php echo esc_url( $footer_cta['url'] ); ?>">
-				<?php echo esc_html( $footer_cta['label'] ); ?>
-				<span class="btn-arrow" aria-hidden="true"></span>
-			</a>
+			<div class="footer-top-actions">
+				<a class="button button-light footer-cta footer-cta--call" href="<?php echo esc_url( $footer_call['url'] ); ?>">
+					<?php echo esc_html( $footer_call['label'] ); ?>
+					<span class="btn-arrow" aria-hidden="true"></span>
+				</a>
+				<a class="button button-light footer-cta" href="<?php echo esc_url( $footer_cta['url'] ); ?>">
+					<?php echo esc_html( $footer_cta['label'] ); ?>
+					<span class="btn-arrow" aria-hidden="true"></span>
+				</a>
+			</div>
 		</div>
 
 		<div class="footer-grid">
@@ -39,10 +46,10 @@ $footer_cta = advay_footer_cta();
 			<div class="footer-col">
 				<h2 class="footer-heading"><?php esc_html_e( 'Services', 'advay-theme' ); ?></h2>
 				<ul class="footer-menu">
-					<li><a href="<?php echo esc_url( advay_services_url( 'platforms' ) ); ?>"><?php esc_html_e( 'Amazon FBA prep', 'advay-theme' ); ?></a></li>
-					<li><a href="<?php echo esc_url( advay_services_url( 'platforms' ) ); ?>"><?php esc_html_e( 'Walmart WFS prep', 'advay-theme' ); ?></a></li>
-					<li><a href="<?php echo esc_url( advay_services_url( 'platforms' ) ); ?>"><?php esc_html_e( 'TikTok Shop prep', 'advay-theme' ); ?></a></li>
-					<li><a href="<?php echo esc_url( advay_services_url() ); ?>"><?php esc_html_e( 'Receiving, labeling & forwarding', 'advay-theme' ); ?></a></li>
+					<li><a href="<?php echo esc_url( advay_services_url( 'amazon' ) ); ?>"><?php esc_html_e( 'Amazon FBA prep', 'advay-theme' ); ?></a></li>
+					<li><a href="<?php echo esc_url( advay_services_url( 'walmart' ) ); ?>"><?php esc_html_e( 'Walmart WFS prep', 'advay-theme' ); ?></a></li>
+					<li><a href="<?php echo esc_url( advay_services_url( 'tiktok' ) ); ?>"><?php esc_html_e( 'TikTok Shop prep', 'advay-theme' ); ?></a></li>
+					<li><a href="<?php echo esc_url( advay_receiving_url() ); ?>"><?php esc_html_e( 'Receiving, labeling & forwarding', 'advay-theme' ); ?></a></li>
 				</ul>
 			</div>
 
@@ -53,7 +60,7 @@ $footer_cta = advay_footer_cta();
 					<li><a href="<?php echo esc_url( advay_onboarding_url() ); ?>"><?php esc_html_e( 'Onboarding', 'advay-theme' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/#how-it-works' ) ); ?>"><?php esc_html_e( 'How it works', 'advay-theme' ); ?></a></li>
 					<li><a href="<?php echo esc_url( home_url( '/#testimonials' ) ); ?>"><?php esc_html_e( 'Success stories', 'advay-theme' ); ?></a></li>
-					<li><a href="<?php echo esc_url( advay_contact_url() ); ?>"><?php esc_html_e( 'Contact', 'advay-theme' ); ?></a></li>
+					<li><a href="<?php echo esc_url( advay_contact_page_url() ); ?>"><?php esc_html_e( 'Contact', 'advay-theme' ); ?></a></li>
 				</ul>
 			</div>
 

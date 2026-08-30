@@ -12,8 +12,8 @@ get_header();
 			the_post();
 
 			/*
-			 * Elementor pages already include their own H1 in the canvas.
-			 * Skip the theme H1 to avoid duplicate headings on production.
+			 * Elementor pages may include their own H1 in the canvas.
+			 * Only skip the theme H1 when rendered content actually has one.
 			 */
 			$advay_is_elementor = false;
 			if ( class_exists( '\Elementor\Plugin' ) && get_the_ID() ) {
@@ -22,9 +22,15 @@ get_header();
 					$advay_is_elementor = (bool) $advay_document->is_built_with_elementor();
 				}
 			}
+
+			$advay_skip_title = false;
+			if ( $advay_is_elementor ) {
+				$advay_rendered = apply_filters( 'the_content', get_the_content() );
+				$advay_skip_title = (bool) preg_match( '/<h1[\s>]/i', $advay_rendered );
+			}
 			?>
 			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-				<?php if ( ! $advay_is_elementor ) : ?>
+				<?php if ( ! $advay_skip_title ) : ?>
 					<header class="entry-header">
 						<h1><?php the_title(); ?></h1>
 					</header>

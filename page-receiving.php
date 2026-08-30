@@ -65,14 +65,14 @@ $recv_eyebrow = advay_page_acf( $slug, 'receiving_eyebrow', __( 'What we do', 'a
 $recv_heading = advay_page_acf( $slug, 'receiving_heading', __( 'How your inventory moves through Elite Prep Center', 'advay-theme' ) );
 $recv_lede    = advay_page_acf( $slug, 'receiving_lede', __( 'One warehouse, five stages. Scroll down — the journey moves left to right through the warehouse.', 'advay-theme' ) );
 $recv_hint    = advay_page_acf( $slug, 'receiving_scroll_hint', __( 'Scroll to move through the warehouse', 'advay-theme' ) );
-$recv_video   = advay_page_acf( $slug, 'receiving_video_url', advay_asset_uri( 'video/DTC.mp4' ) );
+$recv_video   = advay_page_acf( $slug, 'receiving_video_url', advay_asset_uri( 'video/amazon.mp4' ) );
 
 $recv_cta_heading = advay_page_acf( $slug, 'receiving_cta_heading', __( 'Ready to send your next inbound?', 'advay-theme' ) );
 $recv_cta_copy    = advay_page_acf( $slug, 'receiving_cta_copy', __( 'Share SKU counts, marketplace, and timing — we\'ll reply with capacity and a receiving plan.', 'advay-theme' ) );
 $recv_cta_p       = advay_page_acf( $slug, 'receiving_cta_primary', '' );
 $recv_cta_s       = advay_page_acf( $slug, 'receiving_cta_secondary', '' );
 $recv_cta_p_label = advay_acf_link_title( $recv_cta_p, __( 'Talk to ElitePrep', 'advay-theme' ) );
-$recv_cta_p_url   = advay_acf_link_url( $recv_cta_p, advay_contact_url() );
+$recv_cta_p_url   = advay_acf_link_url( $recv_cta_p, advay_contact_page_url() );
 $recv_cta_s_label = advay_acf_link_title( $recv_cta_s, __( 'See platforms', 'advay-theme' ) );
 $recv_cta_s_url   = advay_acf_link_url( $recv_cta_s, advay_services_url( 'platforms' ) );
 
@@ -260,6 +260,8 @@ get_header();
 			</div>
 		</div>
 	</div>
+
+	<?php get_template_part( 'template-parts/editor-zone' ); ?>
 
 	<section class="wj-cta">
 		<div class="container wj-cta-inner">

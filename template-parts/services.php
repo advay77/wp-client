@@ -63,7 +63,7 @@ $cta_how  = advay_get_acf( 'home_hub_cta_how', __( 'Start your onboarding', 'adv
 					<div class="home-hub-lead-slot">
 						<p class="home-hub-lead home-hub-sub"><?php echo esc_html( $hub_what_lead ); ?></p>
 					</div>
-					<a class="button button-primary home-hub-cta" href="<?php echo esc_url( advay_services_url() ); ?>">
+					<a class="button button-primary home-hub-cta" href="<?php echo esc_url( advay_receiving_url() ); ?>">
 						<?php echo esc_html( $cta_what ); ?>
 						<span class="btn-arrow" aria-hidden="true"></span>
 					</a>

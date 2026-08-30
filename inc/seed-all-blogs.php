@@ -244,16 +244,8 @@ function advay_blog_text_to_blocks( $raw ) {
  * @return string
  */
 function advay_blog_related_html( $items ) {
-	if ( ! $items ) {
-		return '';
-	}
-	$html  = "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Check out other related articles</h2>\n<!-- /wp:heading -->\n\n";
-	$html .= "<!-- wp:list -->\n<ul class=\"wp-block-list advay-related-posts\">\n";
-	foreach ( $items as $item ) {
-		$html .= '<li><a href="' . esc_url( $item['url'] ) . '">' . esc_html( $item['title'] ) . "</a></li>\n";
-	}
-	$html .= "</ul>\n<!-- /wp:list -->\n";
-	return $html;
+	/* Placeholder related blocks are no longer injected into post content. */
+	return '';
 }
 
 /**

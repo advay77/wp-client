@@ -40,29 +40,29 @@ foreach ( $values_defaults as $i => $row ) {
 
 $milestones_defaults = array(
 	array(
-		'year'  => '2007',
+		'year'  => '2017',
 		'title' => __( 'The Beginning', 'advay-theme' ),
-		'text'  => __( 'Began my career in manufacturing and industrial engineering, developing a foundation in operations and continuous improvement.', 'advay-theme' ),
+		'text'  => __( 'What began as marketplace selling from a home garage evolved into a vision for a better prep and fulfillment experience.', 'advay-theme' ),
 	),
 	array(
-		'year'  => '2009',
-		'title' => __( 'Building the Foundation', 'advay-theme' ),
-		'text'  => __( 'Joined Merck\'s management development program and progressed through manufacturing and supply chain roles, gaining experience across operations, planning, analytics, and global product supply.', 'advay-theme' ),
+		'year'  => '2019',
+		'title' => __( 'First Expansion', 'advay-theme' ),
+		'text'  => __( 'Growing demand moved the operation into its first dedicated warehouse, creating the foundation for a professional prep center.', 'advay-theme' ),
 	),
 	array(
-		'year'  => '2016',
-		'title' => __( 'Broadening the Lens', 'advay-theme' ),
-		'text'  => __( 'Expanded from operations into enterprise leadership, combining technical expertise with an MBA from UNC Kenan-Flagler.', 'advay-theme' ),
+		'year'  => '2021',
+		'title' => __( 'Supplement Specialization', 'advay-theme' ),
+		'text'  => __( 'EPC onboarded its first dietary supplement client, beginning its specialization in lot-controlled and expiration-dated inventory.', 'advay-theme' ),
 	),
 	array(
-		'year'  => '2018',
-		'title' => __( 'Global Supply Chain Leadership', 'advay-theme' ),
-		'text'  => __( 'Led increasingly complex global vaccine supply chains, including GARDASIL®, across manufacturing and global markets.', 'advay-theme' ),
+		'year'  => '2022',
+		'title' => __( 'Scaling Operations', 'advay-theme' ),
+		'text'  => __( 'EPC expanded into a 25,000 sq. ft. facility, increasing its receiving, storage, prep, and fulfillment capacity.', 'advay-theme' ),
 	),
 	array(
-		'year'  => '2022+',
-		'title' => __( 'Leading at Scale', 'advay-theme' ),
-		'text'  => __( 'Led major global supply chain programs, including Pfizer\'s North America COVID-19 vaccine supply chain, global vaccine donation execution, digital planning transformation, and launches across 80+ markets.', 'advay-theme' ),
+		'year'  => '2026',
+		'title' => __( 'The Next Chapter', 'advay-theme' ),
+		'text'  => __( 'EPC evolved into a specialized multi-channel 3PL and gained recognition across the Amazon and Walmart partner ecosystems.', 'advay-theme' ),
 	),
 );
 
@@ -130,9 +130,9 @@ $os_mission_label  = advay_page_acf( $slug, 'our_story_mission_label', __( 'Miss
 $os_mission        = advay_page_acf( $slug, 'our_story_mission', __( 'To make fulfillment simple, fast, and reliable for growing brands, handling the operational complexity from warehouse to marketplace and customer, so founders can focus on building their brands and creating lasting wealth.', 'advay-theme' ) );
 $os_vision_label   = advay_page_acf( $slug, 'our_story_vision_label', __( 'Vision', 'advay-theme' ) );
 $os_vision         = advay_page_acf( $slug, 'our_story_vision', __( 'To help build a million consumer brands scale faster by becoming the supply chain partner behind their growth.', 'advay-theme' ) );
-$os_tl_eyebrow     = advay_page_acf( $slug, 'our_story_timeline_eyebrow', __( 'Leadership journey', 'advay-theme' ) );
+$os_tl_eyebrow     = advay_page_acf( $slug, 'our_story_timeline_eyebrow', __( 'Our journey', 'advay-theme' ) );
 $os_tl_heading     = advay_page_acf( $slug, 'our_story_timeline_heading', __( 'From vision to reality', 'advay-theme' ) );
-$os_tl_lead        = advay_page_acf( $slug, 'our_story_timeline_lead', __( 'Decades of supply chain leadership — from the factory floor to billion-unit programs — now applied to marketplace prep at ElitePrep.', 'advay-theme' ) );
+$os_tl_lead        = advay_page_acf( $slug, 'our_story_timeline_lead', __( 'From a home garage to a specialized multi-channel 3PL — the milestones that shaped ElitePrep Center.', 'advay-theme' ) );
 $os_gal_heading    = advay_page_acf( $slug, 'our_story_gallery_heading', __( 'Life at ElitePrep', 'advay-theme' ) );
 $os_gal_lead       = advay_page_acf( $slug, 'our_story_gallery_lead', __( 'The people, the floor, and the work behind every shipment.', 'advay-theme' ) );
 $os_cta_heading    = advay_page_acf( $slug, 'our_story_cta_heading', __( 'Ready to prep with a team that gets it?', 'advay-theme' ) );
@@ -141,7 +141,7 @@ $os_cta_s          = advay_page_acf( $slug, 'our_story_cta_secondary', '' );
 $os_cta_p_label    = advay_acf_link_title( $os_cta_p, __( 'One-click onboarding', 'advay-theme' ) );
 $os_cta_p_url      = advay_acf_link_url( $os_cta_p, advay_onboarding_url() );
 $os_cta_s_label    = advay_acf_link_title( $os_cta_s, __( 'Book a call', 'advay-theme' ) );
-$os_cta_s_url      = advay_acf_link_url( $os_cta_s, advay_contact_url() );
+$os_cta_s_url      = advay_acf_book_call_link_url( $os_cta_s, advay_book_call_url() );
 
 get_header();
 ?>
@@ -261,6 +261,8 @@ get_header();
 			</ul>
 		</div>
 	</section>
+
+	<?php get_template_part( 'template-parts/editor-zone' ); ?>
 
 	<section class="os-cta">
 		<div class="container os-cta-inner">

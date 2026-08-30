@@ -12,6 +12,7 @@ get_header();
 		<?php get_template_part( 'template-parts/partner' ); ?>
 		<?php get_template_part( 'template-parts/services' ); ?>
 		<?php get_template_part( 'template-parts/client-success' ); ?>
+		<?php get_template_part( 'template-parts/editor-zone' ); ?>
 		<?php get_template_part( 'template-parts/map' ); ?>
 		<?php get_template_part( 'template-parts/fit-check' ); ?>
 		<?php get_template_part( 'template-parts/trust' ); ?>

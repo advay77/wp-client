@@ -8,12 +8,12 @@ $first    = reset( $channels );
 $front    = advay_acf_front_id();
 
 $hero_cta_primary = advay_get_acf( 'home_hero_cta', '', $front );
-$hero_cta_label   = advay_acf_link_title( $hero_cta_primary, __( 'Grow with ElitePrep', 'advay-theme' ) );
-$hero_cta_url     = advay_acf_link_url( $hero_cta_primary, advay_contact_url() );
+$hero_cta_label   = advay_acf_link_title( $hero_cta_primary, __( 'Get an Instant Quote', 'advay-theme' ) );
+$hero_cta_url     = advay_acf_quote_link_url( $hero_cta_primary, advay_quote_url() );
 
 $hero_cta_secondary       = advay_get_acf( 'home_hero_cta_secondary', '', $front );
 $hero_cta_secondary_label = advay_acf_link_title( $hero_cta_secondary, __( 'Learn more', 'advay-theme' ) );
-$hero_cta_secondary_url   = advay_acf_link_url( $hero_cta_secondary, home_url( '/#services' ) );
+$hero_cta_secondary_url   = advay_acf_link_url( $hero_cta_secondary, advay_receiving_url() );
 
 $hero_image     = advay_get_acf( 'home_hero_image', '', $front );
 $hero_image_url = advay_acf_image_url( $hero_image, '' );

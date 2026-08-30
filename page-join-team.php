@@ -48,6 +48,8 @@ get_header();
 		</div>
 	</section>
 
+	<?php get_template_part( 'template-parts/editor-zone' ); ?>
+
 	<section class="os-cta">
 		<div class="container os-cta-inner">
 			<h2><?php esc_html_e( 'Interested in joining ElitePrep?', 'advay-theme' ); ?></h2>
@@ -56,7 +58,7 @@ get_header();
 					<?php esc_html_e( 'Email us', 'advay-theme' ); ?>
 					<span class="btn-arrow" aria-hidden="true"></span>
 				</a>
-				<a class="button button-ghost" href="<?php echo esc_url( advay_contact_url() ); ?>">
+				<a class="button button-ghost" href="<?php echo esc_url( advay_contact_page_url() ); ?>">
 					<?php esc_html_e( 'Talk to the team', 'advay-theme' ); ?>
 				</a>
 			</div>

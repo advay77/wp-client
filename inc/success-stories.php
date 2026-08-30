@@ -33,6 +33,28 @@ function advay_success_story_exists( $slug ) {
 }
 
 /**
+ * Escape a success-story quote and highlight brand names (ElitePrep / EPC).
+ *
+ * @param string $quote Raw quote text.
+ * @return string Safe HTML for output.
+ */
+function advay_ss_format_quote( $quote ) {
+	$quote = (string) $quote;
+	if ( '' === $quote ) {
+		return '';
+	}
+
+	$html = esc_html( $quote );
+	$html = preg_replace(
+		'/\b(ElitePrep(?:\s*Center)?|EPC)\b/',
+		'<span class="ss-accent">$1</span>',
+		$html
+	);
+
+	return is_string( $html ) ? $html : esc_html( $quote );
+}
+
+/**
  * Success story content by slug.
  *
  * Prefers published CPT + ACF fields; empty ACF fields fall back to PHP array

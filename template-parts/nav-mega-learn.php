@@ -2,8 +2,8 @@
 /**
  * Blogs mega panel — image-card dropdown.
  *
- * Shows the most recent real posts first, then fills remaining slots
- * with evergreen demo cards from the theme.
+ * Shows three pinned articles. If a pinned post is missing, the panel
+ * falls back to the most recent published posts.
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -12,55 +12,55 @@ if ( ! defined( 'ABSPATH' ) ) {
 $blog_url = advay_blog_url();
 $cards    = array();
 
-$recent = get_posts(
-	array(
-		'numberposts'      => 3,
-		'post_status'      => 'publish',
-		'suppress_filters' => false,
-		/* Prefer seeded demos over the default Hello World post. */
-		'orderby'          => 'date',
-		'order'            => 'DESC',
-	)
+/**
+ * The three articles pinned to the Blogs dropdown.
+ * Edit this list to change what the mega panel shows.
+ */
+$pinned_slugs = array(
+	'best-amazon-prep-center-new-jersey',
+	'amazon-is-ending-commingling-what-sellers-need-to-know-before-march-31-2026',
+	'what-is-a-3pl-how-it-can-help-grow-your-shopify-store',
 );
 
-foreach ( $recent as $post_obj ) {
-	/* Skip the default WordPress sample post when we have real demos. */
-	if ( 'hello-world' === $post_obj->post_name && count( $recent ) > 1 ) {
-		continue;
+$picked = array();
+foreach ( $pinned_slugs as $slug ) {
+	$post_obj = get_page_by_path( $slug, OBJECT, 'post' );
+	if ( $post_obj && 'publish' === $post_obj->post_status ) {
+		$picked[] = $post_obj;
 	}
+}
 
-	$cats  = get_the_category( $post_obj->ID );
-	$thumb = has_post_thumbnail( $post_obj->ID ) ? get_the_post_thumbnail_url( $post_obj->ID, 'medium_large' ) : advay_blog_fallback_image( $post_obj->ID );
+/* If a pinned post is missing, top up with the most recent published posts. */
+if ( count( $picked ) < 3 ) {
+	$fill = get_posts(
+		array(
+			'numberposts'      => 3,
+			'post_status'      => 'publish',
+			'suppress_filters' => false,
+			'orderby'          => 'date',
+			'order'            => 'DESC',
+			'post__not_in'     => wp_list_pluck( $picked, 'ID' ),
+		)
+	);
+	foreach ( $fill as $post_obj ) {
+		if ( count( $picked ) >= 3 ) {
+			break;
+		}
+		if ( 'hello-world' === $post_obj->post_name ) {
+			continue;
+		}
+		$picked[] = $post_obj;
+	}
+}
+
+foreach ( $picked as $post_obj ) {
+	$cats    = get_the_category( $post_obj->ID );
+	$thumb   = has_post_thumbnail( $post_obj->ID ) ? get_the_post_thumbnail_url( $post_obj->ID, 'large' ) : advay_blog_fallback_image( $post_obj->ID );
 	$cards[] = array(
 		'label' => ( $cats && ! is_wp_error( $cats ) ) ? $cats[0]->name : __( 'Article', 'advay-theme' ),
 		'title' => get_the_title( $post_obj->ID ),
 		'url'   => get_permalink( $post_obj->ID ),
 		'img'   => $thumb,
-	);
-}
-
-foreach ( advay_demo_blog_posts() as $demo ) {
-	if ( count( $cards ) >= 3 ) {
-		break;
-	}
-	/* Avoid duplicating a post already pulled from get_posts(). */
-	$already = false;
-	foreach ( $cards as $existing_card ) {
-		if ( isset( $existing_card['title'] ) && $existing_card['title'] === $demo['title'] ) {
-			$already = true;
-			break;
-		}
-	}
-	if ( $already ) {
-		continue;
-	}
-
-	$seeded = get_page_by_path( $demo['slug'], OBJECT, 'post' );
-	$cards[] = array(
-		'label' => $demo['category'],
-		'title' => $demo['title'],
-		'url'   => $seeded ? get_permalink( $seeded ) : $blog_url,
-		'img'   => advay_asset_uri( $demo['image'] ),
 	);
 }
 

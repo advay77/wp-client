@@ -3,46 +3,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$founders = advay_founder_portraits();
-if ( empty( $founders ) ) {
-	$photo = get_template_directory() . '/assets/images/client-success.jpg';
-	$founders = array(
-		array(
-			'src'     => file_exists( $photo ) ? advay_asset_uri( 'images/client-success.jpg' ) : advay_asset_uri( 'images/client-success.png' ),
-			'caption' => __( 'Director of Client Success, Cole Sweetser', 'advay-theme' ),
-		),
-	);
-}
-
 $front = advay_acf_front_id();
-$success_image = advay_get_acf( 'home_success_image', '', $front );
-$success_image_url = advay_acf_image_url( $success_image, '' );
-$success_image_alt = advay_acf_image_alt( $success_image, '' );
-$success_caption   = advay_get_acf(
+
+$success_caption = advay_get_acf(
 	'home_success_caption',
 	__( 'Managing Director, Odi Ikpe', 'advay-theme' ),
 	$front
 );
 
-if ( $success_image_url ) {
-	$founders[0] = array(
-		'src'     => $success_image_url,
-		'caption' => $success_image_alt ? $success_image_alt : $success_caption,
-	);
-}
+$kicker    = advay_get_acf( 'home_success_kicker', __( 'Client success', 'advay-theme' ), $front );
+$heading_1 = advay_get_acf( 'home_success_heading_1', __( 'Talk to a human who', 'advay-theme' ), $front );
+$heading_2 = advay_get_acf( 'home_success_heading_2', __( 'knows your name.', 'advay-theme' ), $front );
+$p1        = advay_get_acf( 'home_success_p1', __( 'At most 3PLs, you are just a number. Handed off between reps who do not know you, re-explaining your business every time.', 'advay-theme' ), $front );
+$p2        = advay_get_acf( 'home_success_p2', __( 'Not here. You get a real, U.S.-based person who knows your account, with a direct line to the warehouse floor. Something is off? They get the right people on it, fast.', 'advay-theme' ), $front );
 
-$kicker     = advay_get_acf( 'home_success_kicker', __( 'Client success', 'advay-theme' ), $front );
-$heading_1  = advay_get_acf( 'home_success_heading_1', __( 'Talk to a human who', 'advay-theme' ), $front );
-$heading_2  = advay_get_acf( 'home_success_heading_2', __( 'knows your name.', 'advay-theme' ), $front );
-$p1         = advay_get_acf( 'home_success_p1', __( 'At most 3PLs, you are just a number. Handed off between reps who do not know you, re-explaining your business every time.', 'advay-theme' ), $front );
-$p2         = advay_get_acf( 'home_success_p2', __( 'Not here. You get a real, U.S.-based person who knows your account, with a direct line to the warehouse floor. Something is off? They get the right people on it, fast.', 'advay-theme' ), $front );
-
-$md_url      = advay_managing_director_url();
-$book_md_url = advay_onboarding_url();
+$md_url = advay_managing_director_url();
 
 $success_cta_primary       = advay_get_acf( 'home_success_cta_primary', '', $front );
 $success_cta_primary_label = advay_acf_link_title( $success_cta_primary, __( 'Book a call with our MD', 'advay-theme' ) );
-$success_cta_primary_url   = advay_acf_link_url( $success_cta_primary, $book_md_url );
+$success_cta_primary_url   = advay_acf_book_call_link_url( $success_cta_primary, advay_book_call_url() );
 
 $success_cta_secondary       = advay_get_acf( 'home_success_cta_secondary', '', $front );
 $success_cta_secondary_label = advay_acf_link_title( $success_cta_secondary, __( 'Know more about our Managing Director', 'advay-theme' ) );
@@ -69,22 +48,17 @@ $success_cta_secondary_url   = advay_acf_link_url( $success_cta_secondary, $md_u
 				</a>
 			</div>
 		</div>
-		<figure class="success-frame" data-founder-rotate>
-			<div class="success-photo-stack">
-				<?php foreach ( $founders as $index => $person ) : ?>
-					<img
-						class="success-founder-photo<?php echo 0 === $index ? ' is-active' : ''; ?>"
-						src="<?php echo esc_url( $person['src'] ); ?>"
-						alt="<?php echo esc_attr( $person['caption'] ); ?>"
-						width="640"
-						height="800"
-						loading="<?php echo 0 === $index ? 'eager' : 'lazy'; ?>"
-						decoding="async"
-						data-founder-photo
-						data-founder-caption="<?php echo esc_attr( $person['caption'] ); ?>"
-					>
-				<?php endforeach; ?>
-			</div>
+		<figure class="success-frame">
+			<?php
+			get_template_part(
+				'template-parts/md-feature-video',
+				null,
+				array(
+					'wrapper_class' => 'success-media-video',
+					'aria_label'    => $success_caption,
+				)
+			);
+			?>
 			<figcaption><?php echo esc_html( $success_caption ); ?></figcaption>
 		</figure>
 	</div>

@@ -177,8 +177,8 @@ foreach ( $legacy_pillar_defaults as $i => $row ) {
 }
 
 $legacy_photo_defaults = array(
-	array( 'src' => advay_asset_uri( 'images/md-legacy-1.png' ), 'alt' => __( 'Odi Ikpe at UNICEF Supply Division', 'advay-theme' ) ),
-	array( 'src' => advay_asset_uri( 'images/md-legacy-2.png' ), 'alt' => __( 'Odi Ikpe mentoring and community impact', 'advay-theme' ) ),
+	array( 'src' => advay_asset_uri( 'images/md-legacy-1.png' ), 'alt' => __( 'Odi Ikpe with the team on the operations floor', 'advay-theme' ) ),
+	array( 'src' => advay_asset_uri( 'images/md-legacy-2.png' ), 'alt' => __( 'Odi Ikpe at UNICEF Supply Division', 'advay-theme' ) ),
 	array( 'src' => advay_asset_uri( 'images/md-legacy-3.png' ), 'alt' => __( 'Odi Ikpe collaborating with the next generation', 'advay-theme' ) ),
 );
 $legacy_photos = array();
@@ -291,14 +291,17 @@ get_header();
 				</div>
 			</div>
 			<figure class="md-hero-photo">
-				<img
-					src="<?php echo esc_url( $hero_src ); ?>"
-					alt="<?php echo esc_attr( advay_acf_image_alt( $hero_img_acf, __( 'Odi Ikpe, Managing Director of ElitePrep Center', 'advay-theme' ) ) ); ?>"
-					width="640"
-					height="760"
-					loading="eager"
-					decoding="async"
-				>
+				<?php
+				get_template_part(
+					'template-parts/md-feature-video',
+					null,
+					array(
+						'wrapper_class' => 'md-hero-video-wrap',
+						'video_class'   => 'md-hero-video',
+						'aria_label'    => __( 'Odi Ikpe, Managing Director of ElitePrep Center', 'advay-theme' ),
+					)
+				);
+				?>
 			</figure>
 		</div>
 	</section>
@@ -506,6 +509,8 @@ get_header();
 			</div>
 		</div>
 	</section>
+
+	<?php get_template_part( 'template-parts/editor-zone' ); ?>
 
 	<section class="md-connect" id="md-connect" aria-labelledby="md-connect-heading">
 		<div class="container md-connect-inner">

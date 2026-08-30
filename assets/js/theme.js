@@ -35,7 +35,11 @@
 
 		nav.querySelectorAll('a').forEach(function (link) {
 			link.addEventListener('click', function (event) {
-				if (link.classList.contains('nav-trigger') && window.matchMedia('(max-width: 767px)').matches) {
+				if (!window.matchMedia('(max-width: 767px)').matches) {
+					return;
+				}
+				/* Top-level mega accordion (Company / What we do / …). */
+				if (link.classList.contains('nav-trigger')) {
 					event.preventDefault();
 					var item = link.closest('.has-mega');
 					if (item) {
@@ -45,9 +49,11 @@
 					}
 					return;
 				}
-				if (window.matchMedia('(max-width: 767px)').matches) {
-					setOpen(false);
+				/* Nested What we do columns — expand in place; keep the drawer open. */
+				if (link.classList.contains('mega-head')) {
+					return;
 				}
+				setOpen(false);
 			});
 		});
 	}
@@ -71,6 +77,20 @@
 				}
 			});
 			item.classList.toggle('is-open', !wasOpen);
+		});
+	});
+
+	/* Desktop: hovering another nav item clears click-open state so Company / What we do swap freely. */
+	document.querySelectorAll('.primary-nav .has-mega').forEach(function (item) {
+		item.addEventListener('mouseenter', function () {
+			if (!window.matchMedia('(min-width: 900px)').matches) {
+				return;
+			}
+			document.querySelectorAll('.primary-nav .has-mega.is-open').forEach(function (el) {
+				if (el !== item) {
+					el.classList.remove('is-open');
+				}
+			});
 		});
 	});
 
@@ -180,6 +200,24 @@
 		});
 	});
 
+	/* Deep-link: /?channel=amazon|walmart|tiktok|dtc */
+	(function () {
+		if (!tabs.length) {
+			return;
+		}
+		var params = new URLSearchParams(window.location.search);
+		var channel = (params.get('channel') || '').toLowerCase();
+		if (!channel) {
+			return;
+		}
+		var match = Array.prototype.find.call(tabs, function (tab) {
+			return tab.id === 'tab-' + channel;
+		});
+		if (match) {
+			activateTab(match);
+		}
+	})();
+
 	var viewport = document.querySelector('.logo-slider-viewport');
 	var prevBtn = document.querySelector('.logo-slider-btn.is-prev');
 	var nextBtn = document.querySelector('.logo-slider-btn.is-next');
@@ -188,6 +226,8 @@
 
 	if (viewport && prevBtn && nextBtn && thumb && track) {
 		var list = viewport.querySelector('.logo-slider-list');
+		/* Keep a float position — browsers truncate scrollLeft, so += 0.75 never moves. */
+		var autoPos = 0;
 
 		function maxScroll() {
 			return Math.max(0, viewport.scrollWidth - viewport.clientWidth);
@@ -196,7 +236,7 @@
 		/* List is duplicated 3× — loop on one set width. */
 		function loopWidth() {
 			if (!list) {
-				return maxScroll();
+				return Math.max(1, maxScroll());
 			}
 			return Math.max(1, Math.round(list.scrollWidth / 3));
 		}
@@ -208,6 +248,7 @@
 			} else if (viewport.scrollLeft < half) {
 				viewport.scrollLeft += half;
 			}
+			autoPos = viewport.scrollLeft;
 		}
 
 		function updateThumb() {
@@ -223,6 +264,10 @@
 				left: dir * Math.max(180, Math.round(viewport.clientWidth * 0.4)),
 				behavior: reduce ? 'auto' : 'smooth'
 			});
+			window.setTimeout(function () {
+				normalizeLoop();
+				updateThumb();
+			}, reduce ? 0 : 420);
 		}
 
 		prevBtn.addEventListener('click', function () {
@@ -234,27 +279,46 @@
 		viewport.addEventListener(
 			'scroll',
 			function () {
+				/* During auto-slide, keep the float accumulator — don't snap it to integer scrollLeft. */
+				if (!drag.active && !paused) {
+					updateThumb();
+					return;
+				}
 				normalizeLoop();
 				updateThumb();
 			},
 			{ passive: true }
 		);
-		window.addEventListener('resize', updateThumb);
+		window.addEventListener('resize', function () {
+			normalizeLoop();
+			updateThumb();
+		});
 
-		/* Start mid-set so L→R auto-scroll can loop both ways. */
-		viewport.scrollLeft = loopWidth();
-		updateThumb();
+		function bootSlider() {
+			autoPos = loopWidth();
+			viewport.scrollLeft = autoPos;
+			updateThumb();
+		}
+		bootSlider();
+		if (list) {
+			list.querySelectorAll('img').forEach(function (img) {
+				if (!img.complete) {
+					img.addEventListener('load', bootSlider, { once: true });
+				}
+			});
+		}
 
-		/* Drag-to-scroll on desktop. */
+		/* Drag-to-scroll on desktop only — touch uses native overflow scroll. */
 		var drag = { active: false, startX: 0, startLeft: 0 };
 		viewport.addEventListener('pointerdown', function (event) {
-			if (event.pointerType === 'mouse' && event.button !== 0) {
+			if (event.pointerType !== 'mouse' || event.button !== 0) {
 				return;
 			}
 			drag.active = true;
 			drag.startX = event.clientX;
 			drag.startLeft = viewport.scrollLeft;
 			viewport.classList.add('is-dragging');
+			pause();
 			try {
 				viewport.setPointerCapture(event.pointerId);
 			} catch (err) {}
@@ -264,6 +328,8 @@
 				return;
 			}
 			viewport.scrollLeft = drag.startLeft - (event.clientX - drag.startX);
+			autoPos = viewport.scrollLeft;
+			updateThumb();
 		});
 		function endDrag(event) {
 			if (!drag.active) {
@@ -271,12 +337,29 @@
 			}
 			drag.active = false;
 			viewport.classList.remove('is-dragging');
+			normalizeLoop();
+			updateThumb();
+			window.setTimeout(resume, 800);
 			try {
 				viewport.releasePointerCapture(event.pointerId);
 			} catch (err) {}
 		}
 		viewport.addEventListener('pointerup', endDrag);
 		viewport.addEventListener('pointercancel', endDrag);
+		viewport.addEventListener(
+			'touchstart',
+			function () {
+				pause();
+			},
+			{ passive: true }
+		);
+		viewport.addEventListener(
+			'touchend',
+			function () {
+				window.setTimeout(resume, 1200);
+			},
+			{ passive: true }
+		);
 
 		var paused = false;
 		var wrap = document.querySelector('.logo-slider');
@@ -285,6 +368,7 @@
 		}
 		function resume() {
 			paused = false;
+			autoPos = viewport.scrollLeft;
 		}
 		if (wrap) {
 			wrap.addEventListener('mouseenter', pause);
@@ -296,13 +380,25 @@
 		nextBtn.addEventListener('mouseenter', pause);
 
 		/* Auto-move logos left → right. */
-		function autoSlide() {
-			if (!paused && !reduce && !drag.active) {
-				if (maxScroll() > 1) {
-					viewport.scrollLeft += 0.75;
-					normalizeLoop();
-					updateThumb();
+		var lastTs = 0;
+		function autoSlide(ts) {
+			if (!lastTs) {
+				lastTs = ts;
+			}
+			var dt = Math.min(32, ts - lastTs);
+			lastTs = ts;
+			if (!paused && !reduce && !drag.active && maxScroll() > 1) {
+				/* ~45px/sec — float accumulator avoids integer scrollLeft truncation. */
+				autoPos += (dt / 1000) * 45;
+				var half = loopWidth();
+				while (autoPos >= half * 2) {
+					autoPos -= half;
 				}
+				while (autoPos < half) {
+					autoPos += half;
+				}
+				viewport.scrollLeft = autoPos;
+				updateThumb();
 			}
 			requestAnimationFrame(autoSlide);
 		}
@@ -319,6 +415,7 @@
 			return;
 		}
 		var muteBtn = card.querySelector('.story-mute');
+		var isTouch = window.matchMedia('(hover: none), (max-width: 767px)').matches;
 
 		function setMuteUi(muted) {
 			card.classList.toggle('is-unmuted', !muted);
@@ -343,23 +440,48 @@
 			}, { once: true });
 		}
 
-		setMuteUi(true);
-		freezeFirstFrame();
-
-		card.addEventListener('mouseenter', function () {
+		function tryPlay() {
 			var play = clip.play();
 			if (play && play.catch) {
 				play.catch(function () {});
 			}
-		});
-		card.addEventListener('mouseleave', function () {
-			clip.pause();
-			try {
-				clip.currentTime = 0.001;
-			} catch (err) {}
-			clip.muted = true;
-			setMuteUi(true);
-		});
+		}
+
+		setMuteUi(true);
+
+		if (isTouch) {
+			/* Mobile: autoplay muted when visible — hover never fires. */
+			if ('IntersectionObserver' in window) {
+				var io = new IntersectionObserver(
+					function (entries) {
+						entries.forEach(function (entry) {
+							if (entry.isIntersecting) {
+								tryPlay();
+							} else {
+								clip.pause();
+							}
+						});
+					},
+					{ threshold: 0.35 }
+				);
+				io.observe(card);
+			} else {
+				tryPlay();
+			}
+		} else {
+			freezeFirstFrame();
+			card.addEventListener('mouseenter', function () {
+				tryPlay();
+			});
+			card.addEventListener('mouseleave', function () {
+				clip.pause();
+				try {
+					clip.currentTime = 0.001;
+				} catch (err) {}
+				clip.muted = true;
+				setMuteUi(true);
+			});
+		}
 
 		if (muteBtn) {
 			muteBtn.addEventListener('click', function (event) {
@@ -368,14 +490,95 @@
 				clip.muted = !clip.muted;
 				setMuteUi(clip.muted);
 				if (!clip.muted) {
-					var play = clip.play();
-					if (play && play.catch) {
-						play.catch(function () {});
-					}
+					tryPlay();
 				}
 			});
 		}
 	});
+
+	/* MD feature videos — sound toggle shared across homepage + MD page. */
+	(function () {
+		var wraps = document.querySelectorAll('.success-media-video, .md-hero-video-wrap, .md-feature-video');
+		if (!wraps.length) {
+			return;
+		}
+
+		function syncMute(muted) {
+			wraps.forEach(function (wrap) {
+				var video = wrap.querySelector('video');
+				var btn = wrap.querySelector('.md-video-mute');
+				if (video) {
+					video.muted = muted;
+					if (!muted) {
+						var play = video.play();
+						if (play && play.catch) {
+							play.catch(function () {});
+						}
+					}
+				}
+				wrap.classList.toggle('is-unmuted', !muted);
+				if (btn) {
+					btn.setAttribute('aria-pressed', muted ? 'false' : 'true');
+					btn.setAttribute('aria-label', muted ? 'Turn sound on' : 'Mute');
+				}
+			});
+		}
+
+		wraps.forEach(function (wrap) {
+			var video = wrap.querySelector('video');
+			var btn = wrap.querySelector('.md-video-mute');
+			if (!video) {
+				return;
+			}
+			video.muted = true;
+			video.setAttribute('playsinline', '');
+			video.setAttribute('webkit-playsinline', '');
+			var play = video.play();
+			if (play && play.catch) {
+				play.catch(function () {});
+			}
+			if (btn) {
+				btn.addEventListener('click', function (event) {
+					event.preventDefault();
+					event.stopPropagation();
+					syncMute(!video.muted);
+				});
+			}
+		});
+		syncMute(true);
+	})();
+
+	/* Mobile mega: nest Platforms / Services / Get started under What we do. */
+	(function () {
+		var mq = window.matchMedia('(max-width: 767px)');
+		function bindMegaCols() {
+			document.querySelectorAll('.mega-what .mega-col').forEach(function (col) {
+				var head = col.querySelector('.mega-head');
+				if (!head || head.dataset.megaBound === '1') {
+					return;
+				}
+				head.dataset.megaBound = '1';
+				head.addEventListener('click', function (event) {
+					if (!mq.matches) {
+						return;
+					}
+					event.preventDefault();
+					event.stopPropagation();
+					var open = !col.classList.contains('is-col-open');
+					document.querySelectorAll('.mega-what .mega-col.is-col-open').forEach(function (other) {
+						if (other !== col) {
+							other.classList.remove('is-col-open');
+						}
+					});
+					col.classList.toggle('is-col-open', open);
+				});
+			});
+		}
+		bindMegaCols();
+		if (mq.addEventListener) {
+			mq.addEventListener('change', bindMegaCols);
+		}
+	})();
 
 	var mapEl = document.getElementById('epc-map');
 	if (mapEl && window.L) {
@@ -571,32 +774,22 @@
 	}
 
 	var popup = document.getElementById('epc-popup');
-	if (popup && document.body.classList.contains('home')) {
-		var popupSeen = false;
-		try {
-			popupSeen = window.sessionStorage.getItem('epc_popup_seen') === '1';
-		} catch (err) {
-			popupSeen = false;
-		}
-
-		if (!popupSeen) {
-			window.setTimeout(function () {
-				popup.hidden = false;
-				requestAnimationFrame(function () {
-					popup.classList.add('is-open');
-				});
-				document.body.classList.add('popup-open');
-				try {
-					window.sessionStorage.setItem('epc_popup_seen', '1');
-				} catch (err) {
-					/* ignore */
-				}
-				var closeBtn = popup.querySelector('.epc-popup-close');
-				if (closeBtn) {
-					closeBtn.focus();
-				}
-			}, 8000);
-		}
+	/* Markup is only output on the front page; open after a short delay on every load. */
+	if (popup) {
+		window.setTimeout(function () {
+			if (!popup.isConnected) {
+				return;
+			}
+			popup.hidden = false;
+			requestAnimationFrame(function () {
+				popup.classList.add('is-open');
+			});
+			document.body.classList.add('popup-open');
+			var closeBtn = popup.querySelector('.epc-popup-close');
+			if (closeBtn) {
+				closeBtn.focus();
+			}
+		}, 2500);
 
 		function closePopup() {
 			popup.classList.remove('is-open');

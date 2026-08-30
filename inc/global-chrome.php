@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Header primary CTA (Grow with ElitePrep).
+ * Header primary CTA (Instant Quote).
  *
  * @return array{label: string, url: string}
  */
@@ -20,8 +20,8 @@ function advay_header_cta_primary() {
 	$link = advay_get_acf( 'site_header_cta_primary', '', advay_acf_front_id() );
 
 	return array(
-		'label' => advay_acf_link_title( $link, __( 'Grow with ElitePrep', 'advay-theme' ) ),
-		'url'   => advay_acf_link_url( $link, advay_contact_url() ),
+		'label' => advay_acf_link_title( $link, __( 'Get an Instant Quote', 'advay-theme' ) ),
+		'url'   => advay_acf_quote_link_url( $link, advay_quote_url() ),
 	);
 }
 
@@ -35,7 +35,21 @@ function advay_header_cta_secondary() {
 
 	return array(
 		'label' => advay_acf_link_title( $link, __( 'Book a call', 'advay-theme' ) ),
-		'url'   => advay_acf_link_url( $link, advay_contact_url() ),
+		'url'   => advay_acf_book_call_link_url( $link, advay_book_call_url() ),
+	);
+}
+
+/**
+ * Footer "Call the warehouse" CTA (above Book a call with MD).
+ *
+ * @return array{label: string, url: string}
+ */
+function advay_footer_call_warehouse_cta() {
+	$link = advay_get_acf( 'home_cta_secondary', '', advay_acf_front_id() );
+
+	return array(
+		'label' => advay_acf_link_title( $link, __( 'Call the warehouse', 'advay-theme' ) ),
+		'url'   => advay_acf_link_url( $link, advay_intake_phone_url() ),
 	);
 }
 
@@ -49,7 +63,7 @@ function advay_footer_cta() {
 
 	return array(
 		'label' => advay_acf_link_title( $link, __( 'Book a call with our MD', 'advay-theme' ) ),
-		'url'   => advay_acf_link_url( $link, advay_contact_url() ),
+		'url'   => advay_acf_book_call_link_url( $link, advay_book_call_url() ),
 	);
 }
 
