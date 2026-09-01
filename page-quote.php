@@ -16,11 +16,11 @@ $slug = 'quote';
 
 $quote_eyebrow = advay_page_acf( $slug, 'quote_eyebrow', __( 'Get started', 'advay-theme' ) );
 $quote_heading = advay_page_acf( $slug, 'quote_heading', __( 'Get an Instant Quote', 'advay-theme' ) );
-$quote_lead    = advay_page_acf( $slug, 'quote_lead', __( 'Fill out the form below, text us, or schedule a meeting for an instant quote!', 'advay-theme' ) );
+$quote_lead    = advay_page_acf( $slug, 'quote_lead', __( 'Fill out the form below, text us, or schedule a meeting for an instant quote — and see your instant pricing report.', 'advay-theme' ) );
 
 $reassurance_defaults = array(
 	array(
-		'value' => __( 'From $1/unit', 'advay-theme' ),
+		'value' => __( 'Pricing from $1/unit', 'advay-theme' ),
 		'label' => __( 'Transparent prep pricing', 'advay-theme' ),
 		'note'  => __( 'Per-unit rates with no hidden fees', 'advay-theme' ),
 	),
@@ -46,17 +46,16 @@ foreach ( $reassurance_defaults as $i => $row ) {
 	);
 }
 
-$quote_form_intro = advay_page_acf( $slug, 'quote_form_intro', __( 'Fill out the form below and see your instant pricing report.', 'advay-theme' ) );
 $quote_alt_heading = advay_page_acf( $slug, 'quote_alt_heading', __( 'Prefer to talk?', 'advay-theme' ) );
-$quote_alt_lead    = advay_page_acf( $slug, 'quote_alt_lead', __( 'Call, email, or book time with our managing director — same team, your choice.', 'advay-theme' ) );
+$quote_alt_lead    = advay_page_acf( $slug, 'quote_alt_lead', __( 'WhatsApp, email, or book time with our managing director — same team, your choice.', 'advay-theme' ) );
 
-$book_cta = advay_header_cta_secondary();
+$contact_cta = advay_header_cta_secondary();
 
 $contact_links = array(
 	array(
-		'label'    => advay_dock_phone_label(),
-		'url'      => advay_dock_phone_url(),
-		'external' => false,
+		'label'    => advay_dock_whatsapp_label(),
+		'url'      => advay_whatsapp_url(),
+		'external' => true,
 	),
 	array(
 		'label'    => advay_dock_email_label(),
@@ -93,7 +92,6 @@ get_header();
 
 	<section class="quote-form-section" aria-label="<?php esc_attr_e( 'Instant quote calculator', 'advay-theme' ); ?>">
 		<div class="container quote-form-wrap">
-			<p class="quote-form-intro"><?php echo esc_html( $quote_form_intro ); ?></p>
 			<div class="quote-form content-wrap">
 				<?php
 				if ( function_exists( 'gravity_form' ) ) {
@@ -113,8 +111,8 @@ get_header();
 			<h2 id="quote-alt-heading"><?php echo esc_html( $quote_alt_heading ); ?></h2>
 			<p class="lead"><?php echo esc_html( $quote_alt_lead ); ?></p>
 			<div class="quote-alt-actions">
-				<a class="button button-primary" href="<?php echo esc_url( $book_cta['url'] ); ?>">
-					<?php echo esc_html( $book_cta['label'] ); ?>
+				<a class="button button-primary" href="<?php echo esc_url( $contact_cta['url'] ); ?>">
+					<?php echo esc_html( $contact_cta['label'] ); ?>
 				</a>
 			</div>
 			<div class="quote-contact-links">

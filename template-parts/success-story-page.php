@@ -152,7 +152,6 @@ $founder_caption    = ! empty( $story['founder_caption'] ) ? $story['founder_cap
 				<p id="ss-quote-heading"><?php echo advay_ss_format_quote( $story['quote'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped + allowlisted span in helper. ?></p>
 				<footer>
 					<strong><?php echo esc_html( $story['founder'] ); ?></strong>
-					<span><?php echo esc_html( $story['founder_role'] ); ?></span>
 				</footer>
 			</blockquote>
 			<div class="ss-quote-media">

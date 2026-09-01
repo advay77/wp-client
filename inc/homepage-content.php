@@ -251,7 +251,7 @@ function advay_home_brands_case_studies() {
 			'file'     => 'images/brand-daka.png',
 			'initials' => 'DV',
 			'quote'    => __( 'Vitamin labeling and lot tracking used to slow every inbound. EPC keeps our FBA prep compliant so supplements stay in stock without account risk.', 'advay-theme' ),
-			'author'   => __( 'Ada Okoro', 'advay-theme' ),
+			'author'   => __( 'Brian McNeill', 'advay-theme' ),
 			'role'     => __( 'Founder, Daka Vitamins', 'advay-theme' ),
 			'stats'    => array(
 				array( 'n' => '99.8%', 'l' => __( 'Label accuracy', 'advay-theme' ) ),
@@ -290,7 +290,7 @@ function advay_home_brands_case_studies() {
 			'file'     => 'images/brand-ajayi.jpg',
 			'initials' => 'AP',
 			'quote'    => __( 'Seasonal snack spikes used to break us. Now EPC scales fulfillment up and down with demand — no missed launches.', 'advay-theme' ),
-			'author'   => __( 'Tunde Ajayi', 'advay-theme' ),
+			'author'   => __( 'Bolu Ajayi', 'advay-theme' ),
 			'role'     => __( 'Founder, Ajayi Popcorn', 'advay-theme' ),
 			'stats'    => array(
 				array( 'n' => __( '2 Days', 'advay-theme' ), 'l' => __( 'Nationwide shipping', 'advay-theme' ) ),

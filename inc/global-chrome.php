@@ -12,6 +12,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * "What we do" menu item link. Uses the ACF override when set, else the
+ * theme's built-in routing so an empty field can never break navigation.
+ *
+ * @param string $field    ACF field name (e.g. wwd_amazon_url).
+ * @param string $fallback Built-in URL to use when the field is empty.
+ * @return string
+ */
+function advay_wwd_url( $field, $fallback ) {
+	$url = advay_get_acf( $field, '', advay_acf_front_id() );
+	if ( is_string( $url ) && '' !== trim( $url ) ) {
+		return $url;
+	}
+	return $fallback;
+}
+
+/**
  * Header primary CTA (Instant Quote).
  *
  * @return array{label: string, url: string}
@@ -26,7 +42,7 @@ function advay_header_cta_primary() {
 }
 
 /**
- * Header secondary CTA (Book a call).
+ * Header secondary CTA (Contact us).
  *
  * @return array{label: string, url: string}
  */
@@ -34,8 +50,8 @@ function advay_header_cta_secondary() {
 	$link = advay_get_acf( 'site_header_cta_secondary', '', advay_acf_front_id() );
 
 	return array(
-		'label' => advay_acf_link_title( $link, __( 'Book a call', 'advay-theme' ) ),
-		'url'   => advay_acf_book_call_link_url( $link, advay_book_call_url() ),
+		'label' => advay_acf_link_title( $link, __( 'Contact us', 'advay-theme' ) ),
+		'url'   => advay_acf_link_url( $link, advay_contact_page_url() ),
 	);
 }
 
@@ -94,7 +110,7 @@ function advay_footer_tagline() {
 function advay_footer_contact_line() {
 	$value = advay_get_acf( 'site_footer_contact_line', '', advay_acf_front_id() );
 	if ( ! is_string( $value ) || '' === trim( $value ) ) {
-		return __( 'Warehouse address on request', 'advay-theme' );
+		return __( '1736 Dutch Mill Road, Franklinville, New Jersey 08322', 'advay-theme' );
 	}
 	return $value;
 }

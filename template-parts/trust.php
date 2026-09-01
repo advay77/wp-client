@@ -81,7 +81,6 @@ $read_cs = advay_get_acf( 'home_brands_read_label', __( 'Read Case Study', 'adva
 							<span class="cs-avatar" aria-hidden="true"><?php echo esc_html( $brand['initials'] ); ?></span>
 							<span class="cs-author-meta">
 								<strong><?php echo esc_html( $brand['author'] ); ?></strong>
-								<em><?php echo esc_html( $brand['role'] ); ?></em>
 							</span>
 						</div>
 						<a class="cs-link" href="<?php echo esc_url( advay_success_story_url( $brand['slug'] ) ); ?>">

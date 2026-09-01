@@ -53,17 +53,5 @@ function advay_page_acf( $slug, $key, $fallback = '' ) {
 }
 
 /**
- * WhatsApp URL from ElitePrep Content (no placeholder number).
- *
- * Empty when unset — callers should hide the link or render a non-link pill.
- *
- * @return string
+ * WhatsApp URL — defined in functions.php (advay_whatsapp_url).
  */
-function advay_whatsapp_url() {
-	$front = advay_acf_front_id();
-	$value = advay_get_acf( 'site_whatsapp_url', '', $front );
-	if ( ! is_string( $value ) || '' === trim( $value ) ) {
-		$value = '';
-	}
-	return apply_filters( 'advay_contact_whatsapp_url', $value );
-}

@@ -13,8 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $slug    = 'onboarding';
-$wa_url  = advay_whatsapp_url();
-
 $steps_defaults = array(
 	array(
 		'num'    => '01',
@@ -123,16 +121,12 @@ foreach ( $steps_defaults as $i => $def ) {
 	if ( 1 === $n ) {
 		$step['pills'] = array(
 			array(
-				'label' => advay_page_acf( $slug, 'onboarding_pill_call_label', __( 'Call', 'advay-theme' ) ),
-				'url'   => advay_intake_phone_url(),
+				'label' => advay_page_acf( $slug, 'onboarding_pill_call_label', __( 'WhatsApp', 'advay-theme' ) ),
+				'url'   => advay_whatsapp_url(),
 			),
 			array(
 				'label' => advay_page_acf( $slug, 'onboarding_pill_email_label', __( 'Email', 'advay-theme' ) ),
 				'url'   => advay_intake_email_url(),
-			),
-			array(
-				'label' => advay_page_acf( $slug, 'onboarding_pill_whatsapp_label', __( 'WhatsApp', 'advay-theme' ) ),
-				'url'   => $wa_url,
 			),
 			array(
 				'label' => advay_page_acf( $slug, 'onboarding_pill_form_label', __( 'Fill a form', 'advay-theme' ) ),

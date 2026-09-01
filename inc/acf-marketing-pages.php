@@ -371,5 +371,106 @@ function advay_register_marketing_page_acf_fields() {
 			'active'   => true,
 		)
 	);
+
+	/* ---------- Services (default template, slug: services) ---------- */
+	$img = function ( $key, $label, $name ) {
+		return array(
+			'key'           => $key,
+			'label'         => $label,
+			'name'          => $name,
+			'type'          => 'image',
+			'return_format' => 'array',
+			'preview_size'  => 'medium',
+			'library'       => 'all',
+			'instructions'  => 'Leave empty to keep the built-in image.',
+		);
+	};
+
+	$svc = array(
+		array( 'key' => 'field_svc_tab_hero', 'label' => 'Hero', 'type' => 'tab' ),
+		advay_acf_text_field( 'field_svc_pill', 'Hero pill', 'services_pill' ),
+		advay_acf_text_field( 'field_svc_h1', 'Hero heading', 'services_heading', 'textarea', 2 ),
+		advay_acf_text_field( 'field_svc_lead', 'Hero description', 'services_lead', 'textarea', 3 ),
+		advay_acf_text_field( 'field_svc_cta', 'Hero button label', 'services_hero_cta_label' ),
+		advay_acf_text_field( 'field_svc_seelink', 'Hero "see how" link text', 'services_see_link' ),
+
+		array( 'key' => 'field_svc_tab_why', 'label' => 'Why section', 'type' => 'tab' ),
+		advay_acf_text_field( 'field_svc_why_h2', 'Heading', 'services_why_heading', 'textarea', 2 ),
+		advay_acf_text_field( 'field_svc_why_intro', 'Intro', 'services_why_intro', 'textarea', 2 ),
+	);
+	for ( $i = 1; $i <= 4; $i++ ) {
+		$svc[] = advay_acf_text_field( 'field_svc_why_' . $i . '_t', 'Card ' . $i . ' — title', 'services_why_card_' . $i . '_title' );
+		$svc[] = advay_acf_text_field( 'field_svc_why_' . $i . '_d', 'Card ' . $i . ' — description', 'services_why_card_' . $i . '_desc', 'textarea', 2 );
+	}
+
+	$svc[] = array( 'key' => 'field_svc_tab_market', 'label' => 'Market section', 'type' => 'tab' );
+	$svc[] = advay_acf_text_field( 'field_svc_mkt_h2', 'Heading', 'services_market_heading', 'textarea', 2 );
+	$svc[] = $img( 'field_svc_mkt_img1', 'Photo 1', 'services_market_photo_1' );
+	$svc[] = advay_acf_text_field( 'field_svc_mkt_cap1', 'Photo 1 caption', 'services_market_caption_1' );
+	$svc[] = $img( 'field_svc_mkt_img2', 'Photo 2', 'services_market_photo_2' );
+	$svc[] = advay_acf_text_field( 'field_svc_mkt_cap2', 'Photo 2 caption', 'services_market_caption_2' );
+	for ( $i = 1; $i <= 4; $i++ ) {
+		$svc[] = advay_acf_text_field( 'field_svc_mkt_b' . $i, 'Benefit ' . $i, 'services_market_benefit_' . $i, 'textarea', 2 );
+	}
+	$svc[] = advay_acf_text_field( 'field_svc_mkt_ready', 'Sub-CTA text', 'services_market_ready' );
+	$svc[] = advay_acf_text_field( 'field_svc_mkt_rlabel', 'Sub-CTA button label', 'services_market_ready_label' );
+
+	$svc[] = array( 'key' => 'field_svc_tab_steps', 'label' => 'Steps section', 'type' => 'tab' );
+	$svc[] = advay_acf_text_field( 'field_svc_steps_h2', 'Heading', 'services_steps_heading', 'textarea', 2 );
+	$svc[] = advay_acf_text_field( 'field_svc_steps_btn', 'Onboarding button label', 'services_steps_btn_label' );
+	for ( $i = 1; $i <= 3; $i++ ) {
+		$svc[] = advay_acf_text_field( 'field_svc_step_' . $i . '_h', 'Step ' . $i . ' — heading', 'services_step_' . $i . '_heading' );
+		$svc[] = advay_acf_text_field( 'field_svc_step_' . $i . '_d', 'Step ' . $i . ' — description', 'services_step_' . $i . '_desc', 'textarea', 3 );
+		$svc[] = $img( 'field_svc_step_' . $i . '_img', 'Step ' . $i . ' — image', 'services_step_' . $i . '_image' );
+	}
+
+	$svc[] = array( 'key' => 'field_svc_tab_final', 'label' => 'Final CTA', 'type' => 'tab' );
+	$svc[] = advay_acf_text_field( 'field_svc_final_h2', 'Heading', 'services_final_heading', 'textarea', 2 );
+	$svc[] = advay_acf_text_field( 'field_svc_final_btn', 'Button label', 'services_final_btn_label' );
+
+	acf_add_local_field_group(
+		array(
+			'key'      => 'group_advay_services_page',
+			'title'    => 'Services Page Content',
+			'fields'   => $svc,
+			'location' => array(
+				array(
+					array(
+						'param'    => 'post',
+						'operator' => '==',
+						'value'    => (string) ( get_page_by_path( 'services' ) ? get_page_by_path( 'services' )->ID : 0 ),
+					),
+				),
+			),
+			'active'   => true,
+		)
+	);
+
+	/* ---------- Join Our Team ---------- */
+	$jt = array(
+		array( 'key' => 'field_jt_tab_intro', 'label' => 'Intro', 'type' => 'tab' ),
+		advay_acf_text_field( 'field_jt_eyebrow', 'Eyebrow', 'jt_eyebrow' ),
+		advay_acf_text_field( 'field_jt_h1', 'Heading', 'jt_heading', 'textarea', 2 ),
+		advay_acf_text_field( 'field_jt_aside', 'Intro paragraph', 'jt_aside', 'textarea', 4 ),
+		array( 'key' => 'field_jt_tab_vm', 'label' => 'Vision & Mission', 'type' => 'tab' ),
+		advay_acf_text_field( 'field_jt_vlabel', 'Vision label', 'jt_vision_label' ),
+		advay_acf_text_field( 'field_jt_vtext', 'Vision text', 'jt_vision_text', 'textarea', 3 ),
+		advay_acf_text_field( 'field_jt_mlabel', 'Mission label', 'jt_mission_label' ),
+		advay_acf_text_field( 'field_jt_mtext', 'Mission text', 'jt_mission_text', 'textarea', 4 ),
+		array( 'key' => 'field_jt_tab_cta', 'label' => 'CTA', 'type' => 'tab' ),
+		advay_acf_text_field( 'field_jt_cta_h', 'CTA heading', 'jt_cta_heading', 'textarea', 2 ),
+		advay_acf_text_field( 'field_jt_cta_email', 'Email button label', 'jt_cta_email_label' ),
+		advay_acf_text_field( 'field_jt_cta_talk', 'Secondary button label', 'jt_cta_talk_label' ),
+	);
+
+	acf_add_local_field_group(
+		array(
+			'key'      => 'group_advay_jointeam_page',
+			'title'    => 'Join Our Team Content',
+			'fields'   => $jt,
+			'location' => advay_acf_location_page_template( 'page-join-team.php' ),
+			'active'   => true,
+		)
+	);
 }
 add_action( 'acf/init', 'advay_register_marketing_page_acf_fields' );

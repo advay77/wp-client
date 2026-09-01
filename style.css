@@ -2,7 +2,7 @@
 Theme Name: Advay Theme
 Author: Advay
 Description: FBA / Walmart WFS prep center theme.
-Version: 2.44.7
+Version: 2.48.0
 Text Domain: advay-theme
 */
 
@@ -10236,10 +10236,14 @@ body.page-managing-director {
 	outline-offset: 2px;
 }
 
-.contact-dock-item--call,
+.contact-dock-item--whatsapp,
 .contact-dock-item--email,
 .contact-dock-item--meet {
 	background: var(--blue);
+}
+
+.contact-dock-item--whatsapp {
+	background: #25d366;
 }
 
 .contact-dock-bubble {
@@ -10252,10 +10256,14 @@ body.page-managing-director {
 	color: #fff;
 }
 
-.contact-dock-item--call .contact-dock-bubble,
+.contact-dock-item--whatsapp .contact-dock-bubble,
 .contact-dock-item--email .contact-dock-bubble,
 .contact-dock-item--meet .contact-dock-bubble {
-	background: var(--blue-dark);
+	background: rgba(0, 0, 0, 0.12);
+}
+
+.contact-dock-item--whatsapp .contact-dock-bubble {
+	background: #128c7e;
 }
 
 .contact-dock-label {
@@ -12096,6 +12104,22 @@ body.page-managing-director {
 	font-size: 0.58rem;
 	line-height: 1.3;
 	color: var(--muted);
+}
+
+@media (max-width: 639px) {
+	.quote-points strong {
+		font-size: clamp(0.72rem, 3.4vw, 0.92rem);
+		line-height: 1.2;
+	}
+
+	.quote-points p {
+		font-size: 0.48rem;
+	}
+
+	.quote-points span {
+		font-size: 0.52rem;
+		line-height: 1.25;
+	}
 }
 
 .quote-form-section {

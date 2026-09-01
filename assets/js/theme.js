@@ -774,7 +774,7 @@
 	}
 
 	var popup = document.getElementById('epc-popup');
-	/* Markup is only output on the front page; open after a short delay on every load. */
+	/* Markup is only output on the front page; open after delay on every load. */
 	if (popup) {
 		window.setTimeout(function () {
 			if (!popup.isConnected) {
@@ -789,7 +789,7 @@
 			if (closeBtn) {
 				closeBtn.focus();
 			}
-		}, 2500);
+		}, 20000);
 
 		function closePopup() {
 			popup.classList.remove('is-open');

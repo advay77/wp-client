@@ -11,15 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $dock_items = array(
 	array(
-		'class' => 'contact-dock-item--call',
-		'url'   => advay_dock_phone_url(),
-		'label' => sprintf(
-			/* translators: %s: phone number */
-			__( 'Call at %s', 'advay-theme' ),
-			advay_dock_phone_label()
-		),
-		'icon'  => 'phone',
-		'external' => false,
+		'class' => 'contact-dock-item--whatsapp',
+		'url'   => advay_whatsapp_url(),
+		'label' => advay_dock_whatsapp_label(),
+		'icon'  => 'whatsapp',
+		'external' => true,
 	),
 	array(
 		'class' => 'contact-dock-item--email',

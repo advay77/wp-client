@@ -28,9 +28,6 @@ $stories_heading = advay_get_acf( 'home_stories_heading', __( 'Brands that grow 
 					<div class="story-media-copy">
 						<p><?php echo esc_html( $clip['quote'] ); ?></p>
 						<strong><?php echo esc_html( $clip['brand'] ); ?></strong>
-						<?php if ( ! empty( $clip['role'] ) ) : ?>
-							<span><?php echo esc_html( $clip['role'] ); ?></span>
-						<?php endif; ?>
 					</div>
 				</article>
 			<?php endforeach; ?>

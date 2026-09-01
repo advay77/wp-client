@@ -68,8 +68,8 @@ $footer_cta  = advay_footer_cta();
 				<h2 class="footer-heading"><?php esc_html_e( 'Contact', 'advay-theme' ); ?></h2>
 				<ul class="footer-menu footer-contact">
 					<li>
-						<a href="<?php echo esc_url( advay_dock_phone_url() ); ?>">
-							<?php echo esc_html( advay_dock_phone_label() ); ?>
+						<a href="<?php echo esc_url( advay_whatsapp_url() ); ?>" target="_blank" rel="noopener noreferrer">
+							<?php echo esc_html( advay_dock_whatsapp_label() ); ?>
 						</a>
 					</li>
 					<li>
